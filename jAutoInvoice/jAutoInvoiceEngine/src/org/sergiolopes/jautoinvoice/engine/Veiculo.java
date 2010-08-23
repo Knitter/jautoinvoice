@@ -115,4 +115,58 @@ public class Veiculo {
     public List<Cliente> getAntigosDonos() {
         return new ArrayList<Cliente>(antigosDonos);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Veiculo other = (Veiculo) obj;
+        if (this.marca != other.marca && (this.marca == null || !this.marca.equals(other.marca))) {
+            return false;
+        }
+        if (this.modelo != other.modelo && (this.modelo == null || !this.modelo.equals(other.modelo))) {
+            return false;
+        }
+        if (this.registo != other.registo && (this.registo == null || !this.registo.equals(other.registo))) {
+            return false;
+        }
+        if ((this.matricula == null) ? (other.matricula != null) : !this.matricula.equals(other.matricula)) {
+            return false;
+        }
+        if ((this.nrChassis == null) ? (other.nrChassis != null) : !this.nrChassis.equals(other.nrChassis)) {
+            return false;
+        }
+        if ((this.cilindrada == null) ? (other.cilindrada != null) : !this.cilindrada.equals(other.cilindrada)) {
+            return false;
+        }
+        if ((this.nrMotor == null) ? (other.nrMotor != null) : !this.nrMotor.equals(other.nrMotor)) {
+            return false;
+        }
+        if (this.antigosDonos != other.antigosDonos && (this.antigosDonos == null || !this.antigosDonos.equals(other.antigosDonos))) {
+            return false;
+        }
+        if (this.dono != other.dono && (this.dono == null || !this.dono.equals(other.dono))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + (this.marca != null ? this.marca.hashCode() : 0);
+        hash = 11 * hash + (this.modelo != null ? this.modelo.hashCode() : 0);
+        hash = 11 * hash + (this.registo != null ? this.registo.hashCode() : 0);
+        hash = 11 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
+        hash = 11 * hash + (this.nrChassis != null ? this.nrChassis.hashCode() : 0);
+        hash = 11 * hash + (this.cilindrada != null ? this.cilindrada.hashCode() : 0);
+        hash = 11 * hash + (this.nrMotor != null ? this.nrMotor.hashCode() : 0);
+        hash = 11 * hash + (this.antigosDonos != null ? this.antigosDonos.hashCode() : 0);
+        hash = 11 * hash + (this.dono != null ? this.dono.hashCode() : 0);
+        return hash;
+    }
 }

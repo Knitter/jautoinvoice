@@ -103,4 +103,54 @@ public class Cliente {
             veiculos.remove(veiculo);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+            return false;
+        }
+        if ((this.endereco == null) ? (other.endereco != null) : !this.endereco.equals(other.endereco)) {
+            return false;
+        }
+        if ((this.codigoPostal == null) ? (other.codigoPostal != null) : !this.codigoPostal.equals(other.codigoPostal)) {
+            return false;
+        }
+        if ((this.localidade == null) ? (other.localidade != null) : !this.localidade.equals(other.localidade)) {
+            return false;
+        }
+        if ((this.telefone1 == null) ? (other.telefone1 != null) : !this.telefone1.equals(other.telefone1)) {
+            return false;
+        }
+        if ((this.telefone2 == null) ? (other.telefone2 != null) : !this.telefone2.equals(other.telefone2)) {
+            return false;
+        }
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        if (this.veiculos != other.veiculos && (this.veiculos == null || !this.veiculos.equals(other.veiculos))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 29 * hash + (this.endereco != null ? this.endereco.hashCode() : 0);
+        hash = 29 * hash + (this.codigoPostal != null ? this.codigoPostal.hashCode() : 0);
+        hash = 29 * hash + (this.localidade != null ? this.localidade.hashCode() : 0);
+        hash = 29 * hash + (this.telefone1 != null ? this.telefone1.hashCode() : 0);
+        hash = 29 * hash + (this.telefone2 != null ? this.telefone2.hashCode() : 0);
+        hash = 29 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 29 * hash + (this.veiculos != null ? this.veiculos.hashCode() : 0);
+        return hash;
+    }
 }
