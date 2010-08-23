@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.sergiolopes.jautoinvoice.gui
+OpenIDE-Module-Layer: org/sergiolopes/jautoinvoice/gui/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/sergiolopes/jautoinvoice/gui/i18n/i18n.properties
+OpenIDE-Module-Specification-Version: 1.0
+
