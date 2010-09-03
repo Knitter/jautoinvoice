@@ -1,4 +1,5 @@
 build/
-release/
 private/
 .DS_Store
+jAutoInvoiceS/dist/
+jAutoInvoiceS/*.log*
