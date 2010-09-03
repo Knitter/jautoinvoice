@@ -20,9 +20,13 @@
  */
 package net.sf.jautoinvoice;
 
-import java.awt.Component;
+import net.sf.jautoinvoice.janelas.Login;
+import net.sf.jautoinvoice.janelas.Actualizacao;
+import net.sf.jautoinvoice.janelas.Configuracoes;
+import net.sf.jautoinvoice.paineis.PainelClientes;
+import net.sf.jautoinvoice.paineis.PainelFacturas;
+import net.sf.jautoinvoice.paineis.PainelReparacoes;
 import java.awt.EventQueue;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -34,8 +38,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import net.sf.jautoinvoice.engine.Gestor;
 import org.javadev.AnimatingCardLayout;
-import org.javadev.effects.Animation;
-import org.javadev.effects.AnimationListener;
 import org.javadev.effects.DashboardAnimation;
 
 public class JAutoInvoiceApp extends javax.swing.JFrame {
@@ -108,7 +110,19 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnFacturas = new javax.swing.JButton();
         jbtnVeiculos = new javax.swing.JButton();
         jbtnClientes = new javax.swing.JButton();
+        jbtnPecas = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
+        jbtnPesquisa = new javax.swing.JButton();
+        jbtnImprimir = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        jbtnMarcacoes = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        jbtnEstatisticas = new javax.swing.JButton();
+        jbtnRelatorios = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
+        jbtnEmpregados = new javax.swing.JButton();
+        jbtnConfiguracoes = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JToolBar.Separator();
         jbtnSair = new javax.swing.JButton();
         jpPainelPrincipal = new javax.swing.JPanel();
         jmbBarraMenu = new javax.swing.JMenuBar();
@@ -117,6 +131,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jmiConfiguracoes = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jmiSair = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmAjuda = new javax.swing.JMenu();
         jmiAjuda = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -147,7 +162,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         });
         jtbBarraFerramentas.add(jbtnReparacoes);
 
-        jbtnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/report.png"))); // NOI18N
+        jbtnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/document_prepare.png"))); // NOI18N
         jbtnFacturas.setText(bundle.getString("JAutoInvoiceApp.jbtnFacturas.text")); // NOI18N
         jbtnFacturas.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnFacturas.toolTipText")); // NOI18N
         jbtnFacturas.setFocusable(false);
@@ -173,7 +188,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         });
         jtbBarraFerramentas.add(jbtnVeiculos);
 
-        jbtnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/reseller_programm.png"))); // NOI18N
+        jbtnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/vcard.png"))); // NOI18N
         jbtnClientes.setText(bundle.getString("JAutoInvoiceApp.jbtnClientes.text")); // NOI18N
         jbtnClientes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnClientes.toolTipText")); // NOI18N
         jbtnClientes.setFocusable(false);
@@ -185,7 +200,75 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
             }
         });
         jtbBarraFerramentas.add(jbtnClientes);
+
+        jbtnPecas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/brick.png"))); // NOI18N
+        jbtnPecas.setText(bundle.getString("JAutoInvoiceApp.jbtnPecas.text")); // NOI18N
+        jbtnPecas.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnPecas.toolTipText")); // NOI18N
+        jbtnPecas.setFocusable(false);
+        jbtnPecas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnPecas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnPecas);
         jtbBarraFerramentas.add(jSeparator3);
+
+        jbtnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/find.png"))); // NOI18N
+        jbtnPesquisa.setText(bundle.getString("JAutoInvoiceApp.jbtnPesquisa.text")); // NOI18N
+        jbtnPesquisa.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnPesquisa.toolTipText")); // NOI18N
+        jbtnPesquisa.setFocusable(false);
+        jbtnPesquisa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnPesquisa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnPesquisa);
+
+        jbtnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/printer.png"))); // NOI18N
+        jbtnImprimir.setText(bundle.getString("JAutoInvoiceApp.jbtnImprimir.text")); // NOI18N
+        jbtnImprimir.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnImprimir.toolTipText")); // NOI18N
+        jbtnImprimir.setFocusable(false);
+        jbtnImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnImprimir);
+        jtbBarraFerramentas.add(jSeparator4);
+
+        jbtnMarcacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/calendar.png"))); // NOI18N
+        jbtnMarcacoes.setText(bundle.getString("JAutoInvoiceApp.jbtnMarcacoes.text")); // NOI18N
+        jbtnMarcacoes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnMarcacoes.toolTipText")); // NOI18N
+        jbtnMarcacoes.setFocusable(false);
+        jbtnMarcacoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnMarcacoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnMarcacoes);
+        jtbBarraFerramentas.add(jSeparator5);
+
+        jbtnEstatisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/chart_pie.png"))); // NOI18N
+        jbtnEstatisticas.setText(bundle.getString("JAutoInvoiceApp.jbtnEstatisticas.text")); // NOI18N
+        jbtnEstatisticas.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnEstatisticas.toolTipText")); // NOI18N
+        jbtnEstatisticas.setFocusable(false);
+        jbtnEstatisticas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnEstatisticas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnEstatisticas);
+
+        jbtnRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/report.png"))); // NOI18N
+        jbtnRelatorios.setText(bundle.getString("JAutoInvoiceApp.jbtnRelatorios.text")); // NOI18N
+        jbtnRelatorios.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnRelatorios.toolTipText")); // NOI18N
+        jbtnRelatorios.setFocusable(false);
+        jbtnRelatorios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnRelatorios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnRelatorios);
+        jtbBarraFerramentas.add(jSeparator6);
+
+        jbtnEmpregados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/user_green.png"))); // NOI18N
+        jbtnEmpregados.setText(bundle.getString("JAutoInvoiceApp.jbtnEmpregados.text")); // NOI18N
+        jbtnEmpregados.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnEmpregados.toolTipText")); // NOI18N
+        jbtnEmpregados.setFocusable(false);
+        jbtnEmpregados.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnEmpregados.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnEmpregados);
+
+        jbtnConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/cog.png"))); // NOI18N
+        jbtnConfiguracoes.setText(bundle.getString("JAutoInvoiceApp.jbtnConfiguracoes.text")); // NOI18N
+        jbtnConfiguracoes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnConfiguracoes.toolTipText")); // NOI18N
+        jbtnConfiguracoes.setFocusable(false);
+        jbtnConfiguracoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnConfiguracoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnConfiguracoes);
+        jtbBarraFerramentas.add(jSeparator7);
 
         jbtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/door_out.png"))); // NOI18N
         jbtnSair.setText(bundle.getString("JAutoInvoiceApp.jbtnSair.text")); // NOI18N
@@ -232,6 +315,9 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
             }
         });
         jmApp.add(jmiSair);
+
+        jMenuItem1.setText(bundle.getString("JAutoInvoiceApp.jMenuItem1.text")); // NOI18N
+        jmApp.add(jMenuItem1);
 
         jmbBarraMenu.add(jmApp);
 
@@ -338,11 +424,24 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JButton jbtnClientes;
+    private javax.swing.JButton jbtnConfiguracoes;
+    private javax.swing.JButton jbtnEmpregados;
+    private javax.swing.JButton jbtnEstatisticas;
     private javax.swing.JButton jbtnFacturas;
+    private javax.swing.JButton jbtnImprimir;
+    private javax.swing.JButton jbtnMarcacoes;
+    private javax.swing.JButton jbtnPecas;
+    private javax.swing.JButton jbtnPesquisa;
+    private javax.swing.JButton jbtnRelatorios;
     private javax.swing.JButton jbtnReparacoes;
     private javax.swing.JButton jbtnSair;
     private javax.swing.JButton jbtnVeiculos;

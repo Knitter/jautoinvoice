@@ -4,21 +4,21 @@
  */
 
 /*
- * PainelFacturas.java
+ * PainelReparacoes.java
  *
- * Created on Sep 3, 2010, 7:28:29 PM
+ * Created on Sep 3, 2010, 7:28:07 PM
  */
 
-package net.sf.jautoinvoice;
+package net.sf.jautoinvoice.paineis;
 
 /**
  *
  * @author knitter
  */
-public class PainelFacturas extends javax.swing.JPanel {
+public class PainelReparacoes extends javax.swing.JPanel {
 
-    /** Creates new form PainelFacturas */
-    public PainelFacturas() {
+    /** Creates new form PainelReparacoes */
+    public PainelReparacoes() {
         initComponents();
     }
 
@@ -33,25 +33,23 @@ public class PainelFacturas extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(java.awt.Color.red);
-
-        jLabel1.setText("Facturas");
+        jLabel1.setText("Reparações");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
+                .addGap(144, 144, 144)
                 .addComponent(jLabel1)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
+                .addGap(127, 127, 127)
                 .addComponent(jLabel1)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

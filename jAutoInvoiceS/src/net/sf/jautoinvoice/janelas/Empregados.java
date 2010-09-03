@@ -1,8 +1,24 @@
-package net.sf.jautoinvoice;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-public class Configuracoes extends javax.swing.JDialog {
+/*
+ * Empregados.java
+ *
+ * Created on Sep 4, 2010, 12:08:56 AM
+ */
 
-    public Configuracoes(java.awt.Frame parent, boolean modal) {
+package net.sf.jautoinvoice.janelas;
+
+/**
+ *
+ * @author knitter
+ */
+public class Empregados extends javax.swing.JDialog {
+
+    /** Creates new form Empregados */
+    public Empregados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -18,15 +34,15 @@ public class Configuracoes extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 400, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 300, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();

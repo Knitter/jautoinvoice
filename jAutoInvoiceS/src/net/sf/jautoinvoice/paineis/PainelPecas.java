@@ -4,21 +4,21 @@
  */
 
 /*
- * PainelReparacoes.java
+ * PainelPecas.java
  *
- * Created on Sep 3, 2010, 7:28:07 PM
+ * Created on Sep 4, 2010, 12:06:56 AM
  */
 
-package net.sf.jautoinvoice;
+package net.sf.jautoinvoice.paineis;
 
 /**
  *
  * @author knitter
  */
-public class PainelReparacoes extends javax.swing.JPanel {
+public class PainelPecas extends javax.swing.JPanel {
 
-    /** Creates new form PainelReparacoes */
-    public PainelReparacoes() {
+    /** Creates new form PainelPecas */
+    public PainelPecas() {
         initComponents();
     }
 
@@ -31,31 +31,20 @@ public class PainelReparacoes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
-        jLabel1.setText("Reparações");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jLabel1)
-                .addContainerGap(173, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jLabel1)
-                .addContainerGap(156, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
 }

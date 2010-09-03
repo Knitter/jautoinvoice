@@ -9,7 +9,7 @@
  * Created on Sep 3, 2010, 7:27:59 PM
  */
 
-package net.sf.jautoinvoice;
+package net.sf.jautoinvoice.paineis;
 
 /**
  *

@@ -1,5 +1,5 @@
 /*
- * Gestor.java
+ * Actualizacao.java
  *
  * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
  *
@@ -18,11 +18,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.jautoinvoice;
+package net.sf.jautoinvoice.janelas;
 
-public class Sobre extends javax.swing.JDialog {
+public class Actualizacao extends javax.swing.JDialog {
 
-    public Sobre(java.awt.Frame parent, boolean modal) {
+    public Actualizacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
