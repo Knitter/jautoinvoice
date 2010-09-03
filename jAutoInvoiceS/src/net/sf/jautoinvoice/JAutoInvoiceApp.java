@@ -20,6 +20,7 @@
  */
 package net.sf.jautoinvoice;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -32,14 +33,22 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import net.sf.jautoinvoice.engine.Gestor;
+import org.javadev.AnimatingCardLayout;
+import org.javadev.effects.Animation;
+import org.javadev.effects.AnimationListener;
+import org.javadev.effects.DashboardAnimation;
 
 public class JAutoInvoiceApp extends javax.swing.JFrame {
 
     private Gestor gestor;
     private final JAutoInvoiceApp frame = this;
     private HashMap<String, JInternalFrame> iFrames;
+    private AnimatingCardLayout anicard;
     //
     private static final String I_CLIENTES = "clientes";
+    private static final String I_FACTURAS = "facturas";
+    private static final String I_REPARACOES = "reparacoes";
+    private static final String I_VEICULOS = "veiculos";
 
     public JAutoInvoiceApp() {
         gestor = new Gestor();
@@ -47,7 +56,17 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
 
         iFrames = new HashMap<String, JInternalFrame>(10);
 
+        DashboardAnimation dash = new DashboardAnimation();
+        dash.setAnimationDuration(50);
+        anicard = new AnimatingCardLayout(dash);
+
         initComponents();
+
+        jpPainelPrincipal.add(new PainelClientes(), I_CLIENTES);
+        jpPainelPrincipal.add(new PainelFacturas(), I_FACTURAS);
+        jpPainelPrincipal.add(new PainelReparacoes(), I_REPARACOES);
+
+        anicard.show(jpPainelPrincipal, I_REPARACOES);
     }
 
     public void autenticar(String utilizador, String password) {
@@ -75,23 +94,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         System.exit(0);
     }
 
-    private void listaClientes() {
-        ListaClientes janela = (ListaClientes) iFrames.get(I_CLIENTES);
-        if (janela == null) {
-            janela = new ListaClientes();
-            iFrames.put(I_CLIENTES, janela);
-            janela.setVisible(true);
-            jdpPainelDesktop.add(janela);
-        } else {
-            janela.setVisible(true);
-        }
-        try {
-            janela.setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -101,7 +103,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jdpPainelDesktop = new javax.swing.JDesktopPane();
         jtbBarraFerramentas = new javax.swing.JToolBar();
         jbtnReparacoes = new javax.swing.JButton();
         jbtnFacturas = new javax.swing.JButton();
@@ -109,6 +110,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnClientes = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jbtnSair = new javax.swing.JButton();
+        jpPainelPrincipal = new javax.swing.JPanel();
         jmbBarraMenu = new javax.swing.JMenuBar();
         jmApp = new javax.swing.JMenu();
         jmiLogin = new javax.swing.JMenuItem();
@@ -124,16 +126,13 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/principal"); // NOI18N
         setTitle(bundle.getString("JAutoInvoiceApp.title")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(640, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().add(jdpPainelDesktop, java.awt.BorderLayout.CENTER);
 
         jtbBarraFerramentas.setFloatable(false);
-        jtbBarraFerramentas.setRollover(true);
 
         jbtnReparacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/wrench_orange.png"))); // NOI18N
         jbtnReparacoes.setText(bundle.getString("JAutoInvoiceApp.jbtnReparacoes.text")); // NOI18N
@@ -141,6 +140,11 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnReparacoes.setFocusable(false);
         jbtnReparacoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnReparacoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnReparacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReparacoesActionPerformed(evt);
+            }
+        });
         jtbBarraFerramentas.add(jbtnReparacoes);
 
         jbtnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/report.png"))); // NOI18N
@@ -149,6 +153,11 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnFacturas.setFocusable(false);
         jbtnFacturas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnFacturas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnFacturasActionPerformed(evt);
+            }
+        });
         jtbBarraFerramentas.add(jbtnFacturas);
 
         jbtnVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/car.png"))); // NOI18N
@@ -157,6 +166,11 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnVeiculos.setFocusable(false);
         jbtnVeiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnVeiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnVeiculosActionPerformed(evt);
+            }
+        });
         jtbBarraFerramentas.add(jbtnVeiculos);
 
         jbtnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/reseller_programm.png"))); // NOI18N
@@ -187,6 +201,10 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jtbBarraFerramentas.add(jbtnSair);
 
         getContentPane().add(jtbBarraFerramentas, java.awt.BorderLayout.NORTH);
+
+        jpPainelPrincipal.setLayout(null);
+        jpPainelPrincipal.setLayout(anicard);
+        getContentPane().add(jpPainelPrincipal, java.awt.BorderLayout.CENTER);
 
         jmApp.setText(bundle.getString("JAutoInvoiceApp.jmApp.text")); // NOI18N
 
@@ -276,8 +294,20 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jbtnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClientesActionPerformed
-        listaClientes();
+        anicard.show(jpPainelPrincipal, I_CLIENTES);
     }//GEN-LAST:event_jbtnClientesActionPerformed
+
+    private void jbtnVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVeiculosActionPerformed
+        anicard.show(jpPainelPrincipal, I_VEICULOS);
+    }//GEN-LAST:event_jbtnVeiculosActionPerformed
+
+    private void jbtnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFacturasActionPerformed
+        anicard.show(jpPainelPrincipal, I_FACTURAS);
+    }//GEN-LAST:event_jbtnFacturasActionPerformed
+
+    private void jbtnReparacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReparacoesActionPerformed
+        anicard.show(jpPainelPrincipal, I_REPARACOES);
+    }//GEN-LAST:event_jbtnReparacoesActionPerformed
 
     public static void main(String args[]) {
         EventQueue.invokeLater(new Runnable() {
@@ -316,7 +346,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     private javax.swing.JButton jbtnReparacoes;
     private javax.swing.JButton jbtnSair;
     private javax.swing.JButton jbtnVeiculos;
-    private javax.swing.JDesktopPane jdpPainelDesktop;
     private javax.swing.JMenu jmAjuda;
     private javax.swing.JMenu jmApp;
     private javax.swing.JMenuBar jmbBarraMenu;
@@ -326,6 +355,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiLogin;
     private javax.swing.JMenuItem jmiSair;
     private javax.swing.JMenuItem jmiSobre;
+    private javax.swing.JPanel jpPainelPrincipal;
     private javax.swing.JToolBar jtbBarraFerramentas;
     // End of variables declaration//GEN-END:variables
 }
