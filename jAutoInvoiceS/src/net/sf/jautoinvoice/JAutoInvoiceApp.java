@@ -1,25 +1,95 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * JAutoInvoiceApp.java
  *
- * Created on Sep 2, 2010, 11:25:08 PM
+ * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
+ *
+ * Copyright (C) 2010  Sérgio Lopes
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.sf.jautoinvoice;
 
-/**
- *
- * @author sergiolopes
- */
+import java.awt.EventQueue;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import net.sf.jautoinvoice.engine.Gestor;
+
 public class JAutoInvoiceApp extends javax.swing.JFrame {
 
-    /** Creates new form JAutoInvoiceApp */
+    private Gestor gestor;
+    private final JAutoInvoiceApp frame = this;
+    private HashMap<String, JInternalFrame> iFrames;
+    //
+    private static final String I_CLIENTES = "clientes";
+
     public JAutoInvoiceApp() {
+        gestor = new Gestor();
+        gestor.init();
+
+        iFrames = new HashMap<String, JInternalFrame>(10);
+
         initComponents();
+    }
+
+    public void autenticar(String utilizador, String password) {
+        if (gestor.autenticar(utilizador, password)) {
+            activarInterface();
+        } else {
+            JOptionPane.showMessageDialog(this, "Messagem...", "Title...", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void activarInterface() {
+    }
+
+    private void login() {
+        EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new Login(frame, true).setVisible(true);
+            }
+        });
+    }
+
+    private void sair() {
+        gestor.desligar();
+        System.exit(0);
+    }
+
+    private void listaClientes() {
+        ListaClientes janela = (ListaClientes) iFrames.get(I_CLIENTES);
+        if (janela == null) {
+            janela = new ListaClientes();
+            iFrames.put(I_CLIENTES, janela);
+            janela.setVisible(true);
+            jdpPainelDesktop.add(janela);
+        } else {
+            janela.setVisible(true);
+        }
+        try {
+            janela.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -31,34 +101,231 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jdpPainelDesktop = new javax.swing.JDesktopPane();
+        jtbBarraFerramentas = new javax.swing.JToolBar();
+        jbtnReparacoes = new javax.swing.JButton();
+        jbtnFacturas = new javax.swing.JButton();
+        jbtnVeiculos = new javax.swing.JButton();
+        jbtnClientes = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jbtnSair = new javax.swing.JButton();
+        jmbBarraMenu = new javax.swing.JMenuBar();
+        jmApp = new javax.swing.JMenu();
+        jmiLogin = new javax.swing.JMenuItem();
+        jmiConfiguracoes = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jmiSair = new javax.swing.JMenuItem();
+        jmAjuda = new javax.swing.JMenu();
+        jmiAjuda = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jmiActualizacoes = new javax.swing.JMenuItem();
+        jmiSobre = new javax.swing.JMenuItem();
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/principal"); // NOI18N
+        setTitle(bundle.getString("JAutoInvoiceApp.title")); // NOI18N
+        setPreferredSize(new java.awt.Dimension(640, 480));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+        getContentPane().add(jdpPainelDesktop, java.awt.BorderLayout.CENTER);
+
+        jtbBarraFerramentas.setFloatable(false);
+        jtbBarraFerramentas.setRollover(true);
+
+        jbtnReparacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/wrench_orange.png"))); // NOI18N
+        jbtnReparacoes.setText(bundle.getString("JAutoInvoiceApp.jbtnReparacoes.text")); // NOI18N
+        jbtnReparacoes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnReparacoes.toolTipText")); // NOI18N
+        jbtnReparacoes.setFocusable(false);
+        jbtnReparacoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnReparacoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnReparacoes);
+
+        jbtnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/report.png"))); // NOI18N
+        jbtnFacturas.setText(bundle.getString("JAutoInvoiceApp.jbtnFacturas.text")); // NOI18N
+        jbtnFacturas.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnFacturas.toolTipText")); // NOI18N
+        jbtnFacturas.setFocusable(false);
+        jbtnFacturas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnFacturas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnFacturas);
+
+        jbtnVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/car.png"))); // NOI18N
+        jbtnVeiculos.setText(bundle.getString("JAutoInvoiceApp.jbtnVeiculos.text")); // NOI18N
+        jbtnVeiculos.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnVeiculos.toolTipText")); // NOI18N
+        jbtnVeiculos.setFocusable(false);
+        jbtnVeiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnVeiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbBarraFerramentas.add(jbtnVeiculos);
+
+        jbtnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/reseller_programm.png"))); // NOI18N
+        jbtnClientes.setText(bundle.getString("JAutoInvoiceApp.jbtnClientes.text")); // NOI18N
+        jbtnClientes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnClientes.toolTipText")); // NOI18N
+        jbtnClientes.setFocusable(false);
+        jbtnClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnClientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnClientesActionPerformed(evt);
+            }
+        });
+        jtbBarraFerramentas.add(jbtnClientes);
+        jtbBarraFerramentas.add(jSeparator3);
+
+        jbtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/door_out.png"))); // NOI18N
+        jbtnSair.setText(bundle.getString("JAutoInvoiceApp.jbtnSair.text")); // NOI18N
+        jbtnSair.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnSair.toolTipText")); // NOI18N
+        jbtnSair.setFocusable(false);
+        jbtnSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSairActionPerformed(evt);
+            }
+        });
+        jtbBarraFerramentas.add(jbtnSair);
+
+        getContentPane().add(jtbBarraFerramentas, java.awt.BorderLayout.NORTH);
+
+        jmApp.setText(bundle.getString("JAutoInvoiceApp.jmApp.text")); // NOI18N
+
+        jmiLogin.setText(bundle.getString("JAutoInvoiceApp.jmiLogin.text")); // NOI18N
+        jmiLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiLoginActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiLogin);
+
+        jmiConfiguracoes.setText(bundle.getString("JAutoInvoiceApp.jmiConfiguracoes.text")); // NOI18N
+        jmiConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiConfiguracoesActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiConfiguracoes);
+        jmApp.add(jSeparator2);
+
+        jmiSair.setText(bundle.getString("JAutoInvoiceApp.jmiSair.text")); // NOI18N
+        jmiSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSairActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiSair);
+
+        jmbBarraMenu.add(jmApp);
+
+        jmAjuda.setText(bundle.getString("JAutoInvoiceApp.jmAjuda.text")); // NOI18N
+
+        jmiAjuda.setText(bundle.getString("JAutoInvoiceApp.jmiAjuda.text")); // NOI18N
+        jmAjuda.add(jmiAjuda);
+        jmAjuda.add(jSeparator1);
+
+        jmiActualizacoes.setText(bundle.getString("JAutoInvoiceApp.jmiActualizacoes.text")); // NOI18N
+        jmiActualizacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiActualizacoesActionPerformed(evt);
+            }
+        });
+        jmAjuda.add(jmiActualizacoes);
+
+        jmiSobre.setText(bundle.getString("JAutoInvoiceApp.jmiSobre.text")); // NOI18N
+        jmAjuda.add(jmiSobre);
+
+        jmbBarraMenu.add(jmAjuda);
+
+        setJMenuBar(jmbBarraMenu);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void jmiLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLoginActionPerformed
+        login();
+    }//GEN-LAST:event_jmiLoginActionPerformed
+
+    private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
+        sair();
+    }//GEN-LAST:event_jmiSairActionPerformed
+
+    private void jmiConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConfiguracoesActionPerformed
+        EventQueue.invokeLater(new Runnable() {
+
             public void run() {
+                new Configuracoes(frame, true).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jmiConfiguracoesActionPerformed
+
+    private void jmiActualizacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiActualizacoesActionPerformed
+        EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new Actualizacao(frame, true).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jmiActualizacoesActionPerformed
+
+    private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
+        sair();
+    }//GEN-LAST:event_jbtnSairActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        sair();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jbtnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClientesActionPerformed
+        listaClientes();
+    }//GEN-LAST:event_jbtnClientesActionPerformed
+
+    public static void main(String args[]) {
+        EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                try {
+                    System.setProperty("java.util.logging.config.file", "logging.properties");
+                    LogManager logManager = LogManager.getLogManager();
+                    logManager.readConfiguration();
+                } catch (IOException ex) {
+                } catch (SecurityException ex) {
+                }
+
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 new JAutoInvoiceApp().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JButton jbtnClientes;
+    private javax.swing.JButton jbtnFacturas;
+    private javax.swing.JButton jbtnReparacoes;
+    private javax.swing.JButton jbtnSair;
+    private javax.swing.JButton jbtnVeiculos;
+    private javax.swing.JDesktopPane jdpPainelDesktop;
+    private javax.swing.JMenu jmAjuda;
+    private javax.swing.JMenu jmApp;
+    private javax.swing.JMenuBar jmbBarraMenu;
+    private javax.swing.JMenuItem jmiActualizacoes;
+    private javax.swing.JMenuItem jmiAjuda;
+    private javax.swing.JMenuItem jmiConfiguracoes;
+    private javax.swing.JMenuItem jmiLogin;
+    private javax.swing.JMenuItem jmiSair;
+    private javax.swing.JMenuItem jmiSobre;
+    private javax.swing.JToolBar jtbBarraFerramentas;
     // End of variables declaration//GEN-END:variables
-
 }
