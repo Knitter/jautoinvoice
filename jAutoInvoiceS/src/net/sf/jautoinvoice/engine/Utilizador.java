@@ -31,10 +31,13 @@ public class Utilizador {
     private String username;
     private String password;
     private boolean activo;
+    private boolean administrador;
 
-    public Utilizador(String username, String password) {
+    public Utilizador(String username, String password, boolean administrador) {
         this.username = username;
         this.password = password;
+        this.administrador = administrador;
+        
         activo = true;
     }
 
@@ -60,6 +63,14 @@ public class Utilizador {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public boolean isAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
     }
 
     public static String gerarHash(String password) {

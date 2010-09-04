@@ -26,7 +26,7 @@ public class Empregado extends Utilizador {
     private double valorHora;
 
     public Empregado(String username, String password, String nome, double valorHora) {
-        super(username, password);
+        super(username, password, false);
         
         this.nome = nome;
         this.valorHora = valorHora;

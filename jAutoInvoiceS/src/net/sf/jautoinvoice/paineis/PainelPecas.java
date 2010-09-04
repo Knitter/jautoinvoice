@@ -31,84 +31,316 @@ public class PainelPecas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jPanel2 = new javax.swing.JPanel();
+        jspSplit = new javax.swing.JSplitPane();
+        jpPainelLista = new javax.swing.JPanel();
+        jtfPesquisa = new javax.swing.JTextField();
+        jbtnRemoverPeca = new javax.swing.JButton();
+        jbtnAdicionarPeca = new javax.swing.JButton();
+        jscpScroll = new javax.swing.JScrollPane();
+        jtListaPecas = new javax.swing.JTree();
+        jpPainelDireito = new javax.swing.JPanel();
+        jpDados = new javax.swing.JPanel();
+        jblNome = new javax.swing.JLabel();
+        jtfNome = new javax.swing.JTextField();
+        jlblReferencia = new javax.swing.JLabel();
+        jlblPreco = new javax.swing.JLabel();
+        jtfReferencia = new javax.swing.JTextField();
+        jffPreco = new javax.swing.JFormattedTextField();
+        jpPainelDescricao = new javax.swing.JPanel();
+        jspScrollDescricao = new javax.swing.JScrollPane();
+        jtaDescricao = new javax.swing.JTextArea();
+        jbtnCancelar = new javax.swing.JButton();
+        jbtnGravar = new javax.swing.JButton();
+        jlblMoeda = new javax.swing.JLabel();
+        jpPainelModelos = new javax.swing.JPanel();
+        jscpScrollTreeModelos = new javax.swing.JScrollPane();
+        jtModelos = new javax.swing.JTree();
+        jpBotoes = new javax.swing.JPanel();
+        jbtnAdicionarModelo = new javax.swing.JButton();
+        jbtnRemoverModelo = new javax.swing.JButton();
+        jscpScrollModelos = new javax.swing.JScrollPane();
+        jlstListaModelos = new javax.swing.JList();
+        jlblIva = new javax.swing.JLabel();
+        jcbxIva = new javax.swing.JComboBox();
 
         setLayout(new java.awt.BorderLayout());
 
-        jSplitPane1.setDividerLocation(150);
+        jspSplit.setDividerLocation(200);
 
-        jTextField1.setText("jTextField1");
+        jtfPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPesquisaActionPerformed(evt);
+            }
+        });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/brick_delete.png"))); // NOI18N
+        jbtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/brick_delete.png"))); // NOI18N
+        jbtnRemoverPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverPecaActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/brick_add.png"))); // NOI18N
+        jbtnAdicionarPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/brick_add.png"))); // NOI18N
+        jbtnAdicionarPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarPecaActionPerformed(evt);
+            }
+        });
 
-        jScrollPane1.setViewportView(jTree1);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jtListaPecas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jscpScroll.setViewportView(jtListaPecas);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpPainelListaLayout = new javax.swing.GroupLayout(jpPainelLista);
+        jpPainelLista.setLayout(jpPainelListaLayout);
+        jpPainelListaLayout.setHorizontalGroup(
+            jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPainelListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpPainelListaLayout.createSequentialGroup()
+                        .addComponent(jbtnAdicionarPeca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                        .addComponent(jbtnRemoverPeca))
+                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(jscpScroll, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        jpPainelListaLayout.setVerticalGroup(
+            jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPainelListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addComponent(jscpScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbtnRemoverPeca)
+                    .addComponent(jbtnAdicionarPeca))
                 .addContainerGap())
         );
 
-        jSplitPane1.setLeftComponent(jPanel1);
+        jspSplit.setLeftComponent(jpPainelLista);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/principal"); // NOI18N
+        jpDados.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PainelPecas.jpDados.border.title"))); // NOI18N
+
+        jblNome.setText(bundle.getString("PainelPecas.jblNome.text")); // NOI18N
+
+        jlblReferencia.setText(bundle.getString("PainelPecas.jlblReferencia.text")); // NOI18N
+
+        jlblPreco.setText(bundle.getString("PainelPecas.jlblPreco.text")); // NOI18N
+
+        jtfReferencia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfReferenciaFocusLost(evt);
+            }
+        });
+
+        jpPainelDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PainelPecas.jpPainelDescricao.border.title"))); // NOI18N
+
+        jtaDescricao.setColumns(20);
+        jtaDescricao.setRows(5);
+        jspScrollDescricao.setViewportView(jtaDescricao);
+
+        javax.swing.GroupLayout jpPainelDescricaoLayout = new javax.swing.GroupLayout(jpPainelDescricao);
+        jpPainelDescricao.setLayout(jpPainelDescricaoLayout);
+        jpPainelDescricaoLayout.setHorizontalGroup(
+            jpPainelDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPainelDescricaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jspScrollDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 356, Short.MAX_VALUE)
+        jpPainelDescricaoLayout.setVerticalGroup(
+            jpPainelDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPainelDescricaoLayout.createSequentialGroup()
+                .addComponent(jspScrollDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jSplitPane1.setRightComponent(jPanel2);
+        jbtnCancelar.setText(bundle.getString("PainelPecas.jbtnCancelar.text")); // NOI18N
 
-        add(jSplitPane1, java.awt.BorderLayout.CENTER);
+        jbtnGravar.setText(bundle.getString("PainelPecas.jbtnGravar.text")); // NOI18N
+
+        jlblMoeda.setText(bundle.getString("PainelPecas.jlblMoeda.text")); // NOI18N
+
+        jpPainelModelos.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PainelPecas.jpPainelModelos.border.title"))); // NOI18N
+        jpPainelModelos.setLayout(new javax.swing.BoxLayout(jpPainelModelos, javax.swing.BoxLayout.LINE_AXIS));
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jtModelos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jscpScrollTreeModelos.setViewportView(jtModelos);
+
+        jpPainelModelos.add(jscpScrollTreeModelos);
+
+        jpBotoes.setLayout(new javax.swing.BoxLayout(jpBotoes, javax.swing.BoxLayout.Y_AXIS));
+
+        jbtnAdicionarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
+        jbtnAdicionarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarModeloActionPerformed(evt);
+            }
+        });
+        jpBotoes.add(jbtnAdicionarModelo);
+
+        jbtnRemoverModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/delete.png"))); // NOI18N
+        jbtnRemoverModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverModeloActionPerformed(evt);
+            }
+        });
+        jpBotoes.add(jbtnRemoverModelo);
+
+        jpPainelModelos.add(jpBotoes);
+
+        jscpScrollModelos.setViewportView(jlstListaModelos);
+
+        jpPainelModelos.add(jscpScrollModelos);
+
+        jlblIva.setText(bundle.getString("PainelPecas.jlblIva.text")); // NOI18N
+
+        javax.swing.GroupLayout jpDadosLayout = new javax.swing.GroupLayout(jpDados);
+        jpDados.setLayout(jpDadosLayout);
+        jpDadosLayout.setHorizontalGroup(
+            jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpPainelDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpPainelModelos, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                    .addGroup(jpDadosLayout.createSequentialGroup()
+                        .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblNome)
+                            .addComponent(jlblReferencia)
+                            .addComponent(jlblPreco)
+                            .addComponent(jlblIva))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDadosLayout.createSequentialGroup()
+                                .addComponent(jffPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlblMoeda))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jtfReferencia, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jcbxIva, javax.swing.GroupLayout.Alignment.LEADING, 0, 226, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDadosLayout.createSequentialGroup()
+                        .addComponent(jbtnGravar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnCancelar)))
+                .addContainerGap())
+        );
+        jpDadosLayout.setVerticalGroup(
+            jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jblNome)
+                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblReferencia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jffPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblPreco)
+                    .addComponent(jlblMoeda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbxIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblIva))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpPainelModelos, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpPainelDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnGravar)
+                    .addComponent(jbtnCancelar))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jpPainelDireitoLayout = new javax.swing.GroupLayout(jpPainelDireito);
+        jpPainelDireito.setLayout(jpPainelDireitoLayout);
+        jpPainelDireitoLayout.setHorizontalGroup(
+            jpPainelDireitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPainelDireitoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpPainelDireitoLayout.setVerticalGroup(
+            jpPainelDireitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPainelDireitoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jspSplit.setRightComponent(jpPainelDireito);
+
+        add(jspSplit, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPesquisaActionPerformed
+
+    private void jbtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverPecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnRemoverPecaActionPerformed
+
+    private void jbtnAdicionarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarPecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAdicionarPecaActionPerformed
+
+    private void jbtnAdicionarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAdicionarModeloActionPerformed
+
+    private void jbtnRemoverModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnRemoverModeloActionPerformed
+
+    private void jtfReferenciaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfReferenciaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfReferenciaFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JLabel jblNome;
+    private javax.swing.JButton jbtnAdicionarModelo;
+    private javax.swing.JButton jbtnAdicionarPeca;
+    private javax.swing.JButton jbtnCancelar;
+    private javax.swing.JButton jbtnGravar;
+    private javax.swing.JButton jbtnRemoverModelo;
+    private javax.swing.JButton jbtnRemoverPeca;
+    private javax.swing.JComboBox jcbxIva;
+    private javax.swing.JFormattedTextField jffPreco;
+    private javax.swing.JLabel jlblIva;
+    private javax.swing.JLabel jlblMoeda;
+    private javax.swing.JLabel jlblPreco;
+    private javax.swing.JLabel jlblReferencia;
+    private javax.swing.JList jlstListaModelos;
+    private javax.swing.JPanel jpBotoes;
+    private javax.swing.JPanel jpDados;
+    private javax.swing.JPanel jpPainelDescricao;
+    private javax.swing.JPanel jpPainelDireito;
+    private javax.swing.JPanel jpPainelLista;
+    private javax.swing.JPanel jpPainelModelos;
+    private javax.swing.JScrollPane jscpScroll;
+    private javax.swing.JScrollPane jscpScrollModelos;
+    private javax.swing.JScrollPane jscpScrollTreeModelos;
+    private javax.swing.JScrollPane jspScrollDescricao;
+    private javax.swing.JSplitPane jspSplit;
+    private javax.swing.JTree jtListaPecas;
+    private javax.swing.JTree jtModelos;
+    private javax.swing.JTextArea jtaDescricao;
+    private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfPesquisa;
+    private javax.swing.JTextField jtfReferencia;
     // End of variables declaration//GEN-END:variables
 
 }

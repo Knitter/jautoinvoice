@@ -110,6 +110,8 @@ public class Configuracoes extends javax.swing.JDialog {
 
         jlblLookAndFeel.setText(bundle.getString("Configuracoes.jlblLookAndFeel.text")); // NOI18N
 
+        jcbxLookAndFeel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nativo (Fornecido pelo sistema Operativo)", "Multi-plataforma (Metal)", "Nimbus" }));
+
         jckbUsarAnimacao.setText(bundle.getString("Configuracoes.jckbUsarAnimacao.text")); // NOI18N
         jckbUsarAnimacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +120,8 @@ public class Configuracoes extends javax.swing.JDialog {
         });
 
         jlblTipoAnimacao.setText(bundle.getString("Configuracoes.jlblTipoAnimacao.text")); // NOI18N
+
+        jcbxTipoAnimacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cubo", "Dashboard", "Slide" }));
 
         org.jdesktop.layout.GroupLayout jpPainelAspectoLayout = new org.jdesktop.layout.GroupLayout(jpPainelAspecto);
         jpPainelAspecto.setLayout(jpPainelAspectoLayout);

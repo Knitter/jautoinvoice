@@ -21,7 +21,6 @@
 package net.sf.jautoinvoice;
 
 import java.awt.CardLayout;
-import net.sf.jautoinvoice.janelas.Login;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -40,6 +40,7 @@ import net.sf.jautoinvoice.janelas.Configuracoes;
 import net.sf.jautoinvoice.janelas.Empregados;
 import net.sf.jautoinvoice.janelas.ErrosSugestoes;
 import net.sf.jautoinvoice.janelas.Sobre;
+import net.sf.jautoinvoice.paineis.PainelAutenticacao;
 import net.sf.jautoinvoice.paineis.PainelClientes;
 import net.sf.jautoinvoice.paineis.PainelFacturas;
 import net.sf.jautoinvoice.paineis.PainelPecas;
@@ -56,6 +57,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     private CardLayout anicard;
     private Properties configuracoes;
     //
+    private static final String P_AUTENTICACAO = "autenticacao";
     private static final String P_CLIENTES = "clientes";
     private static final String P_FACTURAS = "facturas";
     private static final String P_REPARACOES = "reparacoes";
@@ -86,27 +88,63 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         }
 
         initComponents();
+        desactivarInteraccao();
+        anicard.show(jpPainelPrincipal, P_AUTENTICACAO);
+    }
 
-        //TODO: passar para initComponents
-        jpPainelPrincipal.add(new PainelReparacoes(), P_REPARACOES);
-        jpPainelPrincipal.add(new PainelFacturas(), P_FACTURAS);
-        jpPainelPrincipal.add(new PainelVeiculos(), P_VEICULOS);
-        jpPainelPrincipal.add(new PainelClientes(), P_CLIENTES);
-        jpPainelPrincipal.add(new PainelPecas(), P_PECAS);
+    private void desactivarInteraccao() {
+        jbtnClientes.setEnabled(false);
+        jbtnFacturas.setEnabled(false);
+        jbtnImprimir.setEnabled(false);
+        jbtnMarcacoes.setEnabled(false);
+        jbtnPecas.setEnabled(false);
+        jbtnPesquisa.setEnabled(false);
+        jbtnReparacoes.setEnabled(false);
+        jbtnVeiculos.setEnabled(false);
+        jbtnRelatorios.setEnabled(false);
+        jbtnRelatorios.setVisible(false);
+        jbtnConfiguracoes.setEnabled(false);
+        jbtnConfiguracoes.setVisible(false);
+        jbtnEmpregados.setEnabled(false);
+        jbtnEmpregados.setVisible(false);
+        jbtnEstatisticas.setEnabled(false);
+        jbtnEstatisticas.setVisible(false);
+        jSeparator5.setVisible(false);
+        jSeparator6.setVisible(false);
+    }
 
-        //anicard.show(jpPainelPrincipal, P_REPARACOES);
-        //END: TODO
+    private void activarInteraccao() {
+        jbtnClientes.setEnabled(true);
+        jbtnFacturas.setEnabled(true);
+        jbtnImprimir.setEnabled(true);
+        jbtnMarcacoes.setEnabled(true);
+        jbtnPecas.setEnabled(true);
+        jbtnPesquisa.setEnabled(true);
+        jbtnReparacoes.setEnabled(true);
+        jbtnVeiculos.setEnabled(true);
+        if (gestor.getAutenticado().isAdministrador()) {
+            jbtnRelatorios.setEnabled(true);
+            jbtnRelatorios.setVisible(true);
+            jbtnConfiguracoes.setEnabled(true);
+            jbtnConfiguracoes.setVisible(true);
+            jbtnEmpregados.setEnabled(true);
+            jbtnEmpregados.setVisible(true);
+            jbtnEstatisticas.setEnabled(true);
+            jbtnEstatisticas.setVisible(true);
+            jSeparator5.setVisible(true);
+            jSeparator6.setVisible(true);
+        }
     }
 
     public void autenticar(String utilizador, String password) {
         if (gestor.autenticar(utilizador, password)) {
-            activarInterface();
+            //alterarEstadoInteraccao(true);
+            anicard.show(jpPainelPrincipal, P_REPARACOES);
         } else {
-            JOptionPane.showMessageDialog(this, "Messagem...", "Title...", JOptionPane.ERROR_MESSAGE);
+            ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos");
+            JOptionPane.showMessageDialog(this, bundle.getString("mensagem.erro.autenticacao.texto"),
+                    bundle.getString("mensagem.erro.autenticacao.titulo"), JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private void activarInterface() {
     }
 
     private void sair() {
@@ -162,7 +200,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jpPainelPrincipal = new javax.swing.JPanel();
         jmbBarraMenu = new javax.swing.JMenuBar();
         jmApp = new javax.swing.JMenu();
-        jmiLogin = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jmiSair = new javax.swing.JMenuItem();
         jmAjuda = new javax.swing.JMenu();
@@ -186,6 +223,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnReparacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/wrench_orange.png"))); // NOI18N
         jbtnReparacoes.setText(bundle.getString("JAutoInvoiceApp.jbtnReparacoes.text")); // NOI18N
         jbtnReparacoes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnReparacoes.toolTipText")); // NOI18N
+        jbtnReparacoes.setEnabled(false);
         jbtnReparacoes.setFocusable(false);
         jbtnReparacoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnReparacoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -199,6 +237,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/document_prepare.png"))); // NOI18N
         jbtnFacturas.setText(bundle.getString("JAutoInvoiceApp.jbtnFacturas.text")); // NOI18N
         jbtnFacturas.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnFacturas.toolTipText")); // NOI18N
+        jbtnFacturas.setEnabled(false);
         jbtnFacturas.setFocusable(false);
         jbtnFacturas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnFacturas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -212,6 +251,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/car.png"))); // NOI18N
         jbtnVeiculos.setText(bundle.getString("JAutoInvoiceApp.jbtnVeiculos.text")); // NOI18N
         jbtnVeiculos.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnVeiculos.toolTipText")); // NOI18N
+        jbtnVeiculos.setEnabled(false);
         jbtnVeiculos.setFocusable(false);
         jbtnVeiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnVeiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -225,6 +265,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/vcard.png"))); // NOI18N
         jbtnClientes.setText(bundle.getString("JAutoInvoiceApp.jbtnClientes.text")); // NOI18N
         jbtnClientes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnClientes.toolTipText")); // NOI18N
+        jbtnClientes.setEnabled(false);
         jbtnClientes.setFocusable(false);
         jbtnClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnClientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -238,6 +279,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnPecas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/brick.png"))); // NOI18N
         jbtnPecas.setText(bundle.getString("JAutoInvoiceApp.jbtnPecas.text")); // NOI18N
         jbtnPecas.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnPecas.toolTipText")); // NOI18N
+        jbtnPecas.setEnabled(false);
         jbtnPecas.setFocusable(false);
         jbtnPecas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnPecas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -252,6 +294,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/find.png"))); // NOI18N
         jbtnPesquisa.setText(bundle.getString("JAutoInvoiceApp.jbtnPesquisa.text")); // NOI18N
         jbtnPesquisa.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnPesquisa.toolTipText")); // NOI18N
+        jbtnPesquisa.setEnabled(false);
         jbtnPesquisa.setFocusable(false);
         jbtnPesquisa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnPesquisa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -265,6 +308,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/printer.png"))); // NOI18N
         jbtnImprimir.setText(bundle.getString("JAutoInvoiceApp.jbtnImprimir.text")); // NOI18N
         jbtnImprimir.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnImprimir.toolTipText")); // NOI18N
+        jbtnImprimir.setEnabled(false);
         jbtnImprimir.setFocusable(false);
         jbtnImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -279,6 +323,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jbtnMarcacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/calendar.png"))); // NOI18N
         jbtnMarcacoes.setText(bundle.getString("JAutoInvoiceApp.jbtnMarcacoes.text")); // NOI18N
         jbtnMarcacoes.setToolTipText(bundle.getString("JAutoInvoiceApp.jbtnMarcacoes.toolTipText")); // NOI18N
+        jbtnMarcacoes.setEnabled(false);
         jbtnMarcacoes.setFocusable(false);
         jbtnMarcacoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnMarcacoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -361,17 +406,15 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
 
         jpPainelPrincipal.setLayout(null);
         jpPainelPrincipal.setLayout(anicard);
+        jpPainelPrincipal.add(new PainelAutenticacao(this), P_AUTENTICACAO);
+        jpPainelPrincipal.add(new PainelReparacoes(), P_REPARACOES);
+        jpPainelPrincipal.add(new PainelFacturas(), P_FACTURAS);
+        jpPainelPrincipal.add(new PainelVeiculos(), P_VEICULOS);
+        jpPainelPrincipal.add(new PainelClientes(), P_CLIENTES);
+        jpPainelPrincipal.add(new PainelPecas(), P_PECAS);
         getContentPane().add(jpPainelPrincipal, java.awt.BorderLayout.CENTER);
 
         jmApp.setText(bundle.getString("JAutoInvoiceApp.jmApp.text")); // NOI18N
-
-        jmiLogin.setText(bundle.getString("JAutoInvoiceApp.jmiLogin.text")); // NOI18N
-        jmiLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiLoginActionPerformed(evt);
-            }
-        });
-        jmApp.add(jmiLogin);
         jmApp.add(jSeparator2);
 
         jmiSair.setText(bundle.getString("JAutoInvoiceApp.jmiSair.text")); // NOI18N
@@ -425,15 +468,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jmiLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLoginActionPerformed
-        EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new Login(frame, true).setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_jmiLoginActionPerformed
 
     private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
         sair();
@@ -610,7 +644,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     private javax.swing.JMenuBar jmbBarraMenu;
     private javax.swing.JMenuItem jmiActualizacoes;
     private javax.swing.JMenuItem jmiAjuda;
-    private javax.swing.JMenuItem jmiLogin;
     private javax.swing.JMenuItem jmiSair;
     private javax.swing.JMenuItem jmiSobre;
     private javax.swing.JMenuItem jmiSugestoes;

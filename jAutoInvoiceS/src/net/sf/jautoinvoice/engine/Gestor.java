@@ -22,11 +22,11 @@ package net.sf.jautoinvoice.engine;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Gestor {
 
@@ -37,56 +37,149 @@ public class Gestor {
         db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), ficheiro);
 
         if (novo) {
-            db.store(new Utilizador("admin", Utilizador.gerarHash("admin")));
+            db.store(new Utilizador("admin", Utilizador.gerarHash("admin"), true));
+            db.commit();
         }
     }
 
     public void desligar() {
-        db.close();
+        autenticado = null;
+        if (db != null) {
+            db.close();
+        }
     }
 
-    public boolean autenticar(String username, String password) {
+    /**
+     * Permite autenticar um utilizador no sistema. Se a conbinação entre
+     * utilizador e password estiver correcta, esse utilizador passa a ser
+     * considerado o utilizador autenticado em todas as operações seguintes.
+     *
+     * @param username Nome do utilizador a autenticar.
+     * @param password Password a usar na autenticação.
+     * 
+     * @return verdadeiro caso a autenticação seja válida, falso caso contrário.
+     */
+    public boolean autenticar(final String username, final String password) {
         if (db != null) {
-            Utilizador prototype = new Utilizador(username, Utilizador.gerarHash(password));
-            ObjectSet<Utilizador> result = db.queryByExample(prototype);
-            if (result.hasNext()) {
-                autenticado = result.next();
+            List<Utilizador> resultados = db.query(new Predicate<Utilizador>() {
 
+                @Override
+                public boolean match(Utilizador et) {
+                    return et.getUsername().equals(username)
+                            && et.getPassword().equals(Utilizador.gerarHash(password))
+                            && et.isActivo();
+                }
+            });
+
+            //só pode existir um resultado
+            if (resultados.size() == 1) {
+                autenticado = resultados.get(0);
                 return true;
             }
+
+            Logger.getLogger(Gestor.class.getName()).log(Level.SEVERE, "Database inconsistent! More than one user in the DB.");
+            return false;
         }
 
         return false;
     }
 
-    public List<Empregado> listarTodosEmpregados() {
-        return db.query(Empregado.class);
+    public Utilizador getAutenticado() {
+        return autenticado;
     }
 
+    /**
+     * Permite listar todos os empregados existentes no sistema.
+     *
+     * @return lista com empregados, se existirem, ou null se não existe um
+     * utilizador autenticado no sistema.
+     */
+    public List<Empregado> listarTodosEmpregados() {
+        if (autenticado != null) {
+            return db.query(Empregado.class);
+        }
+
+        return null;
+    }
+
+    /**
+     * Adiciona um novo empregado ao sistema.
+     * 
+     * @param username Nome de utilizador a usar na autenticação
+     * @param password Password do novo utilizador
+     * @param nome Nome real do empregado
+     * @param valorHora Valor hora padrão a usar para este empregado
+     *
+     * @return o novo empregado criado e registado ou null caso não existe um
+     * utilizador autenticado no sistema.
+     */
     public Empregado adicionarEmpregado(String username, String password, String nome,
             double valorHora) {
 
-        Empregado empregado = new Empregado(username, password, nome, valorHora);
-        db.store(empregado);
-        return empregado;
+        if (autenticado != null) {
+            Empregado empregado = new Empregado(username, password, nome, valorHora);
+            db.store(empregado);
+            return empregado;
+        }
+
+        return null;
+
     }
 
-    public void removerEmpregado(Empregado empregado) {
-        db.delete(empregado);
+    /**
+     * Remove um empregado do sistema.
+     *
+     * @param empregado Empregado a remover. Precisa ser obtido por pesquisa.
+     * 
+     * @return verdadeiro caso exista um utilizador autenticado no sistema, falso
+     * caso contrário.
+     */
+    public boolean removerEmpregado(Empregado empregado) {
+        if (autenticado != null) {
+            db.delete(empregado);
+            return true;
+        }
+
+        return false;
     }
 
-    public void actualizarEmpregado(Empregado empregado) {
-        db.store(empregado);
+    /**
+     * Actualiza um empregado do sistema.
+     *
+     * @param empregado Empregado a actualizar. Precisa ser obtido por pesquisa.
+     *
+     * @return verdadeiro caso exista um utilizador autenticado no sistema, falso
+     * caso contrário.
+     */
+    public boolean actualizarEmpregado(Empregado empregado) {
+        if (autenticado != null) {
+            db.store(empregado);
+            return true;
+        }
+
+        return false;
     }
 
+    /**
+     * Permite a pesquisa de empregados usando o nome real do empregado como
+     * termo de pesquisa.
+     *
+     * @param nome Nome real, o username não é válido, para pesquisar.
+     *
+     * @return lista com todos os empregados encontrados, se alguns.
+     */
     public List<Empregado> procurarEmpregado(final String nome) {
-        return db.query(new Predicate<Empregado>() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Empregado>() {
 
-            @Override
-            public boolean match(Empregado et) {
-                return et.getNome().matches(nome);
-            }
-        });
+                @Override
+                public boolean match(Empregado et) {
+                    return et.getNome().matches(nome);
+                }
+            });
+        }
+
+        return null;
     }
 
     /////////////////////////////////////////////////////////////////TODO: ....

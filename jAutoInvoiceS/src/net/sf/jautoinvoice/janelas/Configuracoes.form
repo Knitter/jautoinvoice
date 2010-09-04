@@ -240,7 +240,11 @@
         <Component class="javax.swing.JComboBox" name="jcbxLookAndFeel">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Nativo (Fornecido pelo sistema Operativo)"/>
+                <StringItem index="1" value="Multi-plataforma (Metal)"/>
+                <StringItem index="2" value="Nimbus"/>
+              </StringArray>
             </Property>
           </Properties>
         </Component>
@@ -266,7 +270,11 @@
         <Component class="javax.swing.JComboBox" name="jcbxTipoAnimacao">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Cubo"/>
+                <StringItem index="1" value="Dashboard"/>
+                <StringItem index="2" value="Slide"/>
+              </StringArray>
             </Property>
           </Properties>
         </Component>

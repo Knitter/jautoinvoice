@@ -46,7 +46,7 @@ public class Cliente {
         this.telefone2 = telefone2;
         this.email = email;
 
-        this.veiculosActuais = new ArrayList<Veiculo>(actuais);
+        veiculosActuais = new ArrayList<Veiculo>(actuais);
         veiculosAnteriores = new ArrayList<Veiculo>();
     }
 
