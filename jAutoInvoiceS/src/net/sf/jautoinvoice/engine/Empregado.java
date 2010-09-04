@@ -20,16 +20,23 @@
  */
 package net.sf.jautoinvoice.engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Empregado extends Utilizador {
 
     private String nome;
     private double valorHora;
+    private List<LinhaReparacao> linhasReparacao;
 
-    public Empregado(String username, String password, String nome, double valorHora) {
-        super(username, password, false);
+    public Empregado(String username, String password, String nome, double valorHora,
+            boolean administrador) {
         
+        super(username, password, administrador);
+
         this.nome = nome;
         this.valorHora = valorHora;
+        linhasReparacao = new ArrayList<LinhaReparacao>();
     }
 
     public String getNome() {
@@ -46,5 +53,23 @@ public class Empregado extends Utilizador {
 
     public void setValorHora(double valorHora) {
         this.valorHora = valorHora;
+    }
+
+    public List<LinhaReparacao> getLinhasReparacao() {
+        return new ArrayList<LinhaReparacao>(linhasReparacao);
+    }
+
+    public void adicionarLinhaReparacao(LinhaReparacao linha) {
+        if (linhasReparacao == null) {
+            linhasReparacao = new ArrayList<LinhaReparacao>();
+        }
+
+        linhasReparacao.add(linha);
+    }
+
+    public void removerLinhaReparacao(LinhaReparacao linha) {
+        if (linhasReparacao != null) {
+            linhasReparacao.remove(linha);
+        }
     }
 }

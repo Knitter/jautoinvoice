@@ -1,24 +1,34 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * PainelMarcacoes.java
  *
- * Created on Sep 4, 2010, 12:07:05 AM
+ * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
+ *
+ * Copyright (C) 2010  Sérgio Lopes
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.sf.jautoinvoice.paineis;
 
-/**
- *
- * @author knitter
- */
+import net.sf.jautoinvoice.JAutoInvoiceApp;
+
 public class PainelMarcacoes extends javax.swing.JPanel {
 
-    /** Creates new form PainelMarcacoes */
-    public PainelMarcacoes() {
+    private JAutoInvoiceApp app;
+
+    public PainelMarcacoes(JAutoInvoiceApp app) {
+        this.app = app;
+        
         initComponents();
     }
 

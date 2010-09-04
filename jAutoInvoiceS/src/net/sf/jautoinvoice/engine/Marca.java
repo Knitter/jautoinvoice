@@ -23,9 +23,11 @@ package net.sf.jautoinvoice.engine;
 public class Marca {
 
     private String nome;
+    private boolean activo;
 
     public Marca(String nome) {
         this.nome = nome;
+        activo = true;
     }
 
     public String getNome() {
@@ -36,25 +38,16 @@ public class Marca {
         this.nome = nome;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Marca other = (Marca) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
-            return false;
-        }
-        return true;
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        return hash;
+    public String toString() {
+        return nome;
     }
 }

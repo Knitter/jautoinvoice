@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Gestor {
+public final class Gestor {
 
     private ObjectContainer db;
     private Utilizador autenticado;
@@ -47,6 +47,11 @@ public class Gestor {
         if (db != null) {
             db.close();
         }
+    }
+
+    public void logout() {
+        db.commit();
+        autenticado = null;
     }
 
     /**
@@ -89,14 +94,21 @@ public class Gestor {
     }
 
     /**
-     * Permite listar todos os empregados existentes no sistema.
+     * Permite listar todos os empregados existentes no sistema que se encontrem
+     * activos.
      *
      * @return lista com empregados, se existirem, ou null se não existe um
      * utilizador autenticado no sistema.
      */
     public List<Empregado> listarTodosEmpregados() {
         if (autenticado != null) {
-            return db.query(Empregado.class);
+            return db.query(new Predicate<Empregado>() {
+
+                @Override
+                public boolean match(Empregado et) {
+                    return et.isActivo();
+                }
+            });
         }
 
         return null;
@@ -114,10 +126,12 @@ public class Gestor {
      * utilizador autenticado no sistema.
      */
     public Empregado adicionarEmpregado(String username, String password, String nome,
-            double valorHora) {
+            double valorHora, boolean adminstrador) {
 
         if (autenticado != null) {
-            Empregado empregado = new Empregado(username, password, nome, valorHora);
+            Empregado empregado = new Empregado(username, password, nome, valorHora,
+                    adminstrador);
+
             db.store(empregado);
             return empregado;
         }
@@ -127,7 +141,8 @@ public class Gestor {
     }
 
     /**
-     * Remove um empregado do sistema.
+     * Remove um empregado do sistema. Uma remoção é, na verdade, uma modificação
+     * de estado activo para inactivo.
      *
      * @param empregado Empregado a remover. Precisa ser obtido por pesquisa.
      * 
@@ -136,7 +151,8 @@ public class Gestor {
      */
     public boolean removerEmpregado(Empregado empregado) {
         if (autenticado != null) {
-            db.delete(empregado);
+            empregado.setActivo(false);
+            db.store(empregado);
             return true;
         }
 
@@ -182,57 +198,212 @@ public class Gestor {
         return null;
     }
 
-    /////////////////////////////////////////////////////////////////TODO: ....
     public List<Cliente> listarTodosClientes() {
-        throw new UnsupportedOperationException("Por Implementar.");
-        //return db.query(Cliente.class);
+        if (autenticado != null) {
+            return db.query(new Predicate<Cliente>() {
+
+                @Override
+                public boolean match(Cliente et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
     }
 
-    public List<Cliente> pesquisarCliente(String nome, String email, String localidade,
-            String matricula, String codigoPostal) {
+    public List<Cliente> procurarCliente(final String nome, final String email,
+            final String localidade, final String matricula, final String codigoPostal) {
 
-        throw new UnsupportedOperationException("Por Implementar.");
+        if (autenticado != null) {
+            return db.query(new Predicate<Cliente>() {
+
+                @Override
+                public boolean match(Cliente et) {
+
+                    if (!et.isActivo()) {
+                        return false;
+                    }
+
+                    boolean resultado = et.getNome().matches(nome)
+                            || et.getEmail().matches(email)
+                            || et.getLocalidade().matches(localidade)
+                            || et.getCodigoPostal().matches(codigoPostal);
+
+                    if (resultado) {
+                        return resultado;
+                    }
+
+                    for (Veiculo v : et.getVeiculosActuais()) {
+                        if (v.getMatricula().matches(matricula)) {
+                            return true;
+                        }
+                    }
+
+                    for (Veiculo v : et.getVeiculosAnteriores()) {
+                        if (v.getMatricula().matches(matricula)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            });
+        }
+
+        return null;
     }
 
-    public void adicionarCliente(Cliente cliente) {
-        //db.store(cliente);
-        throw new UnsupportedOperationException("Por Implementar.");
+    public Cliente adicionarCliente(String nome, String endereco, String codigoPostal,
+            String localidade, String telefone1, String telefone2, String email,
+            String observacoes) {
+
+        if (autenticado != null) {
+            Cliente cliente = new Cliente(nome, endereco, codigoPostal, localidade,
+                    telefone1, telefone2, email, null, observacoes);
+
+            db.store(cliente);
+            return cliente;
+        }
+
+        return null;
+
     }
 
-    public void removerCliente(Cliente cliente) {
-        //db.delete(cliente);
-        throw new UnsupportedOperationException("Por Implementar.");
+    public boolean removerCliente(Cliente cliente) {
+        if (autenticado != null) {
+            cliente.setActivo(false);
+            db.store(cliente);
+            return true;
+        }
+
+        return false;
     }
 
-    public void actualizarCliente(Cliente cliente) {
-        //db.store(cliente);
-        throw new UnsupportedOperationException("Por Implementar.");
+    public boolean actualizarCliente(Cliente cliente) {
+        if (autenticado != null) {
+            db.store(cliente);
+            return true;
+        }
+
+        return false;
     }
 
     public List<Marca> listarTodasMarcas() {
-        //return db.query(Marca.class);
-        throw new UnsupportedOperationException("Por Implementar.");
+        if (autenticado != null) {
+            return db.query(new Predicate<Marca>() {
+
+                @Override
+                public boolean match(Marca et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
     }
 
-    public List<Marca> procurarMarca(String nome) {
-        throw new UnsupportedOperationException("Por Implementar.");
+    public List<Marca> procurarMarca(final String nome) {
+        if (autenticado != null) {
+            return db.query(new Predicate<Marca>() {
+
+                @Override
+                public boolean match(Marca et) {
+                    return et.isActivo() && et.getNome().matches(nome);
+                }
+            });
+        }
+
+        return null;
     }
 
-    public void adicionarMarca(Marca marca) {
-        //db.store(marca);
-        throw new UnsupportedOperationException("Por Implementar.");
+    public Marca adicionarMarca(String nome) {
+        if (autenticado != null) {
+            Marca marca = new Marca(nome);
+            db.store(marca);
+            return marca;
+        }
+
+        return null;
     }
 
-    public void removerMarca(Marca marca) {
-        //db.delete(marca);
-        throw new UnsupportedOperationException("Por Implementar.");
+    public boolean removerMarca(Marca marca) {
+        if (autenticado != null) {
+            marca.setActivo(false);
+            db.store(marca);
+            return true;
+        }
+
+        return false;
     }
 
-    public void actualizarMarca(Marca marca) {
-        //db.store(marca);
-        throw new UnsupportedOperationException("Por Implementar.");
+    public boolean actualizarMarca(Marca marca) {
+        if (autenticado != null) {
+            db.store(marca);
+            return true;
+        }
+
+        return false;
     }
 
+    public List<Modelo> listarTodosModelos() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Modelo>() {
+
+                @Override
+                public boolean match(Modelo et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public List<Modelo> procurarModelo(final String nome) {
+        if (autenticado != null) {
+            return db.query(new Predicate<Modelo>() {
+
+                @Override
+                public boolean match(Modelo et) {
+                    return et.isActivo() && et.getNome().matches(nome);
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public Modelo adicionarModelo(String nome) {
+        if (autenticado != null) {
+            Modelo modelo = new Modelo(nome);
+            db.store(modelo);
+            return modelo;
+        }
+
+        return null;
+    }
+
+    public boolean removerModelo(Modelo modelo) {
+        if (autenticado != null) {
+            modelo.setActivo(false);
+            db.store(modelo);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean actualizarModelo(Modelo modelo) {
+        if (autenticado != null) {
+            db.store(modelo);
+            return true;
+        }
+
+        return false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
     public List<Reparacao> listarTodasReparacoes() {
         //return db.query(Reparacao.class);
         throw new UnsupportedOperationException("Por Implementar.");

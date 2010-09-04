@@ -37,6 +37,7 @@ public class Veiculo {
     private List<Cliente> antigosDonos;
     private Cliente dono;
     private Date dataAdicao;
+    private boolean activo;
 
     public Veiculo(Marca marca, Modelo modelo, Date registo, String matricula,
             String nrChassis, String cilindrada, String nrMotor, Cliente dono,
@@ -54,6 +55,7 @@ public class Veiculo {
 
         antigosDonos = new ArrayList<Cliente>();
         dataAdicao = new Date();
+        activo = true;
     }
 
     public String getCilindrada() {
@@ -152,5 +154,13 @@ public class Veiculo {
 
     public void setDataAdicao(Date dataAdicao) {
         this.dataAdicao = dataAdicao;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

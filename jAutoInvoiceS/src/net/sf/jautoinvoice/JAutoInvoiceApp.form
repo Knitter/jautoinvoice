@@ -389,7 +389,7 @@
     </Container>
     <Container class="javax.swing.JPanel" name="jpPainelPrincipal">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="jpPainelPrincipal.setLayout(anicard);&#xa;jpPainelPrincipal.add(new PainelAutenticacao(this), P_AUTENTICACAO);&#xa;jpPainelPrincipal.add(new PainelReparacoes(), P_REPARACOES);&#xa;jpPainelPrincipal.add(new PainelFacturas(), P_FACTURAS);&#xa;jpPainelPrincipal.add(new PainelVeiculos(), P_VEICULOS);&#xa;jpPainelPrincipal.add(new PainelClientes(), P_CLIENTES);&#xa;jpPainelPrincipal.add(new PainelPecas(), P_PECAS);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="jpPainelPrincipal.setLayout(anicard);&#xa;jpPainelPrincipal.add(new PainelAutenticacao(this), P_AUTENTICACAO);&#xa;jpPainelPrincipal.add(new PainelReparacoes(this), P_REPARACOES);&#xa;jpPainelPrincipal.add(new PainelFacturas(this), P_FACTURAS);&#xa;jpPainelPrincipal.add(new PainelVeiculos(this), P_VEICULOS);&#xa;jpPainelPrincipal.add(new PainelClientes(this), P_CLIENTES);&#xa;jpPainelPrincipal.add(new PainelPecas(this), P_PECAS);&#xa;jpPainelPrincipal.add(new PainelEmpregados(this), P_EMPREGADOS);"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

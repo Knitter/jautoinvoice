@@ -1,5 +1,5 @@
 /*
- * Gestor.java
+ * Sobre.java
  *
  * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
  *
@@ -46,7 +46,7 @@ public class Sobre extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 300, Short.MAX_VALUE)
+            .add(0, 79, Short.MAX_VALUE)
         );
 
         pack();

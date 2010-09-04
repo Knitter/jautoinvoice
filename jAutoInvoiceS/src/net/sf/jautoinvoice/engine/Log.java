@@ -20,6 +20,33 @@
  */
 package net.sf.jautoinvoice.engine;
 
+import java.util.Date;
+
 public class Log {
 
+    private String descricao;
+    private Date data;
+    private Utilizador utilizador;
+
+    public Log(String descricao, Date data, Utilizador utilizador) {
+        this.descricao = descricao;
+        this.data = data;
+        this.utilizador = utilizador;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public String getFormatado() {
+        throw new UnsupportedOperationException("Not implemented yet.");
+    }
 }

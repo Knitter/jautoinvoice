@@ -34,9 +34,12 @@ public class Cliente {
     private String email;
     private List<Veiculo> veiculosActuais;
     private List<Veiculo> veiculosAnteriores;
+    private String observacoes;
+    private boolean activo;
 
     public Cliente(String nome, String endereco, String codigoPostal, String localidade,
-            String telefone1, String telefone2, String email, List<Veiculo> actuais) {
+            String telefone1, String telefone2, String email, List<Veiculo> actuais,
+            String observacoes) {
 
         this.nome = nome;
         this.endereco = endereco;
@@ -45,9 +48,15 @@ public class Cliente {
         this.telefone1 = telefone1;
         this.telefone2 = telefone2;
         this.email = email;
+        this.observacoes = observacoes;
 
-        veiculosActuais = new ArrayList<Veiculo>(actuais);
+        if (actuais != null) {
+            veiculosActuais = new ArrayList<Veiculo>(actuais);
+        } else {
+            veiculosActuais = new ArrayList<Veiculo>();
+        }
         veiculosAnteriores = new ArrayList<Veiculo>();
+        activo = true;
     }
 
     public String getCodigoPostal() {
@@ -140,5 +149,21 @@ public class Cliente {
         if (veiculosAnteriores != null) {
             veiculosAnteriores.remove(veiculo);
         }
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

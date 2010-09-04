@@ -1,24 +1,34 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * PainelPecas.java
  *
- * Created on Sep 4, 2010, 12:06:56 AM
+ * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
+ *
+ * Copyright (C) 2010  Sérgio Lopes
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.sf.jautoinvoice.paineis;
 
-/**
- *
- * @author knitter
- */
+import net.sf.jautoinvoice.JAutoInvoiceApp;
+
 public class PainelPecas extends javax.swing.JPanel {
 
-    /** Creates new form PainelPecas */
-    public PainelPecas() {
+    private JAutoInvoiceApp app;
+
+    public PainelPecas(JAutoInvoiceApp app) {
+        this.app = app;
+        
         initComponents();
     }
 
@@ -49,8 +59,6 @@ public class PainelPecas extends javax.swing.JPanel {
         jpPainelDescricao = new javax.swing.JPanel();
         jspScrollDescricao = new javax.swing.JScrollPane();
         jtaDescricao = new javax.swing.JTextArea();
-        jbtnCancelar = new javax.swing.JButton();
-        jbtnGravar = new javax.swing.JButton();
         jlblMoeda = new javax.swing.JLabel();
         jpPainelModelos = new javax.swing.JPanel();
         jscpScrollTreeModelos = new javax.swing.JScrollPane();
@@ -62,6 +70,7 @@ public class PainelPecas extends javax.swing.JPanel {
         jlstListaModelos = new javax.swing.JList();
         jlblIva = new javax.swing.JLabel();
         jcbxIva = new javax.swing.JComboBox();
+        jbtnGravar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -112,7 +121,7 @@ public class PainelPecas extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscpScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .addComponent(jscpScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbtnRemoverPeca)
@@ -159,10 +168,6 @@ public class PainelPecas extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jbtnCancelar.setText(bundle.getString("PainelPecas.jbtnCancelar.text")); // NOI18N
-
-        jbtnGravar.setText(bundle.getString("PainelPecas.jbtnGravar.text")); // NOI18N
-
         jlblMoeda.setText(bundle.getString("PainelPecas.jlblMoeda.text")); // NOI18N
 
         jpPainelModelos.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PainelPecas.jpPainelModelos.border.title"))); // NOI18N
@@ -176,7 +181,7 @@ public class PainelPecas extends javax.swing.JPanel {
 
         jpBotoes.setLayout(new javax.swing.BoxLayout(jpBotoes, javax.swing.BoxLayout.Y_AXIS));
 
-        jbtnAdicionarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
+        jbtnAdicionarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/arrow_right.png"))); // NOI18N
         jbtnAdicionarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnAdicionarModeloActionPerformed(evt);
@@ -184,7 +189,7 @@ public class PainelPecas extends javax.swing.JPanel {
         });
         jpBotoes.add(jbtnAdicionarModelo);
 
-        jbtnRemoverModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/delete.png"))); // NOI18N
+        jbtnRemoverModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/arrow_left.png"))); // NOI18N
         jbtnRemoverModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnRemoverModeloActionPerformed(evt);
@@ -224,11 +229,7 @@ public class PainelPecas extends javax.swing.JPanel {
                                 .addComponent(jlblMoeda))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jtfReferencia, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jcbxIva, javax.swing.GroupLayout.Alignment.LEADING, 0, 226, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDadosLayout.createSequentialGroup()
-                        .addComponent(jbtnGravar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtnCancelar)))
+                                .addComponent(jcbxIva, javax.swing.GroupLayout.Alignment.LEADING, 0, 226, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jpDadosLayout.setVerticalGroup(
@@ -255,12 +256,10 @@ public class PainelPecas extends javax.swing.JPanel {
                 .addComponent(jpPainelModelos, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpPainelDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnGravar)
-                    .addComponent(jbtnCancelar))
                 .addContainerGap())
         );
+
+        jbtnGravar.setText(bundle.getString("PainelPecas.jbtnGravar.text")); // NOI18N
 
         javax.swing.GroupLayout jpPainelDireitoLayout = new javax.swing.GroupLayout(jpPainelDireito);
         jpPainelDireito.setLayout(jpPainelDireitoLayout);
@@ -268,7 +267,9 @@ public class PainelPecas extends javax.swing.JPanel {
             jpPainelDireitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelDireitoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpPainelDireitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnGravar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jpPainelDireitoLayout.setVerticalGroup(
@@ -276,7 +277,9 @@ public class PainelPecas extends javax.swing.JPanel {
             .addGroup(jpPainelDireitoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnGravar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jspSplit.setRightComponent(jpPainelDireito);
@@ -313,7 +316,6 @@ public class PainelPecas extends javax.swing.JPanel {
     private javax.swing.JLabel jblNome;
     private javax.swing.JButton jbtnAdicionarModelo;
     private javax.swing.JButton jbtnAdicionarPeca;
-    private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton jbtnGravar;
     private javax.swing.JButton jbtnRemoverModelo;
     private javax.swing.JButton jbtnRemoverPeca;

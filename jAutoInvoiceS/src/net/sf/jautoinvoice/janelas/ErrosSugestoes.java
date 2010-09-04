@@ -38,7 +38,7 @@ public class ErrosSugestoes extends javax.swing.JDialog {
 
         jpPainelPrincipal = new javax.swing.JPanel();
         jscpScroll = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtaTexto = new javax.swing.JTextArea();
         jbtnCancelar = new javax.swing.JButton();
         jbtnEnviar = new javax.swing.JButton();
         jckbLogs = new javax.swing.JCheckBox();
@@ -49,9 +49,9 @@ public class ErrosSugestoes extends javax.swing.JDialog {
 
         jpPainelPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jscpScroll.setViewportView(jTextArea1);
+        jtaTexto.setColumns(20);
+        jtaTexto.setRows(5);
+        jscpScroll.setViewportView(jtaTexto);
 
         org.jdesktop.layout.GroupLayout jpPainelPrincipalLayout = new org.jdesktop.layout.GroupLayout(jpPainelPrincipal);
         jpPainelPrincipal.setLayout(jpPainelPrincipalLayout);
@@ -127,12 +127,12 @@ public class ErrosSugestoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton jbtnEnviar;
     private javax.swing.JCheckBox jckbLogs;
     private javax.swing.JPanel jpPainelPrincipal;
     private javax.swing.JScrollPane jscpScroll;
+    private javax.swing.JTextArea jtaTexto;
     // End of variables declaration//GEN-END:variables
 
 }

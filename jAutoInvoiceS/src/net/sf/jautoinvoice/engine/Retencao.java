@@ -1,5 +1,5 @@
 /*
- * LinhaReparacao.java
+ * Retencao.java
  *
  * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
  *
@@ -20,39 +20,39 @@
  */
 package net.sf.jautoinvoice.engine;
 
-public class LinhaReparacao {
+public class Retencao {
 
-    private Empregado empregado;
-    private double valorHora;
-    private double horas;
+    private String descricao;
+    private double valor;
+    private boolean activo;
 
-    public LinhaReparacao(Empregado empregado, double valorHora, double horas) {
-        this.empregado = empregado;
-        this.valorHora = valorHora;
-        this.horas = horas;
+    public Retencao(String descricao, double valor, boolean activo) {
+        this.descricao = descricao;
+        this.valor = valor;
+        this.activo = activo;
     }
 
-    public Empregado getEmpregado() {
-        return empregado;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEmpregados(Empregado empregado) {
-        this.empregado = empregado;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    public double getHoras() {
-        return horas;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setHoras(double horas) {
-        this.horas = horas;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public double getValorHora() {
-        return valorHora;
+    public double getValor() {
+        return valor;
     }
 
-    public void setValorHora(double valorHora) {
-        this.valorHora = valorHora;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 }

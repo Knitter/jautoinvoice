@@ -37,11 +37,12 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import net.sf.jautoinvoice.engine.Gestor;
 import net.sf.jautoinvoice.janelas.Configuracoes;
-import net.sf.jautoinvoice.janelas.Empregados;
 import net.sf.jautoinvoice.janelas.ErrosSugestoes;
+import net.sf.jautoinvoice.janelas.Sair;
 import net.sf.jautoinvoice.janelas.Sobre;
 import net.sf.jautoinvoice.paineis.PainelAutenticacao;
 import net.sf.jautoinvoice.paineis.PainelClientes;
+import net.sf.jautoinvoice.paineis.PainelEmpregados;
 import net.sf.jautoinvoice.paineis.PainelFacturas;
 import net.sf.jautoinvoice.paineis.PainelPecas;
 import net.sf.jautoinvoice.paineis.PainelReparacoes;
@@ -64,6 +65,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     private static final String P_VEICULOS = "veiculos";
     private static final String P_PECAS = "pecas";
     private static final String P_MARCACOES = "marcacoes";
+    private static final String P_EMPREGADOS = "empregados";
     //
     private boolean usarAnimacoes;
 
@@ -90,6 +92,10 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         initComponents();
         desactivarInteraccao();
         anicard.show(jpPainelPrincipal, P_AUTENTICACAO);
+    }
+
+    public Gestor getGestor() {
+        return gestor;
     }
 
     private void desactivarInteraccao() {
@@ -138,7 +144,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
 
     public void autenticar(String utilizador, String password) {
         if (gestor.autenticar(utilizador, password)) {
-            //alterarEstadoInteraccao(true);
+            activarInteraccao();
             anicard.show(jpPainelPrincipal, P_REPARACOES);
         } else {
             ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos");
@@ -147,7 +153,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         }
     }
 
-    private void sair() {
+    public void sair() {
         gestor.desligar();
 
         String base = System.getProperty("user.home");
@@ -167,6 +173,12 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
             Logger.getLogger(Gestor.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.exit(0);
+    }
+
+    public void logout() {
+        gestor.logout();
+        desactivarInteraccao();
+        anicard.show(jpPainelPrincipal, P_AUTENTICACAO);
     }
 
     /** This method is called from within the constructor to
@@ -407,11 +419,12 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jpPainelPrincipal.setLayout(null);
         jpPainelPrincipal.setLayout(anicard);
         jpPainelPrincipal.add(new PainelAutenticacao(this), P_AUTENTICACAO);
-        jpPainelPrincipal.add(new PainelReparacoes(), P_REPARACOES);
-        jpPainelPrincipal.add(new PainelFacturas(), P_FACTURAS);
-        jpPainelPrincipal.add(new PainelVeiculos(), P_VEICULOS);
-        jpPainelPrincipal.add(new PainelClientes(), P_CLIENTES);
-        jpPainelPrincipal.add(new PainelPecas(), P_PECAS);
+        jpPainelPrincipal.add(new PainelReparacoes(this), P_REPARACOES);
+        jpPainelPrincipal.add(new PainelFacturas(this), P_FACTURAS);
+        jpPainelPrincipal.add(new PainelVeiculos(this), P_VEICULOS);
+        jpPainelPrincipal.add(new PainelClientes(this), P_CLIENTES);
+        jpPainelPrincipal.add(new PainelPecas(this), P_PECAS);
+        jpPainelPrincipal.add(new PainelEmpregados(this), P_EMPREGADOS);
         getContentPane().add(jpPainelPrincipal, java.awt.BorderLayout.CENTER);
 
         jmApp.setText(bundle.getString("JAutoInvoiceApp.jmApp.text")); // NOI18N
@@ -478,7 +491,12 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiActualizacoesActionPerformed
 
     private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
-        sair();
+        EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new Sair(frame, true).setVisible(true);
+            }
+        });
     }//GEN-LAST:event_jbtnSairActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -526,12 +544,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnRelatoriosActionPerformed
 
     private void jbtnEmpregadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEmpregadosActionPerformed
-        EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new Empregados(frame, true, gestor).setVisible(true);
-            }
-        });
+        anicard.show(jpPainelPrincipal, P_EMPREGADOS);
     }//GEN-LAST:event_jbtnEmpregadosActionPerformed
 
     private void jbtnConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnConfiguracoesActionPerformed
@@ -614,7 +627,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
                     Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                new JAutoInvoiceApp(ficheiroDados, props, new File(ficheiroDados).exists()).setVisible(true);
+                new JAutoInvoiceApp(ficheiroDados, props, !(new File(ficheiroDados).exists())).setVisible(true);
             }
         });
     }

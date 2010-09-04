@@ -1,3 +1,23 @@
+/*
+ * PainelAutenticacao.java
+ *
+ * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
+ *
+ * Copyright (C) 2010  Sérgio Lopes
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.sf.jautoinvoice.paineis;
 
 import net.sf.jautoinvoice.JAutoInvoiceApp;
@@ -10,6 +30,13 @@ public class PainelAutenticacao extends javax.swing.JPanel {
         this.app = app;
 
         initComponents();
+    }
+
+    private void autenticar() {
+        String utilizador = jtfUtilizador.getText().trim();
+        if (!utilizador.isEmpty()) {
+            app.autenticar(utilizador, new String(jpfPassword.getPassword()));
+        }
     }
 
     /** This method is called from within the constructor to
@@ -35,6 +62,12 @@ public class PainelAutenticacao extends javax.swing.JPanel {
         jLabel1.setText("Utilizador");
 
         jLabel2.setText("Password");
+
+        jpfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpfPasswordActionPerformed(evt);
+            }
+        });
 
         jbtnAutenticar.setText("Autenticar");
         jbtnAutenticar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,11 +114,12 @@ public class PainelAutenticacao extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnAutenticarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAutenticarActionPerformed
-        String utilizador = jtfUtilizador.getText().trim();
-        if (!utilizador.isEmpty()) {
-            app.autenticar(utilizador, new String(jpfPassword.getPassword()));
-        }
+        autenticar();
     }//GEN-LAST:event_jbtnAutenticarActionPerformed
+
+    private void jpfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfPasswordActionPerformed
+        autenticar();
+    }//GEN-LAST:event_jpfPasswordActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
