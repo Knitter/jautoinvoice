@@ -26,10 +26,11 @@ public class Retencao {
     private double valor;
     private boolean activo;
 
-    public Retencao(String descricao, double valor, boolean activo) {
+    public Retencao(String descricao, double valor) {
         this.descricao = descricao;
         this.valor = valor;
-        this.activo = activo;
+
+        activo = true;
     }
 
     public boolean isActivo() {

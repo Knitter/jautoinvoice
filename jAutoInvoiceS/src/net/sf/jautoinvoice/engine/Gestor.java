@@ -42,6 +42,9 @@ public final class Gestor {
         }
     }
 
+    /**
+     * Permite desligar correctamente o motor de bases de dados.
+     */
     public void desligar() {
         autenticado = null;
         if (db != null) {
@@ -49,6 +52,10 @@ public final class Gestor {
         }
     }
 
+    /**
+     * Grava qualquer dado que não tenha sido ainda registado e remove o
+     * utilizador autenticado.
+     */
     public void logout() {
         db.commit();
         autenticado = null;
@@ -89,6 +96,11 @@ public final class Gestor {
         return false;
     }
 
+    /**
+     * Devolve o utilizador autenticado neste momento.
+     *
+     * @return utilizador autenticado ou null se nenhum existir.
+     */
     public Utilizador getAutenticado() {
         return autenticado;
     }
@@ -403,74 +415,414 @@ public final class Gestor {
         return false;
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    public List<Iva> listarTodosIvas() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Iva>() {
+
+                @Override
+                public boolean match(Iva et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public Iva adicionarIva(String descricao, double valor) {
+        if (autenticado != null) {
+            Iva iva = new Iva(descricao, valor);
+            db.store(iva);
+            return iva;
+        }
+
+        return null;
+    }
+
+    public boolean removerIva(Iva iva) {
+        if (autenticado != null) {
+            iva.setActivo(false);
+            db.store(iva);
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<Retencao> listarTodasRetencoes() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Retencao>() {
+
+                @Override
+                public boolean match(Retencao et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public Retencao adicionarRetencao(String descricao, double valor) {
+        if (autenticado != null) {
+            Retencao retencao = new Retencao(descricao, valor);
+            db.store(retencao);
+            return retencao;
+        }
+
+        return null;
+    }
+
+    public boolean removerRetencao(Retencao retencao) {
+        if (autenticado != null) {
+            retencao.setActivo(false);
+            db.store(retencao);
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<Peca> listarTodasPecas() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Peca>() {
+
+                @Override
+                public boolean match(Peca et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public List<Peca> procurarPeca(final String nome, final String referencia,
+            final String descricao, final Modelo modelo) {
+
+        if (autenticado != null) {
+            return db.query(new Predicate<Peca>() {
+
+                @Override
+                public boolean match(Peca et) {
+                    if (!et.isActivo()) {
+                        return false;
+                    }
+
+                    boolean resultado = et.getNome().matches(nome) || et.getReferencia().matches(referencia)
+                            || et.getDescricao().matches(descricao);
+
+                    if (modelo == null) {
+                        return resultado;
+                    }
+
+                    for (Modelo m : et.getModelos()) {
+                        if (m.equals(modelo)) {
+                            return resultado && true;
+                        }
+                    }
+
+                    return false;
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public List<Peca> listarPecaDeModelo(final Modelo modelo) {
+
+        if (autenticado != null) {
+            return db.query(new Predicate<Peca>() {
+
+                @Override
+                public boolean match(Peca et) {
+                    if (!et.isActivo()) {
+                        return false;
+                    }
+
+                    for (Modelo m : et.getModelos()) {
+                        if (m.equals(modelo)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            });
+        }
+
+        return null;
+    }
+
+    public Peca adicionarPeca(String nome, String referencia, String descricao,
+            double preco, Iva iva, List<Modelo> modelos) {
+
+        if (autenticado != null) {
+            Peca peca = new Peca(nome, referencia, descricao, preco, iva, modelos);
+            db.store(peca);
+            return peca;
+        }
+
+        return null;
+    }
+
+    public boolean removerPeca(Peca peca) {
+        if (autenticado != null) {
+            peca.setActivo(false);
+            db.store(peca);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean actualizarPeca(Peca peca) {
+        if (autenticado != null) {
+            db.store(peca);
+            return true;
+        }
+
+        return false;
+    }
+
     public List<Reparacao> listarTodasReparacoes() {
-        //return db.query(Reparacao.class);
-        throw new UnsupportedOperationException("Por Implementar.");
+        if (autenticado != null) {
+            return db.query(new Predicate<Reparacao>() {
+
+                @Override
+                public boolean match(Reparacao et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
     }
 
-    public List<Reparacao> procurarReparacao(Date data, String matricula, String empregado) {
-        throw new UnsupportedOperationException("Por Implementar.");
+    public List<Reparacao> procurarReparacao(final Date inicio, final Date fim, final String avaria) {
+        if (autenticado != null) {
+            return db.query(new Predicate<Reparacao>() {
+
+                @Override
+                public boolean match(Reparacao et) {
+                    if (!et.isActivo()) {
+                        return false;
+                    }
+
+                    //TODO: implementar comparacao de dadas
+                    return et.getDescricaoAvaria().matches(avaria);
+                }
+            });
+        }
+
+        return null;
+    }
+    /*
+
+     //TODO: implementar obtenção de reparacções para determinado veiculo, cliente e empregado
+
+    public Modelo adicionarModelo(String nome) {
+    if (autenticado != null) {
+    Modelo modelo = new Modelo(nome);
+    db.store(modelo);
+    return modelo;
     }
 
-    public void adicionarReparacao(Reparacao reparacao) {
-        //db.store(reparacao);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
+    }
+    /*
+    public boolean removerModelo(Modelo modelo) {
+    if (autenticado != null) {
+    modelo.setActivo(false);
+    db.store(modelo);
+    return true;
     }
 
-    public void removerReparacao(Reparacao reparacao) {
-        //db.delete(reparacao);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return false;
+    }
+    /*
+    public boolean actualizarModelo(Modelo modelo) {
+    if (autenticado != null) {
+    db.store(modelo);
+    return true;
     }
 
-    public void actualizarReparacao(Reparacao reparacao) {
-        //db.store(reparacao);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return false;
+    }
+    /*    linha reparaca
+
+    public List<Modelo> listarTodosModelos() {
+    if (autenticado != null) {
+    return db.query(new Predicate<Modelo>() {
+
+    @Override
+    public boolean match(Modelo et) {
+    return et.isActivo();
+    }
+    });
     }
 
-    public List<Veiculo> listarTodosVeiculos() {
-        //return db.query(Veiculo.class);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
+    }
+    /*
+    public List<Modelo> procurarModelo(final String nome) {
+    if (autenticado != null) {
+    return db.query(new Predicate<Modelo>() {
+
+    @Override
+    public boolean match(Modelo et) {
+    return et.isActivo() && et.getNome().matches(nome);
+    }
+    });
     }
 
-    public List<Veiculo> procurarVeiculo(String dono, String matricula, String marca,
-            Date reparacao, String empregado) {
-
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
+    }
+    /*
+    public Modelo adicionarModelo(String nome) {
+    if (autenticado != null) {
+    Modelo modelo = new Modelo(nome);
+    db.store(modelo);
+    return modelo;
     }
 
-    public void adicionarVeiculo(Veiculo veiculo) {
-        //db.store(veiculo);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
+    }
+    /*
+    public boolean removerModelo(Modelo modelo) {
+    if (autenticado != null) {
+    modelo.setActivo(false);
+    db.store(modelo);
+    return true;
     }
 
-    public void removerVeiculo(Veiculo veiculo) {
-        //db.delete(veiculo);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return false;
+    }
+    /*
+    public boolean actualizarModelo(Modelo modelo) {
+    if (autenticado != null) {
+    db.store(modelo);
+    return true;
     }
 
-    public void actualizarVeiculo(Veiculo veiculo) {
-        //db.store(veiculo);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return false;
     }
 
-    public List<Utilizador> listarTodosUtilizadores() {
-        //return db.query(Utilizador.class);
-        throw new UnsupportedOperationException("Por Implementar.");
+    /*    veiculo
+    public List<Modelo> listarTodosModelos() {
+    if (autenticado != null) {
+    return db.query(new Predicate<Modelo>() {
+
+    @Override
+    public boolean match(Modelo et) {
+    return et.isActivo();
+    }
+    });
     }
 
-    public void adicionarUtilizador(Utilizador utilizador) {
-        //db.store(utilizador);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
+    }
+    /*
+    public List<Modelo> procurarModelo(final String nome) {
+    if (autenticado != null) {
+    return db.query(new Predicate<Modelo>() {
+
+    @Override
+    public boolean match(Modelo et) {
+    return et.isActivo() && et.getNome().matches(nome);
+    }
+    });
     }
 
-    public void removerUtilizador(Utilizador utilizador) {
-        //db.delete(utilizador);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
+    }
+    /*
+    public Modelo adicionarModelo(String nome) {
+    if (autenticado != null) {
+    Modelo modelo = new Modelo(nome);
+    db.store(modelo);
+    return modelo;
     }
 
-    public void actualizarUtilizador(Utilizador utilizador) {
-        //db.store(utilizador);
-        throw new UnsupportedOperationException("Por Implementar.");
+    return null;
     }
+    /*
+    public boolean removerModelo(Modelo modelo) {
+    if (autenticado != null) {
+    modelo.setActivo(false);
+    db.store(modelo);
+    return true;
+    }
+
+    return false;
+    }
+    /*
+    public boolean actualizarModelo(Modelo modelo) {
+    if (autenticado != null) {
+    db.store(modelo);
+    return true;
+    }
+
+    return false;
+    }
+
+    /*   log
+    public List<Modelo> listarTodosModelos() {
+    if (autenticado != null) {
+    return db.query(new Predicate<Modelo>() {
+
+    @Override
+    public boolean match(Modelo et) {
+    return et.isActivo();
+    }
+    });
+    }
+
+    return null;
+    }
+    /*
+    public List<Modelo> procurarModelo(final String nome) {
+    if (autenticado != null) {
+    return db.query(new Predicate<Modelo>() {
+
+    @Override
+    public boolean match(Modelo et) {
+    return et.isActivo() && et.getNome().matches(nome);
+    }
+    });
+    }
+
+    return null;
+    }
+    /*
+    public Modelo adicionarModelo(String nome) {
+    if (autenticado != null) {
+    Modelo modelo = new Modelo(nome);
+    db.store(modelo);
+    return modelo;
+    }
+
+    return null;
+    }
+    /*
+    public boolean removerModelo(Modelo modelo) {
+    if (autenticado != null) {
+    modelo.setActivo(false);
+    db.store(modelo);
+    return true;
+    }
+
+    return false;
+    }
+    /*
+    public boolean actualizarModelo(Modelo modelo) {
+    if (autenticado != null) {
+    db.store(modelo);
+    return true;
+    }
+
+    return false;
+    }
+     */
 }
