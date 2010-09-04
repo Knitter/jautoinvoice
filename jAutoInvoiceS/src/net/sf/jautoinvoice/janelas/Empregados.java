@@ -1,25 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Empregados.java
- *
- * Created on Sep 4, 2010, 12:08:56 AM
- */
-
 package net.sf.jautoinvoice.janelas;
 
-/**
- *
- * @author knitter
- */
+import net.sf.jautoinvoice.engine.Gestor;
+
 public class Empregados extends javax.swing.JDialog {
 
-    /** Creates new form Empregados */
-    public Empregados(java.awt.Frame parent, boolean modal) {
+    private Gestor gestor;
+
+    public Empregados(java.awt.Frame parent, boolean modal, Gestor gestor) {
         super(parent, modal);
+        this.gestor = gestor;
+
         initComponents();
     }
 
@@ -32,23 +22,127 @@ public class Empregados extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jbtnAdicionarEmpregado = new javax.swing.JButton();
+        jbtnRemoverEmpregado = new javax.swing.JButton();
+        jspScroll = new javax.swing.JScrollPane();
+        jtTabelaEmpregados = new javax.swing.JTable();
+        jbtnFechar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos"); // NOI18N
+        setTitle(bundle.getString("Empregados.title")); // NOI18N
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Empregados.jPanel1.border.title"))); // NOI18N
+
+        jbtnAdicionarEmpregado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user_add.png"))); // NOI18N
+        jbtnAdicionarEmpregado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarEmpregadoActionPerformed(evt);
+            }
+        });
+
+        jbtnRemoverEmpregado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user_delete.png"))); // NOI18N
+        jbtnRemoverEmpregado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverEmpregadoActionPerformed(evt);
+            }
+        });
+
+        jtTabelaEmpregados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtTabelaEmpregados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTabelaEmpregadosMouseClicked(evt);
+            }
+        });
+        jspScroll.setViewportView(jtTabelaEmpregados);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jspScroll, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtnAdicionarEmpregado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnRemoverEmpregado)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnRemoverEmpregado)
+                    .addComponent(jbtnAdicionarEmpregado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jbtnFechar.setText(bundle.getString("Empregados.jbtnFechar.text")); // NOI18N
+        jbtnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnFechar))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnFechar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtnAdicionarEmpregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarEmpregadoActionPerformed
+
+    }//GEN-LAST:event_jbtnAdicionarEmpregadoActionPerformed
+
+    private void jbtnRemoverEmpregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverEmpregadoActionPerformed
+        
+    }//GEN-LAST:event_jbtnRemoverEmpregadoActionPerformed
+
+    private void jbtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtnFecharActionPerformed
+
+    private void jtTabelaEmpregadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaEmpregadosMouseClicked
+        throw new UnsupportedOperationException("Por implementar.");
+    }//GEN-LAST:event_jtTabelaEmpregadosMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtnAdicionarEmpregado;
+    private javax.swing.JButton jbtnFechar;
+    private javax.swing.JButton jbtnRemoverEmpregado;
+    private javax.swing.JScrollPane jspScroll;
+    private javax.swing.JTable jtTabelaEmpregados;
     // End of variables declaration//GEN-END:variables
 
 }

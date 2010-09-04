@@ -23,74 +23,25 @@ package net.sf.jautoinvoice.engine;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.db4o.query.Predicate;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.InvalidPropertiesFormatException;
 import java.util.List;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Gestor {
 
     private ObjectContainer db;
     private Utilizador autenticado;
-    private File configuracoes;
-    private Properties properties;
 
-    public Gestor() {
-        properties = new Properties();
-    }
+    public Gestor(String ficheiro, boolean novo) {
+        db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), ficheiro);
 
-    public void init() {
-        String base = System.getProperty("user.home");
-        String dados = null;
-
-        File directoria = new File(base + File.separator
-                + ".jautoinvoice");
-
-        if (!directoria.exists()) {
-            directoria.mkdir();
-        }
-
-        configuracoes = new File(directoria.getAbsolutePath() + File.separator + "conf.xml");
-        if (configuracoes.exists()) {
-            try {
-                properties.loadFromXML(new FileInputStream(configuracoes));
-                dados = properties.getProperty("caminho", directoria.getAbsolutePath()
-                        + File.separator + "dados.db4o.inv");
-
-            } catch (InvalidPropertiesFormatException ex) {
-                Logger.getLogger(Gestor.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(Gestor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            dados = directoria.getAbsolutePath() + File.separator + "dados.db4o.inv";
-        }
-
-        boolean existe = (new File(dados).exists());
-
-        db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dados);
-
-        if(existe) {
+        if (novo) {
             db.store(new Utilizador("admin", Utilizador.gerarHash("admin")));
         }
     }
 
     public void desligar() {
-        try {
-            if (!configuracoes.exists()) {
-                configuracoes.createNewFile();
-            }
-            properties.storeToXML(new FileOutputStream(configuracoes), null);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Gestor.class.getName()).log(Level.SEVERE, null, ex);
-        }
         db.close();
     }
 
@@ -100,7 +51,7 @@ public class Gestor {
             ObjectSet<Utilizador> result = db.queryByExample(prototype);
             if (result.hasNext()) {
                 autenticado = result.next();
-                
+
                 return true;
             }
         }
@@ -108,58 +59,16 @@ public class Gestor {
         return false;
     }
 
-    public List<Cliente> listarTodosClientes() {
-        return db.query(Cliente.class);
-    }
-
-    public List<Cliente> pesquisarCliente(String nome, String email, String localidade,
-            String matricula, String codigoPostal) {
-        
-        throw new UnsupportedOperationException("Por Implementar.");
-    }
-
-    public void adicionarCliente(Cliente cliente) {
-        db.store(cliente);
-    }
-
-    public void removerCliente(Cliente cliente) {
-        db.delete(cliente);
-    }
-
-    public void actualizarCliente(Cliente cliente) {
-        db.store(cliente);
-    }
-
-    public List<Marca> listarTodasMarcas() {
-        return db.query(Marca.class);
-    }
-
-    public List<Marca> procurarMarca(String nome) {
-        throw new UnsupportedOperationException("Por Implementar.");
-    }
-
-    public void adicionarMarca(Marca marca) {
-        db.store(marca);
-    }
-
-    public void removerMarca(Marca marca) {
-        db.delete(marca);
-    }
-
-    public void actualizarMarca(Marca marca) {
-        db.store(marca);
-    }
-
     public List<Empregado> listarTodosEmpregados() {
         return db.query(Empregado.class);
     }
 
-    public List<Empregado> procurarEmpregado(String nome) {
-        throw new UnsupportedOperationException("Por Implementar.");
-    }
+    public Empregado adicionarEmpregado(String username, String password, String nome,
+            double valorHora) {
 
-    public void adicionarEmpregado(Empregado empregado) {
+        Empregado empregado = new Empregado(username, password, nome, valorHora);
         db.store(empregado);
+        return empregado;
     }
 
     public void removerEmpregado(Empregado empregado) {
@@ -170,8 +79,70 @@ public class Gestor {
         db.store(empregado);
     }
 
+    public List<Empregado> procurarEmpregado(final String nome) {
+        return db.query(new Predicate<Empregado>() {
+
+            @Override
+            public boolean match(Empregado et) {
+                return et.getNome().matches(nome);
+            }
+        });
+    }
+
+    /////////////////////////////////////////////////////////////////TODO: ....
+    public List<Cliente> listarTodosClientes() {
+        throw new UnsupportedOperationException("Por Implementar.");
+        //return db.query(Cliente.class);
+    }
+
+    public List<Cliente> pesquisarCliente(String nome, String email, String localidade,
+            String matricula, String codigoPostal) {
+
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public void adicionarCliente(Cliente cliente) {
+        //db.store(cliente);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public void removerCliente(Cliente cliente) {
+        //db.delete(cliente);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public void actualizarCliente(Cliente cliente) {
+        //db.store(cliente);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public List<Marca> listarTodasMarcas() {
+        //return db.query(Marca.class);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public List<Marca> procurarMarca(String nome) {
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public void adicionarMarca(Marca marca) {
+        //db.store(marca);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public void removerMarca(Marca marca) {
+        //db.delete(marca);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
+    public void actualizarMarca(Marca marca) {
+        //db.store(marca);
+        throw new UnsupportedOperationException("Por Implementar.");
+    }
+
     public List<Reparacao> listarTodasReparacoes() {
-        return db.query(Reparacao.class);
+        //return db.query(Reparacao.class);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public List<Reparacao> procurarReparacao(Date data, String matricula, String empregado) {
@@ -179,52 +150,63 @@ public class Gestor {
     }
 
     public void adicionarReparacao(Reparacao reparacao) {
-        db.store(reparacao);
+        //db.store(reparacao);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void removerReparacao(Reparacao reparacao) {
-        db.delete(reparacao);
+        //db.delete(reparacao);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void actualizarReparacao(Reparacao reparacao) {
-        db.store(reparacao);
+        //db.store(reparacao);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public List<Veiculo> listarTodosVeiculos() {
-        return db.query(Veiculo.class);
+        //return db.query(Veiculo.class);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public List<Veiculo> procurarVeiculo(String dono, String matricula, String marca,
             Date reparacao, String empregado) {
-        
+
         throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void adicionarVeiculo(Veiculo veiculo) {
-        db.store(veiculo);
+        //db.store(veiculo);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void removerVeiculo(Veiculo veiculo) {
-        db.delete(veiculo);
+        //db.delete(veiculo);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void actualizarVeiculo(Veiculo veiculo) {
-        db.store(veiculo);
+        //db.store(veiculo);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public List<Utilizador> listarTodosUtilizadores() {
-        return db.query(Utilizador.class);
+        //return db.query(Utilizador.class);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void adicionarUtilizador(Utilizador utilizador) {
-        db.store(utilizador);
+        //db.store(utilizador);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void removerUtilizador(Utilizador utilizador) {
-        db.delete(utilizador);
+        //db.delete(utilizador);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 
     public void actualizarUtilizador(Utilizador utilizador) {
-        db.store(utilizador);
+        //db.store(utilizador);
+        throw new UnsupportedOperationException("Por Implementar.");
     }
 }

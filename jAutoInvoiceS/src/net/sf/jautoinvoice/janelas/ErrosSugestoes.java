@@ -36,23 +36,103 @@ public class ErrosSugestoes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpPainelPrincipal = new javax.swing.JPanel();
+        jscpScroll = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jbtnCancelar = new javax.swing.JButton();
+        jbtnEnviar = new javax.swing.JButton();
+        jckbLogs = new javax.swing.JCheckBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos"); // NOI18N
+        setTitle(bundle.getString("ErrosSugestoes.title")); // NOI18N
+
+        jpPainelPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jscpScroll.setViewportView(jTextArea1);
+
+        org.jdesktop.layout.GroupLayout jpPainelPrincipalLayout = new org.jdesktop.layout.GroupLayout(jpPainelPrincipal);
+        jpPainelPrincipal.setLayout(jpPainelPrincipalLayout);
+        jpPainelPrincipalLayout.setHorizontalGroup(
+            jpPainelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jscpScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpPainelPrincipalLayout.setVerticalGroup(
+            jpPainelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jscpScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jbtnCancelar.setText(bundle.getString("ErrosSugestoes.jbtnCancelar.text")); // NOI18N
+        jbtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCancelarActionPerformed(evt);
+            }
+        });
+
+        jbtnEnviar.setText(bundle.getString("ErrosSugestoes.jbtnEnviar.text")); // NOI18N
+        jbtnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEnviarActionPerformed(evt);
+            }
+        });
+
+        jckbLogs.setText(bundle.getString("ErrosSugestoes.jckbLogs.text")); // NOI18N
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 400, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jpPainelPrincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(layout.createSequentialGroup()
+                        .add(jckbLogs)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 205, Short.MAX_VALUE)
+                        .add(jbtnEnviar)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jbtnCancelar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 300, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jpPainelPrincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jbtnCancelar)
+                    .add(jbtnEnviar)
+                    .add(jckbLogs))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEnviarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnEnviarActionPerformed
+
+    private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtnCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton jbtnCancelar;
+    private javax.swing.JButton jbtnEnviar;
+    private javax.swing.JCheckBox jckbLogs;
+    private javax.swing.JPanel jpPainelPrincipal;
+    private javax.swing.JScrollPane jscpScroll;
     // End of variables declaration//GEN-END:variables
 
 }

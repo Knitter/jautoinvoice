@@ -32,10 +32,12 @@ public class Cliente {
     private String telefone1;
     private String telefone2;
     private String email;
-    private List<Veiculo> veiculos;
+    private List<Veiculo> veiculosActuais;
+    private List<Veiculo> veiculosAnteriores;
 
     public Cliente(String nome, String endereco, String codigoPostal, String localidade,
-            String telefone1, String telefone2, String email, List<Veiculo> veiculos) {
+            String telefone1, String telefone2, String email, List<Veiculo> actuais) {
+
         this.nome = nome;
         this.endereco = endereco;
         this.codigoPostal = codigoPostal;
@@ -43,7 +45,9 @@ public class Cliente {
         this.telefone1 = telefone1;
         this.telefone2 = telefone2;
         this.email = email;
-        this.veiculos = new ArrayList<Veiculo>(veiculos);
+
+        this.veiculosActuais = new ArrayList<Veiculo>(actuais);
+        veiculosAnteriores = new ArrayList<Veiculo>();
     }
 
     public String getCodigoPostal() {
@@ -102,71 +106,39 @@ public class Cliente {
         this.telefone2 = telefone2;
     }
 
-    public List<Veiculo> getVeiculos() {
-        return new ArrayList<Veiculo>(veiculos);
+    public List<Veiculo> getVeiculosActuais() {
+        return new ArrayList<Veiculo>(veiculosActuais);
     }
 
-    public void adicionarVeiculo(Veiculo veiculo) {
-        if (veiculos == null) {
-            veiculos = new ArrayList<Veiculo>();
+    public void adicionarVeiculoActual(Veiculo veiculo) {
+        if (veiculosActuais == null) {
+            veiculosActuais = new ArrayList<Veiculo>();
         }
 
-        veiculos.add(veiculo);
+        veiculosActuais.add(veiculo);
     }
 
-    public void removerVeiculo(Veiculo veiculo) {
-        if (veiculos != null) {
-            veiculos.remove(veiculo);
+    public void removerVeiculoActual(Veiculo veiculo) {
+        if (veiculosActuais != null) {
+            veiculosActuais.remove(veiculo);
         }
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
-            return false;
-        }
-        if ((this.endereco == null) ? (other.endereco != null) : !this.endereco.equals(other.endereco)) {
-            return false;
-        }
-        if ((this.codigoPostal == null) ? (other.codigoPostal != null) : !this.codigoPostal.equals(other.codigoPostal)) {
-            return false;
-        }
-        if ((this.localidade == null) ? (other.localidade != null) : !this.localidade.equals(other.localidade)) {
-            return false;
-        }
-        if ((this.telefone1 == null) ? (other.telefone1 != null) : !this.telefone1.equals(other.telefone1)) {
-            return false;
-        }
-        if ((this.telefone2 == null) ? (other.telefone2 != null) : !this.telefone2.equals(other.telefone2)) {
-            return false;
-        }
-        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
-            return false;
-        }
-        if (this.veiculos != other.veiculos && (this.veiculos == null || !this.veiculos.equals(other.veiculos))) {
-            return false;
-        }
-        return true;
+    public List<Veiculo> getVeiculosAnteriores() {
+        return new ArrayList<Veiculo>(veiculosAnteriores);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 29 * hash + (this.endereco != null ? this.endereco.hashCode() : 0);
-        hash = 29 * hash + (this.codigoPostal != null ? this.codigoPostal.hashCode() : 0);
-        hash = 29 * hash + (this.localidade != null ? this.localidade.hashCode() : 0);
-        hash = 29 * hash + (this.telefone1 != null ? this.telefone1.hashCode() : 0);
-        hash = 29 * hash + (this.telefone2 != null ? this.telefone2.hashCode() : 0);
-        hash = 29 * hash + (this.email != null ? this.email.hashCode() : 0);
-        hash = 29 * hash + (this.veiculos != null ? this.veiculos.hashCode() : 0);
-        return hash;
+    public void adicionarVeiculoAnterior(Veiculo veiculo) {
+        if (veiculosAnteriores == null) {
+            veiculosAnteriores = new ArrayList<Veiculo>();
+        }
+
+        veiculosAnteriores.add(veiculo);
+    }
+
+    public void removerVeiculoAnterior(Veiculo veiculo) {
+        if (veiculosAnteriores != null) {
+            veiculosAnteriores.remove(veiculo);
+        }
     }
 }

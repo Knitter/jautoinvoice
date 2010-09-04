@@ -30,10 +30,12 @@ public class Utilizador {
 
     private String username;
     private String password;
+    private boolean activo;
 
     public Utilizador(String username, String password) {
         this.username = username;
         this.password = password;
+        activo = true;
     }
 
     public String getPassword() {
@@ -52,30 +54,12 @@ public class Utilizador {
         this.username = username;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Utilizador other = (Utilizador) obj;
-        if ((this.username == null) ? (other.username != null) : !this.username.equals(other.username)) {
-            return false;
-        }
-        if ((this.password == null) ? (other.password != null) : !this.password.equals(other.password)) {
-            return false;
-        }
-        return true;
+    public boolean isActivo() {
+        return activo;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + (this.username != null ? this.username.hashCode() : 0);
-        hash = 53 * hash + (this.password != null ? this.password.hashCode() : 0);
-        return hash;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public static String gerarHash(String password) {
