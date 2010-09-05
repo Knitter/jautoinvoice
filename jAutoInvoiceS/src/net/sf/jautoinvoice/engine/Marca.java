@@ -20,14 +20,20 @@
  */
 package net.sf.jautoinvoice.engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Marca {
 
     private String nome;
+    private ArrayList<Modelo> modelos;
     private boolean activo;
 
     public Marca(String nome) {
         this.nome = nome;
+
         activo = true;
+        modelos = new ArrayList<Modelo>();
     }
 
     public String getNome() {
@@ -44,6 +50,30 @@ public class Marca {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public void adicionarModelo(Modelo modelo) {
+        if (modelos == null) {
+            modelos = new ArrayList<Modelo>();
+        }
+
+        modelos.add(modelo);
+    }
+
+    public void removerModelo(Modelo modelo) {
+        if (modelos != null) {
+            modelos.remove(modelo);
+        }
+    }
+
+    public List<Modelo> getModelos() {
+        return new ArrayList<Modelo>(modelos);
+    }
+
+    public void adicionarModelos(List<Modelo> modelos) {
+        if (modelos != null) {
+            this.modelos = new ArrayList<Modelo>(modelos);
+        }
     }
 
     @Override

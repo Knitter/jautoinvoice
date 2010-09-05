@@ -20,9 +20,18 @@
  */
 package net.sf.jautoinvoice.paineis;
 
+import java.awt.Component;
 import java.util.List;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTree;
+import javax.swing.ListCellRenderer;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
 import net.sf.jautoinvoice.engine.Empregado;
 import net.sf.jautoinvoice.engine.Utilizador;
@@ -30,20 +39,34 @@ import net.sf.jautoinvoice.engine.Utilizador;
 public class PainelEmpregados extends javax.swing.JPanel {
 
     private JAutoInvoiceApp app;
-    private DefaultTreeCellRenderer renderer;
     private Empregado actual;
+    private DefaultListModel reparacoes;
+    //
+    private DefaultTreeCellRenderer renderer;
+    private DefaultMutableTreeNode root;
 
     public PainelEmpregados(JAutoInvoiceApp app) {
         this.app = app;
         actual = null;
 
-        //TODO: activar o ícone na jTree
+        processarListaEmpregados();
+
         ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user_green.png"));
         renderer = new DefaultTreeCellRenderer();
         renderer.setClosedIcon(rootIcon);
         renderer.setOpenIcon(rootIcon);
 
         initComponents();
+    }
+
+    private void processarListaEmpregados() {
+        root = new DefaultMutableTreeNode("Empregados");
+
+        DefaultMutableTreeNode elem;
+        for (Empregado e : app.getGestor().listarTodosEmpregados()) {
+            elem = new DefaultMutableTreeNode(e);
+            root.add(elem);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -79,7 +102,7 @@ public class PainelEmpregados extends javax.swing.JPanel {
         jpReparacoes = new javax.swing.JPanel();
         jbtnRemoverReparacao = new javax.swing.JButton();
         jscpScrollReparacoes = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jlstReparacoes = new javax.swing.JList();
         jbtnImprimir = new javax.swing.JButton();
         jbtnGravar = new javax.swing.JButton();
 
@@ -107,8 +130,7 @@ public class PainelEmpregados extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jtEmpregados.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtEmpregados.setModel(new DefaultTreeModel(root));
         jtEmpregados.setCellRenderer(renderer);
         jscpScrollEmpregados.setViewportView(jtEmpregados);
 
@@ -186,7 +208,7 @@ public class PainelEmpregados extends javax.swing.JPanel {
             }
         });
 
-        jscpScrollReparacoes.setViewportView(jList1);
+        jscpScrollReparacoes.setViewportView(jlstReparacoes);
 
         jbtnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/printer.png"))); // NOI18N
         jbtnImprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -310,9 +332,9 @@ public class PainelEmpregados extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPainelDireitaLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(jpPainelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnGravar)
-                .addGap(36, 36, 36))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jspSplit.setRightComponent(jpPainelDireita);
@@ -377,7 +399,6 @@ public class PainelEmpregados extends javax.swing.JPanel {
     private void jtfNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNomeFocusLost
     }//GEN-LAST:event_jtfNomeFocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList jList1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnAdicionarEmpregado;
     private javax.swing.JButton jbtnGravar;
@@ -392,6 +413,7 @@ public class PainelEmpregados extends javax.swing.JPanel {
     private javax.swing.JLabel jlblSeparacaoSeccaoAutenticacao;
     private javax.swing.JLabel jlblUtilizador;
     private javax.swing.JLabel jlblValoHora;
+    private javax.swing.JList jlstReparacoes;
     private javax.swing.JPanel jpPainelDados;
     private javax.swing.JPanel jpPainelDireita;
     private javax.swing.JPanel jpPainelLista;

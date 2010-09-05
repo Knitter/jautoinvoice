@@ -24,9 +24,12 @@ public class Modelo {
 
     private String nome;
     private boolean activo;
+    private Marca marca;
 
-    public Modelo(String nome) {
+    public Modelo(String nome, Marca marca) {
         this.nome = nome;
+        this.marca = marca;
+
         activo = true;
     }
 
@@ -44,5 +47,13 @@ public class Modelo {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
 }

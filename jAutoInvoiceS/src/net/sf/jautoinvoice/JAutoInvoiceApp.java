@@ -145,6 +145,16 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     public void autenticar(String utilizador, String password) {
         if (gestor.autenticar(utilizador, password)) {
             activarInteraccao();
+
+            jpPainelPrincipal.add(new PainelReparacoes(this), P_REPARACOES);
+            jpPainelPrincipal.add(new PainelFacturas(this), P_FACTURAS);
+            jpPainelPrincipal.add(new PainelVeiculos(this), P_VEICULOS);
+            jpPainelPrincipal.add(new PainelClientes(this), P_CLIENTES);
+            jpPainelPrincipal.add(new PainelPecas(this), P_PECAS);
+            jpPainelPrincipal.add(new PainelEmpregados(this), P_EMPREGADOS);
+
+            jpPainelPrincipal.validate();
+
             anicard.show(jpPainelPrincipal, P_REPARACOES);
         } else {
             ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos");
@@ -419,12 +429,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jpPainelPrincipal.setLayout(null);
         jpPainelPrincipal.setLayout(anicard);
         jpPainelPrincipal.add(new PainelAutenticacao(this), P_AUTENTICACAO);
-        jpPainelPrincipal.add(new PainelReparacoes(this), P_REPARACOES);
-        jpPainelPrincipal.add(new PainelFacturas(this), P_FACTURAS);
-        jpPainelPrincipal.add(new PainelVeiculos(this), P_VEICULOS);
-        jpPainelPrincipal.add(new PainelClientes(this), P_CLIENTES);
-        jpPainelPrincipal.add(new PainelPecas(this), P_PECAS);
-        jpPainelPrincipal.add(new PainelEmpregados(this), P_EMPREGADOS);
         getContentPane().add(jpPainelPrincipal, java.awt.BorderLayout.CENTER);
 
         jmApp.setText(bundle.getString("JAutoInvoiceApp.jmApp.text")); // NOI18N

@@ -386,9 +386,9 @@ public final class Gestor {
         return null;
     }
 
-    public Modelo adicionarModelo(String nome) {
+    public Modelo adicionarModelo(String nome, Marca marca) {
         if (autenticado != null) {
-            Modelo modelo = new Modelo(nome);
+            Modelo modelo = new Modelo(nome, marca);
             db.store(modelo);
             return modelo;
         }
