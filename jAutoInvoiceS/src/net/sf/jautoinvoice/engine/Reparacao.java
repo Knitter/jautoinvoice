@@ -20,7 +20,9 @@
  */
 package net.sf.jautoinvoice.engine;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Reparacao {
 
@@ -29,14 +31,20 @@ public class Reparacao {
     private int quilometros;
     private String descricaoReparacao;
     private boolean activo;
+    private ArrayList<LinhaReparacao> linhas;
+    private Veiculo veiculo;
 
-    public Reparacao(Date data, String descricaoAvaria, int quilometros, String descricaoReparacao) {
+    public Reparacao(Date data, String descricaoAvaria, int quilometros, String descricaoReparacao,
+            Veiculo veiculo) {
+
         this.data = data;
         this.descricaoAvaria = descricaoAvaria;
         this.quilometros = quilometros;
         this.descricaoReparacao = descricaoReparacao;
+        this.veiculo = veiculo;
 
         activo = true;
+        linhas = new ArrayList<LinhaReparacao>();
     }
 
     public Date getData() {
@@ -77,5 +85,37 @@ public class Reparacao {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public void adicionarLinhaReparacao(LinhaReparacao linha) {
+        if (linhas == null) {
+            linhas = new ArrayList<LinhaReparacao>();
+        }
+
+        linhas.add(linha);
+    }
+
+    public void removerLinhaReparacao(LinhaReparacao linha) {
+        if (linhas != null) {
+            linhas.remove(linha);
+        }
+    }
+
+    public void adicionarLinhasReparacao(List<LinhaReparacao> linhas) {
+        if (linhas != null) {
+            this.linhas = new ArrayList<LinhaReparacao>(linhas);
+        }
+    }
+
+    public List<LinhaReparacao> getLinhasReparacao() {
+        return new ArrayList<LinhaReparacao>(linhas);
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 }

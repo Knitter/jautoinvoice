@@ -26,6 +26,7 @@ import java.util.List;
 public class Cliente {
 
     private String nome;
+    private String contribuinte;
     private String endereco;
     private String codigoPostal;
     private String localidade;
@@ -39,7 +40,7 @@ public class Cliente {
 
     public Cliente(String nome, String endereco, String codigoPostal, String localidade,
             String telefone1, String telefone2, String email, List<Veiculo> actuais,
-            String observacoes) {
+            String observacoes, String contribuinte) {
 
         this.nome = nome;
         this.endereco = endereco;
@@ -49,6 +50,7 @@ public class Cliente {
         this.telefone2 = telefone2;
         this.email = email;
         this.observacoes = observacoes;
+        this.contribuinte = contribuinte;
 
         if (actuais != null) {
             veiculosActuais = new ArrayList<Veiculo>(actuais);
@@ -165,5 +167,13 @@ public class Cliente {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public String getContribuinte() {
+        return contribuinte;
+    }
+
+    public void setContribuinte(String contribuinte) {
+        this.contribuinte = contribuinte;
     }
 }

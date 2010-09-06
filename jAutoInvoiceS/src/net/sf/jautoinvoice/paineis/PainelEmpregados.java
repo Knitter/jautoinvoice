@@ -27,6 +27,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.ListCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -34,6 +35,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
 import net.sf.jautoinvoice.engine.Empregado;
+import net.sf.jautoinvoice.engine.LinhaReparacao;
 import net.sf.jautoinvoice.engine.Utilizador;
 
 public class PainelEmpregados extends javax.swing.JPanel {
@@ -44,29 +46,72 @@ public class PainelEmpregados extends javax.swing.JPanel {
     //
     private DefaultTreeCellRenderer renderer;
     private DefaultMutableTreeNode root;
+    private boolean pesquisa;
 
     public PainelEmpregados(JAutoInvoiceApp app) {
         this.app = app;
         actual = null;
+        pesquisa = false;
+        reparacoes = new DefaultListModel();
+        root = new DefaultMutableTreeNode("Empregados");
 
         processarListaEmpregados();
+        processarListaReparacoes();
 
         ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user_green.png"));
         renderer = new DefaultTreeCellRenderer();
         renderer.setClosedIcon(rootIcon);
         renderer.setOpenIcon(rootIcon);
+        renderer.setLeafIcon(rootIcon);
 
         initComponents();
     }
 
     private void processarListaEmpregados() {
-        root = new DefaultMutableTreeNode("Empregados");
-
         DefaultMutableTreeNode elem;
         for (Empregado e : app.getGestor().listarTodosEmpregados()) {
             elem = new DefaultMutableTreeNode(e);
             root.add(elem);
         }
+    }
+
+    private void processarListaReparacoes() {
+        Empregado emp = null;
+
+        if (root.isLeaf()) {
+            return;
+        }
+
+        if (actual == null) {
+            emp = (Empregado) ((DefaultMutableTreeNode) root.getChildAt(0)).getUserObject();
+        } else {
+            emp = actual;
+        }
+
+        if (reparacoes.getSize() != 0) {
+            reparacoes.removeAllElements();
+        }
+
+        for (LinhaReparacao l : emp.getLinhasReparacao()) {
+            reparacoes.addElement(new LinhaReparacaoJList(l));
+        }
+    }
+
+    private void mostrarDadosEmpregado() {
+        jtfNome.setText(actual.getNome());
+        jtfUtilizador.setText(actual.getUsername());
+        jffValorHora.setValue(actual.getValorHora());
+        jckbAdministrador.setSelected(actual.isAdministrador());
+
+        processarListaReparacoes();
+    }
+
+    private void semEmpregadoSeleccionado() {
+        jtfNome.setText("");
+        jtfUtilizador.setText("");
+        //TODO: anular valor hora
+        //jffValorHora.setValue("");
+        jckbAdministrador.setSelected(false);
     }
 
     /** This method is called from within the constructor to
@@ -132,6 +177,11 @@ public class PainelEmpregados extends javax.swing.JPanel {
 
         jtEmpregados.setModel(new DefaultTreeModel(root));
         jtEmpregados.setCellRenderer(renderer);
+        jtEmpregados.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jtEmpregadosValueChanged(evt);
+            }
+        });
         jscpScrollEmpregados.setViewportView(jtEmpregados);
 
         javax.swing.GroupLayout jpPainelListaLayout = new javax.swing.GroupLayout(jpPainelLista);
@@ -167,12 +217,6 @@ public class PainelEmpregados extends javax.swing.JPanel {
 
         jpPainelDados.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Empregado"));
 
-        jtfNome.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfNomeFocusLost(evt);
-            }
-        });
-
         jlblNome.setText("Nome");
 
         jlblMoeda.setText("€");
@@ -182,18 +226,6 @@ public class PainelEmpregados extends javax.swing.JPanel {
         jlblSeparacaoSeccaoAutenticacao.setText("Dados de Autenticacao");
 
         jlblUtilizador.setText("Utilzador");
-
-        jtfUtilizador.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfUtilizadorFocusLost(evt);
-            }
-        });
-
-        jpfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jpfPasswordFocusLost(evt);
-            }
-        });
 
         jlblPassword.setText("Password");
 
@@ -208,6 +240,8 @@ public class PainelEmpregados extends javax.swing.JPanel {
             }
         });
 
+        jlstReparacoes.setModel(reparacoes);
+        jlstReparacoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jscpScrollReparacoes.setViewportView(jlstReparacoes);
 
         jbtnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/printer.png"))); // NOI18N
@@ -345,8 +379,26 @@ public class PainelEmpregados extends javax.swing.JPanel {
     private void jtfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisaActionPerformed
         String termo = jtfPesquisa.getText().trim();
         if (!termo.isEmpty()) {
+            pesquisa = true;
             List<Empregado> resultados = app.getGestor().procurarEmpregado(termo);
-            //TODO: actualizar lista, reset flags, alterar actual
+            root.removeAllChildren();
+            if (resultados.size() > 0) {
+                DefaultMutableTreeNode elem;
+
+                for (Empregado e : resultados) {
+                    elem = new DefaultMutableTreeNode(e);
+                    root.add(elem);
+                }
+
+                actual = (Empregado) ((DefaultMutableTreeNode) root.getChildAt(0)).getUserObject();
+                jbtnRemoverEmpregado.setEnabled(true);
+                mostrarDadosEmpregado();
+            } else {
+                jbtnRemoverEmpregado.setEnabled(false);
+                semEmpregadoSeleccionado();
+            }
+        } else if (pesquisa) {
+            processarListaEmpregados();
         }
     }//GEN-LAST:event_jtfPesquisaActionPerformed
 
@@ -359,7 +411,8 @@ public class PainelEmpregados extends javax.swing.JPanel {
             if (actual == null) {
                 //TODO: failsafe
             } else {
-                //TODO: seleccionar actual, reset flags
+                //TODO: encontrar lugar para o actual e injectar e seleccionar
+                mostrarDadosEmpregado();
             }
         } else {
             actual.setNome(jtfNome.getText().trim());
@@ -371,33 +424,43 @@ public class PainelEmpregados extends javax.swing.JPanel {
             if (!app.getGestor().actualizarEmpregado(actual)) {
                 //TODO: failsafe
             }
+            jpfPassword.setText("");
         }
     }//GEN-LAST:event_jbtnGravarActionPerformed
 
     private void jbtnRemoverReparacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverReparacaoActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnRemoverReparacaoActionPerformed
 
     private void jbtnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnImprimirActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnImprimirActionPerformed
 
     private void jbtnRemoverEmpregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverEmpregadoActionPerformed
-        app.getGestor().removerEmpregado(actual);
+        if (actual != null) {
+            if(!app.getGestor().removerEmpregado(actual)) {
+                //TODO: aviso de erro
+            } else {
+                //TODO: seleccionar o topo da lista, mostrar os dados
+            }
+        }
     }//GEN-LAST:event_jbtnRemoverEmpregadoActionPerformed
 
     private void jbtnAdicionarEmpregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarEmpregadoActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnAdicionarEmpregadoActionPerformed
 
-    private void jpfPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jpfPasswordFocusLost
-    }//GEN-LAST:event_jpfPasswordFocusLost
-
-    private void jtfUtilizadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfUtilizadorFocusLost
-    }//GEN-LAST:event_jtfUtilizadorFocusLost
-
-    private void jtfNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNomeFocusLost
-    }//GEN-LAST:event_jtfNomeFocusLost
+    private void jtEmpregadosValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtEmpregadosValueChanged
+        if (jtEmpregados.getLastSelectedPathComponent().toString().equalsIgnoreCase("Empregados")) {
+            actual = null;
+            semEmpregadoSeleccionado();
+            jbtnRemoverEmpregado.setEnabled(false);
+        } else {
+            actual = (Empregado) ((DefaultMutableTreeNode) jtEmpregados.getLastSelectedPathComponent()).getUserObject();
+            jbtnRemoverEmpregado.setEnabled(false);
+            mostrarDadosEmpregado();
+        }
+    }//GEN-LAST:event_jtEmpregadosValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnAdicionarEmpregado;

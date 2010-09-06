@@ -109,6 +109,9 @@
                       <Connection code="new DefaultTreeModel(root)" type="code"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jtEmpregadosValueChanged"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jtEmpregados.setCellRenderer(renderer);"/>
                   </AuxValues>
@@ -244,9 +247,6 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jtfNome">
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfNomeFocusLost"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlblNome">
                   <Properties>
@@ -278,14 +278,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfUtilizador">
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfUtilizadorFocusLost"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="jpfPassword">
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jpfPasswordFocusLost"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlblPassword">
                   <Properties>
@@ -358,9 +352,10 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jlstReparacoes">
                           <Properties>
-                            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                              <StringArray count="0"/>
+                            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="reparacoes" type="code"/>
                             </Property>
+                            <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
                         </Component>
                       </SubComponents>

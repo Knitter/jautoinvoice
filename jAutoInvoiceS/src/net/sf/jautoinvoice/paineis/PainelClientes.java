@@ -20,16 +20,65 @@
  */
 package net.sf.jautoinvoice.paineis;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
+import net.sf.jautoinvoice.engine.Cliente;
 
 public class PainelClientes extends javax.swing.JPanel {
 
     private JAutoInvoiceApp app;
+    private Cliente actual;
+    //
+    private DefaultTreeCellRenderer renderer;
+    private DefaultMutableTreeNode root;
+    private boolean pesquisa;
 
     public PainelClientes(JAutoInvoiceApp app) {
         this.app = app;
-        
+        actual = null;
+        pesquisa = false;
+
+        root = new DefaultMutableTreeNode("Clientes");
+
+        processarListaClientes();
+
+        ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/vcard.png"));
+        renderer = new DefaultTreeCellRenderer();
+        renderer.setClosedIcon(rootIcon);
+        renderer.setOpenIcon(rootIcon);
+        renderer.setLeafIcon(rootIcon);
         initComponents();
+    }
+
+    private void processarListaClientes() {
+        DefaultMutableTreeNode elem;
+        for (Cliente e : app.getGestor().listarTodosClientes()) {
+            elem = new DefaultMutableTreeNode(e);
+            root.add(elem);
+        }
+    }
+
+    private void mostrarDadosCliente() {
+        //TOOD: processar correctamente os jff
+        //jffContribuinte.
+        //jffCodigoPostal;
+        //jffTelefone1;
+        //jffTelefone2;
+
+        //TODO: criar métodos de actualização das listas e jtrees
+        //jlstVeiculosActuais;
+        //jlstVeiculosAntigos;
+        //jtbVeiculos;
+
+        jtaObservacoes.setText(actual.getObservacoes());
+        jtfEmail.setText(actual.getEmail());
+        jtfEndereco.setText(actual.getEndereco());
+        jtfLocalidade.setText(actual.getLocalidade());
+        jtfNome.setText(actual.getNome());
     }
 
     /** This method is called from within the constructor to
@@ -74,6 +123,8 @@ public class PainelClientes extends javax.swing.JPanel {
         jpPainelVeiculosAntigos = new javax.swing.JPanel();
         jscpVeiculosAntigos = new javax.swing.JScrollPane();
         jlstVeiculosAntigos = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
+        jffContribuinte = new javax.swing.JFormattedTextField();
         jbtnGravar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -100,8 +151,12 @@ public class PainelClientes extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jtListaClientes.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtListaClientes.setModel(new DefaultTreeModel(root));
+        jtListaClientes.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jtListaClientesValueChanged(evt);
+            }
+        });
         jscScroll.setViewportView(jtListaClientes);
 
         javax.swing.GroupLayout jpPainelListaLayout = new javax.swing.GroupLayout(jpPainelLista);
@@ -125,7 +180,7 @@ public class PainelClientes extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(jscScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbtnRemoverCliente)
@@ -178,7 +233,7 @@ public class PainelClientes extends javax.swing.JPanel {
             jpObservacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpObservacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpObservacoesLayout.setVerticalGroup(
@@ -197,7 +252,7 @@ public class PainelClientes extends javax.swing.JPanel {
             jpPainelVeiculosActuaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelVeiculosActuaisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jscpVeiculosActuais, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                .addComponent(jscpVeiculosActuais, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpPainelVeiculosActuaisLayout.setVerticalGroup(
@@ -218,7 +273,7 @@ public class PainelClientes extends javax.swing.JPanel {
             jpPainelVeiculosAntigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelVeiculosAntigosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jscpVeiculosAntigos, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                .addComponent(jscpVeiculosAntigos, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpPainelVeiculosAntigosLayout.setVerticalGroup(
@@ -231,15 +286,19 @@ public class PainelClientes extends javax.swing.JPanel {
 
         jtbVeiculos.addTab(bundle.getString("PainelClientes.jpPainelVeiculosAntigos.TabConstraints.tabTitle"), jpPainelVeiculosAntigos); // NOI18N
 
+        jLabel1.setText(bundle.getString("PainelClientes.jLabel1.text")); // NOI18N
+
+        jffContribuinte.setText(bundle.getString("PainelClientes.jffContribuinte.text")); // NOI18N
+
         javax.swing.GroupLayout jpPainelDireitaLayout = new javax.swing.GroupLayout(jpPainelDireita);
         jpPainelDireita.setLayout(jpPainelDireitaLayout);
         jpPainelDireitaLayout.setHorizontalGroup(
             jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPainelDireitaLayout.createSequentialGroup()
+            .addGroup(jpPainelDireitaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtbVeiculos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                    .addComponent(jpObservacoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtbVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpPainelDireitaLayout.createSequentialGroup()
                         .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlblNome)
@@ -247,21 +306,29 @@ public class PainelClientes extends javax.swing.JPanel {
                             .addComponent(lblCodigoPostal)
                             .addComponent(jlblLocalidade)
                             .addComponent(jlblEmail)
-                            .addComponent(jlblTelefone2)
-                            .addComponent(lblTelefone1))
+                            .addComponent(lblTelefone1)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                            .addComponent(jtfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                            .addComponent(jtfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                            .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtfLocalidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jffCodigoPostal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
-                            .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jffTelefone1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jffTelefone2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)))))
+                            .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                            .addComponent(jtfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                            .addComponent(jtfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                            .addComponent(jffCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpPainelDireitaLayout.createSequentialGroup()
+                                .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jffContribuinte, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpPainelDireitaLayout.createSequentialGroup()
+                                        .addComponent(jffTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlblTelefone2)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jffTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
+
+        jpPainelDireitaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jffTelefone1, jffTelefone2});
+
         jpPainelDireitaLayout.setVerticalGroup(
             jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelDireitaLayout.createSequentialGroup()
@@ -272,11 +339,13 @@ public class PainelClientes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jffTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTelefone1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblTelefone2)
                     .addComponent(jffTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblTelefone2))
+                    .addComponent(lblTelefone1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jffContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,23 +398,35 @@ public class PainelClientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisaActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jtfPesquisaActionPerformed
 
     private void jbtnRemoverClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverClienteActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnRemoverClienteActionPerformed
 
     private void jbtnAdicionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarClienteActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnAdicionarClienteActionPerformed
 
-
+    private void jtListaClientesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtListaClientesValueChanged
+        if (jtListaClientes.getLastSelectedPathComponent().toString().equalsIgnoreCase("Clientes")) {
+            actual = null;
+            //semClientesSeleccionado();
+            //jbtnRemoverCliente.setEnabled(false);
+        } else {
+            actual = (Cliente) ((DefaultMutableTreeNode) jtListaClientes.getLastSelectedPathComponent()).getUserObject();
+            //jbtnRemoverCliente.setEnabled(false);
+            mostrarDadosCliente();
+        }
+    }//GEN-LAST:event_jtListaClientesValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbtnAdicionarCliente;
     private javax.swing.JButton jbtnGravar;
     private javax.swing.JButton jbtnRemoverCliente;
     private javax.swing.JFormattedTextField jffCodigoPostal;
+    private javax.swing.JFormattedTextField jffContribuinte;
     private javax.swing.JFormattedTextField jffTelefone1;
     private javax.swing.JFormattedTextField jffTelefone2;
     private javax.swing.JLabel jlblEmail;
@@ -377,5 +458,4 @@ public class PainelClientes extends javax.swing.JPanel {
     private javax.swing.JLabel lblCodigoPostal;
     private javax.swing.JLabel lblTelefone1;
     // End of variables declaration//GEN-END:variables
-
 }

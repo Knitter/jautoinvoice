@@ -25,11 +25,15 @@ public class LinhaReparacao {
     private Empregado empregado;
     private double valorHora;
     private double horas;
+    private Reparacao reparacao;
 
-    public LinhaReparacao(Empregado empregado, double valorHora, double horas) {
+    public LinhaReparacao(Empregado empregado, double valorHora, double horas, 
+            Reparacao reparacao) {
+        
         this.empregado = empregado;
         this.valorHora = valorHora;
         this.horas = horas;
+        this.reparacao = reparacao;
     }
 
     public Empregado getEmpregado() {
@@ -54,5 +58,13 @@ public class LinhaReparacao {
 
     public void setValorHora(double valorHora) {
         this.valorHora = valorHora;
+    }
+
+    public Reparacao getReparacao() {
+        return reparacao;
+    }
+
+    public void setReparacao(Reparacao reparacao) {
+        this.reparacao = reparacao;
     }
 }

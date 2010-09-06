@@ -72,4 +72,9 @@ public class Empregado extends Utilizador {
             linhasReparacao.remove(linha);
         }
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

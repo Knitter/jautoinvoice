@@ -34,7 +34,8 @@ public class Veiculo {
     private String cilindrada;
     private String nrMotor;
     private String observacoes;
-    private List<Cliente> antigosDonos;
+    private ArrayList<Cliente> antigosDonos;
+    private ArrayList<Reparacao> reparacoes;
     private Cliente dono;
     private Date dataAdicao;
     private boolean activo;
@@ -54,6 +55,7 @@ public class Veiculo {
         this.observacoes = observacoes;
 
         antigosDonos = new ArrayList<Cliente>();
+        reparacoes = new ArrayList<Reparacao>();
         dataAdicao = new Date();
         activo = true;
     }
@@ -140,6 +142,12 @@ public class Veiculo {
         return new ArrayList<Cliente>(antigosDonos);
     }
 
+    public void adicionarAntigosDonos(List<Cliente> antigos) {
+        if (antigos != null) {
+            antigosDonos = new ArrayList<Cliente>(antigos);
+        }
+    }
+
     public String getObservacoes() {
         return observacoes;
     }
@@ -162,5 +170,29 @@ public class Veiculo {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public void adicionarReparacao(Reparacao reparacao) {
+        if (reparacoes == null) {
+            reparacoes = new ArrayList<Reparacao>();
+        }
+
+        reparacoes.add(reparacao);
+    }
+
+    public void removerReparacao(Reparacao reparacao) {
+        if (reparacoes != null) {
+            reparacoes.remove(reparacao);
+        }
+    }
+
+    public List<Reparacao> getReparacoes() {
+        return new ArrayList<Reparacao>(reparacoes);
+    }
+
+    public void adicionarReparacoes(List<Reparacao> reparacoes) {
+        if (reparacoes != null) {
+            this.reparacoes = new ArrayList<Reparacao>(reparacoes);
+        }
     }
 }

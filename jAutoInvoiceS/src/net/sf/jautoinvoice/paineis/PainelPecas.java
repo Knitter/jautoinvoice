@@ -20,16 +20,50 @@
  */
 package net.sf.jautoinvoice.paineis;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
+import net.sf.jautoinvoice.engine.Peca;
 
 public class PainelPecas extends javax.swing.JPanel {
 
     private JAutoInvoiceApp app;
-
+    private Peca actual;
+    //
+    private DefaultTreeCellRenderer renderer;
+    private DefaultMutableTreeNode root;
+    private boolean pesquisa;
     public PainelPecas(JAutoInvoiceApp app) {
         this.app = app;
-        
+
+        actual = null;
+        pesquisa = false;
+        root = new DefaultMutableTreeNode("Peças");
+
+        processarListaPecas();
+
+        ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/wrench_orange.png"));
+        renderer = new DefaultTreeCellRenderer();
+        renderer.setClosedIcon(rootIcon);
+        renderer.setOpenIcon(rootIcon);
+        renderer.setLeafIcon(rootIcon);
+
         initComponents();
+    }
+
+    private void processarListaPecas() {
+        DefaultMutableTreeNode elem;
+        for (Peca p : app.getGestor().listarTodasPecas()) {
+            elem = new DefaultMutableTreeNode(p);
+            root.add(elem);
+        }
+    }
+
+    private void mostrarDadosPeca() {
+
     }
 
     /** This method is called from within the constructor to
@@ -96,8 +130,12 @@ public class PainelPecas extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jtListaPecas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtListaPecas.setModel(new DefaultTreeModel(root));
+        jtListaPecas.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jtListaPecasValueChanged(evt);
+            }
+        });
         jscpScroll.setViewportView(jtListaPecas);
 
         javax.swing.GroupLayout jpPainelListaLayout = new javax.swing.GroupLayout(jpPainelLista);
@@ -173,7 +211,7 @@ public class PainelPecas extends javax.swing.JPanel {
         jpPainelModelos.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PainelPecas.jpPainelModelos.border.title"))); // NOI18N
         jpPainelModelos.setLayout(new javax.swing.BoxLayout(jpPainelModelos, javax.swing.BoxLayout.LINE_AXIS));
 
-        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jtModelos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jscpScrollTreeModelos.setViewportView(jtModelos);
 
@@ -288,28 +326,40 @@ public class PainelPecas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisaActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jtfPesquisaActionPerformed
 
     private void jbtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverPecaActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnRemoverPecaActionPerformed
 
     private void jbtnAdicionarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarPecaActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnAdicionarPecaActionPerformed
 
     private void jbtnAdicionarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarModeloActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnAdicionarModeloActionPerformed
 
     private void jbtnRemoverModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverModeloActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Por implementar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbtnRemoverModeloActionPerformed
 
     private void jtfReferenciaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfReferenciaFocusLost
-        // TODO add your handling code here:
+       //TODO:
     }//GEN-LAST:event_jtfReferenciaFocusLost
+
+    private void jtListaPecasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtListaPecasValueChanged
+         if (jtListaPecas.getLastSelectedPathComponent().toString().equalsIgnoreCase("Empregados")) {
+            actual = null;
+            //semPecaSeleccionado();
+            //jbtnRemoverPeca.setEnabled(false);
+        } else {
+            actual = (Peca) ((DefaultMutableTreeNode) jtListaPecas.getLastSelectedPathComponent()).getUserObject();
+            //jbtnRemoverPeca.setEnabled(false);
+            mostrarDadosPeca();
+        }
+    }//GEN-LAST:event_jtListaPecasValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

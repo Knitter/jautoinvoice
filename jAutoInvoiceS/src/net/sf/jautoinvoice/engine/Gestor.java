@@ -268,11 +268,11 @@ public final class Gestor {
 
     public Cliente adicionarCliente(String nome, String endereco, String codigoPostal,
             String localidade, String telefone1, String telefone2, String email,
-            String observacoes) {
+            String observacoes, String contribuinte) {
 
         if (autenticado != null) {
             Cliente cliente = new Cliente(nome, endereco, codigoPostal, localidade,
-                    telefone1, telefone2, email, null, observacoes);
+                    telefone1, telefone2, email, null, observacoes, contribuinte);
 
             db.store(cliente);
             return cliente;

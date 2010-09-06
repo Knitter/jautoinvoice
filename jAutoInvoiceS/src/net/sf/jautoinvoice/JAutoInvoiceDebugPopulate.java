@@ -29,7 +29,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Level;
@@ -207,16 +206,16 @@ public class JAutoInvoiceDebugPopulate {
 
         //Clientes
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-        clientes.add(new Cliente("António Sousa", "Rua das Flores nr. 32", "2400-023", "Coimbra", "203123432", null, "antonio@email.com", null, ""));
-        clientes.add(new Cliente("Ricardo Costa Sousa", "Urbanização Antunes lt 2, 3ºDrt.", "2000-321", "Porto", "204245098", null, "ricardo@email.com", null, ""));
-        clientes.add(new Cliente("Rui Pedro Lopes", "Rua Silva nr. 33", "1899-345", "Leiria", "919109823", null, "rui@email.com", null, ""));
-        clientes.add(new Cliente("Pedro Antunes Costa", "Av. Alves nr. 32", "4000-034", "Leiria", "989723482", null, "pedro@email.com", null, ""));
-        clientes.add(new Cliente("Cristina Rito", "Charneca da Lousa 3ºA", "5000-341", "Guimarães", "234908765", null, "cristina@email.com", null, ""));
-        clientes.add(new Cliente("Joaquim Antunes", "Rua das Flores nr. 40", "1000-342", "Porto", "213876213", null, "joaquim@email.com", null, ""));
-        clientes.add(new Cliente("Ana Quintas", "Rua Antunes", "2100-009", "Coimbra", "345123455", null, "ana@email.com", null, ""));
-        clientes.add(new Cliente("Celeste Costa", "Rua Clara", "2220-002", "Lisboa", "456789223", null, "celeste@email.com", null, ""));
-        clientes.add(new Cliente("Rita Pedro", "", "", "", "929590234", null, "rita@email.com", null, ""));
-        clientes.add(new Cliente("João Maria", "", "", "", "587902123", "234999455", "joao@email.com", null, ""));
+        clientes.add(new Cliente("António Sousa", "Rua das Flores nr. 32", "2400-023", "Coimbra", "203123432", null, "antonio@email.com", null, "", "23567890"));
+        clientes.add(new Cliente("Ricardo Costa Sousa", "Urbanização Antunes lt 2, 3ºDrt.", "2000-321", "Porto", "204245098", null, "ricardo@email.com", null, "", "231443555"));
+        clientes.add(new Cliente("Rui Pedro Lopes", "Rua Silva nr. 33", "1899-345", "Leiria", "919109823", null, "rui@email.com", null, "", "234567123"));
+        clientes.add(new Cliente("Pedro Antunes Costa", "Av. Alves nr. 32", "4000-034", "Leiria", "989723482", null, "pedro@email.com", null, "", "213457121"));
+        clientes.add(new Cliente("Cristina Rito", "Charneca da Lousa 3ºA", "5000-341", "Guimarães", "234908765", null, "cristina@email.com", null, "", "211444566"));
+        clientes.add(new Cliente("Joaquim Antunes", "Rua das Flores nr. 40", "1000-342", "Porto", "213876213", null, "joaquim@email.com", null, "", "211009887"));
+        clientes.add(new Cliente("Ana Quintas", "Rua Antunes", "2100-009", "Coimbra", "345123455", null, "ana@email.com", null, "", "213345631"));
+        clientes.add(new Cliente("Celeste Costa", "Rua Clara", "2220-002", "Lisboa", "456789223", null, "celeste@email.com", null, "", "223334452"));
+        clientes.add(new Cliente("Rita Pedro", "", "", "", "929590234", null, "rita@email.com", null, "", "123432123"));
+        clientes.add(new Cliente("João Maria", "", "", "", "587902123", "234999455", "joao@email.com", null, "", "234412223"));
 
         //Veiculos
         ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
@@ -235,47 +234,89 @@ public class JAutoInvoiceDebugPopulate {
             cliente = clientes.get((int) (Math.random() * clientes.size()));
 
             matricula = new StringBuilder();
-            matricula.append(letras[(int)(Math.random() * letras.length)]);
-            matricula.append(letras[(int)(Math.random() * letras.length)]);
+            matricula.append(letras[(int) (Math.random() * letras.length)]);
+            matricula.append(letras[(int) (Math.random() * letras.length)]);
             matricula.append('-');
-            matricula.append(letras[(int)(Math.random() * letras.length)]);
-            matricula.append(letras[(int)(Math.random() * letras.length)]);
+            matricula.append(letras[(int) (Math.random() * letras.length)]);
+            matricula.append(letras[(int) (Math.random() * letras.length)]);
             matricula.append('-');
-            matricula.append(letras[(int)(Math.random() * letras.length)]);
-            matricula.append(letras[(int)(Math.random() * letras.length)]);
+            matricula.append(letras[(int) (Math.random() * letras.length)]);
+            matricula.append(letras[(int) (Math.random() * letras.length)]);
 
-            v = new Veiculo(marca, modelo, new Date(), matricula.toString(), 
+            v = new Veiculo(marca, modelo, new Date(), matricula.toString(),
                     new BigInteger(16, new Random(System.currentTimeMillis())).toString(),
-                    cilindradas[(int)(Math.random() * cilindradas.length)],
+                    cilindradas[(int) (Math.random() * cilindradas.length)],
                     new BigInteger(8, new Random(System.currentTimeMillis())).toString(), cliente, "");
             cliente.adicionarVeiculoActual(v);
 
             veiculos.add(v);
         }
 
-        for(Veiculo ve : veiculos) {
+        //Reparacoes
+        Reparacao r = null;
+        LinhaReparacao l = null;
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 50000, "Descrição da Reparação", v);
+        l = new LinhaReparacao(joao, joao.getValorHora(), 2, r);
+        joao.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        l = new LinhaReparacao(antonio, antonio.getValorHora(), 2, r);
+        antonio.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        l = new LinhaReparacao(ricardo, ricardo.getValorHora(), 8, r);
+        ricardo.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        v.adicionarReparacao(r);
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 20000, "Descrição da Reparação", v);
+        l = new LinhaReparacao(joao, joao.getValorHora(), 1, r);
+        joao.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        v.adicionarReparacao(r);
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 10000, "Descrição da Reparação", v);
+        l = new LinhaReparacao(joao, joao.getValorHora(), 1, r);
+        joao.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        l = new LinhaReparacao(ricardo, ricardo.getValorHora(), 3, r);
+        ricardo.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        v.adicionarReparacao(r);
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 52000, "Descrição da Reparação", v);
+        l = new LinhaReparacao(antonio, antonio.getValorHora(), 2, r);
+        antonio.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        l = new LinhaReparacao(ricardo, ricardo.getValorHora(), 5, r);
+        ricardo.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        v.adicionarReparacao(r);
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 50340, "Descrição da Reparação", v);
+        l = new LinhaReparacao(antonio, antonio.getValorHora(), 4, r);
+        antonio.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        v.adicionarReparacao(r);
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 500, "Descrição da Reparação", v);
+        l = new LinhaReparacao(ricardo, ricardo.getValorHora(), 1, r);
+        ricardo.adicionarLinhaReparacao(l);
+        r.adicionarLinhaReparacao(l);
+        v.adicionarReparacao(r);
+
+        v = veiculos.get((int) (Math.random() * veiculos.size()));
+        r = new Reparacao(new Date(), "Descrição de avaria", 100, "Descrição da Reparação", v);
+        v.adicionarReparacao(r);
+
+        for (Veiculo ve : veiculos) {
             db.store(ve);
         }
-
-        //Reparacoes
-        //Reparacao r1 = new Reparacao(null, ficheiroDados, quilometros, ficheiroDados);
-        //Reparacao r2 = new Reparacao(null, ficheiroDados, quilometros, ficheiroDados);
-        //Reparacao r3 = new Reparacao(null, ficheiroDados, quilometros, ficheiroDados);
-        //Reparacao r4 = new Reparacao(null, ficheiroDados, quilometros, ficheiroDados);
-        //Reparacao r5 = new Reparacao(null, ficheiroDados, quilometros, ficheiroDados);
-
-        //Linha de Reparação
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
-        //LinhaReparacao l1 = new LinhaReparacao(joao, valorHora, horas);
 
         db.close();
     }
