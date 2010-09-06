@@ -21,7 +21,10 @@
 package net.sf.jautoinvoice;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -90,8 +93,25 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         }
 
         initComponents();
+        this.setPreferredSize(new Dimension(800, 600));
         desactivarInteraccao();
         anicard.show(jpPainelPrincipal, P_AUTENTICACAO);
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+
+        if (screen.getWidth() < 800 || screen.getHeight() < 600) {
+            ResourceBundle bundle = ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos");
+            JOptionPane.showMessageDialog(this, bundle.getString("mensagem.aviso.resolucao.texto"),
+                    bundle.getString("mensagem.aviso.resolucao.titulo"), JOptionPane.WARNING_MESSAGE);
+        }
+
+        setLocation((int) ((screen.getWidth() / 2) - (getWidth() / 2)),
+                (int) ((screen.getHeight() / 2) - (getHeight() / 2)));
+
+        super.setVisible(visible);
     }
 
     public Gestor getGestor() {
@@ -234,6 +254,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/principal"); // NOI18N
         setTitle(bundle.getString("JAutoInvoiceApp.title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(780, 580));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

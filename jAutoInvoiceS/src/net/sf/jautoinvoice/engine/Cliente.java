@@ -176,4 +176,9 @@ public class Cliente {
     public void setContribuinte(String contribuinte) {
         this.contribuinte = contribuinte;
     }
+
+    @Override
+    public String toString() {
+        return nome + " [" + contribuinte  + "]";
+    }
 }

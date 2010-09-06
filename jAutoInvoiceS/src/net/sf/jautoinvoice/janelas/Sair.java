@@ -20,6 +20,7 @@
  */
 package net.sf.jautoinvoice.janelas;
 
+import java.awt.event.KeyEvent;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
 
 public class Sair extends javax.swing.JDialog {
@@ -27,6 +28,14 @@ public class Sair extends javax.swing.JDialog {
     public Sair(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        setLocation(getParent().getX() + (getParent().getWidth() / 2) - (getWidth() / 2),
+                getParent().getY() + (getParent().getHeight() / 2) - (getHeight() / 2));
+
+        super.setVisible(visible);
     }
 
     /** This method is called from within the constructor to

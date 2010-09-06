@@ -350,7 +350,7 @@ public class PainelPecas extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfReferenciaFocusLost
 
     private void jtListaPecasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtListaPecasValueChanged
-         if (jtListaPecas.getLastSelectedPathComponent().toString().equalsIgnoreCase("Empregados")) {
+         if (jtListaPecas.getLastSelectedPathComponent().toString().equalsIgnoreCase("Peças")) {
             actual = null;
             //semPecaSeleccionado();
             //jbtnRemoverPeca.setEnabled(false);

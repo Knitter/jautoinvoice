@@ -20,16 +20,10 @@
  */
 package net.sf.jautoinvoice.paineis;
 
-import java.awt.Component;
 import java.util.List;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTree;
-import javax.swing.ListCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -109,7 +103,6 @@ public class PainelEmpregados extends javax.swing.JPanel {
     private void semEmpregadoSeleccionado() {
         jtfNome.setText("");
         jtfUtilizador.setText("");
-        //TODO: anular valor hora
         //jffValorHora.setValue("");
         jckbAdministrador.setSelected(false);
     }
@@ -162,6 +155,7 @@ public class PainelEmpregados extends javax.swing.JPanel {
         });
 
         jbtnRemoverEmpregado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user_delete.png"))); // NOI18N
+        jbtnRemoverEmpregado.setEnabled(false);
         jbtnRemoverEmpregado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnRemoverEmpregadoActionPerformed(evt);
@@ -217,7 +211,19 @@ public class PainelEmpregados extends javax.swing.JPanel {
 
         jpPainelDados.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Empregado"));
 
+        jtfNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfNomeFocusLost(evt);
+            }
+        });
+
         jlblNome.setText("Nome");
+
+        jffValorHora.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jffValorHoraFocusLost(evt);
+            }
+        });
 
         jlblMoeda.setText("€");
 
@@ -227,9 +233,26 @@ public class PainelEmpregados extends javax.swing.JPanel {
 
         jlblUtilizador.setText("Utilzador");
 
+        jtfUtilizador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfUtilizadorFocusLost(evt);
+            }
+        });
+
+        jpfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jpfPasswordFocusLost(evt);
+            }
+        });
+
         jlblPassword.setText("Password");
 
         jckbAdministrador.setText("Administrador");
+        jckbAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckbAdministradorActionPerformed(evt);
+            }
+        });
 
         jpReparacoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Reparações Efectuadas"));
 
@@ -344,6 +367,7 @@ public class PainelEmpregados extends javax.swing.JPanel {
         );
 
         jbtnGravar.setText("Gravar");
+        jbtnGravar.setEnabled(false);
         jbtnGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnGravarActionPerformed(evt);
@@ -461,6 +485,27 @@ public class PainelEmpregados extends javax.swing.JPanel {
             mostrarDadosEmpregado();
         }
     }//GEN-LAST:event_jtEmpregadosValueChanged
+
+    private void jtfNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNomeFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNomeFocusLost
+
+    private void jffValorHoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jffValorHoraFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jffValorHoraFocusLost
+
+    private void jtfUtilizadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfUtilizadorFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfUtilizadorFocusLost
+
+    private void jpfPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jpfPasswordFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpfPasswordFocusLost
+
+    private void jckbAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckbAdministradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jckbAdministradorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnAdicionarEmpregado;

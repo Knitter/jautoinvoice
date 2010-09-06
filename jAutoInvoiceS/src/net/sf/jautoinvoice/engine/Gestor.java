@@ -611,6 +611,7 @@ public final class Gestor {
                     }
 
                     //TODO: implementar comparacao de dadas
+                    //TODO: implementar obtenção de reparacções para determinado veiculo, cliente e empregado
                     return et.getDescricaoAvaria().matches(avaria);
                 }
             });
@@ -618,211 +619,166 @@ public final class Gestor {
 
         return null;
     }
-    /*
 
-     //TODO: implementar obtenção de reparacções para determinado veiculo, cliente e empregado
+    public Reparacao adicionarReparacao(Date data, String avaria, int quilometros,
+            String descReparacao, Veiculo veiculo) {
 
-    public Modelo adicionarModelo(String nome) {
-    if (autenticado != null) {
-    Modelo modelo = new Modelo(nome);
-    db.store(modelo);
-    return modelo;
-    }
+        if (autenticado != null) {
+            Reparacao reparacao = new Reparacao(data, avaria, quilometros, descReparacao, veiculo);
+            db.store(reparacao);
+            return reparacao;
+        }
 
-    return null;
-    }
-    /*
-    public boolean removerModelo(Modelo modelo) {
-    if (autenticado != null) {
-    modelo.setActivo(false);
-    db.store(modelo);
-    return true;
+        return null;
     }
 
-    return false;
-    }
-    /*
-    public boolean actualizarModelo(Modelo modelo) {
-    if (autenticado != null) {
-    db.store(modelo);
-    return true;
+    public boolean removerReparacao(Reparacao reparacao) {
+        if (autenticado != null) {
+            reparacao.setActivo(false);
+            db.store(reparacao);
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
-    }
-    /*    linha reparaca
+    public boolean actualizarReparacao(Reparacao reparacao) {
+        if (autenticado != null) {
+            db.store(reparacao);
+            return true;
+        }
 
-    public List<Modelo> listarTodosModelos() {
-    if (autenticado != null) {
-    return db.query(new Predicate<Modelo>() {
-
-    @Override
-    public boolean match(Modelo et) {
-    return et.isActivo();
-    }
-    });
+        return false;
     }
 
-    return null;
-    }
-    /*
-    public List<Modelo> procurarModelo(final String nome) {
-    if (autenticado != null) {
-    return db.query(new Predicate<Modelo>() {
+    public List<LinhaReparacao> listarTodasLinhasReparacao() {
+        if (autenticado != null) {
+            return db.query(LinhaReparacao.class);
+        }
 
-    @Override
-    public boolean match(Modelo et) {
-    return et.isActivo() && et.getNome().matches(nome);
-    }
-    });
+        return null;
     }
 
-    return null;
-    }
-    /*
-    public Modelo adicionarModelo(String nome) {
-    if (autenticado != null) {
-    Modelo modelo = new Modelo(nome);
-    db.store(modelo);
-    return modelo;
+    public LinhaReparacao adicionarLinhaReparacao(Empregado empregado, double valorHora,
+            int horas, Reparacao reparacao) {
+
+        if (autenticado != null) {
+            LinhaReparacao linha = new LinhaReparacao(empregado, valorHora, horas, reparacao);
+            db.store(linha);
+            return linha;
+        }
+
+        return null;
     }
 
-    return null;
-    }
-    /*
-    public boolean removerModelo(Modelo modelo) {
-    if (autenticado != null) {
-    modelo.setActivo(false);
-    db.store(modelo);
-    return true;
+    public boolean removerLinhaReparacao(LinhaReparacao linha) {
+        if (autenticado != null) {
+            db.delete(linha);
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
-    }
-    /*
-    public boolean actualizarModelo(Modelo modelo) {
-    if (autenticado != null) {
-    db.store(modelo);
-    return true;
+    public boolean actualizarLinhaReparacao(LinhaReparacao linha) {
+        if (autenticado != null) {
+            db.store(linha);
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
+    public List<Veiculo> listarTodosVeiculos() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Veiculo>() {
+
+                @Override
+                public boolean match(Veiculo et) {
+                    return et.isActivo();
+                }
+            });
+        }
+
+        return null;
     }
 
-    /*    veiculo
-    public List<Modelo> listarTodosModelos() {
-    if (autenticado != null) {
-    return db.query(new Predicate<Modelo>() {
+    public List<Veiculo> procurarVeiculo() {
+        if (autenticado != null) {
+            return db.query(new Predicate<Veiculo>() {
 
-    @Override
-    public boolean match(Modelo et) {
-    return et.isActivo();
-    }
-    });
-    }
+                @Override
+                public boolean match(Veiculo et) {
+                    return et.isActivo(); //TODO: filtrar
+                }
+            });
+        }
 
-    return null;
-    }
-    /*
-    public List<Modelo> procurarModelo(final String nome) {
-    if (autenticado != null) {
-    return db.query(new Predicate<Modelo>() {
-
-    @Override
-    public boolean match(Modelo et) {
-    return et.isActivo() && et.getNome().matches(nome);
-    }
-    });
+        return null;
     }
 
-    return null;
-    }
-    /*
-    public Modelo adicionarModelo(String nome) {
-    if (autenticado != null) {
-    Modelo modelo = new Modelo(nome);
-    db.store(modelo);
-    return modelo;
+    public Veiculo adicionarVeiculo(Marca marca, Modelo modelo, String matricula,
+            String chassis, String cilindrada, String motor, Cliente cliente,
+            String observacoes, Date registo) {
+
+        if (autenticado != null) {
+            Veiculo veiculo = new Veiculo(marca, modelo, registo, matricula, chassis,
+                    cilindrada, motor, cliente, observacoes);
+            db.store(veiculo);
+            return veiculo;
+        }
+
+        return null;
     }
 
-    return null;
-    }
-    /*
-    public boolean removerModelo(Modelo modelo) {
-    if (autenticado != null) {
-    modelo.setActivo(false);
-    db.store(modelo);
-    return true;
+    public boolean removerVeiculo(Veiculo veiculo) {
+        if (autenticado != null) {
+            veiculo.setActivo(false);
+            db.store(veiculo);
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
-    }
-    /*
-    public boolean actualizarModelo(Modelo modelo) {
-    if (autenticado != null) {
-    db.store(modelo);
-    return true;
+    public boolean actualizarVeiculo(Veiculo veiculo) {
+        if (autenticado != null) {
+            db.store(veiculo);
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
+    public List<Log> listarTodosLogs() {
+        if (autenticado != null) {
+            return db.query(Log.class);
+        }
+
+        return null;
     }
 
-    /*   log
-    public List<Modelo> listarTodosModelos() {
-    if (autenticado != null) {
-    return db.query(new Predicate<Modelo>() {
+    public List<Log> filtrarLogs(final Date data) {
+        if (autenticado != null) {
+            return db.query(new Predicate<Log>() {
 
-    @Override
-    public boolean match(Modelo et) {
-    return et.isActivo();
-    }
-    });
-    }
+                @Override
+                public boolean match(Log et) {
+                    return true;//TODO: aplicar filtro
+                }
+            });
+        }
 
-    return null;
-    }
-    /*
-    public List<Modelo> procurarModelo(final String nome) {
-    if (autenticado != null) {
-    return db.query(new Predicate<Modelo>() {
-
-    @Override
-    public boolean match(Modelo et) {
-    return et.isActivo() && et.getNome().matches(nome);
-    }
-    });
+        return null;
     }
 
-    return null;
-    }
-    /*
-    public Modelo adicionarModelo(String nome) {
-    if (autenticado != null) {
-    Modelo modelo = new Modelo(nome);
-    db.store(modelo);
-    return modelo;
-    }
+    public Log adicionarLog(String descricao) {
+        if (autenticado != null) {
+            Log log = new Log(descricao, new Date(), autenticado);
+            db.store(log);
+            return log;
+        }
 
-    return null;
+        return null;
     }
-    /*
-    public boolean removerModelo(Modelo modelo) {
-    if (autenticado != null) {
-    modelo.setActivo(false);
-    db.store(modelo);
-    return true;
-    }
-
-    return false;
-    }
-    /*
-    public boolean actualizarModelo(Modelo modelo) {
-    if (autenticado != null) {
-    db.store(modelo);
-    return true;
-    }
-
-    return false;
-    }
-     */
 }

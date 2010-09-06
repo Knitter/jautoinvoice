@@ -195,4 +195,9 @@ public class Veiculo {
             this.reparacoes = new ArrayList<Reparacao>(reparacoes);
         }
     }
+
+    @Override
+    public String toString() {
+        return marca.getNome() + " " + modelo.getNome();
+    }
 }

@@ -27,6 +27,14 @@ public class ErrosSugestoes extends javax.swing.JDialog {
         initComponents();
     }
 
+    @Override
+    public void setVisible(boolean visible) {
+        setLocation(getParent().getX() + (getParent().getWidth() / 2) - (getWidth() / 2),
+                getParent().getY() + (getParent().getHeight() / 2) - (getHeight() / 2));
+
+        super.setVisible(visible);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -125,7 +133,6 @@ public class ErrosSugestoes extends javax.swing.JDialog {
     private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton jbtnEnviar;
@@ -134,5 +141,4 @@ public class ErrosSugestoes extends javax.swing.JDialog {
     private javax.swing.JScrollPane jscpScroll;
     private javax.swing.JTextArea jtaTexto;
     // End of variables declaration//GEN-END:variables
-
 }

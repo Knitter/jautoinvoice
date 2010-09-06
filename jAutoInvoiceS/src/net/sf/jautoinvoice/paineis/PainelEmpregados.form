@@ -81,6 +81,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/net/sf/jautoinvoice/resources/x16/user_delete.png"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRemoverEmpregadoActionPerformed"/>
@@ -247,6 +248,9 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jtfNome">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfNomeFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlblNome">
                   <Properties>
@@ -254,6 +258,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="jffValorHora">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jffValorHoraFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlblMoeda">
                   <Properties>
@@ -278,8 +285,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfUtilizador">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfUtilizadorFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="jpfPassword">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jpfPasswordFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlblPassword">
                   <Properties>
@@ -290,6 +303,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Administrador"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckbAdministradorActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jpReparacoes">
                   <Properties>
@@ -377,6 +393,7 @@
             <Component class="javax.swing.JButton" name="jbtnGravar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gravar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnGravarActionPerformed"/>

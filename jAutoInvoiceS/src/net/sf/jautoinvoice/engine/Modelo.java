@@ -56,4 +56,9 @@ public class Modelo {
     public void setMarca(Marca marca) {
         this.marca = marca;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
