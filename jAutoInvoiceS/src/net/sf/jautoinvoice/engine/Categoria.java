@@ -23,9 +23,12 @@ package net.sf.jautoinvoice.engine;
 public class Categoria {
 
     private String nome;
+    private boolean activo;
 
     public Categoria(String nome) {
         this.nome = nome;
+
+        activo = true;
     }
 
     public String getNome() {
@@ -34,6 +37,14 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override

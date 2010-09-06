@@ -781,4 +781,29 @@ public final class Gestor {
 
         return null;
     }
+
+    public List<Categoria> listarTodasCategorias() {
+        return db.query(Categoria.class);
+    }
+
+    public Categoria adicionarCategoria(String nome) {
+
+        if (autenticado != null) {
+            Categoria categoria = new Categoria(nome);
+            db.store(categoria);
+            return categoria;
+        }
+
+        return null;
+    }
+
+    public boolean removerCategoria(Categoria categoria) {
+        if (autenticado != null) {
+            categoria.setActivo(false);
+            db.store(categoria);
+            return true;
+        }
+
+        return false;
+    }
 }

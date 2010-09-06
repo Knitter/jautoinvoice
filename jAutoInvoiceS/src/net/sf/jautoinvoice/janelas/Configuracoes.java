@@ -21,15 +21,52 @@
 package net.sf.jautoinvoice.janelas;
 
 import java.util.Properties;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import net.sf.jautoinvoice.JAutoInvoiceApp;
+import net.sf.jautoinvoice.engine.Categoria;
+import net.sf.jautoinvoice.engine.Gestor;
+import net.sf.jautoinvoice.engine.Iva;
+import net.sf.jautoinvoice.engine.Log;
+import net.sf.jautoinvoice.engine.Retencao;
 
 public class Configuracoes extends javax.swing.JDialog {
 
     private Properties configuracoes;
+    private DefaultListModel modeloIvas;
+    private DefaultListModel modeloRetencoes;
+    private DefaultListModel modeloCategorias;
+    private DefaultListModel modeloLogs;
+    private Gestor gestor;
+    //
+    private JFileChooser jfc;
+    private String caminho;
 
     public Configuracoes(java.awt.Frame parent, boolean modal, Properties configuracoes) {
         super(parent, modal);
+        gestor = ((JAutoInvoiceApp) parent).getGestor();
 
         this.configuracoes = configuracoes;
+
+        modeloIvas = new DefaultListModel();
+        for (Iva i : gestor.listarTodosIvas()) {
+            modeloIvas.addElement(i);
+        }
+
+        modeloRetencoes = new DefaultListModel();
+        for (Retencao r : gestor.listarTodasRetencoes()) {
+            modeloRetencoes.addElement(r);
+        }
+
+        modeloCategorias = new DefaultListModel();
+        for (Categoria c : gestor.listarTodasCategorias()) {
+            modeloCategorias.addElement(c);
+        }
+
+        modeloLogs = new DefaultListModel();
+        for (Log l : gestor.listarTodosLogs()) {
+            modeloLogs.addElement(l);
+        }
 
         initComponents();
     }
@@ -72,20 +109,32 @@ public class Configuracoes extends javax.swing.JDialog {
         jlblTipoAnimacao = new javax.swing.JLabel();
         jcbxTipoAnimacao = new javax.swing.JComboBox();
         jpTabIvas = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jpPainelIvas = new javax.swing.JPanel();
+        jlblDescricaoIva = new javax.swing.JLabel();
+        jtfNomeIva = new javax.swing.JTextField();
+        jlblValorIva = new javax.swing.JLabel();
+        jffValorIva = new javax.swing.JFormattedTextField();
+        jscpIvas = new javax.swing.JScrollPane();
+        jlstIvas = new javax.swing.JList();
+        jbtnAdicionarIva = new javax.swing.JButton();
+        jbtnRemoverIva = new javax.swing.JButton();
+        jpPainelRetencoes = new javax.swing.JPanel();
+        jtfNomeRetencao = new javax.swing.JTextField();
+        jffValorRetencao = new javax.swing.JFormattedTextField();
+        jlblDescricaoRetencao = new javax.swing.JLabel();
+        jlblValorRetencao = new javax.swing.JLabel();
+        jscpRetencoes = new javax.swing.JScrollPane();
+        jlstRetencoes = new javax.swing.JList();
+        jbtnAdicionarRetencao = new javax.swing.JButton();
+        jbtnRemoverRetencao = new javax.swing.JButton();
         jpTabCategorias = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jpPainelCategorias = new javax.swing.JPanel();
+        jlblNome = new javax.swing.JLabel();
+        jtfNome = new javax.swing.JTextField();
+        jbtnAdicionarCategoria = new javax.swing.JButton();
+        jbtnRemoverCategoria = new javax.swing.JButton();
+        jscpCategorias = new javax.swing.JScrollPane();
+        jlstCategorias = new javax.swing.JList();
         jpTabLogs = new javax.swing.JPanel();
         jpPainelLogs = new javax.swing.JPanel();
         jscpListaLogs = new javax.swing.JScrollPane();
@@ -137,30 +186,35 @@ public class Configuracoes extends javax.swing.JDialog {
             .add(jpPainelGeralLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jSeparator2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                    .add(jpPainelGeralLayout.createSequentialGroup()
+                        .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jSeparator2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                            .add(jpPainelGeralLayout.createSequentialGroup()
+                                .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jlblPassword)
+                                    .add(jlblPassword2))
+                                .add(18, 18, 18)
+                                .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                    .add(jpfPassword2)
+                                    .add(jpfPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 212, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .add(jpPainelGeralLayout.createSequentialGroup()
                         .add(jlblFicheiroDados)
                         .add(18, 18, 18)
-                        .add(jtfFicheiroDados, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                        .add(jtfFicheiroDados, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jbtnExplorar))
-                    .add(jpPainelGeralLayout.createSequentialGroup()
-                        .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jlblPassword)
-                            .add(jlblPassword2))
-                        .add(18, 18, 18)
-                        .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jpfPassword2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .add(jpfPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .add(jbtnExplorar)
+                        .add(40, 40, 40))))
         );
         jpPainelGeralLayout.setVerticalGroup(
             jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpPainelGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jlblFicheiroDados)
-                    .add(jtfFicheiroDados, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jlblFicheiroDados)
+                        .add(jtfFicheiroDados, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jbtnExplorar))
                 .add(18, 18, 18)
                 .add(jSeparator2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -203,15 +257,15 @@ public class Configuracoes extends javax.swing.JDialog {
                         .add(12, 12, 12)
                         .add(jlblTipoAnimacao)
                         .add(18, 18, 18)
-                        .add(jcbxTipoAnimacao, 0, 477, Short.MAX_VALUE))
+                        .add(jcbxTipoAnimacao, 0, 422, Short.MAX_VALUE))
                     .add(jpPainelAspectoLayout.createSequentialGroup()
                         .add(jckbUsarAnimacao)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
                     .add(jpPainelAspectoLayout.createSequentialGroup()
                         .add(jlblLookAndFeel)
                         .add(18, 18, 18)
-                        .add(jcbxLookAndFeel, 0, 518, Short.MAX_VALUE)))
+                        .add(jcbxLookAndFeel, 0, 463, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpPainelAspectoLayout.setVerticalGroup(
@@ -250,142 +304,224 @@ public class Configuracoes extends javax.swing.JDialog {
                 .add(jpPainelGeral, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpPainelAspecto, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jtpTabs.addTab(bundle.getString("Configuracoes.jpTabGeral.TabConstraints.tabTitle"), jpTabGeral); // NOI18N
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Configuracoes.jPanel3.border.title"))); // NOI18N
+        jpPainelIvas.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Configuracoes.jpPainelIvas.border.title"))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jlblDescricaoIva.setText(bundle.getString("Configuracoes.jlblDescricaoIva.text")); // NOI18N
+
+        jtfNomeIva.setText(bundle.getString("Configuracoes.jtfNomeIva.text")); // NOI18N
+
+        jlblValorIva.setText(bundle.getString("Configuracoes.jlblValorIva.text")); // NOI18N
+
+        jffValorIva.setText(bundle.getString("Configuracoes.jffValorIva.text")); // NOI18N
+
+        jlstIvas.setModel(modeloIvas);
+        jscpIvas.setViewportView(jlstIvas);
+
+        jbtnAdicionarIva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
+        jbtnAdicionarIva.setText(bundle.getString("Configuracoes.jbtnAdicionarIva.text")); // NOI18N
+        jbtnAdicionarIva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarIvaActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
+        jbtnRemoverIva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/delete.png"))); // NOI18N
+        jbtnRemoverIva.setText(bundle.getString("Configuracoes.jbtnRemoverIva.text")); // NOI18N
+        jbtnRemoverIva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverIvaActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jpPainelIvasLayout = new org.jdesktop.layout.GroupLayout(jpPainelIvas);
+        jpPainelIvas.setLayout(jpPainelIvasLayout);
+        jpPainelIvasLayout.setHorizontalGroup(
+            jpPainelIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelIvasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                .add(jpPainelIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jscpIvas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .add(jpPainelIvasLayout.createSequentialGroup()
+                        .add(jlblDescricaoIva)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jtfNomeIva, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 230, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jlblValorIva)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jffValorIva, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jbtnAdicionarIva)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jbtnRemoverIva)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 116, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Configuracoes.jPanel4.border.title"))); // NOI18N
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+        jpPainelIvasLayout.setVerticalGroup(
+            jpPainelIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelIvasLayout.createSequentialGroup()
+                .add(jpPainelIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jpPainelIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jlblDescricaoIva)
+                        .add(jtfNomeIva, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jlblValorIva)
+                        .add(jffValorIva, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jbtnAdicionarIva))
+                    .add(jbtnRemoverIva))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jscpIvas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
+        jpPainelRetencoes.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Configuracoes.jpPainelRetencoes.border.title"))); // NOI18N
+
+        jtfNomeRetencao.setText(bundle.getString("Configuracoes.jtfNomeRetencao.text")); // NOI18N
+
+        jffValorRetencao.setText(bundle.getString("Configuracoes.jffValorRetencao.text")); // NOI18N
+
+        jlblDescricaoRetencao.setText(bundle.getString("Configuracoes.jlblDescricaoRetencao.text")); // NOI18N
+
+        jlblValorRetencao.setText(bundle.getString("Configuracoes.jlblValorRetencao.text")); // NOI18N
+
+        jlstRetencoes.setModel(modeloRetencoes);
+        jscpRetencoes.setViewportView(jlstRetencoes);
+
+        jbtnAdicionarRetencao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
+        jbtnAdicionarRetencao.setText(bundle.getString("Configuracoes.jbtnAdicionarRetencao.text")); // NOI18N
+        jbtnAdicionarRetencao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarRetencaoActionPerformed(evt);
+            }
+        });
+
+        jbtnRemoverRetencao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/delete.png"))); // NOI18N
+        jbtnRemoverRetencao.setText(bundle.getString("Configuracoes.jbtnRemoverRetencao.text")); // NOI18N
+        jbtnRemoverRetencao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverRetencaoActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jpPainelRetencoesLayout = new org.jdesktop.layout.GroupLayout(jpPainelRetencoes);
+        jpPainelRetencoes.setLayout(jpPainelRetencoesLayout);
+        jpPainelRetencoesLayout.setHorizontalGroup(
+            jpPainelRetencoesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelRetencoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jpPainelRetencoesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jscpRetencoes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .add(jpPainelRetencoesLayout.createSequentialGroup()
+                        .add(jlblDescricaoRetencao)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jtfNomeRetencao, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 237, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jlblValorRetencao)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jffValorRetencao, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jbtnAdicionarRetencao)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jbtnRemoverRetencao)))
+                .addContainerGap())
+        );
+        jpPainelRetencoesLayout.setVerticalGroup(
+            jpPainelRetencoesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelRetencoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jpPainelRetencoesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jpPainelRetencoesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jtfNomeRetencao, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jlblDescricaoRetencao)
+                        .add(jlblValorRetencao)
+                        .add(jffValorRetencao, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jbtnAdicionarRetencao))
+                    .add(jbtnRemoverRetencao))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jscpRetencoes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout jpTabIvasLayout = new org.jdesktop.layout.GroupLayout(jpTabIvas);
         jpTabIvas.setLayout(jpTabIvasLayout);
         jpTabIvasLayout.setHorizontalGroup(
             jpTabIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jpTabIvasLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jpTabIvasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jpTabIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(jpTabIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jpPainelIvas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jpPainelRetencoes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpTabIvasLayout.setVerticalGroup(
             jpTabIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpTabIvasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jpPainelIvas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .add(jpPainelRetencoes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jtpTabs.addTab(bundle.getString("Configuracoes.jpTabIvas.TabConstraints.tabTitle"), jpTabIvas); // NOI18N
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Configuracoes.jPanel6.border.title"))); // NOI18N
+        jpPainelCategorias.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Configuracoes.jpPainelCategorias.border.title"))); // NOI18N
 
-        jLabel1.setText(bundle.getString("Configuracoes.jLabel1.text")); // NOI18N
+        jlblNome.setText(bundle.getString("Configuracoes.jlblNome.text")); // NOI18N
 
-        jTextField1.setText(bundle.getString("Configuracoes.jTextField1.text")); // NOI18N
+        jtfNome.setText(bundle.getString("Configuracoes.jtfNome.text")); // NOI18N
 
-        jButton1.setText(bundle.getString("Configuracoes.jButton1.text")); // NOI18N
-
-        jButton2.setText(bundle.getString("Configuracoes.jButton2.text")); // NOI18N
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jbtnAdicionarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
+        jbtnAdicionarCategoria.setText(bundle.getString("Configuracoes.jbtnAdicionarCategoria.text")); // NOI18N
+        jbtnAdicionarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarCategoriaActionPerformed(evt);
+            }
         });
-        jScrollPane3.setViewportView(jList1);
 
-        org.jdesktop.layout.GroupLayout jPanel6Layout = new org.jdesktop.layout.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel6Layout.createSequentialGroup()
+        jbtnRemoverCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/delete.png"))); // NOI18N
+        jbtnRemoverCategoria.setText(bundle.getString("Configuracoes.jbtnRemoverCategoria.text")); // NOI18N
+        jbtnRemoverCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverCategoriaActionPerformed(evt);
+            }
+        });
+
+        jlstCategorias.setModel(modeloCategorias);
+        jlstCategorias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jscpCategorias.setViewportView(jlstCategorias);
+
+        org.jdesktop.layout.GroupLayout jpPainelCategoriasLayout = new org.jdesktop.layout.GroupLayout(jpPainelCategorias);
+        jpPainelCategorias.setLayout(jpPainelCategoriasLayout);
+        jpPainelCategoriasLayout.setHorizontalGroup(
+            jpPainelCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelCategoriasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-                    .add(jPanel6Layout.createSequentialGroup()
-                        .add(jLabel1)
+                .add(jpPainelCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jscpCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .add(jpPainelCategoriasLayout.createSequentialGroup()
+                        .add(jlblNome)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jtfNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(18, 18, 18)
-                        .add(jButton1)
+                        .add(jbtnAdicionarCategoria)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton2)))
+                        .add(jbtnRemoverCategoria)))
                 .addContainerGap())
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel6Layout.createSequentialGroup()
+        jpPainelCategoriasLayout.setVerticalGroup(
+            jpPainelCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jpPainelCategoriasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel1)
-                    .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButton1)
-                    .add(jButton2))
+                .add(jpPainelCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jlblNome)
+                    .add(jtfNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jbtnAdicionarCategoria)
+                    .add(jbtnRemoverCategoria))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .add(jscpCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -395,35 +531,49 @@ public class Configuracoes extends javax.swing.JDialog {
             jpTabCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpTabCategoriasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jpPainelCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpTabCategoriasLayout.setVerticalGroup(
             jpTabCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpTabCategoriasLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jpPainelCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jtpTabs.addTab(bundle.getString("Configuracoes.jpTabCategorias.TabConstraints.tabTitle"), jpTabCategorias); // NOI18N
 
-        jlstListaLogs.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jlstListaLogs.setModel(modeloLogs);
         jscpListaLogs.setViewportView(jlstListaLogs);
 
         jtaDadosLog.setColumns(20);
         jtaDadosLog.setRows(5);
         jscpDadosLog.setViewportView(jtaDadosLog);
 
+        jbtnLimparLogs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/bin.png"))); // NOI18N
         jbtnLimparLogs.setText(bundle.getString("Configuracoes.jbtnLimparLogs.text")); // NOI18N
+        jbtnLimparLogs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLimparLogsActionPerformed(evt);
+            }
+        });
 
+        jbtExportarLogs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/box_down.png"))); // NOI18N
         jbtExportarLogs.setText(bundle.getString("Configuracoes.jbtExportarLogs.text")); // NOI18N
+        jbtExportarLogs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtExportarLogsActionPerformed(evt);
+            }
+        });
 
+        jbtnAplicarFiltroDatas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/find.png"))); // NOI18N
         jbtnAplicarFiltroDatas.setText(bundle.getString("Configuracoes.jbtnAplicarFiltroDatas.text")); // NOI18N
+        jbtnAplicarFiltroDatas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAplicarFiltroDatasActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jpPainelLogsLayout = new org.jdesktop.layout.GroupLayout(jpPainelLogs);
         jpPainelLogs.setLayout(jpPainelLogsLayout);
@@ -431,9 +581,9 @@ public class Configuracoes extends javax.swing.JDialog {
             jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpPainelLogsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jpPainelLogsLayout.createSequentialGroup()
-                        .add(jdcFiltroDatas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jpPainelLogsLayout.createSequentialGroup()
+                        .add(jdcFiltroDatas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbtnAplicarFiltroDatas))
                     .add(jscpListaLogs, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 214, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -443,7 +593,7 @@ public class Configuracoes extends javax.swing.JDialog {
                         .add(jbtExportarLogs)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbtnLimparLogs))
-                    .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+                    .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpPainelLogsLayout.setVerticalGroup(
@@ -452,13 +602,13 @@ public class Configuracoes extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jpPainelLogsLayout.createSequentialGroup()
-                        .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                        .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jbtnAplicarFiltroDatas)
                             .add(jdcFiltroDatas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jscpListaLogs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
+                        .add(jscpListaLogs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
                     .add(jpPainelLogsLayout.createSequentialGroup()
-                        .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                        .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jbtnLimparLogs)
@@ -489,13 +639,13 @@ public class Configuracoes extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jtpTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(548, Short.MAX_VALUE)
+                .addContainerGap(493, Short.MAX_VALUE)
                 .add(jbtnGravar)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jbtnCancelar)
                 .addContainerGap())
+            .add(jtpTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -516,7 +666,13 @@ public class Configuracoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jckbUsarAnimacaoActionPerformed
 
     private void jbtnExplorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExplorarActionPerformed
-        // TODO add your handling code here:
+        if (jfc == null) {
+            jfc = new JFileChooser();
+            jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        }
+        if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            caminho = jfc.getSelectedFile().getAbsolutePath();
+        }
     }//GEN-LAST:event_jbtnExplorarActionPerformed
 
     private void jbtnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGravarActionPerformed
@@ -526,51 +682,111 @@ public class Configuracoes extends javax.swing.JDialog {
     private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnCancelarActionPerformed
+
+    private void jbtnAplicarFiltroDatasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAplicarFiltroDatasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAplicarFiltroDatasActionPerformed
+
+    private void jbtExportarLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtExportarLogsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtExportarLogsActionPerformed
+
+    private void jbtnLimparLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimparLogsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnLimparLogsActionPerformed
+
+    private void jbtnAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAdicionarCategoriaActionPerformed
+
+    private void jbtnRemoverCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverCategoriaActionPerformed
+        if (jlstCategorias.getSelectedIndex() >= 0) {
+            if (gestor.removerCategoria((Categoria) jlstCategorias.getSelectedValue())) {
+                modeloCategorias.remove(jlstCategorias.getSelectedIndex());
+            }
+        }
+    }//GEN-LAST:event_jbtnRemoverCategoriaActionPerformed
+
+    private void jbtnAdicionarIvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarIvaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAdicionarIvaActionPerformed
+
+    private void jbtnRemoverIvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverIvaActionPerformed
+        if (jlstIvas.getSelectedIndex() >= 0) {
+            if (gestor.removerIva((Iva) jlstIvas.getSelectedValue())) {
+                modeloIvas.remove(jlstIvas.getSelectedIndex());
+            }
+        }
+    }//GEN-LAST:event_jbtnRemoverIvaActionPerformed
+
+    private void jbtnAdicionarRetencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarRetencaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAdicionarRetencaoActionPerformed
+
+    private void jbtnRemoverRetencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverRetencaoActionPerformed
+        if (jlstRetencoes.getSelectedIndex() >= 0) {
+            if (gestor.removerRetencao((Retencao) jlstRetencoes.getSelectedValue())) {
+                modeloRetencoes.remove(jlstRetencoes.getSelectedIndex());
+            }
+        }
+    }//GEN-LAST:event_jbtnRemoverRetencaoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbtExportarLogs;
+    private javax.swing.JButton jbtnAdicionarCategoria;
+    private javax.swing.JButton jbtnAdicionarIva;
+    private javax.swing.JButton jbtnAdicionarRetencao;
     private javax.swing.JButton jbtnAplicarFiltroDatas;
     private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton jbtnExplorar;
     private javax.swing.JButton jbtnGravar;
     private javax.swing.JButton jbtnLimparLogs;
+    private javax.swing.JButton jbtnRemoverCategoria;
+    private javax.swing.JButton jbtnRemoverIva;
+    private javax.swing.JButton jbtnRemoverRetencao;
     private javax.swing.JComboBox jcbxLookAndFeel;
     private javax.swing.JComboBox jcbxTipoAnimacao;
     private javax.swing.JCheckBox jckbUsarAnimacao;
     private com.toedter.calendar.JDateChooser jdcFiltroDatas;
+    private javax.swing.JFormattedTextField jffValorIva;
+    private javax.swing.JFormattedTextField jffValorRetencao;
+    private javax.swing.JLabel jlblDescricaoIva;
+    private javax.swing.JLabel jlblDescricaoRetencao;
     private javax.swing.JLabel jlblFicheiroDados;
     private javax.swing.JLabel jlblLookAndFeel;
+    private javax.swing.JLabel jlblNome;
     private javax.swing.JLabel jlblPassword;
     private javax.swing.JLabel jlblPassword2;
     private javax.swing.JLabel jlblTipoAnimacao;
+    private javax.swing.JLabel jlblValorIva;
+    private javax.swing.JLabel jlblValorRetencao;
+    private javax.swing.JList jlstCategorias;
+    private javax.swing.JList jlstIvas;
     private javax.swing.JList jlstListaLogs;
+    private javax.swing.JList jlstRetencoes;
     private javax.swing.JPanel jpPainelAspecto;
+    private javax.swing.JPanel jpPainelCategorias;
     private javax.swing.JPanel jpPainelGeral;
+    private javax.swing.JPanel jpPainelIvas;
     private javax.swing.JPanel jpPainelLogs;
+    private javax.swing.JPanel jpPainelRetencoes;
     private javax.swing.JPanel jpTabCategorias;
     private javax.swing.JPanel jpTabGeral;
     private javax.swing.JPanel jpTabIvas;
     private javax.swing.JPanel jpTabLogs;
     private javax.swing.JPasswordField jpfPassword;
     private javax.swing.JPasswordField jpfPassword2;
+    private javax.swing.JScrollPane jscpCategorias;
     private javax.swing.JScrollPane jscpDadosLog;
+    private javax.swing.JScrollPane jscpIvas;
     private javax.swing.JScrollPane jscpListaLogs;
+    private javax.swing.JScrollPane jscpRetencoes;
     private javax.swing.JTextArea jtaDadosLog;
     private javax.swing.JTextField jtfFicheiroDados;
+    private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfNomeIva;
+    private javax.swing.JTextField jtfNomeRetencao;
     private javax.swing.JTabbedPane jtpTabs;
     // End of variables declaration//GEN-END:variables
 }
