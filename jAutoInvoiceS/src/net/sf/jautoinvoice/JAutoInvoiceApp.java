@@ -47,6 +47,7 @@ import net.sf.jautoinvoice.paineis.PainelAutenticacao;
 import net.sf.jautoinvoice.paineis.PainelClientes;
 import net.sf.jautoinvoice.paineis.PainelEmpregados;
 import net.sf.jautoinvoice.paineis.PainelFacturas;
+import net.sf.jautoinvoice.paineis.PainelMarcacoes;
 import net.sf.jautoinvoice.paineis.PainelPecas;
 import net.sf.jautoinvoice.paineis.PainelReparacoes;
 import net.sf.jautoinvoice.paineis.PainelVeiculos;
@@ -171,6 +172,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
             jpPainelPrincipal.add(new PainelVeiculos(this), P_VEICULOS);
             jpPainelPrincipal.add(new PainelClientes(this), P_CLIENTES);
             jpPainelPrincipal.add(new PainelPecas(this), P_PECAS);
+            jpPainelPrincipal.add(new PainelMarcacoes(this), P_MARCACOES);
             jpPainelPrincipal.add(new PainelEmpregados(this), P_EMPREGADOS);
 
             jpPainelPrincipal.validate();
@@ -242,14 +244,16 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jpPainelPrincipal = new javax.swing.JPanel();
         jmbBarraMenu = new javax.swing.JMenuBar();
         jmApp = new javax.swing.JMenu();
+        jmiImportacao = new javax.swing.JMenuItem();
+        jmiExportacao = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jmiSair = new javax.swing.JMenuItem();
-        jmAjuda = new javax.swing.JMenu();
-        jmiAjuda = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jmiActualizacoes = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        jmiAjuda = new javax.swing.JMenuItem();
         jmiSugestoes = new javax.swing.JMenuItem();
         jmiSobre = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        jmiSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/principal"); // NOI18N
@@ -453,7 +457,57 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         getContentPane().add(jpPainelPrincipal, java.awt.BorderLayout.CENTER);
 
         jmApp.setText(bundle.getString("JAutoInvoiceApp.jmApp.text")); // NOI18N
+
+        jmiImportacao.setText(bundle.getString("JAutoInvoiceApp.jmiImportacao.text")); // NOI18N
+        jmiImportacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiImportacaoActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiImportacao);
+
+        jmiExportacao.setText(bundle.getString("JAutoInvoiceApp.jmiExportacao.text")); // NOI18N
+        jmiExportacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiExportacaoActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiExportacao);
         jmApp.add(jSeparator2);
+
+        jmiActualizacoes.setText(bundle.getString("JAutoInvoiceApp.jmiActualizacoes.text")); // NOI18N
+        jmiActualizacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiActualizacoesActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiActualizacoes);
+        jmApp.add(jSeparator8);
+
+        jmiAjuda.setText(bundle.getString("JAutoInvoiceApp.jmiAjuda.text")); // NOI18N
+        jmiAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAjudaActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiAjuda);
+
+        jmiSugestoes.setText(bundle.getString("JAutoInvoiceApp.jmiSugestoes.text")); // NOI18N
+        jmiSugestoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSugestoesActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiSugestoes);
+
+        jmiSobre.setText(bundle.getString("JAutoInvoiceApp.jmiSobre.text")); // NOI18N
+        jmiSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSobreActionPerformed(evt);
+            }
+        });
+        jmApp.add(jmiSobre);
+        jmApp.add(jSeparator9);
 
         jmiSair.setText(bundle.getString("JAutoInvoiceApp.jmiSair.text")); // NOI18N
         jmiSair.addActionListener(new java.awt.event.ActionListener() {
@@ -464,43 +518,6 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         jmApp.add(jmiSair);
 
         jmbBarraMenu.add(jmApp);
-
-        jmAjuda.setText(bundle.getString("JAutoInvoiceApp.jmAjuda.text")); // NOI18N
-
-        jmiAjuda.setText(bundle.getString("JAutoInvoiceApp.jmiAjuda.text")); // NOI18N
-        jmiAjuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiAjudaActionPerformed(evt);
-            }
-        });
-        jmAjuda.add(jmiAjuda);
-        jmAjuda.add(jSeparator1);
-
-        jmiActualizacoes.setText(bundle.getString("JAutoInvoiceApp.jmiActualizacoes.text")); // NOI18N
-        jmiActualizacoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiActualizacoesActionPerformed(evt);
-            }
-        });
-        jmAjuda.add(jmiActualizacoes);
-
-        jmiSugestoes.setText(bundle.getString("JAutoInvoiceApp.jmiSugestoes.text")); // NOI18N
-        jmiSugestoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiSugestoesActionPerformed(evt);
-            }
-        });
-        jmAjuda.add(jmiSugestoes);
-
-        jmiSobre.setText(bundle.getString("JAutoInvoiceApp.jmiSobre.text")); // NOI18N
-        jmiSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiSobreActionPerformed(evt);
-            }
-        });
-        jmAjuda.add(jmiSobre);
-
-        jmbBarraMenu.add(jmAjuda);
 
         setJMenuBar(jmbBarraMenu);
 
@@ -591,7 +608,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiSugestoesActionPerformed
 
     private void jmiAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAjudaActionPerformed
-        throw new UnsupportedOperationException("Por implementar");
+        JOptionPane.showMessageDialog(this, "Por Implementar", "Funcionalidade", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jmiAjudaActionPerformed
 
     private void jmiSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSobreActionPerformed
@@ -602,6 +619,14 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jmiSobreActionPerformed
+
+    private void jmiImportacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiImportacaoActionPerformed
+        JOptionPane.showMessageDialog(this, "Por Implementar", "Funcionalidade", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jmiImportacaoActionPerformed
+
+    private void jmiExportacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExportacaoActionPerformed
+        JOptionPane.showMessageDialog(this, "Por Implementar", "Funcionalidade", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jmiExportacaoActionPerformed
 
     public static void main(String args[]) {
         EventQueue.invokeLater(new Runnable() {
@@ -657,13 +682,14 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JButton jbtnClientes;
     private javax.swing.JButton jbtnConfiguracoes;
     private javax.swing.JButton jbtnEmpregados;
@@ -677,11 +703,12 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
     private javax.swing.JButton jbtnReparacoes;
     private javax.swing.JButton jbtnSair;
     private javax.swing.JButton jbtnVeiculos;
-    private javax.swing.JMenu jmAjuda;
     private javax.swing.JMenu jmApp;
     private javax.swing.JMenuBar jmbBarraMenu;
     private javax.swing.JMenuItem jmiActualizacoes;
     private javax.swing.JMenuItem jmiAjuda;
+    private javax.swing.JMenuItem jmiExportacao;
+    private javax.swing.JMenuItem jmiImportacao;
     private javax.swing.JMenuItem jmiSair;
     private javax.swing.JMenuItem jmiSobre;
     private javax.swing.JMenuItem jmiSugestoes;

@@ -34,6 +34,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import net.sf.jautoinvoice.engine.Categoria;
 import net.sf.jautoinvoice.engine.Cliente;
 import net.sf.jautoinvoice.engine.Empregado;
 import net.sf.jautoinvoice.engine.Iva;
@@ -217,6 +218,18 @@ public class JAutoInvoiceDebugPopulate {
         clientes.add(new Cliente("Rita Pedro", "", "", "", "929590234", null, "rita@email.com", null, "", "123432123"));
         clientes.add(new Cliente("João Maria", "", "", "", "587902123", "234999455", "joao@email.com", null, "", "234412223"));
 
+        //categorias
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        categorias.add(new Categoria("Ligeiro Passageiros"));
+        categorias.add(new Categoria("Ligeiro Misto"));
+        categorias.add(new Categoria("Ligeiro Comercial"));
+        categorias.add(new Categoria("Ligeiro Passageiros"));
+        categorias.add(new Categoria("Ligeiro Misto"));
+        categorias.add(new Categoria("Ligeiro Comercial"));
+        categorias.add(new Categoria("Motociclo"));
+        categorias.add(new Categoria("Ciclomotor"));
+        categorias.add(new Categoria("Triciclo"));
+
         //Veiculos
         ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
         Veiculo v = null;
@@ -246,7 +259,8 @@ public class JAutoInvoiceDebugPopulate {
             v = new Veiculo(marca, modelo, new Date(), matricula.toString(),
                     new BigInteger(16, new Random(System.currentTimeMillis())).toString(),
                     cilindradas[(int) (Math.random() * cilindradas.length)],
-                    new BigInteger(8, new Random(System.currentTimeMillis())).toString(), cliente, "");
+                    new BigInteger(8, new Random(System.currentTimeMillis())).toString(), cliente, "",
+                    categorias.get((int) (Math.random() * categorias.size())));
             cliente.adicionarVeiculoActual(v);
 
             veiculos.add(v);

@@ -103,6 +103,9 @@
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jtVeiculosValueChanged"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jtVeiculos.setCellRenderer(renderer);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -167,9 +170,9 @@
                                                   <Component id="jlblMarca" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jcbxMarca" max="32767" attributes="1"/>
-                                                  <Component id="jcbxModelo" alignment="1" pref="255" max="32767" attributes="1"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jcbxMarca" pref="273" max="32767" attributes="1"/>
+                                                  <Component id="jcbxModelo" alignment="0" pref="273" max="32767" attributes="1"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -177,24 +180,33 @@
                                                   <Component id="jlblCilindrada" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jlblNrChassis" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jlblNrMotor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="Registo" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jlblMatricula" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="Registo" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jtfNrChassis" alignment="0" pref="255" max="32767" attributes="0"/>
-                                                  <Component id="jcbxDono" alignment="0" max="32767" attributes="1"/>
-                                                  <Component id="jtfMatricula" alignment="0" max="32767" attributes="1"/>
-                                                  <Component id="jtfNrMotor" alignment="0" pref="255" max="32767" attributes="1"/>
-                                                  <Component id="jTextField5" alignment="0" min="-2" pref="134" max="-2" attributes="1"/>
-                                                  <Component id="jtfCilindrada" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                                  <Component id="jdcRegisto" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                                      <Component id="jtfNrChassis" alignment="0" pref="255" max="32767" attributes="0"/>
+                                                      <Component id="jtfMatricula" alignment="0" max="32767" attributes="1"/>
+                                                      <Component id="jtfNrMotor" alignment="0" pref="255" max="32767" attributes="1"/>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="jtfCilindrada" min="-2" pref="63" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="jlblCategoria" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="jcbxCategoria" pref="120" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="jcbxDono" alignment="0" pref="303" max="32767" attributes="1"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
                                       <Component id="jlblDono" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   <Component id="jbtnAdicionarCliente" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -223,6 +235,8 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtfCilindrada" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jlblCilindrada" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jcbxCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -230,9 +244,9 @@
                               <Component id="jlblNrMotor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Registo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="Registo" min="-2" max="-2" attributes="0"/>
+                              <Component id="jdcRegisto" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -240,10 +254,12 @@
                               <Component id="jlblMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jcbxDono" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlblDono" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbtnAdicionarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jcbxDono" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlblDono" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jbtnAdicionarCliente" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jpPainelObservacoes" min="-2" max="-2" attributes="0"/>
@@ -262,15 +278,18 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jcbxMarca">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="modeloMarcas" type="code"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbxMarcaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jcbxModelo">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="modeloModelos" type="code"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -298,11 +317,6 @@
                 <Component class="javax.swing.JLabel" name="jlblNrMotor">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nr. Motor"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextField5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&lt;Substituir por DatePicker&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Registo">
@@ -350,7 +364,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jscpObservacoes" pref="397" max="32767" attributes="0"/>
+                              <Component id="jscpObservacoes" pref="403" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -398,9 +412,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jscpDonosAntigos" alignment="0" pref="397" max="32767" attributes="0"/>
+                                  <Component id="jscpDonosAntigos" alignment="0" pref="403" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jcbxDonosAntigos" pref="325" max="32767" attributes="0"/>
+                                      <Component id="jcbxDonosAntigos" pref="331" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbtnAdicionarDonoAntigo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -466,6 +480,20 @@
                     </Container>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JLabel" name="jlblCategoria">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Categoria"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jcbxCategoria">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="jdcRegisto">
+                </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="jbtnGravar">

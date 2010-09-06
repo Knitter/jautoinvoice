@@ -719,11 +719,11 @@ public final class Gestor {
 
     public Veiculo adicionarVeiculo(Marca marca, Modelo modelo, String matricula,
             String chassis, String cilindrada, String motor, Cliente cliente,
-            String observacoes, Date registo) {
+            String observacoes, Date registo, Categoria categoria) {
 
         if (autenticado != null) {
             Veiculo veiculo = new Veiculo(marca, modelo, registo, matricula, chassis,
-                    cilindrada, motor, cliente, observacoes);
+                    cilindrada, motor, cliente, observacoes, categoria);
             db.store(veiculo);
             return veiculo;
         }

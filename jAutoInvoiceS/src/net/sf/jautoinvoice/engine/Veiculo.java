@@ -38,11 +38,12 @@ public class Veiculo {
     private ArrayList<Reparacao> reparacoes;
     private Cliente dono;
     private Date dataAdicao;
+    private Categoria categoria;
     private boolean activo;
 
     public Veiculo(Marca marca, Modelo modelo, Date registo, String matricula,
             String nrChassis, String cilindrada, String nrMotor, Cliente dono,
-            String observacoes) {
+            String observacoes, Categoria categoria) {
 
         this.marca = marca;
         this.modelo = modelo;
@@ -53,6 +54,7 @@ public class Veiculo {
         this.nrMotor = nrMotor;
         this.dono = dono;
         this.observacoes = observacoes;
+        this.categoria = categoria;
 
         antigosDonos = new ArrayList<Cliente>();
         reparacoes = new ArrayList<Reparacao>();
@@ -194,6 +196,14 @@ public class Veiculo {
         if (reparacoes != null) {
             this.reparacoes = new ArrayList<Reparacao>(reparacoes);
         }
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override

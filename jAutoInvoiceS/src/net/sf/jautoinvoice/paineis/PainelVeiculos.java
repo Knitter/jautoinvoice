@@ -20,11 +20,17 @@
  */
 package net.sf.jautoinvoice.paineis;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
+import net.sf.jautoinvoice.engine.Cliente;
+import net.sf.jautoinvoice.engine.Marca;
+import net.sf.jautoinvoice.engine.Modelo;
 import net.sf.jautoinvoice.engine.Veiculo;
 
 public class PainelVeiculos extends javax.swing.JPanel {
@@ -35,12 +41,26 @@ public class PainelVeiculos extends javax.swing.JPanel {
     private DefaultTreeCellRenderer renderer;
     private DefaultMutableTreeNode root;
     private boolean pesquisa;
+    private DefaultComboBoxModel modeloComboDonosAntigos;
+    private DefaultListModel modeloListaDonosAntigos;
+    private DefaultComboBoxModel modeloMarcas;
+    private DefaultComboBoxModel modeloModelos;
 
     public PainelVeiculos(JAutoInvoiceApp app) {
         this.app = app;
 
         actual = null;
         pesquisa = false;
+
+        modeloComboDonosAntigos = new DefaultComboBoxModel();
+        modeloListaDonosAntigos = new DefaultListModel();
+        modeloMarcas = new DefaultComboBoxModel();
+        for (Marca m : app.getGestor().listarTodasMarcas()) {
+            modeloMarcas.addElement(m);
+        }
+
+        modeloModelos = new DefaultComboBoxModel();
+        actualizarComboModelos();
 
         root = new DefaultMutableTreeNode("Veículos");
 
@@ -57,13 +77,49 @@ public class PainelVeiculos extends javax.swing.JPanel {
 
     private void processarListaVeiculos() {
         DefaultMutableTreeNode elem;
-        //for (Veiculo v : app.getGestor().listarTodosVeiculos()) {
-        //    elem = new DefaultMutableTreeNode(v);
-        //    root.add(elem);
-        //}
+        for (Veiculo v : app.getGestor().listarTodosVeiculos()) {
+            elem = new DefaultMutableTreeNode(v);
+            root.add(elem);
+        }
+    }
+
+    private void actualizarListaDonosAntigos() {
+        modeloListaDonosAntigos.removeAllElements();
+        for (Cliente c : actual.getAntigosDonos()) {
+            modeloListaDonosAntigos.addElement(c);
+        }
+    }
+
+    private void actualizarComboModelos() {
+        if (modeloModelos.getSize() > 0) {
+            modeloModelos.removeAllElements();
+        }
+
+        for (Modelo m : ((Marca) modeloMarcas.getSelectedItem()).getModelos()) {
+            modeloModelos.addElement(m);
+        }
+    }
+
+    private void actualizarComboDonosAntigos() {
+        for (Cliente c : app.getGestor().listarTodosClientes()) {
+            if (c != actual.getDono() && !actual.getAntigosDonos().contains(c)) {
+                modeloComboDonosAntigos.addElement(c);
+            }
+        }
     }
 
     private void mostrarDadosVeiculo() {
+        jdcRegisto.setDate(actual.getRegisto());
+        jcbxCategoria.setSelectedItem(actual.getCategoria());
+        jcbxDono.setSelectedItem(actual.getDono());
+        jcbxMarca.setSelectedItem(actual.getMarca());
+        actualizarListaDonosAntigos();
+        actualizarComboDonosAntigos();
+        jtaObservacoes.setText(actual.getObservacoes());
+        jtfCilindrada.setText(actual.getCilindrada());
+        jtfMatricula.setText(actual.getMatricula());
+        jtfNrChassis.setText(actual.getNrChassis());
+        jtfNrMotor.setText(actual.getNrMotor());
     }
 
     /** This method is called from within the constructor to
@@ -94,7 +150,6 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jtfCilindrada = new javax.swing.JTextField();
         jtfNrMotor = new javax.swing.JTextField();
         jlblNrMotor = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         Registo = new javax.swing.JLabel();
         jtfMatricula = new javax.swing.JTextField();
         jlblMatricula = new javax.swing.JLabel();
@@ -110,6 +165,9 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jbtnAdicionarDonoAntigo = new javax.swing.JButton();
         jscpDonosAntigos = new javax.swing.JScrollPane();
         jlstDonosAntigos = new javax.swing.JList();
+        jlblCategoria = new javax.swing.JLabel();
+        jcbxCategoria = new javax.swing.JComboBox();
+        jdcRegisto = new com.toedter.calendar.JDateChooser();
         jbtnGravar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -121,6 +179,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jbtnAdicionarVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/car_add.png"))); // NOI18N
 
         jtVeiculos.setModel(new DefaultTreeModel(root));
+        jtVeiculos.setCellRenderer(renderer);
         jtVeiculos.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jtVeiculosValueChanged(evt);
@@ -163,6 +222,15 @@ public class PainelVeiculos extends javax.swing.JPanel {
 
         jlblMarca.setText("Marca");
 
+        jcbxMarca.setModel(modeloMarcas);
+        jcbxMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbxMarcaActionPerformed(evt);
+            }
+        });
+
+        jcbxModelo.setModel(modeloModelos);
+
         jlblModelo.setText("Modelo");
 
         jlblNrChassis.setText("Nr. Chassis");
@@ -170,8 +238,6 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jlblCilindrada.setText("Cilidranda");
 
         jlblNrMotor.setText("Nr. Motor");
-
-        jTextField5.setText("<Substituir por DatePicker>");
 
         Registo.setText("Registo");
 
@@ -193,7 +259,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
             jpPainelObservacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelObservacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpPainelObservacoesLayout.setVerticalGroup(
@@ -219,9 +285,9 @@ public class PainelVeiculos extends javax.swing.JPanel {
             .addGroup(jpDonosAntigosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpDonosAntigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jscpDonosAntigos, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                    .addComponent(jscpDonosAntigos, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                     .addGroup(jpDonosAntigosLayout.createSequentialGroup()
-                        .addComponent(jcbxDonosAntigos, 0, 325, Short.MAX_VALUE)
+                        .addComponent(jcbxDonosAntigos, 0, 331, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnAdicionarDonoAntigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -240,6 +306,8 @@ public class PainelVeiculos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jlblCategoria.setText("Categoria");
+
         javax.swing.GroupLayout jpPainelDadosLayout = new javax.swing.GroupLayout(jpPainelDados);
         jpPainelDados.setLayout(jpPainelDadosLayout);
         jpPainelDadosLayout.setHorizontalGroup(
@@ -257,27 +325,34 @@ public class PainelVeiculos extends javax.swing.JPanel {
                                         .addComponent(jlblModelo)
                                         .addComponent(jlblMarca))
                                     .addGap(38, 38, 38)
-                                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jcbxMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jcbxModelo, 0, 255, Short.MAX_VALUE)))
+                                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jcbxMarca, 0, 273, Short.MAX_VALUE)
+                                        .addComponent(jcbxModelo, 0, 273, Short.MAX_VALUE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpPainelDadosLayout.createSequentialGroup()
                                     .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jlblCilindrada)
                                         .addComponent(jlblNrChassis)
                                         .addComponent(jlblNrMotor)
-                                        .addComponent(Registo)
-                                        .addComponent(jlblMatricula))
+                                        .addComponent(jlblMatricula)
+                                        .addComponent(Registo))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jtfNrChassis, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                        .addComponent(jcbxDono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtfMatricula)
-                                        .addComponent(jtfNrMotor, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jtfCilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jdcRegisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtfNrChassis, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                            .addComponent(jtfMatricula)
+                                            .addComponent(jtfNrMotor, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                            .addGroup(jpPainelDadosLayout.createSequentialGroup()
+                                                .addComponent(jtfCilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jlblCategoria)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jcbxCategoria, 0, 120, Short.MAX_VALUE))
+                                            .addComponent(jcbxDono, 0, 303, Short.MAX_VALUE)))))
                             .addComponent(jlblDono))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtnAdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addComponent(jbtnAdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpPainelDadosLayout.setVerticalGroup(
@@ -298,23 +373,26 @@ public class PainelVeiculos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfCilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblCilindrada))
+                    .addComponent(jlblCilindrada)
+                    .addComponent(jlblCategoria)
+                    .addComponent(jcbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNrMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblNrMotor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Registo))
+                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Registo)
+                    .addComponent(jdcRegisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblMatricula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbxDono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblDono)
+                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jcbxDono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlblDono))
                     .addComponent(jbtnAdicionarCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpPainelObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,19 +440,25 @@ public class PainelVeiculos extends javax.swing.JPanel {
             mostrarDadosVeiculo();
         }
     }//GEN-LAST:event_jtVeiculosValueChanged
+
+    private void jcbxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbxMarcaActionPerformed
+        actualizarComboModelos();
+    }//GEN-LAST:event_jcbxMarcaActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Registo;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jbtnAdicionarCliente;
     private javax.swing.JButton jbtnAdicionarDonoAntigo;
     private javax.swing.JButton jbtnAdicionarVeiculo;
     private javax.swing.JButton jbtnGravar;
     private javax.swing.JButton jbtnRemoverDonoAntigo;
     private javax.swing.JButton jbtnRemoverVeiculo;
+    private javax.swing.JComboBox jcbxCategoria;
     private javax.swing.JComboBox jcbxDono;
     private javax.swing.JComboBox jcbxDonosAntigos;
     private javax.swing.JComboBox jcbxMarca;
     private javax.swing.JComboBox jcbxModelo;
+    private com.toedter.calendar.JDateChooser jdcRegisto;
+    private javax.swing.JLabel jlblCategoria;
     private javax.swing.JLabel jlblCilindrada;
     private javax.swing.JLabel jlblDono;
     private javax.swing.JLabel jlblMarca;
