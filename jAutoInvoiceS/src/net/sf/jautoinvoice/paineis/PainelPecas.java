@@ -20,12 +20,15 @@
  */
 package net.sf.jautoinvoice.paineis;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
+import net.sf.jautoinvoice.engine.Marca;
+import net.sf.jautoinvoice.engine.Modelo;
 import net.sf.jautoinvoice.engine.Peca;
 
 public class PainelPecas extends javax.swing.JPanel {
@@ -35,21 +38,32 @@ public class PainelPecas extends javax.swing.JPanel {
     //
     private DefaultTreeCellRenderer renderer;
     private DefaultMutableTreeNode root;
+    private DefaultTreeCellRenderer marcasRenderer;
+    private DefaultMutableTreeNode marcasRoot;
+    private DefaultListModel modeloModelos;
     private boolean pesquisa;
+
     public PainelPecas(JAutoInvoiceApp app) {
         this.app = app;
 
         actual = null;
         pesquisa = false;
         root = new DefaultMutableTreeNode("Peças");
+        marcasRenderer = new DefaultTreeCellRenderer();
+        marcasRoot = new DefaultMutableTreeNode("Marcas");
+        modeloModelos = new DefaultListModel();
+        renderer = new DefaultTreeCellRenderer();
 
         processarListaPecas();
+        processarListaMarcas();
 
         ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/wrench_orange.png"));
-        renderer = new DefaultTreeCellRenderer();
+        //ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/wrench_orange.png"));
         renderer.setClosedIcon(rootIcon);
         renderer.setOpenIcon(rootIcon);
         renderer.setLeafIcon(rootIcon);
+
+        
 
         initComponents();
     }
@@ -59,6 +73,19 @@ public class PainelPecas extends javax.swing.JPanel {
         for (Peca p : app.getGestor().listarTodasPecas()) {
             elem = new DefaultMutableTreeNode(p);
             root.add(elem);
+        }
+    }
+
+    private void processarListaMarcas() {
+        DefaultMutableTreeNode elem;
+        DefaultMutableTreeNode elem2;
+        for(Marca m1 : app.getGestor().listarTodasMarcas()) {
+            elem = new DefaultMutableTreeNode(m1);
+            for(Modelo m2 : m1.getModelos()) {
+                elem2 = new DefaultMutableTreeNode(m2);
+            }
+
+            marcasRoot.add(elem);
         }
     }
 
@@ -131,6 +158,7 @@ public class PainelPecas extends javax.swing.JPanel {
         });
 
         jtListaPecas.setModel(new DefaultTreeModel(root));
+        jtListaPecas.setCellRenderer(renderer);
         jtListaPecas.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jtListaPecasValueChanged(evt);
@@ -159,7 +187,7 @@ public class PainelPecas extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscpScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addComponent(jscpScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbtnRemoverPeca)
@@ -211,8 +239,7 @@ public class PainelPecas extends javax.swing.JPanel {
         jpPainelModelos.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PainelPecas.jpPainelModelos.border.title"))); // NOI18N
         jpPainelModelos.setLayout(new javax.swing.BoxLayout(jpPainelModelos, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jtModelos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtModelos.setModel(new DefaultTreeModel(marcasRoot));
         jscpScrollTreeModelos.setViewportView(jtModelos);
 
         jpPainelModelos.add(jscpScrollTreeModelos);
@@ -247,12 +274,12 @@ public class PainelPecas extends javax.swing.JPanel {
         jpDados.setLayout(jpDadosLayout);
         jpDadosLayout.setHorizontalGroup(
             jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpDadosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpPainelDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpPainelModelos, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                    .addGroup(jpDadosLayout.createSequentialGroup()
+                .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpPainelModelos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                    .addComponent(jpPainelDescricao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDadosLayout.createSequentialGroup()
                         .addGroup(jpDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jblNome)
                             .addComponent(jlblReferencia)
@@ -291,8 +318,8 @@ public class PainelPecas extends javax.swing.JPanel {
                     .addComponent(jcbxIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblIva))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpPainelModelos, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpPainelModelos, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jpPainelDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -317,7 +344,7 @@ public class PainelPecas extends javax.swing.JPanel {
                 .addComponent(jpDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnGravar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jspSplit.setRightComponent(jpPainelDireito);
