@@ -20,7 +20,13 @@
  */
 package net.sf.jautoinvoice.janelas;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import net.sf.jautoinvoice.JAutoInvoiceApp;
@@ -40,13 +46,21 @@ public class Configuracoes extends javax.swing.JDialog {
     private Gestor gestor;
     //
     private JFileChooser jfc;
-    private String caminho;
+    private boolean modificado;
 
     public Configuracoes(java.awt.Frame parent, boolean modal, Properties configuracoes) {
         super(parent, modal);
         gestor = ((JAutoInvoiceApp) parent).getGestor();
 
         this.configuracoes = configuracoes;
+
+        String base = System.getProperty("user.home") + File.separator + ".jautoinvoice"
+                + File.separator + "dados.db4o.inv";
+
+        configuracoes.getProperty("caminho", base);
+        int tipoAnimacao = Integer.parseInt(configuracoes.getProperty("tipo-animacao", "0"));
+        boolean animacao = Boolean.parseBoolean(configuracoes.getProperty("animacao", "false"));
+        int look = Integer.parseInt(configuracoes.getProperty("look", "0"));
 
         modeloIvas = new DefaultListModel();
         for (Iva i : gestor.listarTodosIvas()) {
@@ -69,6 +83,10 @@ public class Configuracoes extends javax.swing.JDialog {
         }
 
         initComponents();
+
+        jckbUsarAnimacao.setSelected(animacao);
+        jcbxLookAndFeel.setSelectedIndex(look);
+        jcbxTipoAnimacao.setSelectedIndex(tipoAnimacao);
     }
 
     @Override
@@ -170,6 +188,12 @@ public class Configuracoes extends javax.swing.JDialog {
 
         jlblPassword.setText(bundle.getString("Configuracoes.jlblPassword.text")); // NOI18N
 
+        jpfPassword2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jpfPassword2FocusLost(evt);
+            }
+        });
+
         jlblPassword2.setText(bundle.getString("Configuracoes.jlblPassword2.text")); // NOI18N
 
         jbtnExplorar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/folders_explorer.png"))); // NOI18N
@@ -234,6 +258,11 @@ public class Configuracoes extends javax.swing.JDialog {
         jlblLookAndFeel.setText(bundle.getString("Configuracoes.jlblLookAndFeel.text")); // NOI18N
 
         jcbxLookAndFeel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nativo (Fornecido pelo sistema Operativo)", "Multi-plataforma (Metal)", "Nimbus" }));
+        jcbxLookAndFeel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbxLookAndFeelActionPerformed(evt);
+            }
+        });
 
         jckbUsarAnimacao.setText(bundle.getString("Configuracoes.jckbUsarAnimacao.text")); // NOI18N
         jckbUsarAnimacao.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +274,11 @@ public class Configuracoes extends javax.swing.JDialog {
         jlblTipoAnimacao.setText(bundle.getString("Configuracoes.jlblTipoAnimacao.text")); // NOI18N
 
         jcbxTipoAnimacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cubo", "Dashboard", "Slide" }));
+        jcbxTipoAnimacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbxTipoAnimacaoActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jpPainelAspectoLayout = new org.jdesktop.layout.GroupLayout(jpPainelAspecto);
         jpPainelAspecto.setLayout(jpPainelAspectoLayout);
@@ -663,6 +697,7 @@ public class Configuracoes extends javax.swing.JDialog {
 
     private void jckbUsarAnimacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckbUsarAnimacaoActionPerformed
         jcbxTipoAnimacao.setEnabled(jckbUsarAnimacao.isSelected());
+        modificado = true;
     }//GEN-LAST:event_jckbUsarAnimacaoActionPerformed
 
     private void jbtnExplorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExplorarActionPerformed
@@ -671,12 +706,31 @@ public class Configuracoes extends javax.swing.JDialog {
             jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         }
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            caminho = jfc.getSelectedFile().getAbsolutePath();
+            jtfFicheiroDados.setText(jfc.getSelectedFile().getAbsolutePath());
+            modificado = true;
         }
     }//GEN-LAST:event_jbtnExplorarActionPerformed
 
     private void jbtnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGravarActionPerformed
-        // TODO add your handling code here:
+        if (modificado) {
+            String base = System.getProperty("user.home") + File.separator + ".jautoinvoice";
+            File directoria = new File(base);
+
+            if (!directoria.exists()) {
+                directoria.mkdir();
+            }
+            try {
+                configuracoes.storeToXML(new FileOutputStream(new File(directoria.getAbsolutePath()
+                        + File.separator + "conf.xml")), null);
+
+                modificado = false;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        dispose();
     }//GEN-LAST:event_jbtnGravarActionPerformed
 
     private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
@@ -692,11 +746,16 @@ public class Configuracoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtExportarLogsActionPerformed
 
     private void jbtnLimparLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimparLogsActionPerformed
-        // TODO add your handling code here:
+        gestor.limparLogs();
     }//GEN-LAST:event_jbtnLimparLogsActionPerformed
 
     private void jbtnAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarCategoriaActionPerformed
-        // TODO add your handling code here:
+        if (!jtfNome.getText().trim().isEmpty()) {
+            Categoria c = gestor.adicionarCategoria(jtfNome.getText().trim());
+            if (c != null) {
+                modeloCategorias.addElement(c);
+            }
+        }
     }//GEN-LAST:event_jbtnAdicionarCategoriaActionPerformed
 
     private void jbtnRemoverCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverCategoriaActionPerformed
@@ -708,7 +767,13 @@ public class Configuracoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnRemoverCategoriaActionPerformed
 
     private void jbtnAdicionarIvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarIvaActionPerformed
-        // TODO add your handling code here:
+        if (!jtfNomeIva.getText().trim().isEmpty() && !jffValorIva.getValue().toString().isEmpty()) {
+            //TODO:
+            Iva i = gestor.adicionarIva(jtfNomeIva.getText().trim(), 0.0);
+            if (i != null) {
+                modeloIvas.addElement(i);
+            }
+        }
     }//GEN-LAST:event_jbtnAdicionarIvaActionPerformed
 
     private void jbtnRemoverIvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverIvaActionPerformed
@@ -720,7 +785,13 @@ public class Configuracoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnRemoverIvaActionPerformed
 
     private void jbtnAdicionarRetencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarRetencaoActionPerformed
-        // TODO add your handling code here:
+        if (!jtfNomeRetencao.getText().trim().isEmpty() && !jffValorRetencao.getValue().toString().isEmpty()) {
+            //TODO: 
+            Retencao r = gestor.adicionarRetencao(jtfNomeRetencao.getText().trim(), 0.0);
+            if (r != null) {
+                modeloRetencoes.addElement(r);
+            }
+        }
     }//GEN-LAST:event_jbtnAdicionarRetencaoActionPerformed
 
     private void jbtnRemoverRetencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverRetencaoActionPerformed
@@ -730,6 +801,27 @@ public class Configuracoes extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jbtnRemoverRetencaoActionPerformed
+
+    private void jpfPassword2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jpfPassword2FocusLost
+        String p1 = new String(jpfPassword.getPassword());
+        String p2 = new String(jpfPassword2.getPassword());
+
+        //TODO: mensagens de erro
+        if (p1.isEmpty()) {
+        } else if (p2.isEmpty()) {
+        } else if (p1.compareTo(p2) != 0) {
+        } else {
+            modificado = true;
+        }
+    }//GEN-LAST:event_jpfPassword2FocusLost
+
+    private void jcbxLookAndFeelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbxLookAndFeelActionPerformed
+        modificado = true;
+    }//GEN-LAST:event_jcbxLookAndFeelActionPerformed
+
+    private void jcbxTipoAnimacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbxTipoAnimacaoActionPerformed
+        modificado = true;
+    }//GEN-LAST:event_jcbxTipoAnimacaoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
