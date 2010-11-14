@@ -23,6 +23,7 @@ package net.sf.jautoinvoice.engine;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -821,5 +822,14 @@ public final class Gestor {
         }
 
         return false;
+    }
+
+    public void limparLogs() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    //TODO:
+    public List<Marcacao> listarTodasMarcacoes() {
+        return new ArrayList<Marcacao>();
     }
 }

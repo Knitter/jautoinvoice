@@ -192,6 +192,9 @@
                 <Component class="javax.swing.JPasswordField" name="jpfPassword">
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="jpfPassword2">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jpfPassword2FocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlblPassword2">
                   <Properties>
@@ -293,6 +296,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbxLookAndFeelActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jckbUsarAnimacao">
                   <Properties>
@@ -323,6 +329,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbxTipoAnimacaoActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -22,6 +22,7 @@ package net.sf.jautoinvoice;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.query.Predicate;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,6 +30,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Level;
@@ -95,7 +97,18 @@ public class JAutoInvoiceDebugPopulate {
 
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), ficheiroDados);
 
-        db.store(new Utilizador("admin", Utilizador.gerarHash("admin"), true));
+        List<Utilizador> existentes = db.query(new Predicate<Utilizador>() {
+
+            @Override
+            public boolean match(Utilizador et) {
+                return et.getUsername().equals("admin");
+            }
+        });
+
+        if (existentes.isEmpty()) {
+            db.store(new Utilizador("admin", Utilizador.gerarHash("admin"), true));
+        }
+
         //Valores de IVA
         Iva iva21 = new Iva("21%", 21.0);
         db.store(new Iva("20%", 20.0));
