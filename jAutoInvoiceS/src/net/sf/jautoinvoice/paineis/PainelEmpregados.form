@@ -46,8 +46,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbtnRemoverEmpregado" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jtfPesquisa" alignment="0" pref="176" max="32767" attributes="0"/>
-                          <Component id="jscpScrollEmpregados" alignment="0" pref="176" max="32767" attributes="0"/>
+                          <Component id="jtfPesquisa" alignment="0" pref="158" max="32767" attributes="0"/>
+                          <Component id="jscpScrollEmpregados" alignment="0" pref="158" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -59,7 +59,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jtfPesquisa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jscpScrollEmpregados" pref="477" max="32767" attributes="0"/>
+                      <Component id="jscpScrollEmpregados" pref="468" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jbtnRemoverEmpregado" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -148,7 +148,7 @@
                       <Component id="jpPainelDados" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jbtnGravar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -182,13 +182,13 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jlblMoeda" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jtfNome" alignment="0" pref="325" max="32767" attributes="0"/>
+                                      <Component id="jtfNome" alignment="0" pref="293" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlblSeparacaoSeccaoAutenticacao" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="jSeparator1" pref="234" max="32767" attributes="0"/>
+                                  <Component id="jSeparator1" pref="214" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -327,7 +327,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbtnRemoverReparacao" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jscpScrollReparacoes" alignment="0" pref="377" max="32767" attributes="0"/>
+                                  <Component id="jscpScrollReparacoes" alignment="0" pref="325" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>

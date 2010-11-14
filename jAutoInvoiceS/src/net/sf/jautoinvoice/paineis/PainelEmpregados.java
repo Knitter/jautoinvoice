@@ -53,10 +53,11 @@ public class PainelEmpregados extends javax.swing.JPanel {
         processarListaReparacoes();
 
         ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user_green.png"));
+        ImageIcon leafIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/user.png"));
         renderer = new DefaultTreeCellRenderer();
         renderer.setClosedIcon(rootIcon);
         renderer.setOpenIcon(rootIcon);
-        renderer.setLeafIcon(rootIcon);
+        renderer.setLeafIcon(leafIcon);
 
         initComponents();
     }

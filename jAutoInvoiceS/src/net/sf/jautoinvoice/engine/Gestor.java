@@ -210,6 +210,11 @@ public final class Gestor {
         return null;
     }
 
+    /**
+     * Devolve uma lista com todos os clientes encontrados no sistema.
+     *
+     * @return lista com todos os clientes.
+     */
     public List<Cliente> listarTodosClientes() {
         if (autenticado != null) {
             return db.query(new Predicate<Cliente>() {
@@ -224,6 +229,17 @@ public final class Gestor {
         return null;
     }
 
+    /**
+     * Permite a pesquisa de clientes com base em vários critérios.
+     *
+     * @param nome Nome do cliente a pesquisar
+     * @param email E-mail a usar na pesquisa
+     * @param localidade Localidade do cliente
+     * @param matricula Matricula de algum dos veículos do cliente
+     * @param codigoPostal Código postal correspondente ao cliente
+     *
+     * @return lista com os clientes encontrados, ou lista vazia.
+     */
     public List<Cliente> procurarCliente(final String nome, final String email,
             final String localidade, final String matricula, final String codigoPostal) {
 

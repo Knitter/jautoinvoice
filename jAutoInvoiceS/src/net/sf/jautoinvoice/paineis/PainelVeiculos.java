@@ -66,11 +66,12 @@ public class PainelVeiculos extends javax.swing.JPanel {
 
         processarListaVeiculos();
 
-        ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/car.png"));
+        ImageIcon rootIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/autos.png"));
+        ImageIcon leafIcon = new ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/car.png"));
         renderer = new DefaultTreeCellRenderer();
         renderer.setClosedIcon(rootIcon);
         renderer.setOpenIcon(rootIcon);
-        renderer.setLeafIcon(rootIcon);
+        renderer.setLeafIcon(leafIcon);
 
         initComponents();
     }
@@ -130,6 +131,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jspSplit = new javax.swing.JSplitPane();
         jpPainelLista = new javax.swing.JPanel();
@@ -139,22 +141,26 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jscpScrollVeiculos = new javax.swing.JScrollPane();
         jtVeiculos = new javax.swing.JTree();
         jpPainelDireita = new javax.swing.JPanel();
-        jpPainelDados = new javax.swing.JPanel();
+        jbtnGravar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jlblDono = new javax.swing.JLabel();
+        jcbxDono = new javax.swing.JComboBox();
         jlblMarca = new javax.swing.JLabel();
         jcbxMarca = new javax.swing.JComboBox();
-        jcbxModelo = new javax.swing.JComboBox();
         jlblModelo = new javax.swing.JLabel();
-        jlblNrChassis = new javax.swing.JLabel();
-        jlblCilindrada = new javax.swing.JLabel();
-        jtfNrChassis = new javax.swing.JTextField();
-        jtfCilindrada = new javax.swing.JTextField();
-        jtfNrMotor = new javax.swing.JTextField();
+        jcbxModelo = new javax.swing.JComboBox();
+        jlblCategoria = new javax.swing.JLabel();
+        jcbxCategoria = new javax.swing.JComboBox();
         jlblNrMotor = new javax.swing.JLabel();
+        jtfNrMotor = new javax.swing.JTextField();
+        jlblNrChassis = new javax.swing.JLabel();
+        jtfNrChassis = new javax.swing.JTextField();
+        jlblCilindrada = new javax.swing.JLabel();
+        jtfCilindrada = new javax.swing.JTextField();
         Registo = new javax.swing.JLabel();
-        jtfMatricula = new javax.swing.JTextField();
+        jdcRegisto = new com.toedter.calendar.JDateChooser();
         jlblMatricula = new javax.swing.JLabel();
-        jcbxDono = new javax.swing.JComboBox();
-        jlblDono = new javax.swing.JLabel();
+        jtfMatricula = new javax.swing.JTextField();
         jbtnAdicionarCliente = new javax.swing.JButton();
         jpPainelObservacoes = new javax.swing.JPanel();
         jscpObservacoes = new javax.swing.JScrollPane();
@@ -165,10 +171,6 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jbtnAdicionarDonoAntigo = new javax.swing.JButton();
         jscpDonosAntigos = new javax.swing.JScrollPane();
         jlstDonosAntigos = new javax.swing.JList();
-        jlblCategoria = new javax.swing.JLabel();
-        jcbxCategoria = new javax.swing.JComboBox();
-        jdcRegisto = new com.toedter.calendar.JDateChooser();
-        jbtnGravar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -198,8 +200,8 @@ public class PainelVeiculos extends javax.swing.JPanel {
                         .addComponent(jbtnAdicionarVeiculo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnRemoverVeiculo))
-                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                    .addComponent(jscpScrollVeiculos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(jscpScrollVeiculos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpPainelListaLayout.setVerticalGroup(
@@ -208,7 +210,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscpScrollVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                .addComponent(jscpScrollVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbtnRemoverVeiculo)
@@ -218,9 +220,28 @@ public class PainelVeiculos extends javax.swing.JPanel {
 
         jspSplit.setLeftComponent(jpPainelLista);
 
-        jpPainelDados.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Veículo"));
+        jbtnGravar.setText("Gravar");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jlblDono.setText("Dono");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblDono, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jcbxDono, gridBagConstraints);
 
         jlblMarca.setText("Marca");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblMarca, gridBagConstraints);
 
         jcbxMarca.setModel(modeloMarcas);
         jcbxMarca.addActionListener(new java.awt.event.ActionListener() {
@@ -228,24 +249,112 @@ public class PainelVeiculos extends javax.swing.JPanel {
                 jcbxMarcaActionPerformed(evt);
             }
         });
-
-        jcbxModelo.setModel(modeloModelos);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jcbxMarca, gridBagConstraints);
 
         jlblModelo.setText("Modelo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblModelo, gridBagConstraints);
 
-        jlblNrChassis.setText("Nr. Chassis");
+        jcbxModelo.setModel(modeloModelos);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jcbxModelo, gridBagConstraints);
 
-        jlblCilindrada.setText("Cilidranda");
+        jlblCategoria.setText("Categoria");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblCategoria, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jcbxCategoria, gridBagConstraints);
 
         jlblNrMotor.setText("Nr. Motor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblNrMotor, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jtfNrMotor, gridBagConstraints);
+
+        jlblNrChassis.setText("Nr. Chassis");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblNrChassis, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jtfNrChassis, gridBagConstraints);
+
+        jlblCilindrada.setText("Cilidranda");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblCilindrada, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jtfCilindrada, gridBagConstraints);
 
         Registo.setText("Registo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(Registo, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jdcRegisto, gridBagConstraints);
 
         jlblMatricula.setText("Matrícula");
-
-        jlblDono.setText("Dono");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jlblMatricula, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(jtfMatricula, gridBagConstraints);
 
         jbtnAdicionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        jPanel1.add(jbtnAdicionarCliente, gridBagConstraints);
 
         jpPainelObservacoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Observações"));
 
@@ -259,16 +368,23 @@ public class PainelVeiculos extends javax.swing.JPanel {
             jpPainelObservacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelObservacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpPainelObservacoesLayout.setVerticalGroup(
             jpPainelObservacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelObservacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(jpPainelObservacoes, gridBagConstraints);
 
         jpDonosAntigos.setBorder(javax.swing.BorderFactory.createTitledBorder("Donos Antigos"));
 
@@ -285,9 +401,9 @@ public class PainelVeiculos extends javax.swing.JPanel {
             .addGroup(jpDonosAntigosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpDonosAntigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jscpDonosAntigos, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                    .addComponent(jscpDonosAntigos, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                     .addGroup(jpDonosAntigosLayout.createSequentialGroup()
-                        .addComponent(jcbxDonosAntigos, 0, 331, Short.MAX_VALUE)
+                        .addComponent(jcbxDonosAntigos, 0, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnAdicionarDonoAntigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,102 +422,12 @@ public class PainelVeiculos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jlblCategoria.setText("Categoria");
-
-        javax.swing.GroupLayout jpPainelDadosLayout = new javax.swing.GroupLayout(jpPainelDados);
-        jpPainelDados.setLayout(jpPainelDadosLayout);
-        jpPainelDadosLayout.setHorizontalGroup(
-            jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPainelDadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpDonosAntigos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpPainelObservacoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpPainelDadosLayout.createSequentialGroup()
-                        .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpPainelDadosLayout.createSequentialGroup()
-                                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlblModelo)
-                                        .addComponent(jlblMarca))
-                                    .addGap(38, 38, 38)
-                                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jcbxMarca, 0, 273, Short.MAX_VALUE)
-                                        .addComponent(jcbxModelo, 0, 273, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpPainelDadosLayout.createSequentialGroup()
-                                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlblCilindrada)
-                                        .addComponent(jlblNrChassis)
-                                        .addComponent(jlblNrMotor)
-                                        .addComponent(jlblMatricula)
-                                        .addComponent(Registo))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jdcRegisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtfNrChassis, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                            .addComponent(jtfMatricula)
-                                            .addComponent(jtfNrMotor, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                            .addGroup(jpPainelDadosLayout.createSequentialGroup()
-                                                .addComponent(jtfCilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jlblCategoria)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jcbxCategoria, 0, 120, Short.MAX_VALUE))
-                                            .addComponent(jcbxDono, 0, 303, Short.MAX_VALUE)))))
-                            .addComponent(jlblDono))
-                        .addGap(12, 12, 12)
-                        .addComponent(jbtnAdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jpPainelDadosLayout.setVerticalGroup(
-            jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpPainelDadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblMarca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblModelo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNrChassis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblNrChassis))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblCilindrada)
-                    .addComponent(jlblCategoria)
-                    .addComponent(jcbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNrMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblNrMotor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Registo)
-                    .addComponent(jdcRegisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblMatricula))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jcbxDono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlblDono))
-                    .addComponent(jbtnAdicionarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpPainelObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpDonosAntigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jbtnGravar.setText("Gravar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(jpDonosAntigos, gridBagConstraints);
 
         javax.swing.GroupLayout jpPainelDireitaLayout = new javax.swing.GroupLayout(jpPainelDireita);
         jpPainelDireita.setLayout(jpPainelDireitaLayout);
@@ -410,7 +436,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
             .addGroup(jpPainelDireitaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpPainelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
                     .addComponent(jbtnGravar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -418,10 +444,10 @@ public class PainelVeiculos extends javax.swing.JPanel {
             jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelDireitaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpPainelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jbtnGravar)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jspSplit.setRightComponent(jpPainelDireita);
@@ -446,6 +472,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbxMarcaActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Registo;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtnAdicionarCliente;
     private javax.swing.JButton jbtnAdicionarDonoAntigo;
     private javax.swing.JButton jbtnAdicionarVeiculo;
@@ -468,7 +495,6 @@ public class PainelVeiculos extends javax.swing.JPanel {
     private javax.swing.JLabel jlblNrMotor;
     private javax.swing.JList jlstDonosAntigos;
     private javax.swing.JPanel jpDonosAntigos;
-    private javax.swing.JPanel jpPainelDados;
     private javax.swing.JPanel jpPainelDireita;
     private javax.swing.JPanel jpPainelLista;
     private javax.swing.JPanel jpPainelObservacoes;

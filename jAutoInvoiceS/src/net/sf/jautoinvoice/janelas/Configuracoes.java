@@ -41,9 +41,12 @@ public class Configuracoes extends javax.swing.JDialog {
     //
     private JFileChooser jfc;
     private String caminho;
+    private boolean modificado;
 
     public Configuracoes(java.awt.Frame parent, boolean modal, Properties configuracoes) {
         super(parent, modal);
+        modificado = false;
+
         gestor = ((JAutoInvoiceApp) parent).getGestor();
 
         this.configuracoes = configuracoes;
@@ -88,7 +91,6 @@ public class Configuracoes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbtnCancelar = new javax.swing.JButton();
         jbtnGravar = new javax.swing.JButton();
         jtpTabs = new javax.swing.JTabbedPane();
         jpTabGeral = new javax.swing.JPanel();
@@ -130,7 +132,7 @@ public class Configuracoes extends javax.swing.JDialog {
         jpTabCategorias = new javax.swing.JPanel();
         jpPainelCategorias = new javax.swing.JPanel();
         jlblNome = new javax.swing.JLabel();
-        jtfNome = new javax.swing.JTextField();
+        jtfNomeCategoria = new javax.swing.JTextField();
         jbtnAdicionarCategoria = new javax.swing.JButton();
         jbtnRemoverCategoria = new javax.swing.JButton();
         jscpCategorias = new javax.swing.JScrollPane();
@@ -149,13 +151,6 @@ public class Configuracoes extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sf/jautoinvoice/i18n/dialogos"); // NOI18N
         setTitle(bundle.getString("Configuracoes.title")); // NOI18N
-
-        jbtnCancelar.setText(bundle.getString("Configuracoes.jbtnCancelar.text")); // NOI18N
-        jbtnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnCancelarActionPerformed(evt);
-            }
-        });
 
         jbtnGravar.setText(bundle.getString("Configuracoes.jbtnGravar.text")); // NOI18N
         jbtnGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +183,7 @@ public class Configuracoes extends javax.swing.JDialog {
                 .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jpPainelGeralLayout.createSequentialGroup()
                         .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jSeparator2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                            .add(jSeparator2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                             .add(jpPainelGeralLayout.createSequentialGroup()
                                 .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(jlblPassword)
@@ -197,12 +192,12 @@ public class Configuracoes extends javax.swing.JDialog {
                                 .add(jpPainelGeralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(jpfPassword2)
                                     .add(jpfPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 212, Short.MAX_VALUE)))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 247, Short.MAX_VALUE)))
                         .addContainerGap())
                     .add(jpPainelGeralLayout.createSequentialGroup()
                         .add(jlblFicheiroDados)
                         .add(18, 18, 18)
-                        .add(jtfFicheiroDados, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                        .add(jtfFicheiroDados, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbtnExplorar)
                         .add(40, 40, 40))))
@@ -257,15 +252,15 @@ public class Configuracoes extends javax.swing.JDialog {
                         .add(12, 12, 12)
                         .add(jlblTipoAnimacao)
                         .add(18, 18, 18)
-                        .add(jcbxTipoAnimacao, 0, 422, Short.MAX_VALUE))
+                        .add(jcbxTipoAnimacao, 0, 442, Short.MAX_VALUE))
                     .add(jpPainelAspectoLayout.createSequentialGroup()
                         .add(jckbUsarAnimacao)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
+                        .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
                     .add(jpPainelAspectoLayout.createSequentialGroup()
                         .add(jlblLookAndFeel)
                         .add(18, 18, 18)
-                        .add(jcbxLookAndFeel, 0, 463, Short.MAX_VALUE)))
+                        .add(jcbxLookAndFeel, 0, 474, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpPainelAspectoLayout.setVerticalGroup(
@@ -304,7 +299,7 @@ public class Configuracoes extends javax.swing.JDialog {
                 .add(jpPainelGeral, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpPainelAspecto, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         jtpTabs.addTab(bundle.getString("Configuracoes.jpTabGeral.TabConstraints.tabTitle"), jpTabGeral); // NOI18N
@@ -345,7 +340,7 @@ public class Configuracoes extends javax.swing.JDialog {
             .add(jpPainelIvasLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jpPainelIvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jscpIvas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .add(jscpIvas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
                     .add(jpPainelIvasLayout.createSequentialGroup()
                         .add(jlblDescricaoIva)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -412,7 +407,7 @@ public class Configuracoes extends javax.swing.JDialog {
             .add(jpPainelRetencoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jpPainelRetencoesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jscpRetencoes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .add(jscpRetencoes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
                     .add(jpPainelRetencoesLayout.createSequentialGroup()
                         .add(jlblDescricaoRetencao)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -471,7 +466,7 @@ public class Configuracoes extends javax.swing.JDialog {
 
         jlblNome.setText(bundle.getString("Configuracoes.jlblNome.text")); // NOI18N
 
-        jtfNome.setText(bundle.getString("Configuracoes.jtfNome.text")); // NOI18N
+        jtfNomeCategoria.setText(bundle.getString("Configuracoes.jtfNomeCategoria.text")); // NOI18N
 
         jbtnAdicionarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/jautoinvoice/resources/x16/add.png"))); // NOI18N
         jbtnAdicionarCategoria.setText(bundle.getString("Configuracoes.jbtnAdicionarCategoria.text")); // NOI18N
@@ -500,11 +495,11 @@ public class Configuracoes extends javax.swing.JDialog {
             .add(jpPainelCategoriasLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jpPainelCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jscpCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .add(jscpCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
                     .add(jpPainelCategoriasLayout.createSequentialGroup()
                         .add(jlblNome)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jtfNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jtfNomeCategoria, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(18, 18, 18)
                         .add(jbtnAdicionarCategoria)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -517,11 +512,11 @@ public class Configuracoes extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(jpPainelCategoriasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jlblNome)
-                    .add(jtfNome, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jtfNomeCategoria, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jbtnAdicionarCategoria)
                     .add(jbtnRemoverCategoria))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jscpCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .add(jscpCategorias, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -593,7 +588,7 @@ public class Configuracoes extends javax.swing.JDialog {
                         .add(jbtExportarLogs)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbtnLimparLogs))
-                    .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+                    .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpPainelLogsLayout.setVerticalGroup(
@@ -606,9 +601,9 @@ public class Configuracoes extends javax.swing.JDialog {
                             .add(jbtnAplicarFiltroDatas)
                             .add(jdcFiltroDatas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jscpListaLogs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                        .add(jscpListaLogs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
                     .add(jpPainelLogsLayout.createSequentialGroup()
-                        .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                        .add(jscpDadosLog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jpPainelLogsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jbtnLimparLogs)
@@ -639,23 +634,19 @@ public class Configuracoes extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jtpTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(493, Short.MAX_VALUE)
+                .addContainerGap(596, Short.MAX_VALUE)
                 .add(jbtnGravar)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jbtnCancelar)
                 .addContainerGap())
-            .add(jtpTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(jtpTabs, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jbtnCancelar)
-                    .add(jbtnGravar))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jbtnGravar)
+                .addContainerGap())
         );
 
         pack();
@@ -676,33 +667,42 @@ public class Configuracoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExplorarActionPerformed
 
     private void jbtnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGravarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnGravarActionPerformed
-
-    private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
+        if (modificado) {
+        }
         dispose();
-    }//GEN-LAST:event_jbtnCancelarActionPerformed
+    }//GEN-LAST:event_jbtnGravarActionPerformed
 
     private void jbtnAplicarFiltroDatasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAplicarFiltroDatasActionPerformed
         // TODO add your handling code here:
+        //filtrar logs
     }//GEN-LAST:event_jbtnAplicarFiltroDatasActionPerformed
 
     private void jbtExportarLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtExportarLogsActionPerformed
         // TODO add your handling code here:
+        //exportar para TXT/HTML/XML/ETC
     }//GEN-LAST:event_jbtExportarLogsActionPerformed
 
     private void jbtnLimparLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimparLogsActionPerformed
-        // TODO add your handling code here:
+        //TODO//TODO joptionpane com mensagem de confirmação
     }//GEN-LAST:event_jbtnLimparLogsActionPerformed
 
     private void jbtnAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarCategoriaActionPerformed
-        // TODO add your handling code here:
+        if (!jtfNomeCategoria.getText().trim().isEmpty()) {
+            Categoria c = gestor.adicionarCategoria(jtfNomeCategoria.getText().trim());
+            if (c != null) {
+                modeloCategorias.addElement(c);
+            } else {
+                //TODO joptionpane com mensagem de erro
+            }
+        }
     }//GEN-LAST:event_jbtnAdicionarCategoriaActionPerformed
 
     private void jbtnRemoverCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverCategoriaActionPerformed
         if (jlstCategorias.getSelectedIndex() >= 0) {
             if (gestor.removerCategoria((Categoria) jlstCategorias.getSelectedValue())) {
                 modeloCategorias.remove(jlstCategorias.getSelectedIndex());
+            } else {
+                //TODO joptionpane com mensagem de erro
             }
         }
     }//GEN-LAST:event_jbtnRemoverCategoriaActionPerformed
@@ -715,6 +715,8 @@ public class Configuracoes extends javax.swing.JDialog {
         if (jlstIvas.getSelectedIndex() >= 0) {
             if (gestor.removerIva((Iva) jlstIvas.getSelectedValue())) {
                 modeloIvas.remove(jlstIvas.getSelectedIndex());
+            } else {
+                //TODO joptionpane com mensagem de erro
             }
         }
     }//GEN-LAST:event_jbtnRemoverIvaActionPerformed
@@ -727,6 +729,8 @@ public class Configuracoes extends javax.swing.JDialog {
         if (jlstRetencoes.getSelectedIndex() >= 0) {
             if (gestor.removerRetencao((Retencao) jlstRetencoes.getSelectedValue())) {
                 modeloRetencoes.remove(jlstRetencoes.getSelectedIndex());
+            } else {
+                //TODO joptionpane com mensagem de erro
             }
         }
     }//GEN-LAST:event_jbtnRemoverRetencaoActionPerformed
@@ -738,7 +742,6 @@ public class Configuracoes extends javax.swing.JDialog {
     private javax.swing.JButton jbtnAdicionarIva;
     private javax.swing.JButton jbtnAdicionarRetencao;
     private javax.swing.JButton jbtnAplicarFiltroDatas;
-    private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton jbtnExplorar;
     private javax.swing.JButton jbtnGravar;
     private javax.swing.JButton jbtnLimparLogs;
@@ -784,7 +787,7 @@ public class Configuracoes extends javax.swing.JDialog {
     private javax.swing.JScrollPane jscpRetencoes;
     private javax.swing.JTextArea jtaDadosLog;
     private javax.swing.JTextField jtfFicheiroDados;
-    private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfNomeCategoria;
     private javax.swing.JTextField jtfNomeIva;
     private javax.swing.JTextField jtfNomeRetencao;
     private javax.swing.JTabbedPane jtpTabs;

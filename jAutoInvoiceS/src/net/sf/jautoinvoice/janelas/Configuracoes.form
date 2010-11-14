@@ -26,41 +26,26 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jtpTabs" alignment="0" pref="698" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="493" max="32767" attributes="0"/>
+              <EmptySpace pref="596" max="32767" attributes="0"/>
               <Component id="jbtnGravar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jbtnCancelar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jtpTabs" alignment="0" pref="643" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jtpTabs" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jbtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnGravar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jbtnGravar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jbtnCancelar">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="net/sf/jautoinvoice/i18n/dialogos.properties" key="Configuracoes.jbtnCancelar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnCancelarActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="jbtnGravar">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -106,7 +91,7 @@
                       <Component id="jpPainelGeral" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jpPainelAspecto" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                      <EmptySpace pref="146" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -131,7 +116,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSeparator2" alignment="0" pref="587" max="32767" attributes="0"/>
+                                      <Component id="jSeparator2" alignment="0" pref="605" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jlblPassword" min="-2" max="-2" attributes="0"/>
@@ -142,7 +127,7 @@
                                               <Component id="jpfPassword2" max="32767" attributes="1"/>
                                               <Component id="jpfPassword" alignment="0" pref="167" max="32767" attributes="1"/>
                                           </Group>
-                                          <EmptySpace pref="212" max="32767" attributes="0"/>
+                                          <EmptySpace pref="247" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -150,7 +135,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlblFicheiroDados" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jtfFicheiroDados" pref="368" max="32767" attributes="0"/>
+                                  <Component id="jtfFicheiroDados" pref="395" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jbtnExplorar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -250,17 +235,17 @@
                                   <EmptySpace min="12" pref="12" max="12" attributes="0"/>
                                   <Component id="jlblTipoAnimacao" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jcbxTipoAnimacao" pref="422" max="32767" attributes="0"/>
+                                  <Component id="jcbxTipoAnimacao" pref="442" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jckbUsarAnimacao" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jSeparator1" pref="435" max="32767" attributes="0"/>
+                                  <Component id="jSeparator1" pref="443" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlblLookAndFeel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jcbxLookAndFeel" pref="463" max="32767" attributes="0"/>
+                                  <Component id="jcbxLookAndFeel" pref="474" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -397,7 +382,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jscpIvas" alignment="0" pref="575" max="32767" attributes="0"/>
+                              <Component id="jscpIvas" alignment="0" pref="585" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlblDescricaoIva" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -526,7 +511,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jscpRetencoes" alignment="0" pref="575" max="32767" attributes="0"/>
+                              <Component id="jscpRetencoes" alignment="0" pref="585" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlblDescricaoRetencao" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -690,11 +675,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jscpCategorias" alignment="0" pref="575" max="32767" attributes="0"/>
+                              <Component id="jscpCategorias" alignment="0" pref="585" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlblNome" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfNome" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Component id="jtfNomeCategoria" min="-2" pref="210" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jbtnAdicionarCategoria" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -711,12 +696,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jlblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfNomeCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jbtnAdicionarCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jbtnRemoverCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jscpCategorias" pref="383" max="32767" attributes="0"/>
+                          <Component id="jscpCategorias" pref="387" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -730,10 +715,10 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfNome">
+                <Component class="javax.swing.JTextField" name="jtfNomeCategoria">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="net/sf/jautoinvoice/i18n/dialogos.properties" key="Configuracoes.jtfNome.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="net/sf/jautoinvoice/i18n/dialogos.properties" key="Configuracoes.jtfNomeCategoria.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -838,7 +823,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jbtnLimparLogs" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jscpDadosLog" pref="367" max="32767" attributes="0"/>
+                              <Component id="jscpDadosLog" pref="373" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -855,10 +840,10 @@
                                       <Component id="jdcFiltroDatas" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jscpListaLogs" pref="410" max="32767" attributes="0"/>
+                                  <Component id="jscpListaLogs" pref="415" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jscpDadosLog" pref="413" max="32767" attributes="0"/>
+                                  <Component id="jscpDadosLog" pref="418" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jbtnLimparLogs" alignment="3" min="-2" max="-2" attributes="0"/>
