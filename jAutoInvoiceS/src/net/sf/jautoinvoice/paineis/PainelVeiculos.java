@@ -141,7 +141,6 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jscpScrollVeiculos = new javax.swing.JScrollPane();
         jtVeiculos = new javax.swing.JTree();
         jpPainelDireita = new javax.swing.JPanel();
-        jbtnGravar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jlblDono = new javax.swing.JLabel();
         jcbxDono = new javax.swing.JComboBox();
@@ -171,6 +170,8 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jbtnAdicionarDonoAntigo = new javax.swing.JButton();
         jscpDonosAntigos = new javax.swing.JScrollPane();
         jlstDonosAntigos = new javax.swing.JList();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -210,7 +211,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscpScrollVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                .addComponent(jscpScrollVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPainelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbtnRemoverVeiculo)
@@ -220,7 +221,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
 
         jspSplit.setLeftComponent(jpPainelLista);
 
-        jbtnGravar.setText("Gravar");
+        jpPainelDireita.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -374,7 +375,6 @@ public class PainelVeiculos extends javax.swing.JPanel {
         jpPainelObservacoesLayout.setVerticalGroup(
             jpPainelObservacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPainelObservacoesLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jscpObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -383,7 +383,7 @@ public class PainelVeiculos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jpPainelObservacoes, gridBagConstraints);
 
         jpDonosAntigos.setBorder(javax.swing.BorderFactory.createTitledBorder("Donos Antigos"));
@@ -426,29 +426,31 @@ public class PainelVeiculos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jpDonosAntigos, gridBagConstraints);
 
-        javax.swing.GroupLayout jpPainelDireitaLayout = new javax.swing.GroupLayout(jpPainelDireita);
-        jpPainelDireita.setLayout(jpPainelDireitaLayout);
-        jpPainelDireitaLayout.setHorizontalGroup(
-            jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpPainelDireitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
-                    .addComponent(jbtnGravar, javax.swing.GroupLayout.Alignment.TRAILING))
+        jpPainelDireita.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jButton1.setText("jButton1");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(375, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
-        jpPainelDireitaLayout.setVerticalGroup(
-            jpPainelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpPainelDireitaLayout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jbtnGravar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
+
+        jpPainelDireita.add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         jspSplit.setRightComponent(jpPainelDireita);
 
@@ -463,20 +465,22 @@ public class PainelVeiculos extends javax.swing.JPanel {
         } else {
             actual = (Veiculo) ((DefaultMutableTreeNode) jtVeiculos.getLastSelectedPathComponent()).getUserObject();
             //jbtnRemoverVeiculo.setEnabled(false);
-            mostrarDadosVeiculo();
+            //mostrarDadosVeiculo();
         }
     }//GEN-LAST:event_jtVeiculosValueChanged
 
     private void jcbxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbxMarcaActionPerformed
         actualizarComboModelos();
-    }//GEN-LAST:event_jcbxMarcaActionPerformed
+}//GEN-LAST:event_jcbxMarcaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Registo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtnAdicionarCliente;
     private javax.swing.JButton jbtnAdicionarDonoAntigo;
     private javax.swing.JButton jbtnAdicionarVeiculo;
-    private javax.swing.JButton jbtnGravar;
     private javax.swing.JButton jbtnRemoverDonoAntigo;
     private javax.swing.JButton jbtnRemoverVeiculo;
     private javax.swing.JComboBox jcbxCategoria;

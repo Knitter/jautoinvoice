@@ -665,6 +665,7 @@ public class JAutoInvoiceApp extends javax.swing.JFrame {
                 }
 
                 try {
+                    //UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(JAutoInvoiceApp.class.getName()).log(Level.SEVERE, null, ex);
