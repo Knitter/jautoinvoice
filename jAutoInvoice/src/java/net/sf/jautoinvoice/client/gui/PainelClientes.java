@@ -1,0 +1,50 @@
+/*
+ * PainelClientes.java
+ *
+ * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
+ *
+ * Copyright (C) 2011 jAutoInvoice
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package net.sf.jautoinvoice.client.gui;
+
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+
+/**
+ * Painel com áreas necessárias à gestão de clientes. Esta class agrupa os 
+ * componentes necessários para mostrar a lista de clientes em árvore e a zona
+ * central onde os dados do cliente são editados.
+ * 
+ * @since 1.0
+ */
+public final class PainelClientes extends Conteudo {
+
+    public PainelClientes() {
+        super();
+        init();
+    }
+
+    @Override
+    public void init() {
+        LayoutContainer container = new LayoutContainer(new BorderLayout());
+        container.add(new ArvoreClientes(), new BorderLayoutData(LayoutRegion.WEST));
+        container.add(new CentralClientes(), new BorderLayoutData(LayoutRegion.CENTER));
+
+        initComponent(container);
+    }
+}
