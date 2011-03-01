@@ -22,8 +22,8 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.modelo.Fornecedor;
-import net.sf.jautoinvoice.client.modelo.Material;
+import net.sf.jautoinvoice.client.model.Fornecedor;
+import net.sf.jautoinvoice.client.model.Material;
 import net.sf.jautoinvoice.client.srvs.SrvFornecedor;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 

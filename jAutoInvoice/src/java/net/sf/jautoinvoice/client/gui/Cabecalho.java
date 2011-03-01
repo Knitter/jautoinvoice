@@ -43,6 +43,7 @@ public final class Cabecalho extends Conteudo {
         LayoutContainer container = new LayoutContainer(new BorderLayout());
         //TODO: adicionar painel de logótipo
         container.add(new MenuPrincipal(), new BorderLayoutData(LayoutRegion.CENTER));
+        
         initComponent(container);
     }
 }

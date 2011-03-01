@@ -22,9 +22,9 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.modelo.FolhaObra;
-import net.sf.jautoinvoice.client.modelo.Funcionario;
-import net.sf.jautoinvoice.client.modelo.Veiculo;
+import net.sf.jautoinvoice.client.model.FolhaObra;
+import net.sf.jautoinvoice.client.model.Funcionario;
+import net.sf.jautoinvoice.client.model.Veiculo;
 
 /**
  * Versao assíncrona do serviço de gestão de funcionários.

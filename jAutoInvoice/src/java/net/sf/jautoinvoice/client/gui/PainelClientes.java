@@ -42,9 +42,10 @@ public final class PainelClientes extends Conteudo {
     @Override
     public void init() {
         LayoutContainer container = new LayoutContainer(new BorderLayout());
-        container.add(new ArvoreClientes(), new BorderLayoutData(LayoutRegion.WEST));
-        container.add(new CentralClientes(), new BorderLayoutData(LayoutRegion.CENTER));
+        container.add(new ListaClientes(), new BorderLayoutData(LayoutRegion.WEST));
+        //container.add(new CentralClientes(), new BorderLayoutData(LayoutRegion.CENTER));
 
         initComponent(container);
     }
 }
+//TODO: completar

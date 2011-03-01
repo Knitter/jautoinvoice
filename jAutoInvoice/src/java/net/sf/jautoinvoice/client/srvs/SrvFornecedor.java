@@ -23,8 +23,8 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.modelo.Fornecedor;
-import net.sf.jautoinvoice.client.modelo.Material;
+import net.sf.jautoinvoice.client.model.Fornecedor;
+import net.sf.jautoinvoice.client.model.Material;
 
 /**
  * Serviço de gestão de fornecedores.

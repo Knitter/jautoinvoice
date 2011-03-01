@@ -24,17 +24,17 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.jautoinvoice.client.modelo.Cliente;
-import net.sf.jautoinvoice.client.modelo.FolhaObra;
-import net.sf.jautoinvoice.client.modelo.Fornecedor;
-import net.sf.jautoinvoice.client.modelo.Funcionario;
-import net.sf.jautoinvoice.client.modelo.IVA;
-import net.sf.jautoinvoice.client.modelo.Inspeccao;
-import net.sf.jautoinvoice.client.modelo.Marca;
-import net.sf.jautoinvoice.client.modelo.Material;
-import net.sf.jautoinvoice.client.modelo.Modelo;
-import net.sf.jautoinvoice.client.modelo.Servico;
-import net.sf.jautoinvoice.client.modelo.Veiculo;
+import net.sf.jautoinvoice.client.model.Cliente;
+import net.sf.jautoinvoice.client.model.FolhaObra;
+import net.sf.jautoinvoice.client.model.Fornecedor;
+import net.sf.jautoinvoice.client.model.Funcionario;
+import net.sf.jautoinvoice.client.model.IVA;
+import net.sf.jautoinvoice.client.model.Inspeccao;
+import net.sf.jautoinvoice.client.model.Marca;
+import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.model.Modelo;
+import net.sf.jautoinvoice.client.model.Servico;
+import net.sf.jautoinvoice.client.model.Veiculo;
 
 /**
  * Esta é a classe base do sistema de gestão. Qualquer serviço delega o 

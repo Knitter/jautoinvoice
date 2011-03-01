@@ -72,7 +72,7 @@ public final class GestorLayout implements ValueChangeHandler<String> {
         BorderLayout root = new BorderLayout();
         view.setLayout(root);
 
-        view.add(new Cabecalho(), new BorderLayoutData(LayoutRegion.NORTH));
+        view.add(new Cabecalho(), new BorderLayoutData(LayoutRegion.NORTH, 90));
         view.add(conteudo, new BorderLayoutData(LayoutRegion.CENTER));
         view.add(new Rodape(), new BorderLayoutData(LayoutRegion.SOUTH));
 

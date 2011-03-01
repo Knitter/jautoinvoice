@@ -22,8 +22,8 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.modelo.Fornecedor;
-import net.sf.jautoinvoice.client.modelo.Material;
+import net.sf.jautoinvoice.client.model.Fornecedor;
+import net.sf.jautoinvoice.client.model.Material;
 
 /**
  * Versão assíncrona do serviço de gestãod e fornecedores.

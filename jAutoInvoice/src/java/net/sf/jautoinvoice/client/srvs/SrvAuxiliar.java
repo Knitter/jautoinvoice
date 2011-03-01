@@ -23,10 +23,10 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.modelo.IVA;
-import net.sf.jautoinvoice.client.modelo.Marca;
-import net.sf.jautoinvoice.client.modelo.Modelo;
-import net.sf.jautoinvoice.client.modelo.Servico;
+import net.sf.jautoinvoice.client.model.IVA;
+import net.sf.jautoinvoice.client.model.Marca;
+import net.sf.jautoinvoice.client.model.Modelo;
+import net.sf.jautoinvoice.client.model.Servico;
 
 /**
  * Serviço de gestão de dados auxiliares.
