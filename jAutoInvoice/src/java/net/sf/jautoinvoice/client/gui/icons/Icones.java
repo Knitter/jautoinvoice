@@ -28,6 +28,8 @@ import com.google.gwt.resources.client.ImageResource;
  */
 public interface Icones extends ClientBundle {
 
+    ImageResource banner();
+    
     ImageResource x16Add();
 
     ImageResource x16ArrowLeft();

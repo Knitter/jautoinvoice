@@ -21,6 +21,7 @@
 package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.widget.Text;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Conteúdo que representa o rodapé da aplicação.
@@ -38,6 +39,11 @@ public final class Rodape extends Conteudo {
     public void init() {
         Text texto = new Text("Footer here...");
         initComponent(texto);
+    }
+
+    @Override
+    public Widget getContainer() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
 //TODO: completar

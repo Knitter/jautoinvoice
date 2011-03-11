@@ -21,21 +21,7 @@
 package net.sf.jautoinvoice.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
-import net.sf.jautoinvoice.client.srvs.SrvAuxiliar;
-import net.sf.jautoinvoice.client.srvs.SrvAuxiliarAsync;
-import net.sf.jautoinvoice.client.srvs.SrvClienteAsync;
-import net.sf.jautoinvoice.client.srvs.SrvConfiguracao;
-import net.sf.jautoinvoice.client.srvs.SrvConfiguracaoAsync;
-import net.sf.jautoinvoice.client.srvs.SrvFornecedor;
-import net.sf.jautoinvoice.client.srvs.SrvFornecedorAsync;
-import net.sf.jautoinvoice.client.srvs.SrvFuncionario;
-import net.sf.jautoinvoice.client.srvs.SrvFuncionarioAsync;
-import net.sf.jautoinvoice.client.srvs.SrvMaterial;
-import net.sf.jautoinvoice.client.srvs.SrvMaterialAsync;
-import net.sf.jautoinvoice.client.srvs.SrvVeiculo;
-import net.sf.jautoinvoice.client.srvs.SrvVeiculoAsync;
 
 /**
  * Ponto inicial de entrada na aplicação, como exigido pelo GWT. Esta classe é
@@ -45,27 +31,14 @@ import net.sf.jautoinvoice.client.srvs.SrvVeiculoAsync;
  */
 public class JAutoInvoiceEntryPoint implements EntryPoint {
 
-    private SrvClienteAsync srvCliente;
-    private SrvAuxiliarAsync srvAuxiliar;
-    private SrvConfiguracaoAsync srvConfiguracao;
-    private SrvFornecedorAsync srvFornecedor;
-    private SrvFuncionarioAsync srvFuncionario;
-    private SrvMaterialAsync srvMaterial;
-    private SrvVeiculoAsync srvVeiculo;
+    
 
-    public void onModuleLoad() {
-        srvAuxiliar = (SrvAuxiliarAsync) GWT.create(SrvAuxiliar.class);
-        srvConfiguracao = (SrvConfiguracaoAsync) GWT.create(SrvConfiguracao.class);
-        srvFornecedor = (SrvFornecedorAsync) GWT.create(SrvFornecedor.class);
-        srvFuncionario = (SrvFuncionarioAsync) GWT.create(SrvFuncionario.class);
-        srvMaterial = (SrvMaterialAsync) GWT.create(SrvMaterial.class);
-        srvVeiculo = (SrvVeiculoAsync) GWT.create(SrvVeiculo.class);
-        
+    public void onModuleLoad() {        
         //??
-        History.addValueChangeHandler(GestorLayout.getInstance());
+        History.addValueChangeHandler(JAutoInvoiceApp.getInstance());
 
         //start GUI
-        GestorLayout.getInstance().doLayout();
+        JAutoInvoiceApp.getInstance().doLayout();
     }
 }
 //TODO: completar

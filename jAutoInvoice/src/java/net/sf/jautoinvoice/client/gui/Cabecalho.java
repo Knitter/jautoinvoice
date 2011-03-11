@@ -22,8 +22,13 @@ package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
+import net.sf.jautoinvoice.client.JAutoInvoiceApp;
 
 /**
  * Zona do cabeçalho onde se incluem o menu principal e o logótipo da aplicação.
@@ -33,6 +38,9 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 
 public final class Cabecalho extends Conteudo {
 
+    private LayoutContainer root;
+    //private VerticalPanel root;
+    
     public Cabecalho() {
         super();
         init();
@@ -40,11 +48,16 @@ public final class Cabecalho extends Conteudo {
 
     @Override
     public void init() {
-        LayoutContainer container = new LayoutContainer(new BorderLayout());
-        //TODO: adicionar painel de logótipo
-        container.add(new MenuPrincipal(), new BorderLayoutData(LayoutRegion.CENTER));
+        root = new LayoutContainer(new BorderLayout());
+        root.add(new Image(JAutoInvoiceApp.getInstance().getIcones().banner()), new BorderLayoutData(LayoutRegion.WEST, 355));
+        root.add(new MenuPrincipal(), new BorderLayoutData(LayoutRegion.CENTER));
         
-        initComponent(container);
+        initComponent(root);
+    }
+
+    @Override
+    public Widget getContainer() {
+        return root;
     }
 }
 //TODO: completar

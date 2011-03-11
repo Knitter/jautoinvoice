@@ -39,7 +39,7 @@ public interface SrvVeiculoAsync {
 
     public void removerVeiculo(Veiculo apagar, AsyncCallback<Void> call);
 
-    public void listarTodosVeiculos(AsyncCallback<Veiculo> call);
+    public void listarTodosVeiculos(AsyncCallback<ArrayList<Veiculo>> call);
 
     public void listarFolhasObra(Veiculo veiculo, AsyncCallback<ArrayList<FolhaObra>> call);
 

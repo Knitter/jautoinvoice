@@ -23,9 +23,5 @@ package net.sf.jautoinvoice.client.markers;
 //DUMMY CLASS
 import java.io.Serializable;
 
-public final class FacturaMarkedBean implements Serializable {
-
-    public FacturaMarkedBean() {
-    }
+public interface FacturaMarkedBean extends Serializable {
 }
-//TODO: completar

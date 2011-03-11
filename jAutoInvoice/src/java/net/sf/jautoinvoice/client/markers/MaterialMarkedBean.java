@@ -27,5 +27,5 @@ import com.extjs.gxt.ui.client.data.BeanModelMarker.BEAN;
  * @since 1.0
  */
 @BEAN(net.sf.jautoinvoice.client.model.Material.class)
-public final class MaterialMarkedBean implements BeanModelMarker {
+public interface MaterialMarkedBean extends BeanModelMarker {
 }

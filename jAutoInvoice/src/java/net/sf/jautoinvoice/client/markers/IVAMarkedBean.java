@@ -28,5 +28,5 @@ import com.extjs.gxt.ui.client.data.BeanModelMarker.BEAN;
  * @since 1.0
  */
 @BEAN(net.sf.jautoinvoice.client.model.IVA.class)
-public final class IVAMarkedBean implements BeanModelMarker {
+public interface IVAMarkedBean extends BeanModelMarker {
 }

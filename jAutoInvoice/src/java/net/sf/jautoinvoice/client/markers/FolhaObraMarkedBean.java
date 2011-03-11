@@ -28,5 +28,5 @@ import com.extjs.gxt.ui.client.data.BeanModelMarker.BEAN;
  * @since 1.0
  */
 @BEAN(net.sf.jautoinvoice.client.model.FolhaObra.class)
-public final class FolhaObraMarkedBean implements BeanModelMarker {
+public interface FolhaObraMarkedBean extends BeanModelMarker {
 }

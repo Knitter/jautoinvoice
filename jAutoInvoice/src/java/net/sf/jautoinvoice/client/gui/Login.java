@@ -21,6 +21,7 @@
 package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Janela de login.
@@ -29,6 +30,8 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
  */
 public final class Login extends Conteudo {
 
+    private LayoutContainer root;
+
     public Login() {
         super();
         init();
@@ -36,9 +39,14 @@ public final class Login extends Conteudo {
 
     @Override
     public void init() {
-        LayoutContainer container = new LayoutContainer();
+        root = new LayoutContainer();
 
-        initComponent(container);
+        initComponent(root);
+    }
+
+    @Override
+    public Widget getContainer() {
+        return root;
     }
 }
 //TODO: completar

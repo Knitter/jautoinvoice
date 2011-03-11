@@ -21,6 +21,8 @@
 package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.widget.Composite;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Classe abstracta que representa um conteúdo. Um conteúdo pode ser qualquer 
@@ -41,4 +43,12 @@ public abstract class Conteudo extends Composite {
      * <em>initComponent</em> de modo a ligar o conteúdo com o GXT.
      */
     public abstract void init();
+
+    /**
+     * Devolve o widget base usado para fazer a representação gráfica do 
+     * conteúdo.
+     * 
+     * @return Widget base usada pelo conteúdo.
+     */
+    public abstract Widget getContainer();
 }
