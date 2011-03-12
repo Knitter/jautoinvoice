@@ -87,6 +87,14 @@ public interface Icones extends ClientBundle {
     ImageResource x16WrenchOrangeAdd();
 
     ImageResource x16WrenchOrangeDelete();
+    
+    ImageResource x16LorryAdd();
+    
+    ImageResource x16LorryDelete();
+    
+    ImageResource x16Disk();
+    
+    ImageResource x16Cancel();
 
     ImageResource x32Brick();
 
@@ -117,4 +125,6 @@ public interface Icones extends ClientBundle {
     ImageResource x32Vcard();
 
     ImageResource x32WrenchOrange();
+    
+    ImageResource x32Lorry();
 }

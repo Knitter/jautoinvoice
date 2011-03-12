@@ -31,15 +31,20 @@ public final class Funcionario implements Serializable {
     private String nome;
     private String contribuinte;
     private double valorHora;
-    
+    private Utilizador utilizador;
+    private boolean activo;
+
     public Funcionario() {
         //DO NOTHING
     }
 
-    public Funcionario(String nome, String contribuinte, double valorHora) {
+    public Funcionario(String nome, String contribuinte, double valorHora,
+            Utilizador utilizador, boolean activo) {
         this.nome = nome;
         this.contribuinte = contribuinte;
         this.valorHora = valorHora;
+        this.utilizador = utilizador;
+        this.activo = activo;
     }
 
     public String getContribuinte() {
@@ -66,6 +71,22 @@ public final class Funcionario implements Serializable {
         this.valorHora = valorHora;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        this.utilizador = utilizador;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -75,9 +96,6 @@ public final class Funcionario implements Serializable {
             return false;
         }
         final Funcionario other = (Funcionario) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
-            return false;
-        }
         if ((this.contribuinte == null) ? (other.contribuinte != null) : !this.contribuinte.equals(other.contribuinte)) {
             return false;
         }
@@ -87,7 +105,6 @@ public final class Funcionario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 47 * hash + (this.contribuinte != null ? this.contribuinte.hashCode() : 0);
         return hash;
     }

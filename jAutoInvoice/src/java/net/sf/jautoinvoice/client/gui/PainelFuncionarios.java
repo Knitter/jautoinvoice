@@ -22,6 +22,7 @@ package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseListLoader;
 import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
@@ -36,6 +37,7 @@ import com.extjs.gxt.ui.client.widget.Html;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
+import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
@@ -48,6 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
 import java.util.ArrayList;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
 import net.sf.jautoinvoice.client.model.Funcionario;
 
@@ -59,6 +62,7 @@ public final class PainelFuncionarios extends Conteudo {
 
     private LayoutContainer root;
     private BaseListLoader<ListLoadResult<BeanModel>> loader;
+    private PainelFuncionarios me = this;
 
     public PainelFuncionarios() {
         super();
@@ -79,38 +83,31 @@ public final class PainelFuncionarios extends Conteudo {
     @Override
     public void init() {
         ContentPanel painel = new ContentPanel();
-        
+
         root = new LayoutContainer(new BorderLayout());
-        
+
         painel.setHeading("Lista de Funcionários");
         painel.setLayout(new FitLayout());
-        
+
         ToolBar barra = new ToolBar();
         barra.setSpacing(2);
-        
-        Button botao = new Button("Adicionar");
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+
+        Button botao = new Button();
+        botao.setToolTip("Adicionar");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16UserAdd()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                new FormularioFuncionario().show();
+                new FormularioFuncionario(me).show();
             }
         });
         barra.add(botao);
-        
-        botao = new Button("Remover");
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                //TODO: implementar
-            }
-        });
-        barra.add(botao);
-        barra.add(new SeparatorToolItem());
-        
-        botao = new Button("Imprimir");
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao = new Button();
+        botao.setToolTip("Remover");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16UserDelete()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -119,8 +116,21 @@ public final class PainelFuncionarios extends Conteudo {
         });
         barra.add(botao);
         barra.add(new SeparatorToolItem());
-        
-        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()   {
+
+        botao = new Button();
+        botao.setToolTip("Imprimir");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                //TODO: implementar
+            }
+        });
+        barra.add(botao);
+        barra.add(new SeparatorToolItem());
+
+        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()    {
 
             @Override
             protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
@@ -132,20 +142,24 @@ public final class PainelFuncionarios extends Conteudo {
         barra.add(new Html("Filtrar: "));
         barra.add(filtro);
         painel.setTopComponent(barra);
-        
+
         ToolBar estado = new ToolBar();
         estado.add(new SeparatorToolItem());
         estado.add(new Html("TODO: "));
         estado.setAlignment(HorizontalAlignment.RIGHT);
         painel.setBottomComponent(estado);
-        
+
+        CheckBoxSelectionModel<BeanModel> cbsm = new CheckBoxSelectionModel<BeanModel>();
+        cbsm.setSelectionMode(SelectionMode.SIMPLE);
+
         ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
+        columns.add(cbsm.getColumn());
         columns.add(new ColumnConfig("nome", "Nome", 200));
         columns.add(new ColumnConfig("contribuinte", "Contribuinte", 100));
         columns.add(new ColumnConfig("valorHora", "Valor/Hora", 50));
 
-        RpcProxy<ArrayList<Funcionario>> proxy = new RpcProxy<ArrayList<Funcionario>>()       {
+        RpcProxy<ArrayList<Funcionario>> proxy = new RpcProxy<ArrayList<Funcionario>>()        {
 
             @Override
             protected void load(Object loadConfig, AsyncCallback<ArrayList<Funcionario>> callback) {
@@ -156,12 +170,17 @@ public final class PainelFuncionarios extends Conteudo {
         loader = new BaseListLoader<ListLoadResult<BeanModel>>(proxy, new BeanModelReader());
         ListStore<BeanModel> dados = new ListStore<BeanModel>(loader);
         filtro.bind(dados);
-        
+
         Grid<BeanModel> grelha = new Grid<BeanModel>(dados, new ColumnModel(columns));
+        grelha.addPlugin(cbsm);
         painel.add(grelha);
 
         root.add(painel, new BorderLayoutData(LayoutRegion.CENTER));
-        
+
         initComponent(root);
+    }
+    
+    public BaseListLoader getLoader() {
+        return loader;
     }
 }

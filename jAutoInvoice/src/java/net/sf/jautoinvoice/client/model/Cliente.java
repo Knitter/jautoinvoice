@@ -36,6 +36,7 @@ public final class Cliente implements Serializable {
     private String endereco;
     private ArrayList<Veiculo> veiculos;
     private boolean activo;
+    private Utilizador utilizador;
 
     public Cliente() {
         this.contactos = new ArrayList<String>();
@@ -44,12 +45,13 @@ public final class Cliente implements Serializable {
     }
 
     public Cliente(String codigo, String nome, String email, ArrayList<String> contactos,
-            String endereco, ArrayList<Veiculo> veiculos, boolean activo) {
+            String endereco, ArrayList<Veiculo> veiculos, boolean activo, Utilizador utilizador) {
         this.codigo = codigo;
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
         this.activo = activo;
+        this.utilizador = utilizador;
 
         this.contactos = new ArrayList<String>();
         if (contactos != null) {
@@ -161,6 +163,14 @@ public final class Cliente implements Serializable {
         for (Veiculo v : veiculos) {
             this.veiculos.add(v);
         }
+    }
+
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        this.utilizador = utilizador;
     }
 
     @Override

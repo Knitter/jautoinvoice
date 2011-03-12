@@ -22,6 +22,7 @@ package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseListLoader;
 import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
@@ -36,6 +37,7 @@ import com.extjs.gxt.ui.client.widget.Html;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
+import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
@@ -46,6 +48,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
 import net.sf.jautoinvoice.client.model.Fornecedor;
@@ -83,8 +86,10 @@ public final class PainelFornecedores extends Conteudo {
 
         ToolBar barra = new ToolBar();
         barra.setSpacing(2);
-        Button botao = new Button("Adicionar");
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+        Button botao = new Button();
+        botao.setToolTip("Adicionar");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16LorryAdd()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -93,8 +98,10 @@ public final class PainelFornecedores extends Conteudo {
         });
         barra.add(botao);
 
-        botao = new Button("Remover");
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+        botao = new Button();
+        botao.setToolTip("Remover");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16LorryDelete()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -104,8 +111,10 @@ public final class PainelFornecedores extends Conteudo {
         barra.add(botao);
 
         barra.add(new SeparatorToolItem());
-        botao = new Button("Imprimir");
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+        botao = new Button();
+        botao.setToolTip("Imprimir");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -115,7 +124,7 @@ public final class PainelFornecedores extends Conteudo {
         barra.add(botao);
         barra.add(new SeparatorToolItem());
 
-        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()    {
+        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()     {
 
             @Override
             protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
@@ -134,15 +143,19 @@ public final class PainelFornecedores extends Conteudo {
         estado.setAlignment(HorizontalAlignment.RIGHT);
         painel.setBottomComponent(estado);
 
+        CheckBoxSelectionModel<BeanModel> cbsm = new CheckBoxSelectionModel<BeanModel>();
+        cbsm.setSelectionMode(SelectionMode.SIMPLE);
+
         ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
-        
+
+        columns.add(cbsm.getColumn());
         columns.add(new ColumnConfig("nome", "Nome", 50));
         columns.add(new ColumnConfig("email", "E-mail", 200));
         columns.add(new ColumnConfig("telefone", "Telefone", 200));
         columns.add(new ColumnConfig("fax", "FAX", 200));
         columns.add(new ColumnConfig("notas", "Notas", 200));
 
-        RpcProxy<ArrayList<Fornecedor>> proxy = new RpcProxy<ArrayList<Fornecedor>>()          {
+        RpcProxy<ArrayList<Fornecedor>> proxy = new RpcProxy<ArrayList<Fornecedor>>()           {
 
             @Override
             protected void load(Object loadConfig, AsyncCallback<ArrayList<Fornecedor>> callback) {

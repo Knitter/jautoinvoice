@@ -148,7 +148,7 @@ public final class MenuPrincipal extends Conteudo {
         });
         grupo.add(botao);
         
-        botao = new Button("Fornecedores");
+        botao = new Button("Fornecedores", AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x32Lorry()));
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);

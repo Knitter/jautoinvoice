@@ -20,11 +20,20 @@
  */
 package net.sf.jautoinvoice.client.gui;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import net.sf.jautoinvoice.client.JAutoInvoiceApp;
+import net.sf.jautoinvoice.client.model.Funcionario;
+import net.sf.jautoinvoice.client.model.Utilizador;
 
 /**
  * @since 1.0
@@ -32,9 +41,19 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 public final class FormularioFuncionario extends Window {
 
     private FormPanel dados;
+    private TextField<String> nome;
+    private TextField<String> contribuinte;
+    private NumberField valorHora;
+    private TextField<String> username;
+    private TextField<String> password;
+    private FieldSet grupo;
+    private PainelFuncionarios parent;
+    private FormularioFuncionario me = this;
 
-    public FormularioFuncionario() {
+    public FormularioFuncionario(PainelFuncionarios parent) {
         super();
+        this.parent = parent;
+        
         init();
     }
 
@@ -43,24 +62,82 @@ public final class FormularioFuncionario extends Window {
         dados = new FormPanel();
         dados.setHeaderVisible(false);
 
-        TextField<String> nome = new TextField<String>();
-        nome.setFieldLabel("Nome");
+        nome = new TextField<String>();
+        nome.setFieldLabel("Nome:");
         dados.add(nome);
 
-        TextField<String> contribuinte = new TextField<String>();
-        contribuinte.setFieldLabel("Contribuinte");
+        contribuinte = new TextField<String>();
+        contribuinte.setFieldLabel("Contribuinte:");
         dados.add(contribuinte);
 
-        NumberField valorHora = new NumberField();
+        valorHora = new NumberField();
         valorHora.setPropertyEditorType(Double.class);
-        valorHora.setFieldLabel("Valor Hora");
+        valorHora.setFieldLabel("Valor/Hora:");
         dados.add(valorHora);
+
+        grupo = new FieldSet();
+        grupo.setHeading("Acesso ao Sistema");
+        grupo.setCheckboxToggle(true);
+
+        username = new TextField<String>();
+        username.setFieldLabel("Username:");
+        grupo.add(username);
+
+        password = new TextField<String>();
+        password.setPassword(true);
+        password.setFieldLabel("Password:");
+        grupo.add(password);
+
+        dados.add(grupo);
+
+        Button botao = new Button("Gravar", AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Disk()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()     {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                Funcionario novo = new Funcionario();
+                novo.setNome(nome.getValue());
+                novo.setContribuinte(contribuinte.getValue());
+                novo.setValorHora(valorHora.getValue().floatValue());
+
+                if (grupo.isCheckboxToggle()) {
+                    Utilizador utilizador = new Utilizador();
+                    utilizador.setUsername(username.getValue());
+                    utilizador.setPassword(password.getValue());
+                    novo.setUtilizador(utilizador);
+                }
+                novo.setActivo(true);
+                JAutoInvoiceApp.getInstance().getSrvFuncionario().adicionarFuncionario(novo, new AsyncCallback<Void>()     {
+
+                    public void onFailure(Throwable caught) {
+                        //TODO:
+                    }
+
+                    public void onSuccess(Void result) {
+                        //TODO:
+                    }
+                });
+                me.hide();
+                parent.getLoader().load();
+            }
+        });
+        addButton(botao);
+
+        botao = new Button("Cancelar", AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Cancel()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>()     {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                me.hide();
+            }
+        });
+        addButton(botao);
 
         setHeading("Novo Funcionário");
         setLayout(new FitLayout());
         setModal(true);
-        setHeight(180);
-        setWidth(300);
+        setHeight(280);
+        setWidth(450);
 
         add(dados);
     }

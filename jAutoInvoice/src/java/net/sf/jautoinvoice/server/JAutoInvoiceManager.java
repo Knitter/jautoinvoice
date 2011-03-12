@@ -61,7 +61,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<Cliente> listarTodosClientes() {
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        List<Cliente> resultado = db.query(new Predicate<Cliente>()             {
+        List<Cliente> resultado = db.query(new Predicate<Cliente>()               {
 
             @Override
             public boolean match(Cliente c) {
@@ -94,7 +94,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<IVA> listarTodosIVAs() {
         ArrayList<IVA> lista = new ArrayList<IVA>();
-        List<IVA> resultado = db.query(new Predicate<IVA>()             {
+        List<IVA> resultado = db.query(new Predicate<IVA>()               {
 
             @Override
             public boolean match(IVA i) {
@@ -151,7 +151,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<Servico> listarTodosServicos() {
         ArrayList<Servico> lista = new ArrayList<Servico>();
-        List<Servico> resultado = db.query(new Predicate<Servico>()             {
+        List<Servico> resultado = db.query(new Predicate<Servico>()               {
 
             @Override
             public boolean match(Servico s) {
@@ -186,7 +186,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
         ArrayList<Material> lista = new ArrayList<Material>();
-        List<Material> resultado = db.query(new Predicate<Material>()           {
+        List<Material> resultado = db.query(new Predicate<Material>()             {
 
             @Override
             public boolean match(Material et) {
@@ -210,7 +210,20 @@ public final class JAutoInvoiceManager {
     }
 
     public ArrayList<Funcionario> listarTodosFuncionarios() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
+        List<Funcionario> resultado = db.query(new Predicate<Funcionario>()  {
+
+            @Override
+            public boolean match(Funcionario f) {
+                return f.isActivo();
+            }
+        });
+
+        for (Funcionario f : resultado) {
+            lista.add(f);
+        }
+
+        return lista;
     }
 
     public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario) {
@@ -252,7 +265,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<FolhaObra> listarFolhasObraVeiculo(final Veiculo veiculo) {
         ArrayList<FolhaObra> lista = new ArrayList<FolhaObra>();
-        List<FolhaObra> resultado = db.query(new Predicate<FolhaObra>()      {
+        List<FolhaObra> resultado = db.query(new Predicate<FolhaObra>()        {
 
             @Override
             public boolean match(FolhaObra et) {
@@ -273,7 +286,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<Inspeccao> listarInspeccoesVeiculo(final Veiculo veiculo) {
         ArrayList<Inspeccao> lista = new ArrayList<Inspeccao>();
-        List<Inspeccao> resultado = db.query(new Predicate<Inspeccao>()      {
+        List<Inspeccao> resultado = db.query(new Predicate<Inspeccao>()        {
 
             @Override
             public boolean match(Inspeccao et) {
@@ -290,7 +303,7 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<Veiculo> listarVeiculosInspeccianadosPor(final Funcionario funcionario) {
         ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-        List<Veiculo> resultado = db.query(new Predicate<Veiculo>()      {
+        List<Veiculo> resultado = db.query(new Predicate<Veiculo>()        {
 
             @Override
             public boolean match(Veiculo et) {
