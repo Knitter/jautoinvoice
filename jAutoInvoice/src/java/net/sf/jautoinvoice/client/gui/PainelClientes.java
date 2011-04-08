@@ -78,7 +78,7 @@ public final class PainelClientes extends Conteudo {
     public void init() {
         //final FormularioCliente fc = new FormularioCliente();
         root = new LayoutContainer(new BorderLayout());
-        
+
         ContentPanel painel = new ContentPanel();
         painel.setHeading("Lista de Clientes");
         painel.setLayout(new FitLayout());
@@ -88,7 +88,7 @@ public final class PainelClientes extends Conteudo {
         Button botao = new Button();
         botao.setToolTip("Adicionar");
         botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16VcardAdd()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -96,11 +96,11 @@ public final class PainelClientes extends Conteudo {
             }
         });
         barra.add(botao);
-        
+
         botao = new Button();
         botao.setToolTip("Remover");
         botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16VcardDelete()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -108,12 +108,12 @@ public final class PainelClientes extends Conteudo {
             }
         });
         barra.add(botao);
-        
-        barra.add(new SeparatorToolItem());        
+
+        barra.add(new SeparatorToolItem());
         botao = new Button();
         botao.setToolTip("Imprimir");
         botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -123,7 +123,7 @@ public final class PainelClientes extends Conteudo {
         barra.add(botao);
         barra.add(new SeparatorToolItem());
 
-        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()   {
+        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>() {
 
             @Override
             protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
@@ -135,7 +135,7 @@ public final class PainelClientes extends Conteudo {
         barra.add(new Html("Filtrar: "));
         barra.add(filtro);
         painel.setTopComponent(barra);
-        
+
         ToolBar estado = new ToolBar();
         estado.add(new SeparatorToolItem());
         total = new Html("TODO: ");
@@ -145,7 +145,7 @@ public final class PainelClientes extends Conteudo {
 
         CheckBoxSelectionModel<BeanModel> cbsm = new CheckBoxSelectionModel<BeanModel>();
         cbsm.setSelectionMode(SelectionMode.SIMPLE);
-        
+
         ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
         columns.add(cbsm.getColumn());
@@ -154,7 +154,7 @@ public final class PainelClientes extends Conteudo {
         columns.add(new ColumnConfig("email", "E-mail", 200));
         //TODO: endereços, contactos e veículos
 
-        RpcProxy<ArrayList<Cliente>> proxy = new RpcProxy<ArrayList<Cliente>>()         {
+        RpcProxy<ArrayList<Cliente>> proxy = new RpcProxy<ArrayList<Cliente>>() {
 
             @Override
             protected void load(Object loadConfig, AsyncCallback<ArrayList<Cliente>> callback) {

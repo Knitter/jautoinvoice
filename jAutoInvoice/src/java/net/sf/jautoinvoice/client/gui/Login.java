@@ -20,8 +20,22 @@
  */
 package net.sf.jautoinvoice.client.gui;
 
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.Html;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ButtonBar;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
+import net.sf.jautoinvoice.client.JAutoInvoiceApp;
+import net.sf.jautoinvoice.client.model.Utilizador;
 
 /**
  * Janela de login.
@@ -31,6 +45,7 @@ import com.google.gwt.user.client.ui.Widget;
 public final class Login extends Conteudo {
 
     private LayoutContainer root;
+    private Window mensagem;
 
     public Login() {
         super();
@@ -41,6 +56,58 @@ public final class Login extends Conteudo {
     public void init() {
         root = new LayoutContainer();
 
+        root.setLayout(new CenterLayout());
+
+        FormPanel formulario = new FormPanel();
+        formulario.setHeading("Autenticação");
+        formulario.setSize(350, 120);
+
+        final TextField<String> username = new TextField<String>();
+        username.setFieldLabel("Username");
+        formulario.add(username);
+
+        final TextField<String> password = new TextField<String>();
+        password.setFieldLabel("Password");
+        password.setPassword(true);
+        formulario.add(password);
+
+        //definir janela de mensagem de erro
+        mensagem = new Window();
+        mensagem.add(new Html("Username ou password inválidos."));
+        mensagem.setModal(true);
+
+        Button botao = new Button("Entrar", AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16ArrowRight()),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+
+                        if (!username.getValue().isEmpty() && !password.getValue().isEmpty()) {
+                            JAutoInvoiceApp.getInstance().getSrvAutorizacao().autenticar(username.getValue(),
+                                    password.getValue(), new AsyncCallback<Utilizador>() {
+
+                                public void onFailure(Throwable caught) {
+                                    //TODO:...
+                                }
+
+                                public void onSuccess(Utilizador result) {
+                                    if (result != null) {
+                                        JAutoInvoiceApp.getInstance().setUtilizadorAutenticado(result);
+                                        JAutoInvoiceApp.getInstance().doLayout();
+                                    } else {
+                                        mensagem.show();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+        ButtonBar barra = new ButtonBar();
+        barra.add(botao);
+        barra.setAlignment(HorizontalAlignment.RIGHT);
+        formulario.add(barra);
+
+        root.add(formulario);
         initComponent(root);
     }
 

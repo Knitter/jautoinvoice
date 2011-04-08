@@ -4,6 +4,10 @@
         <listener-class>net.sf.jautoinvoice.server.ContextListener</listener-class>
     </listener>
     <servlet>
+        <servlet-name>srvDevImpl</servlet-name>
+        <servlet-class>net.sf.jautoinvoice.server.srvs.SrvDevImpl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>srvClienteImpl</servlet-name>
         <servlet-class>net.sf.jautoinvoice.server.srvs.SrvClienteImpl</servlet-class>
     </servlet>
@@ -30,6 +34,10 @@
     <servlet>
         <servlet-name>srvVeiculoImpl</servlet-name>
         <servlet-class>net.sf.jautoinvoice.server.srvs.SrvVeiculoImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>srvAuthorizationImpl</servlet-name>
+        <servlet-class>net.sf.jautoinvoice.server.srvs.SrvAutorizacaoImpl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>srvAuxiliarImpl</servlet-name>
@@ -58,6 +66,14 @@
     <servlet-mapping>
         <servlet-name>srvVeiculoImpl</servlet-name>
         <url-pattern>/net.sf.jautoinvoice.JAutoInvoice/veiculo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>srvDevImpl</servlet-name>
+        <url-pattern>/net.sf.jautoinvoice.JAutoInvoice/dev</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>srvAuthorizationImpl</servlet-name>
+        <url-pattern>/net.sf.jautoinvoice.JAutoInvoice/auth</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

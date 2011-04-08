@@ -20,10 +20,7 @@
  */
 package net.sf.jautoinvoice.server;
 
-import com.db4o.ObjectContainer;
-import com.db4o.query.Predicate;
 import java.util.ArrayList;
-import java.util.List;
 import net.sf.jautoinvoice.client.model.Cliente;
 import net.sf.jautoinvoice.client.model.FolhaObra;
 import net.sf.jautoinvoice.client.model.Fornecedor;
@@ -34,6 +31,7 @@ import net.sf.jautoinvoice.client.model.Marca;
 import net.sf.jautoinvoice.client.model.Material;
 import net.sf.jautoinvoice.client.model.Modelo;
 import net.sf.jautoinvoice.client.model.Servico;
+import net.sf.jautoinvoice.client.model.Utilizador;
 import net.sf.jautoinvoice.client.model.Veiculo;
 
 /**
@@ -49,280 +47,167 @@ import net.sf.jautoinvoice.client.model.Veiculo;
  */
 public final class JAutoInvoiceManager {
 
-    private ObjectContainer db;
+    private Persistencia motor;
 
     public JAutoInvoiceManager() {
-        db = DBManager.getInstance().getObjectContainer();
+        //TODO: alterar de acordo com as configurações
+        motor = new MotorDB4O();
     }
 
     public void adicionarCliente(Cliente novo) {
-        db.store(novo);
+        motor.adicionarCliente(novo);
     }
 
     public ArrayList<Cliente> listarTodosClientes() {
-        ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        List<Cliente> resultado = db.query(new Predicate<Cliente>()               {
-
-            @Override
-            public boolean match(Cliente c) {
-                return c.isActivo();
-            }
-        });
-
-        for (Cliente c : resultado) {
-            lista.add(c);
-        }
-
-        return lista;
+        return motor.listarTodosClientes();
     }
 
     public boolean removerCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        return motor.removerCliente(cliente);
     }
 
     public void adicionarIVA(IVA novo) {
-        db.store(novo);
+        motor.adicionarIVA(novo);
     }
 
     public void removerIVA(IVA apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerIVA(apagar);
     }
 
     public void adicionarMarca(Marca nova) {
-        db.store(nova);
+        motor.adicionarMarca(nova);
     }
 
     public ArrayList<IVA> listarTodosIVAs() {
-        ArrayList<IVA> lista = new ArrayList<IVA>();
-        List<IVA> resultado = db.query(new Predicate<IVA>()               {
-
-            @Override
-            public boolean match(IVA i) {
-                return i.isActivo();
-            }
-        });
-
-        for (IVA i : resultado) {
-            lista.add(i);
-        }
-
-        return lista;
+        return motor.listarTodosIVAs();
     }
 
     public void removerMarca(Marca apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerMarca(apagar);
     }
 
     public ArrayList<Marca> listarTodasMarcas() {
-        ArrayList<Marca> lista = new ArrayList<Marca>();
-
-        for (Marca m : db.query(Marca.class)) {
-            lista.add(m);
-        }
-
-        return lista;
+        return motor.listarTodasMarcas();
     }
 
     public void adicionarModelo(Modelo novo) {
-        db.store(novo);
+        motor.adicionarModelo(novo);
     }
 
     public void removerModelo(Modelo apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerModelo(apagar);
     }
 
     public ArrayList<Modelo> listarTodosModelos() {
-        ArrayList<Modelo> lista = new ArrayList<Modelo>();
-
-        for (Modelo m : db.query(Modelo.class)) {
-            lista.add(m);
-        }
-
-        return lista;
+        return motor.listarTodosModelos();
     }
 
     public void adicionarServico(Servico novo) {
-        db.store(novo);
+        motor.adicionarServico(novo);
     }
 
     public void removerServico(Servico apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerServico(apagar);
     }
 
     public ArrayList<Servico> listarTodosServicos() {
-        ArrayList<Servico> lista = new ArrayList<Servico>();
-        List<Servico> resultado = db.query(new Predicate<Servico>()               {
-
-            @Override
-            public boolean match(Servico s) {
-                return s.isActivo();
-            }
-        });
-
-        for (Servico s : resultado) {
-            lista.add(s);
-        }
-
-        return lista;
+        return motor.listarTodosServicos();
     }
 
     public void adicionarFornecedor(Fornecedor novo) {
-        db.store(novo);
+        motor.adicionarFornecedor(novo);
     }
 
     public void removerFornecedor(Fornecedor apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerFornecedor(apagar);
     }
 
     public ArrayList<Fornecedor> listarTodosFornecedores() {
-        ArrayList<Fornecedor> lista = new ArrayList<Fornecedor>();
-
-        for (Fornecedor f : db.query(Fornecedor.class)) {
-            lista.add(f);
-        }
-
-        return lista;
+        return motor.listarTodosFornecedores();
     }
 
     public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
-        ArrayList<Material> lista = new ArrayList<Material>();
-        List<Material> resultado = db.query(new Predicate<Material>()             {
-
-            @Override
-            public boolean match(Material et) {
-                return et.getFornecedor().equals(fornecedor);
-            }
-        });
-
-        for (Material m : resultado) {
-            lista.add(m);
-        }
-
-        return lista;
+        return motor.listarMateriaisDeFornecedor(fornecedor);
     }
 
     public void adicionarFuncionario(Funcionario novo) {
-        db.store(novo);
+        motor.adicionarFuncionario(novo);
     }
 
     public void removerFuncionario(Funcionario apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerFuncionario(apagar);
     }
 
     public ArrayList<Funcionario> listarTodosFuncionarios() {
-        ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
-        List<Funcionario> resultado = db.query(new Predicate<Funcionario>()  {
-
-            @Override
-            public boolean match(Funcionario f) {
-                return f.isActivo();
-            }
-        });
-
-        for (Funcionario f : resultado) {
-            lista.add(f);
-        }
-
-        return lista;
+        return motor.listarTodosFuncionarios();
     }
 
     public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return motor.veiculosInspeccionadosPeloFuncionario(funcionario);
     }
 
     public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return motor.obrasDoFuncionario(funcionario);
     }
 
     public void adicionarMaterial(Material novo) {
-        db.store(novo);
+        motor.adicionarMaterial(novo);
     }
 
     public void removerMaterial(Material apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerMaterial(apagar);
     }
 
     public ArrayList<Material> listarTodosMateriais() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return motor.listarTodosMateriais();
     }
 
     public void adicionarVeiculo(Veiculo novo) {
-        db.store(novo);
+        motor.adicionarVeiculo(novo);
     }
 
     public void removerVeiculo(Veiculo apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerVeiculo(apagar);
     }
 
     public ArrayList<Veiculo> listarTodosVeiculos() {
-        ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-        for (Veiculo v : db.query(Veiculo.class)) {
-            lista.add(v);
-        }
-
-        return lista;
+        return motor.listarTodosVeiculos();
     }
 
     public ArrayList<FolhaObra> listarFolhasObraVeiculo(final Veiculo veiculo) {
-        ArrayList<FolhaObra> lista = new ArrayList<FolhaObra>();
-        List<FolhaObra> resultado = db.query(new Predicate<FolhaObra>()        {
-
-            @Override
-            public boolean match(FolhaObra et) {
-                return et.getVeiculo().equals(veiculo);
-            }
-        });
-
-        return lista;
+        return motor.listarFolhasObraVeiculo(veiculo);
     }
 
     public void adicionarInspeccao(Inspeccao nova) {
-        db.store(nova);
+        motor.adicionarInspeccao(nova);
     }
 
     public void removerInspeccao(Inspeccao apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        motor.removerInspeccao(apagar);
     }
 
     public ArrayList<Inspeccao> listarInspeccoesVeiculo(final Veiculo veiculo) {
-        ArrayList<Inspeccao> lista = new ArrayList<Inspeccao>();
-        List<Inspeccao> resultado = db.query(new Predicate<Inspeccao>()        {
-
-            @Override
-            public boolean match(Inspeccao et) {
-                return et.getVeiculo().equals(veiculo);
-            }
-        });
-
-        for (Inspeccao i : resultado) {
-            lista.add(i);
-        }
-
-        return lista;
+        return motor.listarInspeccoesVeiculo(veiculo);
     }
 
     public ArrayList<Veiculo> listarVeiculosInspeccianadosPor(final Funcionario funcionario) {
-        ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-        List<Veiculo> resultado = db.query(new Predicate<Veiculo>()        {
+        return motor.listarVeiculosInspeccianadosPor(funcionario);
+    }
 
-            @Override
-            public boolean match(Veiculo et) {
+    public boolean autorizado(Utilizador utilizador, String area) {
+        //TODO: ...
+        return true;
+    }
 
-                for (Inspeccao i : et.getInspeccoes()) {
-                    if (i.getFuncionario().equals(funcionario)) {
-                        return true;
-                    }
-                }
+    public Utilizador autenticar(String username, String password) {
+        password = SHA1.hash(password);
 
-                return false;
-            }
-        });
-
-        for (Veiculo v : resultado) {
-            lista.add(v);
+        Utilizador utilizador = motor.autenticar(username, password);
+        if (utilizador != null) {
+            utilizador.setPassword(null);
         }
 
-        return lista;
+        return utilizador;
     }
 }
 //TODO: completar
