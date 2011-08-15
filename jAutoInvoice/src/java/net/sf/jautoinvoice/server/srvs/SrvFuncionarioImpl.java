@@ -62,4 +62,8 @@ public class SrvFuncionarioImpl extends RemoteServiceServlet implements SrvFunci
     public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario) {
         return gestor.obrasDoFuncionario(funcionario);
     }
+    
+    public void removerFuncionarios(ArrayList<Funcionario> funcionarios) {
+        gestor.removerFuncionarios(funcionarios);
+    }
 }

@@ -23,11 +23,12 @@ package net.sf.jautoinvoice.client.model;
 import java.io.Serializable;
 
 /**
- * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public final class Funcionario implements Serializable {
 
+    private String id;
     private String nome;
     private String contribuinte;
     private double valorHora;
@@ -53,6 +54,14 @@ public final class Funcionario implements Serializable {
 
     public void setContribuinte(String contribuinte) {
         this.contribuinte = contribuinte;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -96,6 +105,11 @@ public final class Funcionario implements Serializable {
             return false;
         }
         final Funcionario other = (Funcionario) obj;
+
+        if (this.id.equals(other.id)) {
+            return true;
+        }
+
         if ((this.contribuinte == null) ? (other.contribuinte != null) : !this.contribuinte.equals(other.contribuinte)) {
             return false;
         }
@@ -105,6 +119,7 @@ public final class Funcionario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 47 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 47 * hash + (this.contribuinte != null ? this.contribuinte.hashCode() : 0);
         return hash;
     }

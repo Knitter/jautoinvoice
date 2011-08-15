@@ -29,12 +29,16 @@ import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.ListLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Html;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
@@ -51,11 +55,12 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import java.util.List;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
 import net.sf.jautoinvoice.client.model.Funcionario;
 
 /**
- * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public final class PainelFuncionarios extends Conteudo {
@@ -82,8 +87,53 @@ public final class PainelFuncionarios extends Conteudo {
 
     @Override
     public void init() {
-        ContentPanel painel = new ContentPanel();
 
+        //criar grelha e elementos necessários à apresentação das linhas
+        CheckBoxSelectionModel<BeanModel> cbsm = new CheckBoxSelectionModel<BeanModel>();
+        cbsm.setSelectionMode(SelectionMode.SIMPLE);
+
+        ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
+
+        columns.add(cbsm.getColumn());
+        columns.add(new ColumnConfig("nome", "Nome", 200));
+        columns.add(new ColumnConfig("contribuinte", "Contribuinte", 100));
+        columns.add(new ColumnConfig("valorHora", "Valor/Hora", 70));
+
+        RpcProxy<ArrayList<Funcionario>> proxy = new RpcProxy<ArrayList<Funcionario>>() {
+
+            @Override
+            protected void load(Object loadConfig, AsyncCallback<ArrayList<Funcionario>> callback) {
+                JAutoInvoiceApp.getInstance().getSrvFuncionario().listarTodosFuncionarios(callback);
+            }
+        };
+
+        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>() {
+
+            @Override
+            protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
+                    BeanModel record, String property, String filter) {
+
+                String nome = record.get("nome");
+                String contribuinte = record.get("contribuinte");
+
+                if (nome.toLowerCase().startsWith(filter.toLowerCase()) || contribuinte.startsWith(filter)) {
+                    return true;
+                }
+
+                return false;
+
+            }
+        };
+
+        loader = new BaseListLoader<ListLoadResult<BeanModel>>(proxy, new BeanModelReader());
+        ListStore<BeanModel> dados = new ListStore<BeanModel>(loader);
+        filtro.bind(dados);
+
+        final Grid<BeanModel> grelha = new Grid<BeanModel>(dados, new ColumnModel(columns));
+        grelha.addPlugin(cbsm);
+
+        //restantes componentes visuais             
+        ContentPanel painel = new ContentPanel();
         root = new LayoutContainer(new BorderLayout());
 
         painel.setHeading("Lista de Funcionários");
@@ -95,7 +145,7 @@ public final class PainelFuncionarios extends Conteudo {
         Button botao = new Button();
         botao.setToolTip("Adicionar");
         botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16UserAdd()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -104,41 +154,58 @@ public final class PainelFuncionarios extends Conteudo {
         });
         barra.add(botao);
 
+        final Listener<MessageBoxEvent> eventoRemocao = new Listener<MessageBoxEvent>() {
+
+            public void handleEvent(MessageBoxEvent ce) {
+                if (Dialog.YES.equals(ce.getButtonClicked().getItemId())) {
+                    ArrayList<Funcionario> seleccionados = new ArrayList<Funcionario>();
+                    for (BeanModel m : grelha.getSelectionModel().getSelectedItems()) {
+                        seleccionados.add((Funcionario) m.getBean());
+                    }
+
+                    JAutoInvoiceApp.getInstance().getSrvFuncionario().removerFuncionarios(seleccionados, new AsyncCallback<Void>() {
+
+                        public void onFailure(Throwable caught) {
+                            MessageBox.alert("Erro", "Não foi possível remover o funcionário.", null);
+                        }
+
+                        public void onSuccess(Void result) {
+                            loader.load();
+                        }
+                    });
+                }
+            }
+        };
+
         botao = new Button();
         botao.setToolTip("Remover");
         botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16UserDelete()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                //TODO: implementar
+                List<BeanModel> seleccionados = grelha.getSelectionModel().getSelectedItems();
+                if (seleccionados != null && seleccionados.size() > 0) {
+                    MessageBox.confirm("Confirm", "Tem a certeza que deseja remover o funcionário(s) seleccionado(s)?", eventoRemocao);
+                }
             }
         });
         barra.add(botao);
         barra.add(new SeparatorToolItem());
 
-        botao = new Button();
-        botao.setToolTip("Imprimir");
-        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()   {
+        //botao = new Button();
+        //botao.setToolTip("Imprimir");
+        //botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
+        //botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                //TODO: implementar
-            }
-        });
-        barra.add(botao);
-        barra.add(new SeparatorToolItem());
+        //    @Override
+        //    public void componentSelected(ButtonEvent ce) {
+        //        //TODO: implementar impressão de funcionários
+        //    }
+        //});
+        //barra.add(botao);
+        //barra.add(new SeparatorToolItem());
 
-        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()    {
-
-            @Override
-            protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
-                    BeanModel record, String property, String filter) {
-                return true;
-
-            }
-        };
         barra.add(new Html("Filtrar: "));
         barra.add(filtro);
         painel.setTopComponent(barra);
@@ -149,37 +216,12 @@ public final class PainelFuncionarios extends Conteudo {
         estado.setAlignment(HorizontalAlignment.RIGHT);
         painel.setBottomComponent(estado);
 
-        CheckBoxSelectionModel<BeanModel> cbsm = new CheckBoxSelectionModel<BeanModel>();
-        cbsm.setSelectionMode(SelectionMode.SIMPLE);
-
-        ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
-
-        columns.add(cbsm.getColumn());
-        columns.add(new ColumnConfig("nome", "Nome", 200));
-        columns.add(new ColumnConfig("contribuinte", "Contribuinte", 100));
-        columns.add(new ColumnConfig("valorHora", "Valor/Hora", 50));
-
-        RpcProxy<ArrayList<Funcionario>> proxy = new RpcProxy<ArrayList<Funcionario>>()        {
-
-            @Override
-            protected void load(Object loadConfig, AsyncCallback<ArrayList<Funcionario>> callback) {
-                JAutoInvoiceApp.getInstance().getSrvFuncionario().listarTodosFuncionarios(callback);
-            }
-        };
-
-        loader = new BaseListLoader<ListLoadResult<BeanModel>>(proxy, new BeanModelReader());
-        ListStore<BeanModel> dados = new ListStore<BeanModel>(loader);
-        filtro.bind(dados);
-
-        Grid<BeanModel> grelha = new Grid<BeanModel>(dados, new ColumnModel(columns));
-        grelha.addPlugin(cbsm);
         painel.add(grelha);
-
         root.add(painel, new BorderLayoutData(LayoutRegion.CENTER));
 
         initComponent(root);
     }
-    
+
     public BaseListLoader getLoader() {
         return loader;
     }

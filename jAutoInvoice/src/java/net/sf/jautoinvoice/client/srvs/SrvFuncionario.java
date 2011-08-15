@@ -49,6 +49,7 @@ public interface SrvFuncionario extends RemoteService {
      * @param apagar Funcionário que se pretende remover.
      * @since 1.0
      */
+    //TODO: possivelmente remover
     public void removerFuncionario(Funcionario apagar);
 
     /**
@@ -77,4 +78,11 @@ public interface SrvFuncionario extends RemoteService {
      * @since 1.0
      */
     public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario);
+    
+    /**
+     * Permite a remoção de vários funcionários em simultâneo.
+     * 
+     * @param funcionarios 
+     */
+    public void removerFuncionarios(ArrayList<Funcionario> funcionarios);
 }

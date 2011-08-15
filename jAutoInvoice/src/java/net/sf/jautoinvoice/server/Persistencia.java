@@ -80,6 +80,8 @@ public interface Persistencia {
 
     public ArrayList<Funcionario> listarTodosFuncionarios();
 
+    public void removerFuncionarios(ArrayList<Funcionario> funcionarios);
+
     public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario);
 
     public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario);

@@ -27,9 +27,11 @@ import net.sf.jautoinvoice.client.model.Funcionario;
 import net.sf.jautoinvoice.client.model.Veiculo;
 
 /**
- * Versao assíncrona do serviço de gestão de funcionários.
+ * Versão assíncrona do serviço de gestão de funcionários.
  * 
  * @see SrvFuncionario
+ * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public interface SrvFuncionarioAsync {
@@ -43,4 +45,6 @@ public interface SrvFuncionarioAsync {
     public void inpeccionadosPeloFuncionario(Funcionario funcionario, AsyncCallback<ArrayList<Veiculo>> call);
 
     public void obrasDoFuncionario(Funcionario funcionario, AsyncCallback<ArrayList<FolhaObra>> call);
+
+    public void removerFuncionarios(ArrayList<Funcionario> funcionarios, AsyncCallback<Void> call);
 }

@@ -43,6 +43,7 @@ import net.sf.jautoinvoice.client.model.Veiculo;
  * ser usado para criar uma aplicação <em>Desktop</em> ou de qualquer outro 
  * formato.
  * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public final class JAutoInvoiceManager {
@@ -140,6 +141,10 @@ public final class JAutoInvoiceManager {
 
     public ArrayList<Funcionario> listarTodosFuncionarios() {
         return motor.listarTodosFuncionarios();
+    }
+
+    public void removerFuncionarios(ArrayList<Funcionario> funcionarios) {
+        motor.removerFuncionarios(funcionarios);
     }
 
     public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario) {

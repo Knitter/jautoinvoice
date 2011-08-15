@@ -25,6 +25,7 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import net.sf.jautoinvoice.client.model.Cliente;
 import net.sf.jautoinvoice.client.model.FolhaObra;
 import net.sf.jautoinvoice.client.model.Fornecedor;
@@ -47,22 +48,23 @@ public class MotorDB4O implements Persistencia {
     }
 
     public void adicionarCliente(Cliente novo) {
+        novo.setId(UUID.randomUUID().toString());
         db.store(novo);
     }
 
     public ArrayList<Cliente> listarTodosClientes() {
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        List<Cliente> resultado = db.query(new Predicate<Cliente>() {
+        //List<Cliente> resultado = db.query(new Predicate<Cliente>() {
 
-            @Override
-            public boolean match(Cliente c) {
-                return c.isActivo();
-            }
-        });
+        //    @Override
+        //    public boolean match(Cliente c) {
+        //        return c.isActivo();
+        //    }
+        //});
 
-        for (Cliente c : resultado) {
-            lista.add(c);
-        }
+        //for (Cliente c : resultado) {
+        //    lista.add(c);
+        //}
 
         return lista;
     }
@@ -72,31 +74,33 @@ public class MotorDB4O implements Persistencia {
     }
 
     public void adicionarIVA(IVA novo) {
+        //TODO: id
         db.store(novo);
     }
 
     public void removerIVA(IVA apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public ArrayList<IVA> listarTodosIVAs() {
         ArrayList<IVA> lista = new ArrayList<IVA>();
-        List<IVA> resultado = db.query(new Predicate<IVA>() {
+        //List<IVA> resultado = db.query(new Predicate<IVA>() {
 
-            @Override
-            public boolean match(IVA i) {
-                return i.isActivo();
-            }
-        });
+        //    @Override
+        //    public boolean match(IVA i) {
+        //        return i.isActivo();
+        //    }
+        //});
 
-        for (IVA i : resultado) {
-            lista.add(i);
-        }
+        //for (IVA i : resultado) {
+        //    lista.add(i);
+        //}
 
         return lista;
     }
 
     public void adicionarMarca(Marca nova) {
+        //TODO: id
         db.store(nova);
     }
 
@@ -107,32 +111,34 @@ public class MotorDB4O implements Persistencia {
     public ArrayList<Marca> listarTodasMarcas() {
         ArrayList<Marca> lista = new ArrayList<Marca>();
 
-        for (Marca m : db.query(Marca.class)) {
-            lista.add(m);
-        }
+        //for (Marca m : db.query(Marca.class)) {
+        //    lista.add(m);
+        //}
 
         return lista;
     }
 
     public void adicionarModelo(Modelo novo) {
+        //TODO: id
         db.store(novo);
     }
 
     public void removerModelo(Modelo apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public ArrayList<Modelo> listarTodosModelos() {
         ArrayList<Modelo> lista = new ArrayList<Modelo>();
 
-        for (Modelo m : db.query(Modelo.class)) {
-            lista.add(m);
-        }
+        //for (Modelo m : db.query(Modelo.class)) {
+        //    lista.add(m);
+        //}
 
         return lista;
     }
 
     public void adicionarServico(Servico novo) {
+        //TODO: id
         db.store(novo);
     }
 
@@ -142,22 +148,23 @@ public class MotorDB4O implements Persistencia {
 
     public ArrayList<Servico> listarTodosServicos() {
         ArrayList<Servico> lista = new ArrayList<Servico>();
-        List<Servico> resultado = db.query(new Predicate<Servico>() {
+        //List<Servico> resultado = db.query(new Predicate<Servico>() {
 
-            @Override
-            public boolean match(Servico s) {
-                return s.isActivo();
-            }
-        });
+        //    @Override
+        //    public boolean match(Servico s) {
+        //        return s.isActivo();
+        //    }
+        //});
 
-        for (Servico s : resultado) {
-            lista.add(s);
-        }
+        //for (Servico s : resultado) {
+        //    lista.add(s);
+        //}
 
         return lista;
     }
 
     public void adicionarFornecedor(Fornecedor novo) {
+        //TODO: id
         db.store(novo);
     }
 
@@ -168,36 +175,48 @@ public class MotorDB4O implements Persistencia {
     public ArrayList<Fornecedor> listarTodosFornecedores() {
         ArrayList<Fornecedor> lista = new ArrayList<Fornecedor>();
 
-        for (Fornecedor f : db.query(Fornecedor.class)) {
-            lista.add(f);
-        }
+        //for (Fornecedor f : db.query(Fornecedor.class)) {
+        //    lista.add(f);
+        //}
 
         return lista;
     }
 
     public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
         ArrayList<Material> lista = new ArrayList<Material>();
-        List<Material> resultado = db.query(new Predicate<Material>() {
+        //List<Material> resultado = db.query(new Predicate<Material>() {
 
-            @Override
-            public boolean match(Material et) {
-                return et.getFornecedor().equals(fornecedor);
-            }
-        });
+        //    @Override
+        //    public boolean match(Material et) {
+        //        return et.getFornecedor().equals(fornecedor);
+        //    }
+        //});
 
-        for (Material m : resultado) {
-            lista.add(m);
-        }
+        //for (Material m : resultado) {
+        //    lista.add(m);
+        //}
 
         return lista;
     }
 
     public void adicionarFuncionario(Funcionario novo) {
+        novo.setId(UUID.randomUUID().toString());
         db.store(novo);
     }
 
     public void removerFuncionario(Funcionario apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        final String uuid = apagar.getId();
+        List<Funcionario> resultado = db.query(new Predicate<Funcionario>() {
+
+            public boolean match(Funcionario f) {
+                return f.getId().equals(uuid);
+            }
+        });
+
+        if (resultado.size() == 1) {
+            resultado.get(0).setActivo(false);
+            db.store(resultado.get(0));
+        }
     }
 
     public ArrayList<Funcionario> listarTodosFuncionarios() {
@@ -217,6 +236,12 @@ public class MotorDB4O implements Persistencia {
         return lista;
     }
 
+    public void removerFuncionarios(ArrayList<Funcionario> funcionarios) {
+        for (Funcionario apagar : funcionarios) {
+            removerFuncionario(apagar);
+        }
+    }
+
     public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
@@ -226,6 +251,7 @@ public class MotorDB4O implements Persistencia {
     }
 
     public void adicionarMaterial(Material novo) {
+        //TODO: id
         db.store(novo);
     }
 
@@ -235,22 +261,23 @@ public class MotorDB4O implements Persistencia {
 
     public ArrayList<Material> listarTodosMateriais() {
         ArrayList<Material> lista = new ArrayList<Material>();
-        List<Material> resultado = db.query(new Predicate<Material>() {
-
-            @Override
-            public boolean match(Material m) {
-                return m.isActivo();
-            }
-        });
-
-        for (Material m : resultado) {
-            lista.add(m);
-        }
+//        List<Material> resultado = db.query(new Predicate<Material>() {
+//
+//            @Override
+//            public boolean match(Material m) {
+//                return m.isActivo();
+//            }
+//        });
+//
+//        for (Material m : resultado) {
+//            lista.add(m);
+//        }
 
         return lista;
     }
 
     public void adicionarVeiculo(Veiculo novo) {
+        //TODO: id
         db.store(novo);
     }
 
@@ -260,27 +287,28 @@ public class MotorDB4O implements Persistencia {
 
     public ArrayList<Veiculo> listarTodosVeiculos() {
         ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-        for (Veiculo v : db.query(Veiculo.class)) {
-            lista.add(v);
-        }
+//        for (Veiculo v : db.query(Veiculo.class)) {
+//            lista.add(v);
+//        }
 
         return lista;
     }
 
     public ArrayList<FolhaObra> listarFolhasObraVeiculo(final Veiculo veiculo) {
         ArrayList<FolhaObra> lista = new ArrayList<FolhaObra>();
-        List<FolhaObra> resultado = db.query(new Predicate<FolhaObra>() {
-
-            @Override
-            public boolean match(FolhaObra et) {
-                return et.getVeiculo().equals(veiculo);
-            }
-        });
+//        List<FolhaObra> resultado = db.query(new Predicate<FolhaObra>() {
+//
+//            @Override
+//            public boolean match(FolhaObra et) {
+//                return et.getVeiculo().equals(veiculo);
+//            }
+//        });
 
         return lista;
     }
 
     public void adicionarInspeccao(Inspeccao nova) {
+        //TODO: id
         db.store(nova);
     }
 
@@ -290,55 +318,55 @@ public class MotorDB4O implements Persistencia {
 
     public ArrayList<Inspeccao> listarInspeccoesVeiculo(final Veiculo veiculo) {
         ArrayList<Inspeccao> lista = new ArrayList<Inspeccao>();
-        List<Inspeccao> resultado = db.query(new Predicate<Inspeccao>() {
-
-            @Override
-            public boolean match(Inspeccao et) {
-                return et.getVeiculo().equals(veiculo);
-            }
-        });
-
-        for (Inspeccao i : resultado) {
-            lista.add(i);
-        }
+//        List<Inspeccao> resultado = db.query(new Predicate<Inspeccao>() {
+//
+//            @Override
+//            public boolean match(Inspeccao et) {
+//                return et.getVeiculo().equals(veiculo);
+//            }
+//        });
+//
+//        for (Inspeccao i : resultado) {
+//            lista.add(i);
+//        }
 
         return lista;
     }
 
     public ArrayList<Veiculo> listarVeiculosInspeccianadosPor(final Funcionario funcionario) {
         ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-        List<Veiculo> resultado = db.query(new Predicate<Veiculo>() {
-
-            @Override
-            public boolean match(Veiculo et) {
-
-                for (Inspeccao i : et.getInspeccoes()) {
-                    if (i.getFuncionario().equals(funcionario)) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-        });
-
-        for (Veiculo v : resultado) {
-            lista.add(v);
-        }
+//        List<Veiculo> resultado = db.query(new Predicate<Veiculo>() {
+//
+//            @Override
+//            public boolean match(Veiculo et) {
+//
+//                for (Inspeccao i : et.getInspeccoes()) {
+//                    if (i.getFuncionario().equals(funcionario)) {
+//                        return true;
+//                    }
+//                }
+//
+//                return false;
+//            }
+//        });
+//
+//        for (Veiculo v : resultado) {
+//            lista.add(v);
+//        }
 
         return lista;
     }
 
     public Utilizador autenticar(String username, String password) {
-        Utilizador temp = new Utilizador();
-        temp.setUsername(username);
-        temp.setPassword(password);
+        //Utilizador temp = new Utilizador();
+        //temp.setUsername(username);
+        //temp.setPassword(password);
 
-        ObjectSet<Utilizador> resultado = db.queryByExample(temp);
+        //ObjectSet<Utilizador> resultado = db.queryByExample(temp);
 
-        if (resultado.size() == 1) {
-            return resultado.get(0);
-        }
+        //if (resultado.size() == 1) {
+        //    return resultado.get(0);
+        //}
 
         return null;
     }

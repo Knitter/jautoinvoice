@@ -22,6 +22,7 @@ package net.sf.jautoinvoice.client.gui;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -29,6 +30,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
@@ -36,6 +38,7 @@ import net.sf.jautoinvoice.client.model.Funcionario;
 import net.sf.jautoinvoice.client.model.Utilizador;
 
 /**
+ * @autor Sérgio Lopes
  * @since 1.0
  */
 public final class FormularioFuncionario extends Window {
@@ -53,45 +56,45 @@ public final class FormularioFuncionario extends Window {
     public FormularioFuncionario(PainelFuncionarios parent) {
         super();
         this.parent = parent;
-        
+
         init();
     }
 
     private void init() {
-
         dados = new FormPanel();
         dados.setHeaderVisible(false);
 
         nome = new TextField<String>();
-        nome.setFieldLabel("Nome:");
+        nome.setFieldLabel("Nome");
         dados.add(nome);
 
         contribuinte = new TextField<String>();
-        contribuinte.setFieldLabel("Contribuinte:");
+        contribuinte.setFieldLabel("Contribuinte");
         dados.add(contribuinte);
 
         valorHora = new NumberField();
         valorHora.setPropertyEditorType(Double.class);
-        valorHora.setFieldLabel("Valor/Hora:");
+        valorHora.setFieldLabel("Valor/Hora");
         dados.add(valorHora);
 
         grupo = new FieldSet();
+        grupo.setLayout(new FormLayout());
         grupo.setHeading("Acesso ao Sistema");
         grupo.setCheckboxToggle(true);
 
         username = new TextField<String>();
-        username.setFieldLabel("Username:");
+        username.setFieldLabel("Username");
         grupo.add(username);
 
         password = new TextField<String>();
         password.setPassword(true);
-        password.setFieldLabel("Password:");
+        password.setFieldLabel("Password");
         grupo.add(password);
 
         dados.add(grupo);
 
         Button botao = new Button("Gravar", AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Disk()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()     {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -107,24 +110,23 @@ public final class FormularioFuncionario extends Window {
                     novo.setUtilizador(utilizador);
                 }
                 novo.setActivo(true);
-                JAutoInvoiceApp.getInstance().getSrvFuncionario().adicionarFuncionario(novo, new AsyncCallback<Void>()     {
+                JAutoInvoiceApp.getInstance().getSrvFuncionario().adicionarFuncionario(novo, new AsyncCallback<Void>() {
 
                     public void onFailure(Throwable caught) {
-                        //TODO:
+                        MessageBox.alert("Erro", "Não fo possível adicionar o novo funcionário.", null);
                     }
 
                     public void onSuccess(Void result) {
-                        //TODO:
+                        parent.getLoader().load();
                     }
                 });
                 me.hide();
-                parent.getLoader().load();
             }
         });
         addButton(botao);
 
         botao = new Button("Cancelar", AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Cancel()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()     {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -142,4 +144,3 @@ public final class FormularioFuncionario extends Window {
         add(dados);
     }
 }
-//TODO: completar
