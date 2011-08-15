@@ -20,6 +20,8 @@
  */
 package net.sf.jautoinvoice.server;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -43,16 +45,12 @@ public class ContextListener implements ServletContextListener {
         String file = sc.getRealPath("/jauto.jdb");
         if (file != null) {
             DBManager.getInstance().setPath(file);
+            Logger.getLogger(ContextListener.class.getName()).log(Level.FINE, "Contexto iniciado, caminho definido.");
         }
-//        try {
-//            sc.getResource("jauto.jdb");
-//        } catch (MalformedURLException ex) {
-//            Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }
 
     public void contextDestroyed(ServletContextEvent event) {
         DBManager.getInstance().shutdown();
+        Logger.getLogger(ContextListener.class.getName()).log(Level.FINE, "Contexto finalizado.");
     }
 }

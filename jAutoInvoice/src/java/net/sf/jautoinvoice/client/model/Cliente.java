@@ -29,6 +29,7 @@ import java.util.ArrayList;
  */
 public final class Cliente implements Serializable {
 
+    private String id;
     private String codigo;
     private String nome;
     private String email;
@@ -173,6 +174,14 @@ public final class Cliente implements Serializable {
         this.utilizador = utilizador;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -182,9 +191,11 @@ public final class Cliente implements Serializable {
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (this.activo != other.activo) {
-            return false;
+
+        if (this.id.equals(other.id)) {
+            return true;
         }
+
         if ((this.codigo == null) ? (other.codigo != null) : !this.codigo.equals(other.codigo)) {
             return false;
         }
@@ -197,9 +208,9 @@ public final class Cliente implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 97 * hash + (this.codigo != null ? this.codigo.hashCode() : 0);
         hash = 97 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 97 * hash + (this.activo ? 1 : 0);
         return hash;
     }
 }

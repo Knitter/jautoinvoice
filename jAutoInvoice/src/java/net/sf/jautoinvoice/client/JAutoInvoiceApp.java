@@ -31,6 +31,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.HashMap;
 import net.sf.jautoinvoice.client.gui.Cabecalho;
+import net.sf.jautoinvoice.client.gui.CabecalhoEntrada;
 import net.sf.jautoinvoice.client.gui.Login;
 import net.sf.jautoinvoice.client.gui.icons.Icones;
 import net.sf.jautoinvoice.client.gui.PainelClientes;
@@ -59,6 +60,7 @@ import net.sf.jautoinvoice.client.srvs.SrvVeiculo;
 import net.sf.jautoinvoice.client.srvs.SrvVeiculoAsync;
 
 /**
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
@@ -120,28 +122,25 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
         doLayout();
     }
 
+    //TODO: ...
     public void doLayout() {
-        //TODO: remove/rewrite
-        conteudo = new PainelClientes();
-
-        RootLayoutPanel.get().clear();
         Viewport view = new Viewport();
         BorderLayout root = new BorderLayout();
         view.setLayout(root);
+
+        //TODO: autenticação
+        //if (utilizadorAutenticado == null) {
+        //    view.add(new CabecalhoEntrada(), new BorderLayoutData(LayoutRegion.NORTH, 101));
+        //    view.add(new Login(), new BorderLayoutData(LayoutRegion.CENTER));
+        //} else {
+        //TODO: colocar o conteúdo correcto...
+        if (conteudo == null) {
+            conteudo = new PainelClientes();
+        }
 
         view.add(new Cabecalho(), new BorderLayoutData(LayoutRegion.NORTH, 101));
         view.add(conteudo, new BorderLayoutData(LayoutRegion.CENTER));
-        RootLayoutPanel.get().add(view);
-    }
-
-    public void doLogin() {
-        conteudo = new Login();
-
-        Viewport view = new Viewport();
-        BorderLayout root = new BorderLayout();
-        view.setLayout(root);
-
-        view.add(conteudo, new BorderLayoutData(LayoutRegion.CENTER));
+        //}
 
         RootLayoutPanel.get().clear();
         RootLayoutPanel.get().add(view);
@@ -229,6 +228,5 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
     public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
         this.utilizadorAutenticado = utilizadorAutenticado;
     }
-    
 }
 //TODO: completar

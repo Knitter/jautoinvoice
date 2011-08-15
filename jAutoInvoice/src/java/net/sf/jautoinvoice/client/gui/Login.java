@@ -23,6 +23,7 @@ package net.sf.jautoinvoice.client.gui;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.util.Padding;
 import com.extjs.gxt.ui.client.widget.Html;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -31,6 +32,7 @@ import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
+import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
@@ -40,6 +42,7 @@ import net.sf.jautoinvoice.client.model.Utilizador;
 /**
  * Janela de login.
  * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public final class Login extends Conteudo {
@@ -56,7 +59,9 @@ public final class Login extends Conteudo {
     public void init() {
         root = new LayoutContainer();
 
-        root.setLayout(new CenterLayout());
+        VBoxLayout vbox = new VBoxLayout(VBoxLayout.VBoxLayoutAlign.CENTER);
+        vbox.setPadding(new Padding(100, 0, 0, 0));
+        root.setLayout(vbox);
 
         FormPanel formulario = new FormPanel();
         formulario.setHeading("Autenticação");

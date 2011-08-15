@@ -22,6 +22,8 @@ package net.sf.jautoinvoice.server;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Gestor de ligação à base de dados. É esta classe que permite iniciar o motor
@@ -60,12 +62,17 @@ public final class DBManager {
 
     public synchronized void shutdown() {
         if (container != null) {
-            container.close();
+            if (container.close()) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.FINE, "Motor fechado com sucesso.");
+            } else {
+                Logger.getLogger(DBManager.class.getName()).log(Level.WARNING, "Falha ao fechar o motor.");
+            }
         }
     }
 
     private void startup() {
         container = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), path);
+        Logger.getLogger(ContextListener.class.getName()).log(Level.FINE, "DB4O container aberto.");
     }
 
     public String getPath() {

@@ -30,6 +30,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
+import java.util.ArrayList;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
 import net.sf.jautoinvoice.client.srvs.SrvCliente;
 import net.sf.jautoinvoice.client.srvs.SrvClienteAsync;
@@ -65,7 +66,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -79,7 +80,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -93,7 +94,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -111,7 +112,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -125,7 +126,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -139,7 +140,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -153,7 +154,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -171,7 +172,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -185,7 +186,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -203,7 +204,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -217,7 +218,7 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
@@ -231,34 +232,47 @@ public final class MenuPrincipal extends Conteudo {
         botao.setScale(Style.ButtonScale.LARGE);
         botao.setIconAlign(Style.IconAlign.TOP);
         botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent event) {
-                //TODO: implementar logout
-            }
-        });
-        grupo.add(botao);
-
-        botao = new Button("Dev");
-        botao.setScale(Style.ButtonScale.LARGE);
-        botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()  {
-
-            @Override
-            public void componentSelected(ButtonEvent event) {
-                JAutoInvoiceApp.getInstance().getSrvDev().criarDadosTeste(new AsyncCallback<Void>() {
+                JAutoInvoiceApp.getInstance().getSrvAutorizacao().sair(new AsyncCallback<ArrayList<Void>>() {
 
                     public void onFailure(Throwable caught) {
+                        //ignorar
                     }
 
-                    public void onSuccess(Void result) {
+                    public void onSuccess(ArrayList<Void> result) {
+                        JAutoInvoiceApp.getInstance().doLayout();
                     }
                 });
             }
         });
         grupo.add(botao);
         barraFerramentas.add(grupo);
+        
+        //TODO: remover...
+        botao = new Button("Dev");
+        botao.setScale(Style.ButtonScale.LARGE);
+        botao.setArrowAlign(Style.ButtonArrowAlign.BOTTOM);
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent event) {
+                JAutoInvoiceApp.getInstance().getSrvDev().criarDadosTeste(new AsyncCallback<Void>() {
+
+                    public void onFailure(Throwable caught) {
+                        //ignorar
+                    }
+
+                    public void onSuccess(Void result) {
+                        //ignorar
+                    }
+                });
+            }
+        });
+        barraFerramentas.add(botao);
+        //TODO: remover....    
 
         initComponent(barraFerramentas);
     }

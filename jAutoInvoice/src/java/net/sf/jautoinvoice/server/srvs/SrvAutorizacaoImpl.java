@@ -54,7 +54,12 @@ public final class SrvAutorizacaoImpl extends RemoteServiceServlet implements Sr
     }
 
     public void sair() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        HttpSession session = getThreadLocalRequest().getSession();
+
+        Utilizador autenticado = (Utilizador) session.getAttribute("utilizador");
+        if (autenticado != null) {
+            session.removeAttribute("utilizador");
+        }
     }
 
     public boolean autorizado(String area) {
@@ -63,6 +68,10 @@ public final class SrvAutorizacaoImpl extends RemoteServiceServlet implements Sr
 
         if (autenticado == null) {
             return false;
+        }
+
+        if (area.equals("*")) {
+            return true;
         }
 
         return gestor.autorizado(autenticado, area);

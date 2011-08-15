@@ -28,6 +28,7 @@ package net.sf.jautoinvoice.client.model;
  * A interface foi criada para evitar misturar na mesma hierarquia os dois 
  * elementos mencionados acima.
  * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public interface Autenticavel {
@@ -39,7 +40,7 @@ public interface Autenticavel {
      * @return Hash da password.
      * @since 1.0
      */
-    public String getPasswod();
+    public String getPassword();
 
     /**
      * Recebe uma password e guarda-a neste elemento. A password deve vir 

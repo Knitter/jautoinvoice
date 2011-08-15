@@ -22,37 +22,22 @@ package net.sf.jautoinvoice.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Ponto inicial de entrada na aplicação, como exigido pelo GWT. Esta classe é
  * responsável pela iniciação da aplicação, adição de handlers de eventos, etc.
  * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public class JAutoInvoiceEntryPoint implements EntryPoint {
 
     public void onModuleLoad() {
-        //??
+        //TODO: ver questão do histórico...
         History.addValueChangeHandler(JAutoInvoiceApp.getInstance());
 
-        //start GUI
-        JAutoInvoiceApp.getInstance().getSrvAutorizacao().autorizado("", new AsyncCallback<Boolean>() {
-
-            public void onFailure(Throwable caught) {
-                //TODO:...
-            }
-
-            public void onSuccess(Boolean result) {
-
-
-                if (result.booleanValue()) {
-                    JAutoInvoiceApp.getInstance().doLayout();
-                } else {
-                    JAutoInvoiceApp.getInstance().doLogin();
-                }
-            }
-        });
+        //iniciar a aplicação
+        JAutoInvoiceApp.getInstance().doLayout();
     }
 }
 //TODO: completar
