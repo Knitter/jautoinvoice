@@ -3,3 +3,4 @@ private/
 .DS_Store
 jAutoInvoiceS/dist/
 jAutoInvoiceS/*.log*
+/jAutoInvoice/dist/
