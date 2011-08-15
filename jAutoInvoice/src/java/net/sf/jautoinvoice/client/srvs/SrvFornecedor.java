@@ -66,4 +66,6 @@ public interface SrvFornecedor extends RemoteService {
      * @since 1.0
      */
     public ArrayList<Material> materiaisDeFornecedor(Fornecedor fornecedor);
+    
+    public void removerFornecedores(ArrayList<Fornecedor> fornecedores);
 }

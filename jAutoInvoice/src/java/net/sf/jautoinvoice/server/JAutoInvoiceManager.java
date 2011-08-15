@@ -126,6 +126,10 @@ public final class JAutoInvoiceManager {
     public ArrayList<Fornecedor> listarTodosFornecedores() {
         return motor.listarTodosFornecedores();
     }
+    
+    public void removerFornecedores(ArrayList<Fornecedor> fornecedores) {
+        motor.removerFornecedores(fornecedores);
+    }
 
     public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
         return motor.listarMateriaisDeFornecedor(fornecedor);

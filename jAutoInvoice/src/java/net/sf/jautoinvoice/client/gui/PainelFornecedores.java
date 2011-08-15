@@ -29,12 +29,16 @@ import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.ListLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Html;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
@@ -50,6 +54,7 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
+import java.util.List;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
 import net.sf.jautoinvoice.client.model.Fornecedor;
 
@@ -61,6 +66,7 @@ import net.sf.jautoinvoice.client.model.Fornecedor;
  */
 public final class PainelFornecedores extends Conteudo {
 
+    private PainelFornecedores me = this;
     private LayoutContainer root;
     private BaseListLoader<ListLoadResult<BeanModel>> loader;
 
@@ -73,76 +79,12 @@ public final class PainelFornecedores extends Conteudo {
     public void onRender(Element target, int index) {
         super.onRender(target, index);
         loader.load();
-        //total.setHtml("Total: " + loader.);
     }
 
     @Override
     public void init() {
-        root = new LayoutContainer(new BorderLayout());
 
-        ContentPanel painel = new ContentPanel();
-        painel.setHeading("Lista de Fornecedores");
-        painel.setLayout(new FitLayout());
-
-        ToolBar barra = new ToolBar();
-        barra.setSpacing(2);
-        Button botao = new Button();
-        botao.setToolTip("Adicionar");
-        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16LorryAdd()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                //TODO:implementar
-            }
-        });
-        barra.add(botao);
-
-        botao = new Button();
-        botao.setToolTip("Remover");
-        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16LorryDelete()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                //TODO:implementar
-            }
-        });
-        barra.add(botao);
-
-        barra.add(new SeparatorToolItem());
-        botao = new Button();
-        botao.setToolTip("Imprimir");
-        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
-        botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                //TODO: implementar
-            }
-        });
-        barra.add(botao);
-        barra.add(new SeparatorToolItem());
-
-        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>()     {
-
-            @Override
-            protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
-                    BeanModel record, String property, String filter) {
-                return true;
-
-            }
-        };
-        barra.add(new Html("Filtrar: "));
-        barra.add(filtro);
-        painel.setTopComponent(barra);
-
-        ToolBar estado = new ToolBar();
-        estado.add(new SeparatorToolItem());
-        estado.add(new Html("TODO: "));
-        estado.setAlignment(HorizontalAlignment.RIGHT);
-        painel.setBottomComponent(estado);
-
+        //grelha
         CheckBoxSelectionModel<BeanModel> cbsm = new CheckBoxSelectionModel<BeanModel>();
         cbsm.setSelectionMode(SelectionMode.SIMPLE);
 
@@ -155,7 +97,7 @@ public final class PainelFornecedores extends Conteudo {
         columns.add(new ColumnConfig("fax", "FAX", 200));
         columns.add(new ColumnConfig("notas", "Notas", 200));
 
-        RpcProxy<ArrayList<Fornecedor>> proxy = new RpcProxy<ArrayList<Fornecedor>>()           {
+        RpcProxy<ArrayList<Fornecedor>> proxy = new RpcProxy<ArrayList<Fornecedor>>() {
 
             @Override
             protected void load(Object loadConfig, AsyncCallback<ArrayList<Fornecedor>> callback) {
@@ -163,11 +105,118 @@ public final class PainelFornecedores extends Conteudo {
             }
         };
 
+        StoreFilterField<BeanModel> filtro = new StoreFilterField<BeanModel>() {
+
+            @Override
+            protected boolean doSelect(Store<BeanModel> store, BeanModel parent,
+                    BeanModel record, String property, String filter) {
+
+                String nome = record.get("nome");
+                String email = record.get("email");
+                String telefone = record.get("fax");
+                String fax = record.get("telefone");
+                String notas = record.get("notas");
+
+                //TODO: 
+                //if (nome.toLowerCase().startsWith(filter.toLowerCase()) || contribuinte.startsWith(filter)) {
+                //    return true;
+                //}
+
+                return false;
+
+            }
+        };
+
         loader = new BaseListLoader<ListLoadResult<BeanModel>>(proxy, new BeanModelReader());
         ListStore<BeanModel> dados = new ListStore<BeanModel>(loader);
         filtro.bind(dados);
 
-        Grid<BeanModel> grelha = new Grid<BeanModel>(dados, new ColumnModel(columns));
+        final Grid<BeanModel> grelha = new Grid<BeanModel>(dados, new ColumnModel(columns));
+        grelha.addPlugin(cbsm);
+
+        //outros componentes visuais
+        ContentPanel painel = new ContentPanel();
+        root = new LayoutContainer(new BorderLayout());
+
+        painel.setHeading("Lista de Fornecedores");
+        painel.setLayout(new FitLayout());
+
+        ToolBar barra = new ToolBar();
+        barra.setSpacing(2);
+        Button botao = new Button();
+        botao.setToolTip("Adicionar");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16LorryAdd()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                new FormularioFornecedor(me).show();
+            }
+        });
+        barra.add(botao);
+
+        final Listener<MessageBoxEvent> eventoRemocao = new Listener<MessageBoxEvent>() {
+
+            public void handleEvent(MessageBoxEvent ce) {
+                if (Dialog.YES.equals(ce.getButtonClicked().getItemId())) {
+                    ArrayList<Fornecedor> seleccionados = new ArrayList<Fornecedor>();
+                    for (BeanModel m : grelha.getSelectionModel().getSelectedItems()) {
+                        seleccionados.add((Fornecedor) m.getBean());
+                    }
+
+                    JAutoInvoiceApp.getInstance().getSrvFornecedor().removerFornecedores(seleccionados, new AsyncCallback<Void>() {
+
+                        public void onFailure(Throwable caught) {
+                            MessageBox.alert("Erro", "Não foi possível remover o(s) fornecedor(es).", null);
+                        }
+
+                        public void onSuccess(Void result) {
+                            loader.load();
+                        }
+                    });
+                }
+            }
+        };
+
+        botao = new Button();
+        botao.setToolTip("Remover");
+        botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16LorryDelete()));
+        botao.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+
+                List<BeanModel> seleccionados = grelha.getSelectionModel().getSelectedItems();
+                if (seleccionados != null && seleccionados.size() > 0) {
+                    MessageBox.confirm("Confirm", "Tem a certeza que deseja remover o forenecedor(es) seleccionado(s)?", eventoRemocao);
+                }
+            }
+        });
+        barra.add(botao);
+        barra.add(new SeparatorToolItem());
+
+        //botao = new Button();
+        //botao.setToolTip("Imprimir");
+        //botao.setIcon(AbstractImagePrototype.create(JAutoInvoiceApp.getInstance().getIcones().x16Printer()));
+        //botao.addSelectionListener(new SelectionListener<ButtonEvent>()    {
+
+        //    @Override
+        //    public void componentSelected(ButtonEvent ce) {
+        //    }
+        //});
+        //barra.add(botao);
+        //barra.add(new SeparatorToolItem());
+
+        barra.add(new Html("Filtrar: "));
+        barra.add(filtro);
+        painel.setTopComponent(barra);
+
+        ToolBar estado = new ToolBar();
+        estado.add(new SeparatorToolItem());
+        estado.add(new Html("TODO: "));
+        estado.setAlignment(HorizontalAlignment.RIGHT);
+        painel.setBottomComponent(estado);
+
         painel.add(grelha);
         root.add(painel, new BorderLayoutData(LayoutRegion.CENTER));
 
@@ -178,5 +227,8 @@ public final class PainelFornecedores extends Conteudo {
     public LayoutContainer getContainer() {
         return root;
     }
+
+    public BaseListLoader getLoader() {
+        return loader;
+    }
 }
-//TODO: completar

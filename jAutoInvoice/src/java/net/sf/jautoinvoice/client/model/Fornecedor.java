@@ -24,10 +24,12 @@ import java.io.Serializable;
 
 /**
  * 
+ * @author Sérgio Lopes
  * @since 1.0
  */
 public final class Fornecedor implements Serializable {
 
+    private String id;
     private String nome;
     private String email;
     private String telefone;
@@ -47,6 +49,14 @@ public final class Fornecedor implements Serializable {
         this.fax = fax;
         this.notas = notas;
         this.activo = activo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isActivo() {
@@ -106,6 +116,11 @@ public final class Fornecedor implements Serializable {
             return false;
         }
         final Fornecedor other = (Fornecedor) obj;
+
+        if (this.id.equals(other.id)) {
+            return true;
+        }
+
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
@@ -127,6 +142,7 @@ public final class Fornecedor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 41 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 41 * hash + (this.email != null ? this.email.hashCode() : 0);
         hash = 41 * hash + (this.telefone != null ? this.telefone.hashCode() : 0);

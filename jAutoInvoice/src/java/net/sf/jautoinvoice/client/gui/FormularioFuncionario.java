@@ -113,7 +113,7 @@ public final class FormularioFuncionario extends Window {
                 JAutoInvoiceApp.getInstance().getSrvFuncionario().adicionarFuncionario(novo, new AsyncCallback<Void>() {
 
                     public void onFailure(Throwable caught) {
-                        MessageBox.alert("Erro", "Não fo possível adicionar o novo funcionário.", null);
+                        MessageBox.alert("Erro", "Não foi possível adicionar o novo funcionário.", null);
                     }
 
                     public void onSuccess(Void result) {

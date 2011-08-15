@@ -71,6 +71,8 @@ public interface Persistencia {
     public void removerFornecedor(Fornecedor apagar);
 
     public ArrayList<Fornecedor> listarTodosFornecedores();
+    
+    public void removerFornecedores(ArrayList<Fornecedor> fornecedores);
 
     public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor);
 

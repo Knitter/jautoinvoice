@@ -164,37 +164,64 @@ public class MotorDB4O implements Persistencia {
     }
 
     public void adicionarFornecedor(Fornecedor novo) {
-        //TODO: id
+        novo.setId(UUID.randomUUID().toString());
         db.store(novo);
     }
 
     public void removerFornecedor(Fornecedor apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //TODO: possivelmente remover isto...
     }
 
     public ArrayList<Fornecedor> listarTodosFornecedores() {
         ArrayList<Fornecedor> lista = new ArrayList<Fornecedor>();
 
-        //for (Fornecedor f : db.query(Fornecedor.class)) {
-        //    lista.add(f);
-        //}
+        List<Fornecedor> resultado = db.query(new Predicate<Fornecedor>() {
+
+            public boolean match(Fornecedor et) {
+                return et.isActivo();
+            }
+        });
+
+        for (Fornecedor f : resultado) {
+            lista.add(f);
+        }
 
         return lista;
     }
 
+    public void removerFornecedores(final ArrayList<Fornecedor> fornecedores) {
+        List<Fornecedor> resultado = db.query(new Predicate<Fornecedor>() {
+
+            public boolean match(Fornecedor et) {
+                for (Fornecedor f : fornecedores) {
+                    if (f.getId().equals(et.getId())) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        for (Fornecedor apagar : resultado) {
+            apagar.setActivo(false);
+            db.store(apagar);
+        }
+    }
+
     public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
         ArrayList<Material> lista = new ArrayList<Material>();
-        //List<Material> resultado = db.query(new Predicate<Material>() {
+        List<Material> resultado = db.query(new Predicate<Material>() {
 
-        //    @Override
-        //    public boolean match(Material et) {
-        //        return et.getFornecedor().equals(fornecedor);
-        //    }
-        //});
+            @Override
+            public boolean match(Material et) {
+                return et.getFornecedor().equals(fornecedor);
+            }
+        });
 
-        //for (Material m : resultado) {
-        //    lista.add(m);
-        //}
+        for (Material m : resultado) {
+            lista.add(m);
+        }
 
         return lista;
     }

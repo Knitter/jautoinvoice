@@ -57,4 +57,8 @@ public class SrvFornecedorImpl extends RemoteServiceServlet implements SrvFornec
     public ArrayList<Material> materiaisDeFornecedor(Fornecedor fornecedor) {
         return gestor.listarMateriaisDeFornecedor(fornecedor);
     }
+
+    public void removerFornecedores(ArrayList<Fornecedor> fornecedores) {
+        gestor.removerFornecedores(fornecedores);
+    }
 }

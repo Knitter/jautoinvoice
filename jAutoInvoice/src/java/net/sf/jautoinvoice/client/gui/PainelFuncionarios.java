@@ -116,12 +116,12 @@ public final class PainelFuncionarios extends Conteudo {
                 String nome = record.get("nome");
                 String contribuinte = record.get("contribuinte");
 
+                //TODO: alterar para contains
                 if (nome.toLowerCase().startsWith(filter.toLowerCase()) || contribuinte.startsWith(filter)) {
                     return true;
                 }
 
                 return false;
-
             }
         };
 
@@ -166,7 +166,7 @@ public final class PainelFuncionarios extends Conteudo {
                     JAutoInvoiceApp.getInstance().getSrvFuncionario().removerFuncionarios(seleccionados, new AsyncCallback<Void>() {
 
                         public void onFailure(Throwable caught) {
-                            MessageBox.alert("Erro", "Não foi possível remover o funcionário.", null);
+                            MessageBox.alert("Erro", "Não foi possível remover o(s) funcionário(s).", null);
                         }
 
                         public void onSuccess(Void result) {

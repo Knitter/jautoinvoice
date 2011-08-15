@@ -40,4 +40,6 @@ public interface SrvFornecedorAsync {
     public void listarTodosFornecedores(AsyncCallback<ArrayList<Fornecedor>> call);
 
     public void materiaisDeFornecedor(Fornecedor fornecedor, AsyncCallback<ArrayList<Material>> call);
+    
+    public void removerFornecedores(ArrayList<Fornecedor> fornecedores, AsyncCallback<Void> call);
 }
