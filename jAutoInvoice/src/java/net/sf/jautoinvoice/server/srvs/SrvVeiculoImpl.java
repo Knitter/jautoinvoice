@@ -22,10 +22,10 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Inspeccao;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOInspeccao;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 import net.sf.jautoinvoice.client.srvs.SrvVeiculo;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 
@@ -44,35 +44,35 @@ public final class SrvVeiculoImpl extends RemoteServiceServlet implements SrvVei
         gestor = new JAutoInvoiceManager();
     }
 
-    public void adicionarVeiculo(Veiculo novo) {
+    public void adicionarVeiculo(DTOVeiculo novo) {
         gestor.adicionarVeiculo(novo);
     }
 
-    public void removerVeiculo(Veiculo apagar) {
+    public void removerVeiculo(DTOVeiculo apagar) {
         gestor.removerVeiculo(apagar);
     }
 
-    public ArrayList<Veiculo> listarTodosVeiculos() {
+    public ArrayList<DTOVeiculo> listarTodosVeiculos() {
         return gestor.listarTodosVeiculos();
     }
 
-    public ArrayList<FolhaObra> listarFolhasObra(Veiculo veiculo) {
+    public ArrayList<DTOFolhaObra> listarFolhasObra(DTOVeiculo veiculo) {
         return gestor.listarFolhasObraVeiculo(veiculo);
     }
 
-    public void adicionarInspeccao(Inspeccao nova) {
+    public void adicionarInspeccao(DTOInspeccao nova) {
         gestor.adicionarInspeccao(nova);
     }
 
-    public void removerInspeccao(Inspeccao apagar) {
+    public void removerInspeccao(DTOInspeccao apagar) {
         gestor.removerInspeccao(apagar);
     }
 
-    public ArrayList<Inspeccao> listarInspeccoes(Veiculo veiculo) {
+    public ArrayList<DTOInspeccao> listarInspeccoes(DTOVeiculo veiculo) {
         return gestor.listarInspeccoesVeiculo(veiculo);
     }
 
-    public ArrayList<Veiculo> inpeccionadosPeloFuncionario(Funcionario funcionario) {
+    public ArrayList<DTOVeiculo> inpeccionadosPeloFuncionario(DTOFuncionario funcionario) {
         return gestor.listarVeiculosInspeccianadosPor(funcionario);
     }
 }

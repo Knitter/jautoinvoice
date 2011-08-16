@@ -37,7 +37,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Utilizador;
+import net.sf.jautoinvoice.server.model.Utilizador;
 
 /**
  * Janela de login.
@@ -97,8 +97,8 @@ public final class Login extends Conteudo {
 
                                 public void onSuccess(Utilizador result) {
                                     if (result != null) {
-                                        JAutoInvoiceApp.getInstance().setUtilizadorAutenticado(result);
-                                        JAutoInvoiceApp.getInstance().doLayout();
+                                        //JAutoInvoiceApp.getInstance().setUtilizadorAutenticado(result);
+                                        //JAutoInvoiceApp.getInstance().doLayout();
                                     } else {
                                         mensagem.show();
                                     }

@@ -22,9 +22,9 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 import net.sf.jautoinvoice.client.srvs.SrvFuncionario;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 
@@ -43,27 +43,23 @@ public class SrvFuncionarioImpl extends RemoteServiceServlet implements SrvFunci
         gestor = new JAutoInvoiceManager();
     }
 
-    public void adicionarFuncionario(Funcionario novo) {
+    public void adicionarFuncionario(DTOFuncionario novo) {
         gestor.adicionarFuncionario(novo);
     }
 
-    public void removerFuncionario(Funcionario apagar) {
-        gestor.removerFuncionario(apagar);
-    }
-
-    public ArrayList<Funcionario> listarTodosFuncionarios() {
+    public ArrayList<DTOFuncionario> listarTodosFuncionarios() {
         return gestor.listarTodosFuncionarios();
     }
 
-    public ArrayList<Veiculo> inpeccionadosPeloFuncionario(Funcionario funcionario) {
+    public ArrayList<DTOVeiculo> inpeccionadosPeloFuncionario(DTOFuncionario funcionario) {
         return gestor.veiculosInspeccionadosPeloFuncionario(funcionario);
     }
 
-    public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario) {
+    public ArrayList<DTOFolhaObra> obrasDoFuncionario(DTOFuncionario funcionario) {
         return gestor.obrasDoFuncionario(funcionario);
     }
     
-    public void removerFuncionarios(ArrayList<Funcionario> funcionarios) {
+    public void removerFuncionarios(ArrayList<DTOFuncionario> funcionarios) {
         gestor.removerFuncionarios(funcionarios);
     }
 }

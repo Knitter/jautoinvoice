@@ -23,7 +23,7 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 
 /**
  * Serviço de gestão de material.
@@ -38,19 +38,19 @@ public interface SrvMaterial extends RemoteService {
      * @param novo 
      * @since 1.0
      */
-    public void adicionarMaterial(Material novo);
+    public void adicionarMaterial(DTOMaterial novo);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerMaterial(Material apagar);
+    public void removerMaterial(DTOMaterial apagar);
 
     /**
      * 
      * @return 
      * @since 1.0
      */
-    public ArrayList<Material> listarTodosMateriais();
+    public ArrayList<DTOMaterial> listarTodosMateriais();
 }

@@ -22,8 +22,8 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Fornecedor;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 
 /**
  * Versão assíncrona do serviço de gestãod e fornecedores.
@@ -33,13 +33,11 @@ import net.sf.jautoinvoice.client.model.Material;
  */
 public interface SrvFornecedorAsync {
 
-    public void adicionarFornecedor(Fornecedor novo, AsyncCallback<Void> call);
+    public void adicionarFornecedor(DTOFornecedor novo, AsyncCallback<Void> call);
 
-    public void removerFornecedor(Fornecedor apagar, AsyncCallback<Void> call);
+    public void listarTodosFornecedores(AsyncCallback<ArrayList<DTOFornecedor>> call);
 
-    public void listarTodosFornecedores(AsyncCallback<ArrayList<Fornecedor>> call);
-
-    public void materiaisDeFornecedor(Fornecedor fornecedor, AsyncCallback<ArrayList<Material>> call);
+    public void materiaisDeFornecedor(DTOFornecedor fornecedor, AsyncCallback<ArrayList<DTOMaterial>> call);
     
-    public void removerFornecedores(ArrayList<Fornecedor> fornecedores, AsyncCallback<Void> call);
+    public void removerFornecedores(ArrayList<DTOFornecedor> fornecedores, AsyncCallback<Void> call);
 }

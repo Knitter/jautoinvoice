@@ -22,7 +22,7 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 import net.sf.jautoinvoice.client.srvs.SrvMaterial;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 
@@ -41,15 +41,15 @@ public class SrvMaterialImpl extends RemoteServiceServlet implements SrvMaterial
         gestor = new JAutoInvoiceManager();
     }
 
-    public void adicionarMaterial(Material novo) {
+    public void adicionarMaterial(DTOMaterial novo) {
         gestor.adicionarMaterial(novo);
     }
 
-    public void removerMaterial(Material apagar) {
+    public void removerMaterial(DTOMaterial apagar) {
         gestor.removerMaterial(apagar);
     }
 
-    public ArrayList<Material> listarTodosMateriais() {
+    public ArrayList<DTOMaterial> listarTodosMateriais() {
         return gestor.listarTodosMateriais();
     }
 }

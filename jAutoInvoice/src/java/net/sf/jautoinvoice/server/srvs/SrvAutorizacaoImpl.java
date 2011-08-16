@@ -22,7 +22,7 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import javax.servlet.http.HttpSession;
-import net.sf.jautoinvoice.client.model.Utilizador;
+import net.sf.jautoinvoice.server.model.Utilizador;
 import net.sf.jautoinvoice.client.srvs.SrvAutorizacao;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 

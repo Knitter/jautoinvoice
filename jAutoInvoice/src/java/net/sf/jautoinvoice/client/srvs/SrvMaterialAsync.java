@@ -22,7 +22,7 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 
 /**
  * Versão assíncrona do serviço de gestão de material.
@@ -32,9 +32,9 @@ import net.sf.jautoinvoice.client.model.Material;
  */
 public interface SrvMaterialAsync {
 
-    public void adicionarMaterial(Material novo, AsyncCallback<Void> call);
+    public void adicionarMaterial(DTOMaterial novo, AsyncCallback<Void> call);
 
-    public void removerMaterial(Material apagar, AsyncCallback<Void> call);
+    public void removerMaterial(DTOMaterial apagar, AsyncCallback<Void> call);
 
-    public void listarTodosMateriais(AsyncCallback<ArrayList<Material>> call);
+    public void listarTodosMateriais(AsyncCallback<ArrayList<DTOMaterial>> call);
 }

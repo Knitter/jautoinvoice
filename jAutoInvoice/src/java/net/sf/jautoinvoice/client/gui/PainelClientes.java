@@ -51,7 +51,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Cliente;
+import net.sf.jautoinvoice.client.dto.DTOCliente;
 
 /**
  * @since 1.0
@@ -76,7 +76,7 @@ public final class PainelClientes extends Conteudo {
 
     @Override
     public void init() {
-        //final FormularioCliente fc = new FormularioCliente();
+
         root = new LayoutContainer(new BorderLayout());
 
         ContentPanel painel = new ContentPanel();
@@ -154,10 +154,10 @@ public final class PainelClientes extends Conteudo {
         columns.add(new ColumnConfig("email", "E-mail", 200));
         //TODO: endereços, contactos e veículos
 
-        RpcProxy<ArrayList<Cliente>> proxy = new RpcProxy<ArrayList<Cliente>>() {
+        RpcProxy<ArrayList<DTOCliente>> proxy = new RpcProxy<ArrayList<DTOCliente>>() {
 
             @Override
-            protected void load(Object loadConfig, AsyncCallback<ArrayList<Cliente>> callback) {
+            protected void load(Object loadConfig, AsyncCallback<ArrayList<DTOCliente>> callback) {
                 JAutoInvoiceApp.getInstance().getSrvCliente().listarTodos(callback);
             }
         };

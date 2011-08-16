@@ -23,10 +23,10 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Inspeccao;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOInspeccao;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 
 /**
  * Serviço de gestão de veículos.
@@ -41,21 +41,21 @@ public interface SrvVeiculo extends RemoteService {
      * @param novo 
      * @since 1.0
      */
-    public void adicionarVeiculo(Veiculo novo);
+    public void adicionarVeiculo(DTOVeiculo novo);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerVeiculo(Veiculo apagar);
+    public void removerVeiculo(DTOVeiculo apagar);
 
     /**
      * 
      * @return 
      * @since 1.0
      */
-    public ArrayList<Veiculo> listarTodosVeiculos();
+    public ArrayList<DTOVeiculo> listarTodosVeiculos();
 
     /**
      * 
@@ -63,21 +63,21 @@ public interface SrvVeiculo extends RemoteService {
      * @return 
      * @since 1.0
      */
-    public ArrayList<FolhaObra> listarFolhasObra(Veiculo veiculo);
+    public ArrayList<DTOFolhaObra> listarFolhasObra(DTOVeiculo veiculo);
 
     /**
      * 
      * @param nova 
      * @since 1.0
      */
-    public void adicionarInspeccao(Inspeccao nova);
+    public void adicionarInspeccao(DTOInspeccao nova);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerInspeccao(Inspeccao apagar);
+    public void removerInspeccao(DTOInspeccao apagar);
 
     /**
      * 
@@ -85,7 +85,7 @@ public interface SrvVeiculo extends RemoteService {
      * @return 
      * @since 1.0
      */
-    public ArrayList<Inspeccao> listarInspeccoes(Veiculo veiculo);
+    public ArrayList<DTOInspeccao> listarInspeccoes(DTOVeiculo veiculo);
 
     /**
      * 
@@ -93,5 +93,5 @@ public interface SrvVeiculo extends RemoteService {
      * @return 
      * @since 1.0
      */
-    public ArrayList<Veiculo> inpeccionadosPeloFuncionario(Funcionario funcionario);
+    public ArrayList<DTOVeiculo> inpeccionadosPeloFuncionario(DTOFuncionario funcionario);
 }

@@ -39,7 +39,6 @@ import net.sf.jautoinvoice.client.gui.PainelFornecedores;
 import net.sf.jautoinvoice.client.gui.PainelFuncionarios;
 import net.sf.jautoinvoice.client.gui.PainelMaterial;
 import net.sf.jautoinvoice.client.gui.PainelVeiculos;
-import net.sf.jautoinvoice.client.model.Utilizador;
 import net.sf.jautoinvoice.client.srvs.SrvAutorizacao;
 import net.sf.jautoinvoice.client.srvs.SrvAutorizacaoAsync;
 import net.sf.jautoinvoice.client.srvs.SrvAuxiliar;
@@ -92,7 +91,7 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
     public static final String PAINEL_OPCOES = "opcoes";
     public static final String PAINEL_FORNECEDORES = "fornecedores";
     //
-    private Utilizador utilizadorAutenticado;
+    //private Utilizador utilizadorAutenticado;
 
     private JAutoInvoiceApp() {
         paineis = new HashMap<String, Conteudo>();
@@ -221,12 +220,12 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
         return icons;
     }
 
-    public Utilizador getUtilizadorAutenticado() {
-        return utilizadorAutenticado;
-    }
+    //public Utilizador getUtilizadorAutenticado() {
+    //    return utilizadorAutenticado;
+    //}
 
-    public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
-        this.utilizadorAutenticado = utilizadorAutenticado;
-    }
+    //7public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
+    //    this.utilizadorAutenticado = utilizadorAutenticado;
+    //}
 }
 //TODO: completar

@@ -22,10 +22,10 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Inspeccao;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOInspeccao;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 
 /**
  * Versão assíncrona do serviço de gestão de veículos.
@@ -35,19 +35,19 @@ import net.sf.jautoinvoice.client.model.Veiculo;
  */
 public interface SrvVeiculoAsync {
 
-    public void adicionarVeiculo(Veiculo novo, AsyncCallback<Void> call);
+    public void adicionarVeiculo(DTOVeiculo novo, AsyncCallback<Void> call);
 
-    public void removerVeiculo(Veiculo apagar, AsyncCallback<Void> call);
+    public void removerVeiculo(DTOVeiculo apagar, AsyncCallback<Void> call);
 
-    public void listarTodosVeiculos(AsyncCallback<ArrayList<Veiculo>> call);
+    public void listarTodosVeiculos(AsyncCallback<ArrayList<DTOVeiculo>> call);
 
-    public void listarFolhasObra(Veiculo veiculo, AsyncCallback<ArrayList<FolhaObra>> call);
+    public void listarFolhasObra(DTOVeiculo veiculo, AsyncCallback<ArrayList<DTOFolhaObra>> call);
 
-    public void adicionarInspeccao(Inspeccao nova, AsyncCallback<Void> call);
+    public void adicionarInspeccao(DTOInspeccao nova, AsyncCallback<Void> call);
 
-    public void removerInspeccao(Inspeccao apagar, AsyncCallback<Void> call);
+    public void removerInspeccao(DTOInspeccao apagar, AsyncCallback<Void> call);
 
-    public void listarInspeccoes(Veiculo veiculo, AsyncCallback<ArrayList<Inspeccao>> call);
+    public void listarInspeccoes(DTOVeiculo veiculo, AsyncCallback<ArrayList<DTOInspeccao>> call);
 
-    public void inpeccionadosPeloFuncionario(Funcionario funcionario, AsyncCallback<ArrayList<Veiculo>> call);
+    public void inpeccionadosPeloFuncionario(DTOFuncionario funcionario, AsyncCallback<ArrayList<DTOVeiculo>> call);
 }

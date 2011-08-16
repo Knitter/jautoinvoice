@@ -22,7 +22,7 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Cliente;
+import net.sf.jautoinvoice.client.dto.DTOCliente;
 
 /**
  * Versão assíncrona do serviço de gestão de clientes.
@@ -32,9 +32,9 @@ import net.sf.jautoinvoice.client.model.Cliente;
  */
 public interface SrvClienteAsync {
 
-    public void adicionarCliente(Cliente cliente, AsyncCallback<Void> call);
+    public void adicionarCliente(DTOCliente cliente, AsyncCallback<Void> call);
 
-    public void removerCliente(Cliente cliente, AsyncCallback<Void> call);
+    public void removerClientes(ArrayList<DTOCliente> clientes, AsyncCallback<Void> call);
 
-    public void listarTodos(AsyncCallback<ArrayList<Cliente>> call);
+    public void listarTodos(AsyncCallback<ArrayList<DTOCliente>> call);
 }

@@ -22,7 +22,7 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import net.sf.jautoinvoice.client.model.Utilizador;
+import net.sf.jautoinvoice.server.model.Utilizador;
 
 @RemoteServiceRelativePath("auth")
 public interface SrvAutorizacao extends RemoteService {

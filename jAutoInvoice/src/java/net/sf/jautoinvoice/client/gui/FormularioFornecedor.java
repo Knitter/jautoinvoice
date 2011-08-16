@@ -32,7 +32,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Fornecedor;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
 
 /**
  * Zona central para gestão de fornecedores.
@@ -87,14 +87,13 @@ public final class FormularioFornecedor extends Window {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                Fornecedor novo = new Fornecedor();
+                DTOFornecedor novo = new DTOFornecedor();
                 
                 novo.setNome(nome.getValue());
                 novo.setEmail(email.getValue());
                 novo.setFax(fax.getValue());
                 novo.setNotas(notas.getValue());
                 novo.setTelefone(telefone.getValue());
-                novo.setActivo(true);
                 JAutoInvoiceApp.getInstance().getSrvFornecedor().adicionarFornecedor(novo, new AsyncCallback<Void>() {
 
                     public void onFailure(Throwable caught) {

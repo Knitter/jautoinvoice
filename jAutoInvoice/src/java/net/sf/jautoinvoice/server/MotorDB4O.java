@@ -26,18 +26,30 @@ import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import net.sf.jautoinvoice.client.model.Cliente;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Fornecedor;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.IVA;
-import net.sf.jautoinvoice.client.model.Inspeccao;
-import net.sf.jautoinvoice.client.model.Marca;
-import net.sf.jautoinvoice.client.model.Material;
-import net.sf.jautoinvoice.client.model.Modelo;
-import net.sf.jautoinvoice.client.model.Servico;
-import net.sf.jautoinvoice.client.model.Utilizador;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOCliente;
+import net.sf.jautoinvoice.client.dto.DTOFactory;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOIVA;
+import net.sf.jautoinvoice.client.dto.DTOInspeccao;
+import net.sf.jautoinvoice.client.dto.DTOMarca;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
+import net.sf.jautoinvoice.client.dto.DTOModelo;
+import net.sf.jautoinvoice.client.dto.DTOServico;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
+import net.sf.jautoinvoice.server.model.Cliente;
+import net.sf.jautoinvoice.server.model.FolhaObra;
+import net.sf.jautoinvoice.server.model.Fornecedor;
+import net.sf.jautoinvoice.server.model.Funcionario;
+import net.sf.jautoinvoice.server.model.IVA;
+import net.sf.jautoinvoice.server.model.Inspeccao;
+import net.sf.jautoinvoice.server.model.Marca;
+import net.sf.jautoinvoice.server.model.Material;
+import net.sf.jautoinvoice.server.model.Modelo;
+import net.sf.jautoinvoice.server.model.Servico;
+import net.sf.jautoinvoice.server.model.Utilizador;
+import net.sf.jautoinvoice.server.model.Veiculo;
 
 public class MotorDB4O implements Persistencia {
 
@@ -47,133 +59,152 @@ public class MotorDB4O implements Persistencia {
         db = DBManager.getInstance().getObjectContainer();
     }
 
-    public void adicionarCliente(Cliente novo) {
+    public void adicionarCliente(DTOCliente novo) {
+        Cliente c = DTOFactory.getFactory().decomporDTOCliente(novo);
+        c.setId(UUID.randomUUID().toString());
+        db.store(c);
+    }
+
+    public ArrayList<DTOCliente> listarTodosClientes() {
+        ArrayList<DTOCliente> lista = new ArrayList<DTOCliente>();
+        List<Cliente> resultado = db.query(new Predicate<Cliente>() {
+
+            @Override
+            public boolean match(Cliente c) {
+                return c.isActivo();
+            }
+        });
+
+        for (Cliente cliente : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOCliente(cliente));
+        }
+
+        return lista;
+    }
+
+    public void removerClientes(final ArrayList<DTOCliente> clientes) {
+        List<Cliente> resultado = db.query(new Predicate<Cliente>() {
+
+            @Override
+            public boolean match(Cliente et) {
+                for (DTOCliente dto : clientes) {
+                    if (dto.getId().equals(et.getId())) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        for (Cliente apagar : resultado) {
+            apagar.setActivo(false);
+            db.store(apagar);
+        }
+    }
+
+    public void adicionarIVA(DTOIVA novo) {
+        IVA i = DTOFactory.getFactory().decomporDTOIVA(novo);
+        i.setId(UUID.randomUUID().toString());
+        db.store(i);
+    }
+
+    public void removerIVA(DTOIVA apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOIVA> listarTodosIVAs() {
+        ArrayList<DTOIVA> lista = new ArrayList<DTOIVA>();
+        List<IVA> resultado = db.query(new Predicate<IVA>() {
+
+            @Override
+            public boolean match(IVA i) {
+                return i.isActivo();
+            }
+        });
+
+        for (IVA iva : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOIVA(iva));
+        }
+
+        return lista;
+    }
+
+    public void adicionarMarca(DTOMarca nova) {
+        Marca m = DTOFactory.getFactory().decomporDTOMarca(nova);
+        m.setId(UUID.randomUUID().toString());
+        db.store(m);
+    }
+
+    public void removerMarca(DTOMarca apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOMarca> listarTodasMarcas() {
+        ArrayList<DTOMarca> lista = new ArrayList<DTOMarca>();
+
+        List<Marca> resultado = db.query(new Predicate<Marca>() {
+
+            public boolean match(Marca et) {
+                return et.isActivo();
+            }
+        });
+
+        for (Marca marca : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOMarca(marca));
+        }
+
+        return lista;
+    }
+
+    public void adicionarModelo(DTOModelo novo) {
+        Modelo m = DTOFactory.getFactory().decomporDTOModelo(novo);
+        m.setId(UUID.randomUUID().toString());
+        db.store(m);
+    }
+
+    public void removerModelo(DTOModelo apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOModelo> listarTodosModelos() {
+        ArrayList<DTOModelo> lista = new ArrayList<DTOModelo>();
+
+        List<Modelo> resultado = db.query(new Predicate<Modelo>() {
+
+            public boolean match(Modelo et) {
+                return et.isActivo();
+            }
+        });
+
+        for (Modelo modelo : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOModelo(modelo));
+        }
+
+        return lista;
+    }
+
+    public void adicionarServico(DTOServico novo) {
+        Servico s = DTOFactory.getFactory().decomporDTOServico(novo);
+        s.setId(UUID.randomUUID().toString());
+        db.store(s);
+    }
+
+    public void removerServico(DTOServico apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOServico> listarTodosServicos() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void adicionarFornecedor(DTOFornecedor novo) {
         novo.setId(UUID.randomUUID().toString());
         db.store(novo);
     }
 
-    public ArrayList<Cliente> listarTodosClientes() {
-        ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        //List<Cliente> resultado = db.query(new Predicate<Cliente>() {
-
-        //    @Override
-        //    public boolean match(Cliente c) {
-        //        return c.isActivo();
-        //    }
-        //});
-
-        //for (Cliente c : resultado) {
-        //    lista.add(c);
-        //}
-
-        return lista;
-    }
-
-    public boolean removerCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not implemented yet.");
-    }
-
-    public void adicionarIVA(IVA novo) {
-        //TODO: id
-        db.store(novo);
-    }
-
-    public void removerIVA(IVA apagar) {
-        //throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<IVA> listarTodosIVAs() {
-        ArrayList<IVA> lista = new ArrayList<IVA>();
-        //List<IVA> resultado = db.query(new Predicate<IVA>() {
-
-        //    @Override
-        //    public boolean match(IVA i) {
-        //        return i.isActivo();
-        //    }
-        //});
-
-        //for (IVA i : resultado) {
-        //    lista.add(i);
-        //}
-
-        return lista;
-    }
-
-    public void adicionarMarca(Marca nova) {
-        //TODO: id
-        db.store(nova);
-    }
-
-    public void removerMarca(Marca apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<Marca> listarTodasMarcas() {
-        ArrayList<Marca> lista = new ArrayList<Marca>();
-
-        //for (Marca m : db.query(Marca.class)) {
-        //    lista.add(m);
-        //}
-
-        return lista;
-    }
-
-    public void adicionarModelo(Modelo novo) {
-        //TODO: id
-        db.store(novo);
-    }
-
-    public void removerModelo(Modelo apagar) {
-        //throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<Modelo> listarTodosModelos() {
-        ArrayList<Modelo> lista = new ArrayList<Modelo>();
-
-        //for (Modelo m : db.query(Modelo.class)) {
-        //    lista.add(m);
-        //}
-
-        return lista;
-    }
-
-    public void adicionarServico(Servico novo) {
-        //TODO: id
-        db.store(novo);
-    }
-
-    public void removerServico(Servico apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<Servico> listarTodosServicos() {
-        ArrayList<Servico> lista = new ArrayList<Servico>();
-        //List<Servico> resultado = db.query(new Predicate<Servico>() {
-
-        //    @Override
-        //    public boolean match(Servico s) {
-        //        return s.isActivo();
-        //    }
-        //});
-
-        //for (Servico s : resultado) {
-        //    lista.add(s);
-        //}
-
-        return lista;
-    }
-
-    public void adicionarFornecedor(Fornecedor novo) {
-        novo.setId(UUID.randomUUID().toString());
-        db.store(novo);
-    }
-
-    public void removerFornecedor(Fornecedor apagar) {
-        //TODO: possivelmente remover isto...
-    }
-
-    public ArrayList<Fornecedor> listarTodosFornecedores() {
-        ArrayList<Fornecedor> lista = new ArrayList<Fornecedor>();
+    public ArrayList<DTOFornecedor> listarTodosFornecedores() {
+        ArrayList<DTOFornecedor> lista = new ArrayList<DTOFornecedor>();
 
         List<Fornecedor> resultado = db.query(new Predicate<Fornecedor>() {
 
@@ -182,19 +213,19 @@ public class MotorDB4O implements Persistencia {
             }
         });
 
-        for (Fornecedor f : resultado) {
-            lista.add(f);
+        for (Fornecedor fornecedor : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOFornecedor(fornecedor));
         }
 
         return lista;
     }
 
-    public void removerFornecedores(final ArrayList<Fornecedor> fornecedores) {
+    public void removerFornecedores(final ArrayList<DTOFornecedor> fornecedores) {
         List<Fornecedor> resultado = db.query(new Predicate<Fornecedor>() {
 
             public boolean match(Fornecedor et) {
-                for (Fornecedor f : fornecedores) {
-                    if (f.getId().equals(et.getId())) {
+                for (DTOFornecedor dto : fornecedores) {
+                    if (dto.getId().equals(et.getId())) {
                         return true;
                     }
                 }
@@ -209,45 +240,33 @@ public class MotorDB4O implements Persistencia {
         }
     }
 
-    public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
-        ArrayList<Material> lista = new ArrayList<Material>();
+    public ArrayList<DTOMaterial> listarMateriaisDeFornecedor(DTOFornecedor fornecedor) {
+        ArrayList<DTOMaterial> lista = new ArrayList<DTOMaterial>();
+
+        final Fornecedor fo = DTOFactory.getFactory().decomporDTOFornecedor(fornecedor);
+
         List<Material> resultado = db.query(new Predicate<Material>() {
 
             @Override
             public boolean match(Material et) {
-                return et.getFornecedor().equals(fornecedor);
+                return et.getFornecedor().equals(fo);
             }
         });
 
-        for (Material m : resultado) {
-            lista.add(m);
+        for (Material material : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOMaterial(material));
         }
 
         return lista;
     }
 
-    public void adicionarFuncionario(Funcionario novo) {
+    public void adicionarFuncionario(DTOFuncionario novo) {
         novo.setId(UUID.randomUUID().toString());
         db.store(novo);
     }
 
-    public void removerFuncionario(Funcionario apagar) {
-        final String uuid = apagar.getId();
-        List<Funcionario> resultado = db.query(new Predicate<Funcionario>() {
-
-            public boolean match(Funcionario f) {
-                return f.getId().equals(uuid);
-            }
-        });
-
-        if (resultado.size() == 1) {
-            resultado.get(0).setActivo(false);
-            db.store(resultado.get(0));
-        }
-    }
-
-    public ArrayList<Funcionario> listarTodosFuncionarios() {
-        ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
+    public ArrayList<DTOFuncionario> listarTodosFuncionarios() {
+        ArrayList<DTOFuncionario> lista = new ArrayList<DTOFuncionario>();
         List<Funcionario> resultado = db.query(new Predicate<Funcionario>() {
 
             @Override
@@ -256,145 +275,98 @@ public class MotorDB4O implements Persistencia {
             }
         });
 
-        for (Funcionario f : resultado) {
-            lista.add(f);
+        for (Funcionario funcionario : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOFuncionario(funcionario));
         }
 
         return lista;
     }
 
-    public void removerFuncionarios(ArrayList<Funcionario> funcionarios) {
-        for (Funcionario apagar : funcionarios) {
-            removerFuncionario(apagar);
+    public void removerFuncionarios(ArrayList<DTOFuncionario> funcionarios) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOVeiculo> veiculosInspeccionadosPeloFuncionario(DTOFuncionario funcionario) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOFolhaObra> obrasDoFuncionario(DTOFuncionario funcionario) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void adicionarMaterial(DTOMaterial novo) {
+        Material m = DTOFactory.getFactory().decomporDTOMaterial(novo);
+        m.setId(UUID.randomUUID().toString());
+        db.store(m);
+    }
+
+    public void removerMaterial(DTOMaterial apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOMaterial> listarTodosMateriais() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void adicionarVeiculo(DTOVeiculo novo) {
+        Veiculo v = DTOFactory.getFactory().decomporDTOVeiculo(novo);
+        v.setId(UUID.randomUUID().toString());
+        db.store(v);
+    }
+
+    public void removerVeiculo(DTOVeiculo apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOVeiculo> listarTodosVeiculos() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOFolhaObra> listarFolhasObraVeiculo(final DTOVeiculo veiculo) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void adicionarInspeccao(DTOInspeccao nova) {
+        Inspeccao i = DTOFactory.getFactory().decomporDTOInspeccao(nova);
+        i.setId(UUID.randomUUID().toString());
+        db.store(i);
+    }
+
+    public void removerInspeccao(DTOInspeccao apagar) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOInspeccao> listarInspeccoesVeiculo(final DTOVeiculo veiculo) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ArrayList<DTOVeiculo> listarVeiculosInspeccianadosPor(DTOFuncionario funcionario) {
+        ArrayList<DTOVeiculo> lista = new ArrayList<DTOVeiculo>();
+
+        final Funcionario dono = DTOFactory.getFactory().decomporDTOFuncionario(funcionario);
+        List<Veiculo> resultado = db.query(new Predicate<Veiculo>() {
+
+            @Override
+            public boolean match(Veiculo et) {
+
+                for (Inspeccao i : et.getInspeccoes()) {
+                    if (i.getFuncionario().equals(dono)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        for (Veiculo veiculo : resultado) {
+            lista.add(DTOFactory.getFactory().comporDTOVeiculo(veiculo));
         }
-    }
-
-    public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public void adicionarMaterial(Material novo) {
-        //TODO: id
-        db.store(novo);
-    }
-
-    public void removerMaterial(Material apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<Material> listarTodosMateriais() {
-        ArrayList<Material> lista = new ArrayList<Material>();
-//        List<Material> resultado = db.query(new Predicate<Material>() {
-//
-//            @Override
-//            public boolean match(Material m) {
-//                return m.isActivo();
-//            }
-//        });
-//
-//        for (Material m : resultado) {
-//            lista.add(m);
-//        }
-
-        return lista;
-    }
-
-    public void adicionarVeiculo(Veiculo novo) {
-        //TODO: id
-        db.store(novo);
-    }
-
-    public void removerVeiculo(Veiculo apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<Veiculo> listarTodosVeiculos() {
-        ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-//        for (Veiculo v : db.query(Veiculo.class)) {
-//            lista.add(v);
-//        }
-
-        return lista;
-    }
-
-    public ArrayList<FolhaObra> listarFolhasObraVeiculo(final Veiculo veiculo) {
-        ArrayList<FolhaObra> lista = new ArrayList<FolhaObra>();
-//        List<FolhaObra> resultado = db.query(new Predicate<FolhaObra>() {
-//
-//            @Override
-//            public boolean match(FolhaObra et) {
-//                return et.getVeiculo().equals(veiculo);
-//            }
-//        });
-
-        return lista;
-    }
-
-    public void adicionarInspeccao(Inspeccao nova) {
-        //TODO: id
-        db.store(nova);
-    }
-
-    public void removerInspeccao(Inspeccao apagar) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public ArrayList<Inspeccao> listarInspeccoesVeiculo(final Veiculo veiculo) {
-        ArrayList<Inspeccao> lista = new ArrayList<Inspeccao>();
-//        List<Inspeccao> resultado = db.query(new Predicate<Inspeccao>() {
-//
-//            @Override
-//            public boolean match(Inspeccao et) {
-//                return et.getVeiculo().equals(veiculo);
-//            }
-//        });
-//
-//        for (Inspeccao i : resultado) {
-//            lista.add(i);
-//        }
-
-        return lista;
-    }
-
-    public ArrayList<Veiculo> listarVeiculosInspeccianadosPor(final Funcionario funcionario) {
-        ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-//        List<Veiculo> resultado = db.query(new Predicate<Veiculo>() {
-//
-//            @Override
-//            public boolean match(Veiculo et) {
-//
-//                for (Inspeccao i : et.getInspeccoes()) {
-//                    if (i.getFuncionario().equals(funcionario)) {
-//                        return true;
-//                    }
-//                }
-//
-//                return false;
-//            }
-//        });
-//
-//        for (Veiculo v : resultado) {
-//            lista.add(v);
-//        }
 
         return lista;
     }
 
     public Utilizador autenticar(String username, String password) {
-        //Utilizador temp = new Utilizador();
-        //temp.setUsername(username);
-        //temp.setPassword(password);
-
-        //ObjectSet<Utilizador> resultado = db.queryByExample(temp);
-
-        //if (resultado.size() == 1) {
-        //    return resultado.get(0);
-        //}
-
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

@@ -21,94 +21,95 @@
 package net.sf.jautoinvoice.server;
 
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Cliente;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Fornecedor;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.IVA;
-import net.sf.jautoinvoice.client.model.Inspeccao;
-import net.sf.jautoinvoice.client.model.Marca;
-import net.sf.jautoinvoice.client.model.Material;
-import net.sf.jautoinvoice.client.model.Modelo;
-import net.sf.jautoinvoice.client.model.Servico;
-import net.sf.jautoinvoice.client.model.Utilizador;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOCliente;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOIVA;
+import net.sf.jautoinvoice.client.dto.DTOInspeccao;
+import net.sf.jautoinvoice.client.dto.DTOMarca;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
+import net.sf.jautoinvoice.client.dto.DTOModelo;
+import net.sf.jautoinvoice.client.dto.DTOServico;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
+import net.sf.jautoinvoice.server.model.Utilizador;
 
+/**
+ * 
+ * @author Sérgio Lopes
+ * @since 1.0
+ */
 public interface Persistencia {
 
-    public void adicionarCliente(Cliente novo);
+    public void adicionarCliente(DTOCliente novo);
 
-    public ArrayList<Cliente> listarTodosClientes();
+    public ArrayList<DTOCliente> listarTodosClientes();
 
-    public boolean removerCliente(Cliente cliente);
+    public void removerClientes(ArrayList<DTOCliente> clientes);
 
-    public void adicionarIVA(IVA novo);
+    public void adicionarIVA(DTOIVA novo);
 
-    public void removerIVA(IVA apagar);
+    public void removerIVA(DTOIVA apagar);
 
-    public void adicionarMarca(Marca nova);
+    public ArrayList<DTOIVA> listarTodosIVAs();
 
-    public ArrayList<IVA> listarTodosIVAs();
+    public void adicionarMarca(DTOMarca nova);
 
-    public void removerMarca(Marca apagar);
+    public void removerMarca(DTOMarca apagar);
 
-    public ArrayList<Marca> listarTodasMarcas();
+    public ArrayList<DTOMarca> listarTodasMarcas();
 
-    public void adicionarModelo(Modelo novo);
+    public void adicionarModelo(DTOModelo novo);
 
-    public void removerModelo(Modelo apagar);
+    public void removerModelo(DTOModelo apagar);
 
-    public ArrayList<Modelo> listarTodosModelos();
+    public ArrayList<DTOModelo> listarTodosModelos();
 
-    public void adicionarServico(Servico novo);
+    public void adicionarServico(DTOServico novo);
 
-    public void removerServico(Servico apagar);
+    public void removerServico(DTOServico apagar);
 
-    public ArrayList<Servico> listarTodosServicos();
+    public ArrayList<DTOServico> listarTodosServicos();
 
-    public void adicionarFornecedor(Fornecedor novo);
+    public void adicionarFornecedor(DTOFornecedor novo);
 
-    public void removerFornecedor(Fornecedor apagar);
+    public ArrayList<DTOFornecedor> listarTodosFornecedores();
 
-    public ArrayList<Fornecedor> listarTodosFornecedores();
-    
-    public void removerFornecedores(ArrayList<Fornecedor> fornecedores);
+    public void removerFornecedores(ArrayList<DTOFornecedor> fornecedores);
 
-    public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor);
+    public ArrayList<DTOMaterial> listarMateriaisDeFornecedor(final DTOFornecedor fornecedor);
 
-    public void adicionarFuncionario(Funcionario novo);
+    public void adicionarFuncionario(DTOFuncionario novo);
 
-    public void removerFuncionario(Funcionario apagar);
+    public ArrayList<DTOFuncionario> listarTodosFuncionarios();
 
-    public ArrayList<Funcionario> listarTodosFuncionarios();
+    public void removerFuncionarios(ArrayList<DTOFuncionario> funcionarios);
 
-    public void removerFuncionarios(ArrayList<Funcionario> funcionarios);
+    public ArrayList<DTOVeiculo> veiculosInspeccionadosPeloFuncionario(DTOFuncionario funcionario);
 
-    public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario);
+    public ArrayList<DTOFolhaObra> obrasDoFuncionario(DTOFuncionario funcionario);
 
-    public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario);
+    public void adicionarMaterial(DTOMaterial novo);
 
-    public void adicionarMaterial(Material novo);
+    public void removerMaterial(DTOMaterial apagar);
 
-    public void removerMaterial(Material apagar);
+    public ArrayList<DTOMaterial> listarTodosMateriais();
 
-    public ArrayList<Material> listarTodosMateriais();
+    public void adicionarVeiculo(DTOVeiculo novo);
 
-    public void adicionarVeiculo(Veiculo novo);
+    public void removerVeiculo(DTOVeiculo apagar);
 
-    public void removerVeiculo(Veiculo apagar);
+    public ArrayList<DTOVeiculo> listarTodosVeiculos();
 
-    public ArrayList<Veiculo> listarTodosVeiculos();
+    public ArrayList<DTOFolhaObra> listarFolhasObraVeiculo(final DTOVeiculo veiculo);
 
-    public ArrayList<FolhaObra> listarFolhasObraVeiculo(final Veiculo veiculo);
+    public void adicionarInspeccao(DTOInspeccao nova);
 
-    public void adicionarInspeccao(Inspeccao nova);
+    public void removerInspeccao(DTOInspeccao apagar);
 
-    public void removerInspeccao(Inspeccao apagar);
+    public ArrayList<DTOInspeccao> listarInspeccoesVeiculo(final DTOVeiculo veiculo);
 
-    public ArrayList<Inspeccao> listarInspeccoesVeiculo(final Veiculo veiculo);
-
-    public ArrayList<Veiculo> listarVeiculosInspeccianadosPor(final Funcionario funcionario);
+    public ArrayList<DTOVeiculo> listarVeiculosInspeccianadosPor(final DTOFuncionario funcionario);
 
     public Utilizador autenticar(String username, String password);
 }

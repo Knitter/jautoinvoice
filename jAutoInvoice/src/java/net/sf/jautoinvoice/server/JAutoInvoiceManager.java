@@ -21,18 +21,18 @@
 package net.sf.jautoinvoice.server;
 
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Cliente;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Fornecedor;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.IVA;
-import net.sf.jautoinvoice.client.model.Inspeccao;
-import net.sf.jautoinvoice.client.model.Marca;
-import net.sf.jautoinvoice.client.model.Material;
-import net.sf.jautoinvoice.client.model.Modelo;
-import net.sf.jautoinvoice.client.model.Servico;
-import net.sf.jautoinvoice.client.model.Utilizador;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOCliente;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOIVA;
+import net.sf.jautoinvoice.client.dto.DTOInspeccao;
+import net.sf.jautoinvoice.client.dto.DTOMarca;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
+import net.sf.jautoinvoice.client.dto.DTOModelo;
+import net.sf.jautoinvoice.client.dto.DTOServico;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
+import net.sf.jautoinvoice.server.model.Utilizador;
 
 /**
  * Esta é a classe base do sistema de gestão. Qualquer serviço delega o 
@@ -55,151 +55,143 @@ public final class JAutoInvoiceManager {
         motor = new MotorDB4O();
     }
 
-    public void adicionarCliente(Cliente novo) {
+    public void adicionarCliente(DTOCliente novo) {
         motor.adicionarCliente(novo);
     }
 
-    public ArrayList<Cliente> listarTodosClientes() {
+    public ArrayList<DTOCliente> listarTodosClientes() {
         return motor.listarTodosClientes();
     }
 
-    public boolean removerCliente(Cliente cliente) {
-        return motor.removerCliente(cliente);
+    public void removerClientes(ArrayList<DTOCliente> clientes) {
+        motor.removerClientes(clientes);
     }
 
-    public void adicionarIVA(IVA novo) {
+    public void adicionarIVA(DTOIVA novo) {
         motor.adicionarIVA(novo);
     }
 
-    public void removerIVA(IVA apagar) {
+    public void removerIVA(DTOIVA apagar) {
         motor.removerIVA(apagar);
     }
 
-    public void adicionarMarca(Marca nova) {
-        motor.adicionarMarca(nova);
-    }
-
-    public ArrayList<IVA> listarTodosIVAs() {
+    public ArrayList<DTOIVA> listarTodosIVAs() {
         return motor.listarTodosIVAs();
     }
 
-    public void removerMarca(Marca apagar) {
+    public void adicionarMarca(DTOMarca nova) {
+        motor.adicionarMarca(nova);
+    }
+
+    public void removerMarca(DTOMarca apagar) {
         motor.removerMarca(apagar);
     }
 
-    public ArrayList<Marca> listarTodasMarcas() {
+    public ArrayList<DTOMarca> listarTodasMarcas() {
         return motor.listarTodasMarcas();
     }
 
-    public void adicionarModelo(Modelo novo) {
+    public void adicionarModelo(DTOModelo novo) {
         motor.adicionarModelo(novo);
     }
 
-    public void removerModelo(Modelo apagar) {
+    public void removerModelo(DTOModelo apagar) {
         motor.removerModelo(apagar);
     }
 
-    public ArrayList<Modelo> listarTodosModelos() {
+    public ArrayList<DTOModelo> listarTodosModelos() {
         return motor.listarTodosModelos();
     }
 
-    public void adicionarServico(Servico novo) {
+    public void adicionarServico(DTOServico novo) {
         motor.adicionarServico(novo);
     }
 
-    public void removerServico(Servico apagar) {
+    public void removerServico(DTOServico apagar) {
         motor.removerServico(apagar);
     }
 
-    public ArrayList<Servico> listarTodosServicos() {
+    public ArrayList<DTOServico> listarTodosServicos() {
         return motor.listarTodosServicos();
     }
 
-    public void adicionarFornecedor(Fornecedor novo) {
+    public void adicionarFornecedor(DTOFornecedor novo) {
         motor.adicionarFornecedor(novo);
     }
 
-    public void removerFornecedor(Fornecedor apagar) {
-        motor.removerFornecedor(apagar);
-    }
-
-    public ArrayList<Fornecedor> listarTodosFornecedores() {
+    public ArrayList<DTOFornecedor> listarTodosFornecedores() {
         return motor.listarTodosFornecedores();
     }
-    
-    public void removerFornecedores(ArrayList<Fornecedor> fornecedores) {
+
+    public void removerFornecedores(ArrayList<DTOFornecedor> fornecedores) {
         motor.removerFornecedores(fornecedores);
     }
 
-    public ArrayList<Material> listarMateriaisDeFornecedor(final Fornecedor fornecedor) {
+    public ArrayList<DTOMaterial> listarMateriaisDeFornecedor(final DTOFornecedor fornecedor) {
         return motor.listarMateriaisDeFornecedor(fornecedor);
     }
 
-    public void adicionarFuncionario(Funcionario novo) {
+    public void adicionarFuncionario(DTOFuncionario novo) {
         motor.adicionarFuncionario(novo);
     }
 
-    public void removerFuncionario(Funcionario apagar) {
-        motor.removerFuncionario(apagar);
-    }
-
-    public ArrayList<Funcionario> listarTodosFuncionarios() {
+    public ArrayList<DTOFuncionario> listarTodosFuncionarios() {
         return motor.listarTodosFuncionarios();
     }
 
-    public void removerFuncionarios(ArrayList<Funcionario> funcionarios) {
+    public void removerFuncionarios(ArrayList<DTOFuncionario> funcionarios) {
         motor.removerFuncionarios(funcionarios);
     }
 
-    public ArrayList<Veiculo> veiculosInspeccionadosPeloFuncionario(Funcionario funcionario) {
+    public ArrayList<DTOVeiculo> veiculosInspeccionadosPeloFuncionario(DTOFuncionario funcionario) {
         return motor.veiculosInspeccionadosPeloFuncionario(funcionario);
     }
 
-    public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario) {
+    public ArrayList<DTOFolhaObra> obrasDoFuncionario(DTOFuncionario funcionario) {
         return motor.obrasDoFuncionario(funcionario);
     }
 
-    public void adicionarMaterial(Material novo) {
+    public void adicionarMaterial(DTOMaterial novo) {
         motor.adicionarMaterial(novo);
     }
 
-    public void removerMaterial(Material apagar) {
+    public void removerMaterial(DTOMaterial apagar) {
         motor.removerMaterial(apagar);
     }
 
-    public ArrayList<Material> listarTodosMateriais() {
+    public ArrayList<DTOMaterial> listarTodosMateriais() {
         return motor.listarTodosMateriais();
     }
 
-    public void adicionarVeiculo(Veiculo novo) {
+    public void adicionarVeiculo(DTOVeiculo novo) {
         motor.adicionarVeiculo(novo);
     }
 
-    public void removerVeiculo(Veiculo apagar) {
+    public void removerVeiculo(DTOVeiculo apagar) {
         motor.removerVeiculo(apagar);
     }
 
-    public ArrayList<Veiculo> listarTodosVeiculos() {
+    public ArrayList<DTOVeiculo> listarTodosVeiculos() {
         return motor.listarTodosVeiculos();
     }
 
-    public ArrayList<FolhaObra> listarFolhasObraVeiculo(final Veiculo veiculo) {
+    public ArrayList<DTOFolhaObra> listarFolhasObraVeiculo(final DTOVeiculo veiculo) {
         return motor.listarFolhasObraVeiculo(veiculo);
     }
 
-    public void adicionarInspeccao(Inspeccao nova) {
+    public void adicionarInspeccao(DTOInspeccao nova) {
         motor.adicionarInspeccao(nova);
     }
 
-    public void removerInspeccao(Inspeccao apagar) {
+    public void removerInspeccao(DTOInspeccao apagar) {
         motor.removerInspeccao(apagar);
     }
 
-    public ArrayList<Inspeccao> listarInspeccoesVeiculo(final Veiculo veiculo) {
+    public ArrayList<DTOInspeccao> listarInspeccoesVeiculo(final DTOVeiculo veiculo) {
         return motor.listarInspeccoesVeiculo(veiculo);
     }
 
-    public ArrayList<Veiculo> listarVeiculosInspeccianadosPor(final Funcionario funcionario) {
+    public ArrayList<DTOVeiculo> listarVeiculosInspeccianadosPor(final DTOFuncionario funcionario) {
         return motor.listarVeiculosInspeccianadosPor(funcionario);
     }
 

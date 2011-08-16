@@ -22,8 +22,8 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Fornecedor;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 import net.sf.jautoinvoice.client.srvs.SrvFornecedor;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 
@@ -42,23 +42,19 @@ public class SrvFornecedorImpl extends RemoteServiceServlet implements SrvFornec
         gestor = new JAutoInvoiceManager();
     }
 
-    public void adicionarFornecedor(Fornecedor novo) {
+    public void adicionarFornecedor(DTOFornecedor novo) {
         gestor.adicionarFornecedor(novo);
     }
 
-    public void removerFornecedor(Fornecedor apagar) {
-        gestor.removerFornecedor(apagar);
-    }
-
-    public ArrayList<Fornecedor> listarTodosFornecedores() {
+    public ArrayList<DTOFornecedor> listarTodosFornecedores() {
         return gestor.listarTodosFornecedores();
     }
 
-    public ArrayList<Material> materiaisDeFornecedor(Fornecedor fornecedor) {
+    public ArrayList<DTOMaterial> materiaisDeFornecedor(DTOFornecedor fornecedor) {
         return gestor.listarMateriaisDeFornecedor(fornecedor);
     }
 
-    public void removerFornecedores(ArrayList<Fornecedor> fornecedores) {
+    public void removerFornecedores(ArrayList<DTOFornecedor> fornecedores) {
         gestor.removerFornecedores(fornecedores);
     }
 }

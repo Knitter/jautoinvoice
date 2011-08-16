@@ -51,7 +51,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 
 /**
  * @since 1.0
@@ -150,10 +150,10 @@ public final class PainelMaterial extends Conteudo {
         columns.add(new ColumnConfig("descricao", "Descrição", 200));
         //TODO: fornecedor, iva, quantidade
 
-        RpcProxy<ArrayList<Material>> proxy = new RpcProxy<ArrayList<Material>>() {
+        RpcProxy<ArrayList<DTOMaterial>> proxy = new RpcProxy<ArrayList<DTOMaterial>>() {
 
             @Override
-            protected void load(Object loadConfig, AsyncCallback<ArrayList<Material>> callback) {
+            protected void load(Object loadConfig, AsyncCallback<ArrayList<DTOMaterial>> callback) {
                 JAutoInvoiceApp.getInstance().getSrvMaterial().listarTodosMateriais(callback);
             }
         };

@@ -22,10 +22,10 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.IVA;
-import net.sf.jautoinvoice.client.model.Marca;
-import net.sf.jautoinvoice.client.model.Modelo;
-import net.sf.jautoinvoice.client.model.Servico;
+import net.sf.jautoinvoice.client.dto.DTOIVA;
+import net.sf.jautoinvoice.client.dto.DTOMarca;
+import net.sf.jautoinvoice.client.dto.DTOModelo;
+import net.sf.jautoinvoice.client.dto.DTOServico;
 import net.sf.jautoinvoice.client.srvs.SrvAuxiliar;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 
@@ -44,51 +44,51 @@ public class SrvAuxiliarImpl extends RemoteServiceServlet implements SrvAuxiliar
         gestor = new JAutoInvoiceManager();
     }
 
-    public void adicionarIVA(IVA novo) {
+    public void adicionarIVA(DTOIVA novo) {
         gestor.adicionarIVA(novo);
     }
 
-    public void removerIVA(IVA apagar) {
+    public void removerIVA(DTOIVA apagar) {
         gestor.removerIVA(apagar);
     }
 
-    public ArrayList<IVA> listarTodosIVAs() {
+    public ArrayList<DTOIVA> listarTodosIVAs() {
         return gestor.listarTodosIVAs();
     }
 
-    public void adicionarMarca(Marca nova) {
+    public void adicionarMarca(DTOMarca nova) {
         gestor.adicionarMarca(nova);
     }
 
-    public void removerMarca(Marca apagar) {
+    public void removerMarca(DTOMarca apagar) {
         gestor.removerMarca(apagar);
     }
 
-    public ArrayList<Marca> listarTodasMarcas() {
+    public ArrayList<DTOMarca> listarTodasMarcas() {
         return gestor.listarTodasMarcas();
     }
 
-    public void adicionarModelo(Modelo novo) {
+    public void adicionarModelo(DTOModelo novo) {
         gestor.adicionarModelo(novo);
     }
 
-    public void removerModelo(Modelo apagar) {
+    public void removerModelo(DTOModelo apagar) {
         gestor.removerModelo(apagar);
     }
 
-    public ArrayList<Modelo> listarTodosModelos() {
+    public ArrayList<DTOModelo> listarTodosModelos() {
         return gestor.listarTodosModelos();
     }
 
-    public void adicionarServico(Servico novo) {
+    public void adicionarServico(DTOServico novo) {
         gestor.adicionarServico(novo);
     }
 
-    public void removerServico(Servico apagar) {
+    public void removerServico(DTOServico apagar) {
         gestor.removerServico(apagar);
     }
 
-    public ArrayList<Servico> listarTodosServicos() {
+    public ArrayList<DTOServico> listarTodosServicos() {
         return gestor.listarTodosServicos();
     }
 }

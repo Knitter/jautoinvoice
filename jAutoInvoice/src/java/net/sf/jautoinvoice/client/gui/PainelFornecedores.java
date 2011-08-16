@@ -56,7 +56,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Fornecedor;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
 
 /**
  * Painel que agrupa os conteúdos necessários à gestão de fornecedores, onde se 
@@ -97,10 +97,10 @@ public final class PainelFornecedores extends Conteudo {
         columns.add(new ColumnConfig("fax", "FAX", 200));
         columns.add(new ColumnConfig("notas", "Notas", 200));
 
-        RpcProxy<ArrayList<Fornecedor>> proxy = new RpcProxy<ArrayList<Fornecedor>>() {
+        RpcProxy<ArrayList<DTOFornecedor>> proxy = new RpcProxy<ArrayList<DTOFornecedor>>() {
 
             @Override
-            protected void load(Object loadConfig, AsyncCallback<ArrayList<Fornecedor>> callback) {
+            protected void load(Object loadConfig, AsyncCallback<ArrayList<DTOFornecedor>> callback) {
                 JAutoInvoiceApp.getInstance().getSrvFornecedor().listarTodosFornecedores(callback);
             }
         };
@@ -159,9 +159,9 @@ public final class PainelFornecedores extends Conteudo {
 
             public void handleEvent(MessageBoxEvent ce) {
                 if (Dialog.YES.equals(ce.getButtonClicked().getItemId())) {
-                    ArrayList<Fornecedor> seleccionados = new ArrayList<Fornecedor>();
+                    ArrayList<DTOFornecedor> seleccionados = new ArrayList<DTOFornecedor>();
                     for (BeanModel m : grelha.getSelectionModel().getSelectedItems()) {
-                        seleccionados.add((Fornecedor) m.getBean());
+                        seleccionados.add((DTOFornecedor) m.getBean());
                     }
 
                     JAutoInvoiceApp.getInstance().getSrvFornecedor().removerFornecedores(seleccionados, new AsyncCallback<Void>() {

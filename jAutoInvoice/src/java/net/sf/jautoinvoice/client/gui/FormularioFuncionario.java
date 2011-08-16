@@ -34,8 +34,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Utilizador;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
 
 /**
  * @autor Sérgio Lopes
@@ -98,16 +97,16 @@ public final class FormularioFuncionario extends Window {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                Funcionario novo = new Funcionario();
+                DTOFuncionario novo = new DTOFuncionario();
                 novo.setNome(nome.getValue());
                 novo.setContribuinte(contribuinte.getValue());
                 novo.setValorHora(valorHora.getValue().floatValue());
 
                 if (grupo.isCheckboxToggle()) {
-                    Utilizador utilizador = new Utilizador();
-                    utilizador.setUsername(username.getValue());
-                    utilizador.setPassword(password.getValue());
-                    novo.setUtilizador(utilizador);
+                    //Utilizador utilizador = new Utilizador();
+                    //utilizador.setUsername(username.getValue());
+                    //utilizador.setPassword(password.getValue());
+                    //novo.setUtilizador(utilizador);
                 }
                 novo.setActivo(true);
                 JAutoInvoiceApp.getInstance().getSrvFuncionario().adicionarFuncionario(novo, new AsyncCallback<Void>() {

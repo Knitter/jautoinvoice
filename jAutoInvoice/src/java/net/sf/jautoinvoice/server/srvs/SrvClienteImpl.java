@@ -22,7 +22,7 @@ package net.sf.jautoinvoice.server.srvs;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Cliente;
+import net.sf.jautoinvoice.client.dto.DTOCliente;
 import net.sf.jautoinvoice.client.srvs.SrvCliente;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 
@@ -41,15 +41,15 @@ public class SrvClienteImpl extends RemoteServiceServlet implements SrvCliente {
         gestor = new JAutoInvoiceManager();
     }
 
-    public void adicionarCliente(Cliente novo) {
+    public void adicionarCliente(DTOCliente novo) {
         gestor.adicionarCliente(novo);
     }
 
-    public void removerCliente(Cliente apagar) {
-        gestor.removerCliente(apagar);
+    public void removerClientes(ArrayList<DTOCliente> clientes) {
+        gestor.removerClientes(clientes);
     }
 
-    public ArrayList<Cliente> listarTodos() {
+    public ArrayList<DTOCliente> listarTodos() {
         return gestor.listarTodosClientes();
     }
 }

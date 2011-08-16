@@ -22,9 +22,9 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 
 /**
  * Versão assíncrona do serviço de gestão de funcionários.
@@ -36,15 +36,13 @@ import net.sf.jautoinvoice.client.model.Veiculo;
  */
 public interface SrvFuncionarioAsync {
 
-    public void adicionarFuncionario(Funcionario novo, AsyncCallback<Void> call);
+    public void adicionarFuncionario(DTOFuncionario novo, AsyncCallback<Void> call);
 
-    public void removerFuncionario(Funcionario apagar, AsyncCallback<Void> call);
+    public void listarTodosFuncionarios(AsyncCallback<ArrayList<DTOFuncionario>> call);
 
-    public void listarTodosFuncionarios(AsyncCallback<ArrayList<Funcionario>> call);
+    public void inpeccionadosPeloFuncionario(DTOFuncionario funcionario, AsyncCallback<ArrayList<DTOVeiculo>> call);
 
-    public void inpeccionadosPeloFuncionario(Funcionario funcionario, AsyncCallback<ArrayList<Veiculo>> call);
+    public void obrasDoFuncionario(DTOFuncionario funcionario, AsyncCallback<ArrayList<DTOFolhaObra>> call);
 
-    public void obrasDoFuncionario(Funcionario funcionario, AsyncCallback<ArrayList<FolhaObra>> call);
-
-    public void removerFuncionarios(ArrayList<Funcionario> funcionarios, AsyncCallback<Void> call);
+    public void removerFuncionarios(ArrayList<DTOFuncionario> funcionarios, AsyncCallback<Void> call);
 }

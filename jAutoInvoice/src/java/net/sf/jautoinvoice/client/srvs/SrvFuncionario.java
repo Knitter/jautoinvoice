@@ -23,9 +23,9 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.FolhaObra;
-import net.sf.jautoinvoice.client.model.Funcionario;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 
 /**
  * Serviço de gestão de funcionários.
@@ -41,16 +41,7 @@ public interface SrvFuncionario extends RemoteService {
      * @param novo Funcionário a adicionar.
      * @since 1.0
      */
-    public void adicionarFuncionario(Funcionario novo);
-
-    /**
-     * Remove um funcionário do sistema.
-     * 
-     * @param apagar Funcionário que se pretende remover.
-     * @since 1.0
-     */
-    //TODO: possivelmente remover
-    public void removerFuncionario(Funcionario apagar);
+    public void adicionarFuncionario(DTOFuncionario novo);
 
     /**
      * Lista todos os funcionários existentes no sistema.
@@ -58,7 +49,7 @@ public interface SrvFuncionario extends RemoteService {
      * @return ArrayList<Funcionario> com todos os funcionários encontrados.
      * @since 1.0
      */
-    public ArrayList<Funcionario> listarTodosFuncionarios();
+    public ArrayList<DTOFuncionario> listarTodosFuncionarios();
 
     /**
      * Lista os veículos que possuem inspecções levadas a cabo por determinado
@@ -68,7 +59,7 @@ public interface SrvFuncionario extends RemoteService {
      * @return ArrayList<Veiculo> com os veículos encontrados.
      * @since 1.0
      */
-    public ArrayList<Veiculo> inpeccionadosPeloFuncionario(Funcionario funcionario);
+    public ArrayList<DTOVeiculo> inpeccionadosPeloFuncionario(DTOFuncionario funcionario);
 
     /**
      * Mostra todas as folhas de obra onde determinado funcionário interviu.
@@ -77,12 +68,12 @@ public interface SrvFuncionario extends RemoteService {
      * @return ArrayList<FolhaObra> com as folhas de obra encontradas.
      * @since 1.0
      */
-    public ArrayList<FolhaObra> obrasDoFuncionario(Funcionario funcionario);
+    public ArrayList<DTOFolhaObra> obrasDoFuncionario(DTOFuncionario funcionario);
     
     /**
      * Permite a remoção de vários funcionários em simultâneo.
      * 
      * @param funcionarios 
      */
-    public void removerFuncionarios(ArrayList<Funcionario> funcionarios);
+    public void removerFuncionarios(ArrayList<DTOFuncionario> funcionarios);
 }

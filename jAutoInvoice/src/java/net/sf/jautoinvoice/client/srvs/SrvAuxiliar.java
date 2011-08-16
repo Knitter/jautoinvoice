@@ -23,10 +23,10 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.IVA;
-import net.sf.jautoinvoice.client.model.Marca;
-import net.sf.jautoinvoice.client.model.Modelo;
-import net.sf.jautoinvoice.client.model.Servico;
+import net.sf.jautoinvoice.client.dto.DTOIVA;
+import net.sf.jautoinvoice.client.dto.DTOMarca;
+import net.sf.jautoinvoice.client.dto.DTOModelo;
+import net.sf.jautoinvoice.client.dto.DTOServico;
 
 /**
  * Serviço de gestão de dados auxiliares.
@@ -41,21 +41,21 @@ public interface SrvAuxiliar extends RemoteService {
      * @param novo 
      * @since 1.0
      */
-    public void adicionarIVA(IVA novo);
+    public void adicionarIVA(DTOIVA novo);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerIVA(IVA apagar);
+    public void removerIVA(DTOIVA apagar);
 
     /**
      * 
      * @return 
      * @since 1.0
      */
-    public ArrayList<IVA> listarTodosIVAs();
+    public ArrayList<DTOIVA> listarTodosIVAs();
     //TODO: pesquisar
 
     /**
@@ -63,21 +63,21 @@ public interface SrvAuxiliar extends RemoteService {
      * @param nova 
      * @since 1.0
      */
-    public void adicionarMarca(Marca nova);
+    public void adicionarMarca(DTOMarca nova);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerMarca(Marca apagar);
+    public void removerMarca(DTOMarca apagar);
 
     /**
      * 
      * @return 
      * @since 1.0
      */
-    public ArrayList<Marca> listarTodasMarcas();
+    public ArrayList<DTOMarca> listarTodasMarcas();
     //TODO: pesquisar
 
     /**
@@ -85,21 +85,21 @@ public interface SrvAuxiliar extends RemoteService {
      * @param novo 
      * @since 1.0
      */
-    public void adicionarModelo(Modelo novo);
+    public void adicionarModelo(DTOModelo novo);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerModelo(Modelo apagar);
+    public void removerModelo(DTOModelo apagar);
 
     /**
      * 
      * @return 
      * @since 1.0
      */
-    public ArrayList<Modelo> listarTodosModelos();
+    public ArrayList<DTOModelo> listarTodosModelos();
     //TODO: pesquisar
 
     /**
@@ -107,21 +107,21 @@ public interface SrvAuxiliar extends RemoteService {
      * @param novo 
      * @since 1.0
      */
-    public void adicionarServico(Servico novo);
+    public void adicionarServico(DTOServico novo);
 
     /**
      * 
      * @param apagar 
      * @since 1.0
      */
-    public void removerServico(Servico apagar);
+    public void removerServico(DTOServico apagar);
 
     /**
      * 
      * @return 
      * @since 1.0
      */
-    public ArrayList<Servico> listarTodosServicos();
+    public ArrayList<DTOServico> listarTodosServicos();
     //TODO: pesquisar
 }
 //TODO: completar

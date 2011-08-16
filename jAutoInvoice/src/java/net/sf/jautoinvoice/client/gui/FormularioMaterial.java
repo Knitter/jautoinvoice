@@ -32,7 +32,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 
 /**
  * @since 1.0
@@ -76,7 +76,7 @@ public class FormularioMaterial extends Window {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                Material novo = new Material();
+                DTOMaterial novo = new DTOMaterial();
 
                 novo.setReferencia(referencia.getValue());
                 novo.setPrecoUnitario(precoUnitario.getValue().doubleValue());

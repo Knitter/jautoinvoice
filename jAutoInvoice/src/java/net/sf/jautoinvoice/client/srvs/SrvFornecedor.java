@@ -23,8 +23,8 @@ package net.sf.jautoinvoice.client.srvs;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.Fornecedor;
-import net.sf.jautoinvoice.client.model.Material;
+import net.sf.jautoinvoice.client.dto.DTOFornecedor;
+import net.sf.jautoinvoice.client.dto.DTOMaterial;
 
 /**
  * Serviço de gestão de fornecedores.
@@ -40,15 +40,7 @@ public interface SrvFornecedor extends RemoteService {
      * @param novo Fornecedor a adicionar.
      * @since 1.0
      */
-    public void adicionarFornecedor(Fornecedor novo);
-
-    /**
-     * Remove um fornecedor do sistema.
-     * 
-     * @param apagar Fornecedor a remover.
-     * @since 1.0
-     */
-    public void removerFornecedor(Fornecedor apagar);
+    public void adicionarFornecedor(DTOFornecedor novo);
 
     /**
      * Lista todos os fornecedores do sistema que se encontrem activos.
@@ -56,7 +48,7 @@ public interface SrvFornecedor extends RemoteService {
      * @return ArrayList<Fornecedor> com todos os fornecedores encontrados.
      * @since 1.0
      */
-    public ArrayList<Fornecedor> listarTodosFornecedores();
+    public ArrayList<DTOFornecedor> listarTodosFornecedores();
 
     /**
      * Lista todos os materiais que são adquiridos a determinado fornecedor.
@@ -65,7 +57,7 @@ public interface SrvFornecedor extends RemoteService {
      * @return ArrayList<Material> lista com todos os materiais encontrados.
      * @since 1.0
      */
-    public ArrayList<Material> materiaisDeFornecedor(Fornecedor fornecedor);
-    
-    public void removerFornecedores(ArrayList<Fornecedor> fornecedores);
+    public ArrayList<DTOMaterial> materiaisDeFornecedor(DTOFornecedor fornecedor);
+
+    public void removerFornecedores(ArrayList<DTOFornecedor> fornecedores);
 }

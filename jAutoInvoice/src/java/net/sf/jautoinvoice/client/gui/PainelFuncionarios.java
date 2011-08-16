@@ -57,7 +57,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Funcionario;
+import net.sf.jautoinvoice.client.dto.DTOFuncionario;
 
 /**
  * @author Sérgio Lopes
@@ -99,10 +99,10 @@ public final class PainelFuncionarios extends Conteudo {
         columns.add(new ColumnConfig("contribuinte", "Contribuinte", 100));
         columns.add(new ColumnConfig("valorHora", "Valor/Hora", 70));
 
-        RpcProxy<ArrayList<Funcionario>> proxy = new RpcProxy<ArrayList<Funcionario>>() {
+        RpcProxy<ArrayList<DTOFuncionario>> proxy = new RpcProxy<ArrayList<DTOFuncionario>>() {
 
             @Override
-            protected void load(Object loadConfig, AsyncCallback<ArrayList<Funcionario>> callback) {
+            protected void load(Object loadConfig, AsyncCallback<ArrayList<DTOFuncionario>> callback) {
                 JAutoInvoiceApp.getInstance().getSrvFuncionario().listarTodosFuncionarios(callback);
             }
         };
@@ -158,9 +158,9 @@ public final class PainelFuncionarios extends Conteudo {
 
             public void handleEvent(MessageBoxEvent ce) {
                 if (Dialog.YES.equals(ce.getButtonClicked().getItemId())) {
-                    ArrayList<Funcionario> seleccionados = new ArrayList<Funcionario>();
+                    ArrayList<DTOFuncionario> seleccionados = new ArrayList<DTOFuncionario>();
                     for (BeanModel m : grelha.getSelectionModel().getSelectedItems()) {
-                        seleccionados.add((Funcionario) m.getBean());
+                        seleccionados.add((DTOFuncionario) m.getBean());
                     }
 
                     JAutoInvoiceApp.getInstance().getSrvFuncionario().removerFuncionarios(seleccionados, new AsyncCallback<Void>() {

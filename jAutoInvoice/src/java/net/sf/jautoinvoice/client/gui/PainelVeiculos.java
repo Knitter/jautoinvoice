@@ -51,8 +51,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.client.model.Cliente;
-import net.sf.jautoinvoice.client.model.Veiculo;
+import net.sf.jautoinvoice.client.dto.DTOVeiculo;
 
 /**
  * @since 1.0
@@ -154,10 +153,10 @@ public final class PainelVeiculos extends Conteudo {
         columns.add(new ColumnConfig("notas", "Notas", 200));
         //TODO: marca, modelo, donos antigos, dono actual, categoria, inspeccoes, foljas obra, combustiveis
 
-        RpcProxy<ArrayList<Veiculo>> proxy = new RpcProxy<ArrayList<Veiculo>>()         {
+        RpcProxy<ArrayList<DTOVeiculo>> proxy = new RpcProxy<ArrayList<DTOVeiculo>>()         {
 
             @Override
-            protected void load(Object loadConfig, AsyncCallback<ArrayList<Veiculo>> callback) {
+            protected void load(Object loadConfig, AsyncCallback<ArrayList<DTOVeiculo>> callback) {
                 JAutoInvoiceApp.getInstance().getSrvVeiculo().listarTodosVeiculos(callback);
             }
         };

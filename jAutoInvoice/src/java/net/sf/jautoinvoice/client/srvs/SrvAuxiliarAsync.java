@@ -22,10 +22,10 @@ package net.sf.jautoinvoice.client.srvs;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import net.sf.jautoinvoice.client.model.IVA;
-import net.sf.jautoinvoice.client.model.Marca;
-import net.sf.jautoinvoice.client.model.Modelo;
-import net.sf.jautoinvoice.client.model.Servico;
+import net.sf.jautoinvoice.client.dto.DTOIVA;
+import net.sf.jautoinvoice.client.dto.DTOMarca;
+import net.sf.jautoinvoice.client.dto.DTOModelo;
+import net.sf.jautoinvoice.client.dto.DTOServico;
 
 /**
  * Versão assíncrona do serviço de gestão de dados auxiliares.
@@ -35,32 +35,32 @@ import net.sf.jautoinvoice.client.model.Servico;
  */
 public interface SrvAuxiliarAsync {
 
-    public void adicionarIVA(IVA novo, AsyncCallback<Void> call);
+    public void adicionarIVA(DTOIVA novo, AsyncCallback<Void> call);
 
-    public void removerIVA(IVA apagar, AsyncCallback<Void> call);
+    public void removerIVA(DTOIVA apagar, AsyncCallback<Void> call);
 
-    public void listarTodosIVAs(AsyncCallback<ArrayList<IVA>> call);
+    public void listarTodosIVAs(AsyncCallback<ArrayList<DTOIVA>> call);
     //TODO: pesquisar
 
-    public void adicionarMarca(Marca nova, AsyncCallback<Void> call);
+    public void adicionarMarca(DTOMarca nova, AsyncCallback<Void> call);
 
-    public void removerMarca(Marca apagar, AsyncCallback<Void> call);
+    public void removerMarca(DTOMarca apagar, AsyncCallback<Void> call);
 
-    public void listarTodasMarcas(AsyncCallback<ArrayList<Marca>> call);
+    public void listarTodasMarcas(AsyncCallback<ArrayList<DTOMarca>> call);
     //TODO: pesquisar
 
-    public void adicionarModelo(Modelo novo, AsyncCallback<Void> call);
+    public void adicionarModelo(DTOModelo novo, AsyncCallback<Void> call);
 
-    public void removerModelo(Modelo apagar, AsyncCallback<Void> call);
+    public void removerModelo(DTOModelo apagar, AsyncCallback<Void> call);
 
-    public void listarTodosModelos(AsyncCallback<ArrayList<Modelo>> call);
+    public void listarTodosModelos(AsyncCallback<ArrayList<DTOModelo>> call);
     //TODO: pesquisar
 
-    public void adicionarServico(Servico novo, AsyncCallback<Void> call);
+    public void adicionarServico(DTOServico novo, AsyncCallback<Void> call);
 
-    public void removerServico(Servico apagar, AsyncCallback<Void> call);
+    public void removerServico(DTOServico apagar, AsyncCallback<Void> call);
 
-    public void listarTodosServicos(AsyncCallback<ArrayList<Servico>> call);
+    public void listarTodosServicos(AsyncCallback<ArrayList<DTOServico>> call);
     //TODO: pesquisar
 }
 //TODO: completar
