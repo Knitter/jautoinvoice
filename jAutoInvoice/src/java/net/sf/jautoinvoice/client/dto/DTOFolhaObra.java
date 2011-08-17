@@ -76,6 +76,14 @@ public final class DTOFolhaObra implements Serializable {
         }
     }
 
+    public int getNumeroLinhasServico() {
+        if(linhas != null) {
+            return linhas.size();
+        }
+        
+        return 0;
+    }
+    
     public String getData() {
         return data;
     }

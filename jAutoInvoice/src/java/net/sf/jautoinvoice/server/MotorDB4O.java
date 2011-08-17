@@ -295,6 +295,13 @@ public class MotorDB4O implements Persistencia {
     public void adicionarMaterial(DTOMaterial novo) {
         Material m = DTOFactory.getFactory().decomporDTOMaterial(novo);
         m.setId(UUID.randomUUID().toString());
+        
+        Fornecedor fornecedor = DTOFactory.getFactory().decomporDTOFornecedor(novo.getFornecedor());
+        List<Fornecedor> possiveis = db.queryByExample(fornecedor);
+        if(possiveis.size() == 1) {
+            m.setFornecedor(possiveis.get(0));
+        }
+        
         db.store(m);
     }
 

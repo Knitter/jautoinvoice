@@ -71,6 +71,14 @@ public final class FolhaObra implements Serializable {
             linhas.remove(linha);
         }
     }
+    
+    public int getNumeroLinhasServico() {
+        if(linhas != null) {
+            return linhas.size();
+        }
+        
+        return 0;
+    }
 
     public String getData() {
         return data;

@@ -46,36 +46,38 @@ public final class DTOFactory {
         return SingletonHolder.FACTORY;
     }
 
+    //TODO: inspecções, folhas de obra, etc.
     public DTOCliente comporDTOCliente(Cliente cliente) {
-        ArrayList<String> contactos = new ArrayList<String>(cliente.getContactos().size());
-        for (String contacto : cliente.getContactos()) {
-            contactos.add(contacto);
+        ArrayList<DTOVeiculo> veiculos = new ArrayList<DTOVeiculo>(cliente.getNumeroVeiculos());
+
+        for (Veiculo veiculo : cliente.getVeiculos()) {
+            veiculos.add(new DTOVeiculo(veiculo.getId(), comporDTOModelo(veiculo.getModelo()), veiculo.getDataRegisto(),
+                    veiculo.getMatricula(), veiculo.getNrChassis(), veiculo.getCilindrada(),
+                    veiculo.getNrMotor(), null, null, null, comporDTOCategoria(veiculo.getCategoria()),
+                    comporDTOCombustivel(veiculo.getCombustivel()), veiculo.getNotas(), null, veiculo.isActivo()));
         }
 
-        ArrayList<DTOVeiculo> veiculos = new ArrayList<DTOVeiculo>(cliente.getVeiculos().size());
-        for (Veiculo veiculo : cliente.getVeiculos()) {
-            veiculos.add(comporDTOVeiculo(veiculo));
-        }
+        DTOUtilizador utilizador = comporDTOUtilizador(cliente.getUtilizador());
 
         return new DTOCliente(cliente.getId(), cliente.getNome(), cliente.getContribuinte(), cliente.getEmail(),
-                contactos, cliente.getEndereco(), veiculos, comporDTOUtilizador(cliente.getUtilizador()),
-                cliente.isActivo());
+                cliente.getContactos(), cliente.getEndereco(), veiculos, utilizador, cliente.isActivo());
     }
 
+    //TODO: inspecções, folhas de obra, etc.
     public Cliente decomporDTOCliente(DTOCliente dto) {
-        ArrayList<String> contactos = new ArrayList<String>(dto.getContactos().size());
-        for (String contacto : dto.getContactos()) {
-            contactos.add(contacto);
+        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>(dto.getNumeroVeiculos());
+
+        for (DTOVeiculo veiculo : dto.getVeiculos()) {
+            veiculos.add(new Veiculo(veiculo.getId(), decomporDTOModelo(veiculo.getModelo()), veiculo.getDataRegisto(),
+                    veiculo.getMatricula(), veiculo.getNrChassis(), veiculo.getCilindrada(),
+                    veiculo.getNrMotor(), null, null, null, decomporDTOCategoria(veiculo.getCategoria()),
+                    decomporDTOCombustivel(veiculo.getCombustivel()), veiculo.getNotas(), null, veiculo.isActivo()));
         }
 
-        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>(dto.getVeiculos().size());
-        for (DTOVeiculo dv : dto.getVeiculos()) {
-            veiculos.add(decomporDTOVeiculo(dv));
-        }
+        Utilizador utilizador = decomporDTOUtilizador(dto.getUtilizador());
 
         return new Cliente(dto.getId(), dto.getNome(), dto.getContribuinte(), dto.getEmail(),
-                contactos, dto.getEndereco(), veiculos, decomporDTOUtilizador(dto.getUtilizador()),
-                dto.isActivo());
+                dto.getContactos(), dto.getEndereco(), veiculos, utilizador, dto.isActivo());
     }
 
     public DTOFolhaObra comporDTOFolhaObra(FolhaObra folha) {
@@ -125,18 +127,18 @@ public final class DTOFactory {
     }
 
     public DTOMarca comporDTOMarca(Marca marca) {
-        ArrayList<DTOModelo> modelos = new ArrayList<DTOModelo>(marca.getModelos().size());
+        ArrayList<DTOModelo> modelos = new ArrayList<DTOModelo>(marca.getNumeroModelos());
         for (Modelo modelo : marca.getModelos()) {
-            modelos.add(comporDTOModelo(modelo));
+            modelos.add(new DTOModelo(modelo.getId(), null, modelo.getNome(), modelo.isActivo()));
         }
 
         return new DTOMarca(marca.getId(), marca.getNome(), modelos, marca.isActivo());
     }
 
     public Marca decomporDTOMarca(DTOMarca dto) {
-        ArrayList<Modelo> modelos = new ArrayList<Modelo>(dto.getModelos().size());
+        ArrayList<Modelo> modelos = new ArrayList<Modelo>(dto.getNumeroModelos());
         for (DTOModelo dm : dto.getModelos()) {
-            modelos.add(decomporDTOModelo(dm));
+            modelos.add(new Modelo(dto.getId(), null, dto.getNome(), dto.isActivo()));
         }
 
         return new Marca(dto.getId(), dto.getNome(), modelos, dto.isActivo());
@@ -155,20 +157,35 @@ public final class DTOFactory {
     }
 
     public DTOModelo comporDTOModelo(Modelo modelo) {
-        return new DTOModelo(modelo.getId(), comporDTOMarca(modelo.getMarca()),
-                modelo.getNome(), modelo.isActivo());
+        if (modelo.getMarca() != null) {
+            for (DTOModelo dm : comporDTOMarca(modelo.getMarca()).getModelos()) {
+                if (dm.getId() != null && dm.getId().equals(modelo.getId())) {
+                    return dm;
+                }
+            }
+        }
+
+        return new DTOModelo(modelo.getId(), null, modelo.getNome(), modelo.isActivo());
     }
 
     public Modelo decomporDTOModelo(DTOModelo dto) {
-        return new Modelo(dto.getId(), decomporDTOMarca(dto.getMarca()), dto.getNome(), dto.isActivo());
+        if (dto.getMarca() != null) {
+            for (Modelo modelo : decomporDTOMarca(dto.getMarca()).getModelos()) {
+                if (modelo.getId() != null && modelo.getId().equals(dto.getId())) {
+                    return modelo;
+                }
+            }
+        }
+
+        return new Modelo(dto.getId(), null, dto.getNome(), dto.isActivo());
     }
 
     public DTOServico comporDTOServico(Servico servico) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOServico(servico.getId(), servico.getDescricao(), servico.isActivo());
     }
 
     public Servico decomporDTOServico(DTOServico dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Servico(dto.getId(), dto.getDescricao(), dto.isActivo());
     }
 
     public DTOVeiculo comporDTOVeiculo(Veiculo veiculo) {

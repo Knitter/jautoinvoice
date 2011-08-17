@@ -47,6 +47,7 @@ public final class Marca implements Serializable {
         this.modelos = new ArrayList<Modelo>();
         if (modelos != null) {
             for (Modelo m : modelos) {
+                m.setMarca(this);
                 this.modelos.add(m);
             }
         }
@@ -78,6 +79,14 @@ public final class Marca implements Serializable {
         if (modelos != null) {
             modelos.remove(modelo);
         }
+    }
+    
+    public int getNumeroModelos() {
+        if (modelos != null) {
+            return modelos.size();
+        }
+
+        return 0;
     }
 
     public ArrayList<Modelo> getModelos() {

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public final class DTOVeiculo implements Serializable {
 
     private String id;
-    private DTOMarca marca;
     private DTOModelo modelo;
     private String dataRegisto;
     private String matricula;
@@ -49,14 +48,13 @@ public final class DTOVeiculo implements Serializable {
         folhasObra = new ArrayList<DTOFolhaObra>();
     }
 
-    public DTOVeiculo(String id, DTOMarca marca, DTOModelo modelo, String dataRegisto, String matricula,
+    public DTOVeiculo(String id, DTOModelo modelo, String dataRegisto, String matricula,
             String nrChassis, String cilindrada, String nrMotor, DTOCliente dono,
             ArrayList<DTOCliente> antigosDonos, ArrayList<DTOInspeccao> inspeccoes,
             DTOCategoria categoria, DTOCombustivel combustivel, String notas,
             ArrayList<DTOFolhaObra> folhasObra, boolean activo) {
 
         this.id = id;
-        this.marca = marca;
         this.modelo = modelo;
         this.dataRegisto = dataRegisto;
         this.matricula = matricula;
@@ -93,7 +91,6 @@ public final class DTOVeiculo implements Serializable {
     }
 
     public void adicionarAntigoDono(DTOCliente dono) {
-        //TODO: validar se estamos a adicionar um antigo que é dono actual
         if (antigosDonos == null) {
             antigosDonos = new ArrayList<DTOCliente>();
         }
@@ -105,6 +102,14 @@ public final class DTOVeiculo implements Serializable {
         if (antigosDonos != null) {
             antigosDonos.remove(dono);
         }
+    }
+    
+    public int getNumeroAntigosDonos() {
+        if(antigosDonos != null) {
+            return antigosDonos.size();
+        }
+        
+        return 0;
     }
 
     public void adicionarInspeccao(DTOInspeccao inspeccao) {
@@ -120,6 +125,14 @@ public final class DTOVeiculo implements Serializable {
             inspeccoes.remove(inspeccao);
         }
     }
+    
+    public int getNumeroInspeccoes() {
+        if(inspeccoes != null) {
+            return inspeccoes.size();
+        }
+        
+        return 0;
+    }
 
     public void adicionarFolhaObra(DTOFolhaObra folha) {
         if (folhasObra == null) {
@@ -133,6 +146,14 @@ public final class DTOVeiculo implements Serializable {
         if (folhasObra == null) {
             folhasObra.remove(folha);
         }
+    }
+    
+    public int getNumeroFolhasObra() {
+        if (folhasObra != null) {
+            return folhasObra.size();
+        }
+
+        return 0;
     }
 
     public ArrayList<DTOCliente> getAntigosDonos() {
@@ -216,14 +237,6 @@ public final class DTOVeiculo implements Serializable {
         for (DTOFolhaObra f : folhasObra) {
             this.folhasObra.add(f);
         }
-    }
-
-    public DTOMarca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(DTOMarca marca) {
-        this.marca = marca;
     }
 
     public String getMatricula() {

@@ -83,6 +83,14 @@ public final class LinhaServico implements Serializable {
             gastos.remove(gasto);
         }
     }
+    
+    public int getNumeroLinhasGasto() {
+        if(gastos != null) {
+            return gastos.size();
+        }
+        
+        return 0;
+    }
 
     public double getDuracao() {
         return duracao;

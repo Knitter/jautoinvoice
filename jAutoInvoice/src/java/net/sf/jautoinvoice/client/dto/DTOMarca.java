@@ -47,6 +47,7 @@ public final class DTOMarca implements Serializable {
         this.modelos = new ArrayList<DTOModelo>();
         if (modelos != null) {
             for (DTOModelo m : modelos) {
+                m.setMarca(this);
                 this.modelos.add(m);
             }
         }
@@ -82,10 +83,18 @@ public final class DTOMarca implements Serializable {
 
     public ArrayList<DTOModelo> getModelos() {
         if (modelos != null) {
-            return new ArrayList(modelos);
+            return new ArrayList<DTOModelo>(modelos);
         }
 
         return null;
+    }
+
+    public int getNumeroModelos() {
+        if (modelos != null) {
+            return modelos.size();
+        }
+
+        return 0;
     }
 
     public void setModelos(ArrayList<DTOModelo> modelos) {

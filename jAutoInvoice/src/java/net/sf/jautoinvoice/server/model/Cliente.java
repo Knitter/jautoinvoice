@@ -65,6 +65,7 @@ public final class Cliente implements Serializable {
         this.veiculos = new ArrayList<Veiculo>();
         if (veiculos != null) {
             for (Veiculo v : veiculos) {
+                v.setDono(this);
                 this.veiculos.add(v);
             }
         }
@@ -85,6 +86,14 @@ public final class Cliente implements Serializable {
         }
     }
 
+    public int getNumeroContactos() {
+        if (contactos != null) {
+            return contactos.size();
+        }
+
+        return 0;
+    }
+
     public void adicionarVeiculo(Veiculo veiculo) {
         if (veiculos == null) {
             veiculos = new ArrayList<Veiculo>();
@@ -97,6 +106,14 @@ public final class Cliente implements Serializable {
         if (veiculos != null) {
             veiculos.remove(veiculo);
         }
+    }
+
+    public int getNumeroVeiculos() {
+        if (veiculos != null) {
+            return veiculos.size();
+        }
+
+        return 0;
     }
 
     public boolean isActivo() {

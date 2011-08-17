@@ -32,7 +32,6 @@ import java.util.ArrayList;
 public final class Veiculo implements Serializable {
 
     private String id;
-    private Marca marca;
     private Modelo modelo;
     private String dataRegisto;
     private String matricula;
@@ -55,14 +54,13 @@ public final class Veiculo implements Serializable {
         folhasObra = new ArrayList<FolhaObra>();
     }
 
-    public Veiculo(String id, Marca marca, Modelo modelo, String dataRegisto, String matricula,
+    public Veiculo(String id, Modelo modelo, String dataRegisto, String matricula,
             String nrChassis, String cilindrada, String nrMotor, Cliente dono,
             ArrayList<Cliente> antigosDonos, ArrayList<Inspeccao> inspeccoes,
             Categoria categoria, Combustivel combustivel, String notas,
             ArrayList<FolhaObra> folhasObra, boolean activo) {
 
         this.id = id;
-        this.marca = marca;
         this.modelo = modelo;
         this.dataRegisto = dataRegisto;
         this.matricula = matricula;
@@ -125,6 +123,14 @@ public final class Veiculo implements Serializable {
         }
     }
 
+    public int getNumeroAntigosDonos() {
+        if (antigosDonos != null) {
+            return antigosDonos.size();
+        }
+
+        return 0;
+    }
+
     /**
      * 
      * @param inspeccao 
@@ -149,6 +155,14 @@ public final class Veiculo implements Serializable {
         }
     }
 
+    public int getNumeroInspeccoes() {
+        if (inspeccoes != null) {
+            return inspeccoes.size();
+        }
+
+        return 0;
+    }
+
     /**
      * 
      * @param folha 
@@ -171,6 +185,14 @@ public final class Veiculo implements Serializable {
         if (folhasObra == null) {
             folhasObra.remove(folha);
         }
+    }
+
+    public int getNumeroFolhasObra() {
+        if (folhasObra != null) {
+            return folhasObra.size();
+        }
+
+        return 0;
     }
 
     public ArrayList<Cliente> getAntigosDonos() {
@@ -254,14 +276,6 @@ public final class Veiculo implements Serializable {
         for (FolhaObra f : folhasObra) {
             this.folhasObra.add(f);
         }
-    }
-
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
     }
 
     public String getMatricula() {
