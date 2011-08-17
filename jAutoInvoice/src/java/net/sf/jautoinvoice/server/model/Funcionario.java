@@ -32,19 +32,16 @@ public final class Funcionario implements Serializable {
     private String nome;
     private String contribuinte;
     private double valorHora;
-    private Utilizador utilizador;
     private boolean activo;
 
     public Funcionario() {
         //DO NOTHING
     }
 
-    public Funcionario(String nome, String contribuinte, double valorHora,
-            Utilizador utilizador, boolean activo) {
+    public Funcionario(String nome, String contribuinte, double valorHora, boolean activo) {
         this.nome = nome;
         this.contribuinte = contribuinte;
         this.valorHora = valorHora;
-        this.utilizador = utilizador;
         this.activo = activo;
     }
 
@@ -86,14 +83,6 @@ public final class Funcionario implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
-    }
-
-    public Utilizador getUtilizador() {
-        return utilizador;
-    }
-
-    public void setUtilizador(Utilizador utilizador) {
-        this.utilizador = utilizador;
     }
 
     @Override

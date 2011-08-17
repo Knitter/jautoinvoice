@@ -23,15 +23,6 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Relaciona um serviço com uma folha de obra e agrupa os dados referentes ao 
- * funcionário, ao valor hora, duração, etc.
- * 
- * Permite também associar linhas de gastos onde se registam os materiais que 
- * foram usados.
- * 
- * @since 1.0
- */
 public final class DTOLinhaServico implements Serializable {
 
     private DTOFolhaObra folha;

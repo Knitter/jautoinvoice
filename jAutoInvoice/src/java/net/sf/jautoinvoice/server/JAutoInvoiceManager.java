@@ -32,7 +32,6 @@ import net.sf.jautoinvoice.client.dto.DTOMaterial;
 import net.sf.jautoinvoice.client.dto.DTOModelo;
 import net.sf.jautoinvoice.client.dto.DTOServico;
 import net.sf.jautoinvoice.client.dto.DTOVeiculo;
-import net.sf.jautoinvoice.server.model.Utilizador;
 
 /**
  * Esta é a classe base do sistema de gestão. Qualquer serviço delega o 
@@ -195,20 +194,20 @@ public final class JAutoInvoiceManager {
         return motor.listarVeiculosInspeccianadosPor(funcionario);
     }
 
-    public boolean autorizado(Utilizador utilizador, String area) {
-        //TODO: ...
+    public boolean autenticado() {
         return true;
     }
 
-    public Utilizador autenticar(String username, String password) {
-        password = SHA1.hash(password);
+    public boolean permissoesFuncionario() {
+        return true;
+    }
 
-        Utilizador utilizador = motor.autenticar(username, password);
-        if (utilizador != null) {
-            utilizador.setPassword(null);
-        }
+    public boolean permissoesAdministracao() {
+        return true;
+    }
 
-        return utilizador;
+    public boolean permissoesCliente() {
+        return true;
     }
 }
 //TODO: completar

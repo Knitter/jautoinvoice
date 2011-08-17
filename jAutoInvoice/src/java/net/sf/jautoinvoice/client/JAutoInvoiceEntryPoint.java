@@ -40,4 +40,3 @@ public class JAutoInvoiceEntryPoint implements EntryPoint {
         JAutoInvoiceApp.getInstance().doLayout();
     }
 }
-//TODO: completar

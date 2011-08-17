@@ -22,12 +22,6 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
-/**
- * Representa materia de uso na oficina e aplicado nos veículos. Pode ser uma 
- * peça ou um consumível usado com óleo.
- * 
- * @since 1.0
- */
 public final class DTOMaterial implements Serializable {
 
     //TODO: Nr. da factura e data da compra para controlar os stocks.

@@ -22,11 +22,6 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
-/**
- * 
- * @author Sérgio Lopes
- * @since 1.0
- */
 public final class DTOFornecedor implements Serializable {
 
     private String id;

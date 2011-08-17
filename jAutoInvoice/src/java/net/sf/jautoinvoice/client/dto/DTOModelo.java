@@ -22,11 +22,6 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
-/**
- * Representa um modelo de veículo. Os modelos pertencem sempre a uma marca.
- * 
- * @since 1.0
- */
 public final class DTOModelo implements Serializable {
 
     private DTOMarca marca;

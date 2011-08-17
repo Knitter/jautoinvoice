@@ -236,16 +236,7 @@ public final class MenuPrincipal extends Conteudo {
 
             @Override
             public void componentSelected(ButtonEvent event) {
-                JAutoInvoiceApp.getInstance().getSrvAutorizacao().sair(new AsyncCallback<ArrayList<Void>>() {
-
-                    public void onFailure(Throwable caught) {
-                        //ignorar
-                    }
-
-                    public void onSuccess(ArrayList<Void> result) {
-                        JAutoInvoiceApp.getInstance().doLayout();
-                    }
-                });
+                //TODO:
             }
         });
         grupo.add(botao);

@@ -23,12 +23,6 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Representa um veículo, registando os dados necessários e as relações 
- * existentes com outros elementos.
- * 
- * @since 1.0
- */
 public final class DTOVeiculo implements Serializable {
 
     private DTOMarca marca;
@@ -92,12 +86,6 @@ public final class DTOVeiculo implements Serializable {
         }
     }
 
-    /**
-     * Permite adicionar um cliente como tendo sido dono do veículo.
-     * 
-     * @param dono O cliente a adicionar
-     * @since 1.0
-     */
     public void adicionarAntigoDono(DTOCliente dono) {
         //TODO: validar se estamos a adicionar um antigo que é dono actual
         if (antigosDonos == null) {
@@ -107,23 +95,12 @@ public final class DTOVeiculo implements Serializable {
         antigosDonos.add(dono);
     }
 
-    /**
-     * Remove um cliente como tendo sido dono deste veículo.
-     * 
-     * @param dono O cliente a remover
-     * @since 1.0
-     */
     public void removerAntigoDono(DTOCliente dono) {
         if (antigosDonos != null) {
             antigosDonos.remove(dono);
         }
     }
 
-    /**
-     * 
-     * @param inspeccao 
-     * @since 1.0
-     */
     public void adicionarInspeccao(DTOInspeccao inspeccao) {
         if (inspeccoes == null) {
             inspeccoes = new ArrayList<DTOInspeccao>();
@@ -132,22 +109,12 @@ public final class DTOVeiculo implements Serializable {
         inspeccoes.add(inspeccao);
     }
 
-    /**
-     * 
-     * @param inspeccao 
-     * @since 1.0
-     */
     public void removerInspeccao(DTOInspeccao inspeccao) {
         if (inspeccoes != null) {
             inspeccoes.remove(inspeccao);
         }
     }
 
-    /**
-     * 
-     * @param folha 
-     * @since 1.0
-     */
     public void adicionarFolhaObra(DTOFolhaObra folha) {
         if (folhasObra == null) {
             folhasObra = new ArrayList<DTOFolhaObra>();
@@ -156,11 +123,6 @@ public final class DTOVeiculo implements Serializable {
         folhasObra.add(folha);
     }
 
-    /**
-     * 
-     * @param folha 
-     * @since 1.0
-     */
     public void removeFolharObra(DTOFolhaObra folha) {
         if (folhasObra == null) {
             folhasObra.remove(folha);

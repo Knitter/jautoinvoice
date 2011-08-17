@@ -22,10 +22,6 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
-/**
- * 
- * @since 1.0
- */
 public final class DTOLinhaGasto implements Serializable {
 
     private DTOMaterial material;

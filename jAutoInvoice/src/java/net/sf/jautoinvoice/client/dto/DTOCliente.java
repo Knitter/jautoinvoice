@@ -23,10 +23,6 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * @author Sérgio Lopes
- * @since 1.0
- */
 public final class DTOCliente implements Serializable {
 
     private String id;
@@ -37,7 +33,6 @@ public final class DTOCliente implements Serializable {
     private String endereco;
     private ArrayList<DTOVeiculo> veiculos;
     private boolean activo;
-    //private Utilizador utilizador;
 
     public DTOCliente() {
         this.contactos = new ArrayList<String>();
@@ -46,13 +41,12 @@ public final class DTOCliente implements Serializable {
     }
 
     public DTOCliente(String codigo, String nome, String email, ArrayList<String> contactos,
-            String endereco, ArrayList<DTOVeiculo> veiculos, boolean activo/*, Utilizador utilizador*/) {
+            String endereco, ArrayList<DTOVeiculo> veiculos, boolean activo) {
         this.codigo = codigo;
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
         this.activo = activo;
-        //this.utilizador = utilizador;
 
         this.contactos = new ArrayList<String>();
         if (contactos != null) {
@@ -67,7 +61,6 @@ public final class DTOCliente implements Serializable {
                 this.veiculos.add(v);
             }
         }
-
     }
 
     public void adicionarContacto(String contacto) {
@@ -165,14 +158,6 @@ public final class DTOCliente implements Serializable {
             this.veiculos.add(v);
         }
     }
-
-    //public Utilizador getUtilizador() {
-    //    return utilizador;
-    //}
-
-    //public void setUtilizador(Utilizador utilizador) {
-    //    this.utilizador = utilizador;
-    //}
 
     public String getId() {
         return id;

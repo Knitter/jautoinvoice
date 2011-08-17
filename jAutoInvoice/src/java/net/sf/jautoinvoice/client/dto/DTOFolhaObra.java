@@ -23,10 +23,6 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * 
- * @since 1.0
- */
 public final class DTOFolhaObra implements Serializable {
 
     private DTOVeiculo veiculo;

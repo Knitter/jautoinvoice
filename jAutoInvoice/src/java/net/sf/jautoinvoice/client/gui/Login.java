@@ -31,13 +31,10 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import net.sf.jautoinvoice.client.JAutoInvoiceApp;
-import net.sf.jautoinvoice.server.model.Utilizador;
 
 /**
  * Janela de login.
@@ -86,25 +83,6 @@ public final class Login extends Conteudo {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-
-                        if (!username.getValue().isEmpty() && !password.getValue().isEmpty()) {
-                            JAutoInvoiceApp.getInstance().getSrvAutorizacao().autenticar(username.getValue(),
-                                    password.getValue(), new AsyncCallback<Utilizador>() {
-
-                                public void onFailure(Throwable caught) {
-                                    //TODO:...
-                                }
-
-                                public void onSuccess(Utilizador result) {
-                                    if (result != null) {
-                                        //JAutoInvoiceApp.getInstance().setUtilizadorAutenticado(result);
-                                        //JAutoInvoiceApp.getInstance().doLayout();
-                                    } else {
-                                        mensagem.show();
-                                    }
-                                }
-                            });
-                        }
                     }
                 });
         ButtonBar barra = new ButtonBar();

@@ -23,11 +23,6 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Representa a marca de um veículo.
- * 
- * @since 1.0
- */
 public final class DTOMarca implements Serializable {
 
     private String nome;

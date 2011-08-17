@@ -32,7 +32,6 @@ import net.sf.jautoinvoice.client.dto.DTOMaterial;
 import net.sf.jautoinvoice.client.dto.DTOModelo;
 import net.sf.jautoinvoice.client.dto.DTOServico;
 import net.sf.jautoinvoice.client.dto.DTOVeiculo;
-import net.sf.jautoinvoice.server.model.Utilizador;
 
 /**
  * 
@@ -111,5 +110,4 @@ public interface Persistencia {
 
     public ArrayList<DTOVeiculo> listarVeiculosInspeccianadosPor(final DTOFuncionario funcionario);
 
-    public Utilizador autenticar(String username, String password);
 }

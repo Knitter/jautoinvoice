@@ -22,13 +22,6 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
-/**
- * Classe que representa um serviço a que um veículo pode ser sujeito. Esta 
- * classe é apenas um wrapper para as descrições de serviços que a oficina 
- * executa.
- * 
- * @since 1.0
- */
 public final class DTOServico implements Serializable {
 
     private String descricao;

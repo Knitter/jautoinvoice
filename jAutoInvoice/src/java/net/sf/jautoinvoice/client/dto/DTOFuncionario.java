@@ -22,10 +22,6 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
-/**
- * @author Sérgio Lopes
- * @since 1.0
- */
 public final class DTOFuncionario implements Serializable {
 
     private String id;
@@ -38,12 +34,10 @@ public final class DTOFuncionario implements Serializable {
         activo = true;
     }
 
-    public DTOFuncionario(String nome, String contribuinte, double valorHora,
-            boolean activo/*Utilizador utilizador*/) {
+    public DTOFuncionario(String nome, String contribuinte, double valorHora, boolean activo) {
         this.nome = nome;
         this.contribuinte = contribuinte;
         this.valorHora = valorHora;
-        //this.utilizador = utilizador;
         this.activo = activo;
     }
 
@@ -86,14 +80,6 @@ public final class DTOFuncionario implements Serializable {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
-    //public Utilizador getUtilizador() {
-    //    return utilizador;
-    //}
-
-    //public void setUtilizador(Utilizador utilizador) {
-    //    this.utilizador = utilizador;
-    //}
 
     @Override
     public boolean equals(Object obj) {

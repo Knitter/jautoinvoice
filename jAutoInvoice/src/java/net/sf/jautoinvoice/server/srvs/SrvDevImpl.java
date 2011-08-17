@@ -34,7 +34,6 @@ import net.sf.jautoinvoice.client.srvs.SrvDev;
 import net.sf.jautoinvoice.server.JAutoInvoiceManager;
 import net.sf.jautoinvoice.server.SHA1;
 import net.sf.jautoinvoice.server.model.ETipoUtilizador;
-import net.sf.jautoinvoice.server.model.Utilizador;
 
 /**
  * @see SrvDev
@@ -51,7 +50,7 @@ public class SrvDevImpl extends RemoteServiceServlet implements SrvDev {
 
     public void criarDadosTeste() {
 
-        ArrayList<DTOIVA> ivas = new ArrayList<DTOIVA>();
+        /*ArrayList<DTOIVA> ivas = new ArrayList<DTOIVA>();
         ivas.add(new DTOIVA("Sem IVA", 0, true));
         ivas.add(new DTOIVA("IVA 6%", 6, true));
         ivas.add(new DTOIVA("IVA 23%", 23, true));
@@ -74,7 +73,6 @@ public class SrvDevImpl extends RemoteServiceServlet implements SrvDev {
         ArrayList<DTOCliente> clientes = new ArrayList<DTOCliente>();
 
         DTOCliente c = null;
-        Utilizador u = null;
 
         //u = new Utilizador("cliente1", SHA1.hash("cliente1"), ETipoUtilizador.CLIENTE, true, null, null);
         c = new DTOCliente("C1", "António Mota", "mota@email.moc", contactos, "Rua das Flores, 32 Casal Leiria", null, true);
@@ -335,6 +333,6 @@ public class SrvDevImpl extends RemoteServiceServlet implements SrvDev {
 
         for (DTOMaterial m3 : materiais) {
             gestor.adicionarMaterial(m3);
-        }
+        }*/
     }
 }

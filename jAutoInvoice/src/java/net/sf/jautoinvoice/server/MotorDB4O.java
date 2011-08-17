@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import net.sf.jautoinvoice.client.dto.DTOCliente;
-import net.sf.jautoinvoice.client.dto.DTOFactory;
 import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
 import net.sf.jautoinvoice.client.dto.DTOFornecedor;
 import net.sf.jautoinvoice.client.dto.DTOFuncionario;
@@ -48,7 +47,6 @@ import net.sf.jautoinvoice.server.model.Marca;
 import net.sf.jautoinvoice.server.model.Material;
 import net.sf.jautoinvoice.server.model.Modelo;
 import net.sf.jautoinvoice.server.model.Servico;
-import net.sf.jautoinvoice.server.model.Utilizador;
 import net.sf.jautoinvoice.server.model.Veiculo;
 
 public class MotorDB4O implements Persistencia {
@@ -364,9 +362,5 @@ public class MotorDB4O implements Persistencia {
         }
 
         return lista;
-    }
-
-    public Utilizador autenticar(String username, String password) {
-        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

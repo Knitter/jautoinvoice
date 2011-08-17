@@ -39,8 +39,6 @@ import net.sf.jautoinvoice.client.gui.PainelFornecedores;
 import net.sf.jautoinvoice.client.gui.PainelFuncionarios;
 import net.sf.jautoinvoice.client.gui.PainelMaterial;
 import net.sf.jautoinvoice.client.gui.PainelVeiculos;
-import net.sf.jautoinvoice.client.srvs.SrvAutorizacao;
-import net.sf.jautoinvoice.client.srvs.SrvAutorizacaoAsync;
 import net.sf.jautoinvoice.client.srvs.SrvAuxiliar;
 import net.sf.jautoinvoice.client.srvs.SrvAuxiliarAsync;
 import net.sf.jautoinvoice.client.srvs.SrvCliente;
@@ -76,7 +74,6 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
     private SrvFuncionarioAsync srvFuncionario;
     private SrvMaterialAsync srvMaterial;
     private SrvVeiculoAsync srvVeiculo;
-    private SrvAutorizacaoAsync srvAutorizacao;
     private SrvDevAsync srvDev;
     //
     public static final String PAINEL_OBRAS = "obras";
@@ -90,8 +87,6 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
     public static final String PAINEL_FUNCIONARIOS = "funcionarios";
     public static final String PAINEL_OPCOES = "opcoes";
     public static final String PAINEL_FORNECEDORES = "fornecedores";
-    //
-    //private Utilizador utilizadorAutenticado;
 
     private JAutoInvoiceApp() {
         paineis = new HashMap<String, Conteudo>();
@@ -104,7 +99,6 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
         srvMaterial = (SrvMaterialAsync) GWT.create(SrvMaterial.class);
         srvVeiculo = (SrvVeiculoAsync) GWT.create(SrvVeiculo.class);
         srvCliente = (SrvClienteAsync) GWT.create(SrvCliente.class);
-        srvAutorizacao = (SrvAutorizacaoAsync) GWT.create(SrvAutorizacao.class);
         srvDev = (SrvDevAsync) GWT.create(SrvDev.class);
     }
 
@@ -128,10 +122,6 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
         view.setLayout(root);
 
         //TODO: autenticação
-        //if (utilizadorAutenticado == null) {
-        //    view.add(new CabecalhoEntrada(), new BorderLayoutData(LayoutRegion.NORTH, 101));
-        //    view.add(new Login(), new BorderLayoutData(LayoutRegion.CENTER));
-        //} else {
         //TODO: colocar o conteúdo correcto...
         if (conteudo == null) {
             conteudo = new PainelClientes();
@@ -180,10 +170,6 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
         return srvDev;
     }
 
-    public SrvAutorizacaoAsync getSrvAutorizacao() {
-        return srvAutorizacao;
-    }
-
     public Conteudo getPainel(String id) {
         Conteudo c = paineis.get(id);
         if (c == null) {
@@ -219,13 +205,5 @@ public final class JAutoInvoiceApp implements ValueChangeHandler<String> {
     public Icones getIcones() {
         return icons;
     }
-
-    //public Utilizador getUtilizadorAutenticado() {
-    //    return utilizadorAutenticado;
-    //}
-
-    //7public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
-    //    this.utilizadorAutenticado = utilizadorAutenticado;
-    //}
 }
 //TODO: completar
