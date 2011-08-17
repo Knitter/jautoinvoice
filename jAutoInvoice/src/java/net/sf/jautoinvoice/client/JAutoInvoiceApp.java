@@ -31,8 +31,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.HashMap;
 import net.sf.jautoinvoice.client.gui.Cabecalho;
-import net.sf.jautoinvoice.client.gui.CabecalhoEntrada;
-import net.sf.jautoinvoice.client.gui.Login;
 import net.sf.jautoinvoice.client.gui.icons.Icones;
 import net.sf.jautoinvoice.client.gui.PainelClientes;
 import net.sf.jautoinvoice.client.gui.PainelFornecedores;

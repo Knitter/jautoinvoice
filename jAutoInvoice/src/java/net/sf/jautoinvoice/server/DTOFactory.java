@@ -63,7 +63,19 @@ public final class DTOFactory {
     }
 
     public Cliente decomporDTOCliente(DTOCliente dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        ArrayList<String> contactos = new ArrayList<String>(dto.getContactos().size());
+        for (String contacto : dto.getContactos()) {
+            contactos.add(contacto);
+        }
+
+        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>(dto.getVeiculos().size());
+        for (DTOVeiculo dv : dto.getVeiculos()) {
+            veiculos.add(decomporDTOVeiculo(dv));
+        }
+
+        return new Cliente(dto.getId(), dto.getNome(), dto.getContribuinte(), dto.getEmail(),
+                contactos, dto.getEndereco(), veiculos, decomporDTOUtilizador(dto.getUtilizador()),
+                dto.isActivo());
     }
 
     public DTOFolhaObra comporDTOFolhaObra(FolhaObra folha) {
@@ -75,27 +87,33 @@ public final class DTOFactory {
     }
 
     public DTOFornecedor comporDTOFornecedor(Fornecedor fornecedor) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOFornecedor(fornecedor.getId(), fornecedor.getNome(), fornecedor.getEmail(),
+                fornecedor.getTelefone(), fornecedor.getFax(), fornecedor.getNotas(),
+                fornecedor.isActivo());
     }
 
     public Fornecedor decomporDTOFornecedor(DTOFornecedor dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Fornecedor(dto.getId(), dto.getNome(), dto.getEmail(), dto.getTelefone(),
+                dto.getFax(), dto.getNotas(), dto.isActivo());
     }
 
     public DTOFuncionario comporDTOFuncionario(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOFuncionario(funcionario.getId(), funcionario.getNome(),
+                funcionario.getContribuinte(), funcionario.getValorHora(),
+                comporDTOUtilizador(funcionario.getUtilizador()), funcionario.isActivo());
     }
 
     public Funcionario decomporDTOFuncionario(DTOFuncionario dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Funcionario(dto.getId(), dto.getNome(), dto.getContribuinte(), dto.getValorHora(),
+                decomporDTOUtilizador(dto.getUtilizador()), dto.isActivo());
     }
 
     public DTOIVA comporDTOIVA(IVA iva) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOIVA(iva.getId(), iva.getDescricao(), iva.getPercentagem(), iva.isActivo());
     }
 
     public IVA decomporDTOIVA(DTOIVA dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new IVA(dto.getId(), dto.getDescricao(), dto.getPercentagem(), dto.isActivo());
     }
 
     public DTOInspeccao comporDTOInspeccao(Inspeccao inspeccao) {
@@ -107,27 +125,42 @@ public final class DTOFactory {
     }
 
     public DTOMarca comporDTOMarca(Marca marca) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        ArrayList<DTOModelo> modelos = new ArrayList<DTOModelo>(marca.getModelos().size());
+        for (Modelo modelo : marca.getModelos()) {
+            modelos.add(comporDTOModelo(modelo));
+        }
+
+        return new DTOMarca(marca.getId(), marca.getNome(), modelos, marca.isActivo());
     }
 
     public Marca decomporDTOMarca(DTOMarca dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        ArrayList<Modelo> modelos = new ArrayList<Modelo>(dto.getModelos().size());
+        for (DTOModelo dm : dto.getModelos()) {
+            modelos.add(decomporDTOModelo(dm));
+        }
+
+        return new Marca(dto.getId(), dto.getNome(), modelos, dto.isActivo());
     }
 
     public DTOMaterial comporDTOMaterial(Material material) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOMaterial(material.getId(), comporDTOFornecedor(material.getFornecedor()),
+                material.getPrecoUnitario(), comporDTOIVA(material.getIva()),
+                material.getReferencia(), material.getDescricao(), material.isActivo());
     }
 
     public Material decomporDTOMaterial(DTOMaterial dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Material(dto.getId(), decomporDTOFornecedor(dto.getFornecedor()),
+                dto.getPrecoUnitario(), decomporDTOIVA(dto.getIva()), dto.getReferencia(),
+                dto.getDescricao(), dto.isActivo());
     }
 
     public DTOModelo comporDTOModelo(Modelo modelo) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOModelo(modelo.getId(), comporDTOMarca(modelo.getMarca()),
+                modelo.getNome(), modelo.isActivo());
     }
 
     public Modelo decomporDTOModelo(DTOModelo dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Modelo(dto.getId(), decomporDTOMarca(dto.getMarca()), dto.getNome(), dto.isActivo());
     }
 
     public DTOServico comporDTOServico(Servico servico) {
@@ -147,35 +180,35 @@ public final class DTOFactory {
     }
 
     public DTOCategoria comporDTOCategoria(Categoria categoria) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOCategoria(categoria.getId(), categoria.getNome(), categoria.isActivo());
     }
 
     public Categoria decomporDTOCategoria(DTOCategoria dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Categoria(dto.getId(), dto.getNome(), dto.isActivo());
     }
 
     public DTOCombustivel comporDTOCombustivel(Combustivel combustivel) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOCombustivel(combustivel.getId(), combustivel.getNome(), combustivel.isActivo());
     }
 
     public Combustivel decomporDTOCombustivel(DTOCombustivel dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Combustivel(dto.getId(), dto.getNome(), dto.isActivo());
     }
 
     public DTOEstadoInspeccao comporDTOEstadoInspeccao(EstadoInspeccao estado) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOEstadoInspeccao(estado.getId(), estado.getNome(), estado.isActivo());
     }
 
     public EstadoInspeccao decomporDTOEstadoInspeccao(DTOEstadoInspeccao dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new EstadoInspeccao(dto.getId(), dto.getNome(), dto.isActivo());
     }
 
     public DTOUtilizador comporDTOUtilizador(Utilizador utilizador) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new DTOUtilizador(utilizador.getId(), utilizador.getNome(), utilizador.getPassword());
     }
 
     public Utilizador decomporDTOUtilizador(DTOUtilizador dto) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new Utilizador(dto.getId(), dto.getNome(), dto.getPassword());
     }
 
     private static class SingletonHolder {
