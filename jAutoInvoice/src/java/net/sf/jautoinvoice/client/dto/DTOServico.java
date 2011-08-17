@@ -22,8 +22,16 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * Classe que representa um serviço a que um veículo pode ser sujeito. Esta 
+ * classe é apenas um wrapper para as descrições de serviços que a oficina 
+ * executa.
+ * 
+ * @since 1.0
+ */
 public final class DTOServico implements Serializable {
 
+    private String id;
     private String descricao;
     private boolean activo;
 
@@ -31,7 +39,8 @@ public final class DTOServico implements Serializable {
         activo = true;
     }
 
-    public DTOServico(String descricao, boolean activo) {
+    public DTOServico(String id, String descricao, boolean activo) {
+        this.id = id;
         this.descricao = descricao;
         this.activo = activo;
     }
@@ -52,6 +61,14 @@ public final class DTOServico implements Serializable {
         this.descricao = descricao;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -61,6 +78,11 @@ public final class DTOServico implements Serializable {
             return false;
         }
         final DTOServico other = (DTOServico) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
             return false;
         }
@@ -73,6 +95,7 @@ public final class DTOServico implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
+        hash = 13 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 13 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
         hash = 13 * hash + (this.activo ? 1 : 0);
         return hash;

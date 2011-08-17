@@ -1,8 +1,10 @@
 package net.sf.jautoinvoice.server;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import net.sf.jautoinvoice.client.dto.DTOCategoria;
 import net.sf.jautoinvoice.client.dto.DTOCliente;
+import net.sf.jautoinvoice.client.dto.DTOCombustivel;
+import net.sf.jautoinvoice.client.dto.DTOEstadoInspeccao;
 import net.sf.jautoinvoice.client.dto.DTOFolhaObra;
 import net.sf.jautoinvoice.client.dto.DTOFornecedor;
 import net.sf.jautoinvoice.client.dto.DTOFuncionario;
@@ -12,8 +14,12 @@ import net.sf.jautoinvoice.client.dto.DTOMarca;
 import net.sf.jautoinvoice.client.dto.DTOMaterial;
 import net.sf.jautoinvoice.client.dto.DTOModelo;
 import net.sf.jautoinvoice.client.dto.DTOServico;
+import net.sf.jautoinvoice.client.dto.DTOUtilizador;
 import net.sf.jautoinvoice.client.dto.DTOVeiculo;
+import net.sf.jautoinvoice.server.model.Categoria;
 import net.sf.jautoinvoice.server.model.Cliente;
+import net.sf.jautoinvoice.server.model.Combustivel;
+import net.sf.jautoinvoice.server.model.EstadoInspeccao;
 import net.sf.jautoinvoice.server.model.FolhaObra;
 import net.sf.jautoinvoice.server.model.Fornecedor;
 import net.sf.jautoinvoice.server.model.Funcionario;
@@ -23,6 +29,7 @@ import net.sf.jautoinvoice.server.model.Marca;
 import net.sf.jautoinvoice.server.model.Material;
 import net.sf.jautoinvoice.server.model.Modelo;
 import net.sf.jautoinvoice.server.model.Servico;
+import net.sf.jautoinvoice.server.model.Utilizador;
 import net.sf.jautoinvoice.server.model.Veiculo;
 
 /**
@@ -50,7 +57,9 @@ public final class DTOFactory {
             veiculos.add(comporDTOVeiculo(veiculo));
         }
 
-        return new DTOCliente(cliente.getCodigo(), cliente.getNome(), cliente.getEmail(), contactos, cliente.getEndereco(), veiculos, cliente.isActivo());
+        return new DTOCliente(cliente.getId(), cliente.getNome(), cliente.getContribuinte(), cliente.getEmail(),
+                contactos, cliente.getEndereco(), veiculos, comporDTOUtilizador(cliente.getUtilizador()),
+                cliente.isActivo());
     }
 
     public Cliente decomporDTOCliente(DTOCliente dto) {
@@ -58,83 +67,115 @@ public final class DTOFactory {
     }
 
     public DTOFolhaObra comporDTOFolhaObra(FolhaObra folha) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public FolhaObra decomporDTOFolhaObra(DTOFolhaObra dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOFornecedor comporDTOFornecedor(Fornecedor fornecedor) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Fornecedor decomporDTOFornecedor(DTOFornecedor dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOFuncionario comporDTOFuncionario(Funcionario funcionario) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Funcionario decomporDTOFuncionario(DTOFuncionario dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOIVA comporDTOIVA(IVA iva) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public IVA decomporDTOIVA(DTOIVA dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOInspeccao comporDTOInspeccao(Inspeccao inspeccao) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Inspeccao decomporDTOInspeccao(DTOInspeccao dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOMarca comporDTOMarca(Marca marca) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Marca decomporDTOMarca(DTOMarca dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOMaterial comporDTOMaterial(Material material) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Material decomporDTOMaterial(DTOMaterial dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOModelo comporDTOModelo(Modelo modelo) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Modelo decomporDTOModelo(DTOModelo dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOServico comporDTOServico(Servico servico) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Servico decomporDTOServico(DTOServico dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public DTOVeiculo comporDTOVeiculo(Veiculo veiculo) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public Veiculo decomporDTOVeiculo(DTOVeiculo dto) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public DTOCategoria comporDTOCategoria(Categoria categoria) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public Categoria decomporDTOCategoria(DTOCategoria dto) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public DTOCombustivel comporDTOCombustivel(Combustivel combustivel) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public Combustivel decomporDTOCombustivel(DTOCombustivel dto) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public DTOEstadoInspeccao comporDTOEstadoInspeccao(EstadoInspeccao estado) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public EstadoInspeccao decomporDTOEstadoInspeccao(DTOEstadoInspeccao dto) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public DTOUtilizador comporDTOUtilizador(Utilizador utilizador) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public Utilizador decomporDTOUtilizador(DTOUtilizador dto) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     private static class SingletonHolder {

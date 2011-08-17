@@ -20,7 +20,6 @@
  */
 package net.sf.jautoinvoice.server.model;
 
-import net.sf.jautoinvoice.server.model.Fornecedor;
 import java.io.Serializable;
 
 /**
@@ -44,8 +43,9 @@ public final class Material implements Serializable {
         activo = true;
     }
 
-    public Material(Fornecedor fornecedor, double precoUnitario, IVA iva,
+    public Material(String id, Fornecedor fornecedor, double precoUnitario, IVA iva,
             String referencia, String descricao, boolean activo) {
+        this.id = id;
         this.fornecedor = fornecedor;
         this.precoUnitario = precoUnitario;
         this.iva = iva;

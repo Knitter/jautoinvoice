@@ -38,7 +38,8 @@ public final class Modelo implements Serializable {
         activo = true;
     }
 
-    public Modelo(Marca marca, String nome, boolean activo) {
+    public Modelo(String id, Marca marca, String nome, boolean activo) {
+        this.id = id;
         this.marca = marca;
         this.nome = nome;
         this.activo = activo;

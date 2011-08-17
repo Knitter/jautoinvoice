@@ -23,21 +23,29 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @since 1.0
+ */
 public final class DTOFolhaObra implements Serializable {
 
+    private String id;
     private DTOVeiculo veiculo;
     private String data;
     private String descricaoAvaria;
     private int kms;
     private DTOFactura factura;
     private ArrayList<DTOLinhaServico> linhas;
+    private boolean activo;
 
     public DTOFolhaObra() {
+        activo = true;
         linhas = new ArrayList<DTOLinhaServico>();
     }
 
-    public DTOFolhaObra(DTOVeiculo veiculo, String data, String descricaoAvaria, int kms,
-            DTOFactura factura, ArrayList<DTOLinhaServico> linhas) {
+    public DTOFolhaObra(String id, DTOVeiculo veiculo, String data, String descricaoAvaria, int kms,
+            DTOFactura factura, ArrayList<DTOLinhaServico> linhas, boolean activo) {
+        this.id = id;
         this.veiculo = veiculo;
         this.data = data;
         this.descricaoAvaria = descricaoAvaria;
@@ -50,6 +58,8 @@ public final class DTOFolhaObra implements Serializable {
                 linhas.add(l);
             }
         }
+        
+        this.activo = activo;
     }
 
     public void adicionarLinhaServico(DTOLinhaServico linha) {
@@ -121,6 +131,22 @@ public final class DTOFolhaObra implements Serializable {
         this.veiculo = veiculo;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -130,6 +156,11 @@ public final class DTOFolhaObra implements Serializable {
             return false;
         }
         final DTOFolhaObra other = (DTOFolhaObra) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if (this.veiculo != other.veiculo && (this.veiculo == null || !this.veiculo.equals(other.veiculo))) {
             return false;
         }
@@ -148,6 +179,7 @@ public final class DTOFolhaObra implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 17 * hash + (this.veiculo != null ? this.veiculo.hashCode() : 0);
         hash = 17 * hash + (this.data != null ? this.data.hashCode() : 0);
         hash = 17 * hash + this.kms;

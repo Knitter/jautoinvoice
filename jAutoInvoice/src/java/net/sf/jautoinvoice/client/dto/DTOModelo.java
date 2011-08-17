@@ -22,18 +22,27 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * Representa um modelo de veículo. Os modelos pertencem sempre a uma marca.
+ * 
+ * @since 1.0
+ */
 public final class DTOModelo implements Serializable {
 
+    private String id;
     private DTOMarca marca;
     private String nome;
-    
+    private boolean activo;
+
     public DTOModelo() {
-        //DO NOTHING
+        activo = true;
     }
 
-    public DTOModelo(DTOMarca marca, String nome) {
+    public DTOModelo(String id, DTOMarca marca, String nome, boolean activo) {
+        this.id = id;
         this.marca = marca;
         this.nome = nome;
+        this.activo = activo;
     }
 
     public DTOMarca getMarca() {
@@ -52,6 +61,22 @@ public final class DTOModelo implements Serializable {
         this.nome = nome;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -61,6 +86,11 @@ public final class DTOModelo implements Serializable {
             return false;
         }
         final DTOModelo other = (DTOModelo) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if (this.marca != other.marca && (this.marca == null || !this.marca.equals(other.marca))) {
             return false;
         }
@@ -73,6 +103,7 @@ public final class DTOModelo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 71 * hash + (this.marca != null ? this.marca.hashCode() : 0);
         hash = 71 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         return hash;

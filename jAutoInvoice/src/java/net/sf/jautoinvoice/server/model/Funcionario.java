@@ -32,16 +32,20 @@ public final class Funcionario implements Serializable {
     private String nome;
     private String contribuinte;
     private double valorHora;
+    private Utilizador utilizador;
     private boolean activo;
 
     public Funcionario() {
-        //DO NOTHING
+        activo = true;
     }
 
-    public Funcionario(String nome, String contribuinte, double valorHora, boolean activo) {
+    public Funcionario(String id, String nome, String contribuinte, double valorHora, 
+            Utilizador utilizador, boolean activo) {
+        this.id = id;
         this.nome = nome;
         this.contribuinte = contribuinte;
         this.valorHora = valorHora;
+        this.utilizador = utilizador;
         this.activo = activo;
     }
 
@@ -85,6 +89,14 @@ public final class Funcionario implements Serializable {
         this.activo = activo;
     }
 
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        this.utilizador = utilizador;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -98,6 +110,10 @@ public final class Funcionario implements Serializable {
         if (this.id != null && this.id.equals(other.id)) {
             return true;
         }
+        
+        if ((this.utilizador == null) ? (other.utilizador != null) : !this.utilizador.equals(other.utilizador)) {
+            return false;
+        }
 
         if ((this.contribuinte == null) ? (other.contribuinte != null) : !this.contribuinte.equals(other.contribuinte)) {
             return false;
@@ -109,6 +125,7 @@ public final class Funcionario implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 47 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 47 * hash + (this.utilizador != null ? this.utilizador.hashCode() : 0);
         hash = 47 * hash + (this.contribuinte != null ? this.contribuinte.hashCode() : 0);
         return hash;
     }

@@ -39,7 +39,8 @@ public final class Servico implements Serializable {
         activo = true;
     }
 
-    public Servico(String descricao, boolean activo) {
+    public Servico(String id, String descricao, boolean activo) {
+        this.id = id;
         this.descricao = descricao;
         this.activo = activo;
     }

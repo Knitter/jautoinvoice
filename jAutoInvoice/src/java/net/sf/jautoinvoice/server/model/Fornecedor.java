@@ -41,8 +41,9 @@ public final class Fornecedor implements Serializable {
         activo = true;
     }
 
-    public Fornecedor(String nome, String email, String telefone, String fax,
+    public Fornecedor(String id, String nome, String email, String telefone, String fax,
             String notas, boolean activo) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;

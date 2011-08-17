@@ -22,9 +22,16 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * Representa materia de uso na oficina e aplicado nos veículos. Pode ser uma 
+ * peça ou um consumível usado com óleo.
+ * 
+ * @since 1.0
+ */
 public final class DTOMaterial implements Serializable {
 
     //TODO: Nr. da factura e data da compra para controlar os stocks.
+    private String id;
     private DTOFornecedor fornecedor;
     private double precoUnitario;
     private DTOIVA iva;
@@ -36,8 +43,9 @@ public final class DTOMaterial implements Serializable {
         activo = true;
     }
 
-    public DTOMaterial(DTOFornecedor fornecedor, double precoUnitario, DTOIVA iva,
+    public DTOMaterial(String id, DTOFornecedor fornecedor, double precoUnitario, DTOIVA iva,
             String referencia, String descricao, boolean activo) {
+        this.id = id;
         this.fornecedor = fornecedor;
         this.precoUnitario = precoUnitario;
         this.iva = iva;
@@ -94,6 +102,14 @@ public final class DTOMaterial implements Serializable {
         this.referencia = referencia;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -103,6 +119,11 @@ public final class DTOMaterial implements Serializable {
             return false;
         }
         final DTOMaterial other = (DTOMaterial) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if (this.fornecedor != other.fornecedor && (this.fornecedor == null || !this.fornecedor.equals(other.fornecedor))) {
             return false;
         }
@@ -127,6 +148,7 @@ public final class DTOMaterial implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 97 * hash + (this.fornecedor != null ? this.fornecedor.hashCode() : 0);
         hash = 97 * hash + (int) this.precoUnitario;
         hash = 97 * hash + (this.iva != null ? this.iva.hashCode() : 0);

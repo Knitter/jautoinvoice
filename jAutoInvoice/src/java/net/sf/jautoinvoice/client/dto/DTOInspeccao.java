@@ -22,25 +22,33 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @since 1.0
+ */
 public final class DTOInspeccao implements Serializable {
 
+    private String id;
     private DTOVeiculo veiculo;
     private String data;
-    private EInspeccao estado;
+    private DTOEstadoInspeccao estado;
     private String notas;
     private DTOFuncionario funcionario;
+    private boolean activo;
 
     public DTOInspeccao() {
-        //DO NOTHING
+        activo = true;
     }
 
-    public DTOInspeccao(DTOVeiculo veiculo, String data, EInspeccao estado, String notas,
-            DTOFuncionario funcionario) {
+    public DTOInspeccao(String id, DTOVeiculo veiculo, String data, DTOEstadoInspeccao estado, String notas,
+            DTOFuncionario funcionario, boolean activo) {
+        this.id = id;
         this.veiculo = veiculo;
         this.data = data;
         this.estado = estado;
         this.notas = notas;
         this.funcionario = funcionario;
+        this.activo = activo;
     }
 
     public String getData() {
@@ -51,11 +59,11 @@ public final class DTOInspeccao implements Serializable {
         this.data = data;
     }
 
-    public EInspeccao getEstado() {
+    public DTOEstadoInspeccao getEstado() {
         return estado;
     }
 
-    public void setEstado(EInspeccao estado) {
+    public void setEstado(DTOEstadoInspeccao estado) {
         this.estado = estado;
     }
 
@@ -83,6 +91,22 @@ public final class DTOInspeccao implements Serializable {
         this.veiculo = veiculo;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -92,13 +116,18 @@ public final class DTOInspeccao implements Serializable {
             return false;
         }
         final DTOInspeccao other = (DTOInspeccao) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if (this.veiculo != other.veiculo && (this.veiculo == null || !this.veiculo.equals(other.veiculo))) {
             return false;
         }
         if ((this.data == null) ? (other.data != null) : !this.data.equals(other.data)) {
             return false;
         }
-        if (this.estado != other.estado) {
+        if (this.estado != other.estado && (this.estado == null || !this.estado.equals(other.estado))) {
             return false;
         }
         if ((this.notas == null) ? (other.notas != null) : !this.notas.equals(other.notas)) {
@@ -113,9 +142,10 @@ public final class DTOInspeccao implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 29 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 29 * hash + (this.veiculo != null ? this.veiculo.hashCode() : 0);
-        hash = 29 * hash + (this.data != null ? this.data.hashCode() : 0);
         hash = 29 * hash + (this.estado != null ? this.estado.hashCode() : 0);
+        hash = 29 * hash + (this.data != null ? this.data.hashCode() : 0);
         hash = 29 * hash + (this.notas != null ? this.notas.hashCode() : 0);
         hash = 29 * hash + (this.funcionario != null ? this.funcionario.hashCode() : 0);
         return hash;

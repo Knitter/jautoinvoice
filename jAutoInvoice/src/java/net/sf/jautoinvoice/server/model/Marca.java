@@ -40,7 +40,8 @@ public final class Marca implements Serializable {
         modelos = new ArrayList<Modelo>();
     }
 
-    public Marca(String nome, ArrayList<Modelo> modelos, boolean activo) {
+    public Marca(String id, String nome, ArrayList<Modelo> modelos, boolean activo) {
+        this.id = id;
         this.nome = nome;
 
         this.modelos = new ArrayList<Modelo>();

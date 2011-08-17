@@ -31,21 +31,24 @@ public final class Inspeccao implements Serializable {
     private String id;
     private Veiculo veiculo;
     private String data;
-    private EInspeccao estado;
+    private EstadoInspeccao estado;
     private String notas;
     private Funcionario funcionario;
+    private boolean activo;
 
     public Inspeccao() {
-        //DO NOTHING
+        activo = true;
     }
 
-    public Inspeccao(Veiculo veiculo, String data, EInspeccao estado, String notas,
-            Funcionario funcionario) {
+    public Inspeccao(String id, Veiculo veiculo, String data, EstadoInspeccao estado, String notas,
+            Funcionario funcionario, boolean activo) {
+        this.id = id;
         this.veiculo = veiculo;
         this.data = data;
         this.estado = estado;
         this.notas = notas;
         this.funcionario = funcionario;
+        this.activo = activo;
     }
 
     public String getData() {
@@ -56,11 +59,11 @@ public final class Inspeccao implements Serializable {
         this.data = data;
     }
 
-    public EInspeccao getEstado() {
+    public EstadoInspeccao getEstado() {
         return estado;
     }
 
-    public void setEstado(EInspeccao estado) {
+    public void setEstado(EstadoInspeccao estado) {
         this.estado = estado;
     }
 
@@ -96,6 +99,14 @@ public final class Inspeccao implements Serializable {
         this.id = id;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -116,7 +127,7 @@ public final class Inspeccao implements Serializable {
         if ((this.data == null) ? (other.data != null) : !this.data.equals(other.data)) {
             return false;
         }
-        if (this.estado != other.estado) {
+        if (this.estado != other.estado && (this.estado == null || !this.estado.equals(other.estado))) {
             return false;
         }
         if ((this.notas == null) ? (other.notas != null) : !this.notas.equals(other.notas)) {
@@ -133,8 +144,8 @@ public final class Inspeccao implements Serializable {
         int hash = 7;
         hash = 29 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 29 * hash + (this.veiculo != null ? this.veiculo.hashCode() : 0);
-        hash = 29 * hash + (this.data != null ? this.data.hashCode() : 0);
         hash = 29 * hash + (this.estado != null ? this.estado.hashCode() : 0);
+        hash = 29 * hash + (this.data != null ? this.data.hashCode() : 0);
         hash = 29 * hash + (this.notas != null ? this.notas.hashCode() : 0);
         hash = 29 * hash + (this.funcionario != null ? this.funcionario.hashCode() : 0);
         return hash;

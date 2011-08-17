@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public final class DTOVeiculo implements Serializable {
 
+    private String id;
     private DTOMarca marca;
     private DTOModelo modelo;
     private String dataRegisto;
@@ -35,23 +36,26 @@ public final class DTOVeiculo implements Serializable {
     private DTOCliente dono;
     private ArrayList<DTOCliente> antigosDonos;
     private ArrayList<DTOInspeccao> inspeccoes;
-    private ECategoria categoria;
-    private ECombustivel combustivel;
+    private DTOCategoria categoria;
+    private DTOCombustivel combustivel;
     private String notas;
     private ArrayList<DTOFolhaObra> folhasObra;
+    private boolean activo;
 
     public DTOVeiculo() {
+        activo = true;
         antigosDonos = new ArrayList<DTOCliente>();
         inspeccoes = new ArrayList<DTOInspeccao>();
         folhasObra = new ArrayList<DTOFolhaObra>();
     }
 
-    public DTOVeiculo(DTOMarca marca, DTOModelo modelo, String dataRegisto, String matricula,
+    public DTOVeiculo(String id, DTOMarca marca, DTOModelo modelo, String dataRegisto, String matricula,
             String nrChassis, String cilindrada, String nrMotor, DTOCliente dono,
             ArrayList<DTOCliente> antigosDonos, ArrayList<DTOInspeccao> inspeccoes,
-            ECategoria categoria, ECombustivel combustivel, String notas,
-            ArrayList<DTOFolhaObra> folhasObra) {
+            DTOCategoria categoria, DTOCombustivel combustivel, String notas,
+            ArrayList<DTOFolhaObra> folhasObra, boolean activo) {
 
+        this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.dataRegisto = dataRegisto;
@@ -84,6 +88,8 @@ public final class DTOVeiculo implements Serializable {
                 this.folhasObra.add(f);
             }
         }
+
+        this.activo = activo;
     }
 
     public void adicionarAntigoDono(DTOCliente dono) {
@@ -143,11 +149,11 @@ public final class DTOVeiculo implements Serializable {
         }
     }
 
-    public ECategoria getCategoria() {
+    public DTOCategoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(ECategoria categoria) {
+    public void setCategoria(DTOCategoria categoria) {
         this.categoria = categoria;
     }
 
@@ -159,11 +165,11 @@ public final class DTOVeiculo implements Serializable {
         this.cilindrada = cilindrada;
     }
 
-    public ECombustivel getCombustivel() {
+    public DTOCombustivel getCombustivel() {
         return combustivel;
     }
 
-    public void setCombustivel(ECombustivel combustivel) {
+    public void setCombustivel(DTOCombustivel combustivel) {
         this.combustivel = combustivel;
     }
 
@@ -260,6 +266,22 @@ public final class DTOVeiculo implements Serializable {
         this.nrMotor = nrMotor;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -268,7 +290,13 @@ public final class DTOVeiculo implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
+
         final DTOVeiculo other = (DTOVeiculo) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if ((this.matricula == null) ? (other.matricula != null) : !this.matricula.equals(other.matricula)) {
             return false;
         }
@@ -278,6 +306,7 @@ public final class DTOVeiculo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 73 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 73 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
         return hash;
     }

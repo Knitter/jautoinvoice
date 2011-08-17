@@ -30,12 +30,13 @@ import java.util.ArrayList;
 public final class Cliente implements Serializable {
 
     private String id;
-    private String codigo;
     private String nome;
+    private String contribuinte;
     private String email;
     private ArrayList<String> contactos;
     private String endereco;
     private ArrayList<Veiculo> veiculos;
+    private Utilizador utilizador;
     private boolean activo;
 
     public Cliente() {
@@ -44,12 +45,14 @@ public final class Cliente implements Serializable {
         activo = true;
     }
 
-    public Cliente(String codigo, String nome, String email, ArrayList<String> contactos,
-            String endereco, ArrayList<Veiculo> veiculos, boolean activo) {
-        this.codigo = codigo;
+    public Cliente(String id, String nome, String contribuinte, String email, ArrayList<String> contactos,
+            String endereco, ArrayList<Veiculo> veiculos, Utilizador utilizador, boolean activo) {
+        this.id = id;
         this.nome = nome;
+        this.contribuinte = contribuinte;
         this.email = email;
         this.endereco = endereco;
+        this.utilizador = utilizador;
         this.activo = activo;
 
         this.contactos = new ArrayList<String>();
@@ -102,14 +105,6 @@ public final class Cliente implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public ArrayList<String> getContactos() {
@@ -172,6 +167,22 @@ public final class Cliente implements Serializable {
         this.id = id;
     }
 
+    public String getContribuinte() {
+        return contribuinte;
+    }
+
+    public void setContribuinte(String contribuinte) {
+        this.contribuinte = contribuinte;
+    }
+
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        this.utilizador = utilizador;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -186,9 +197,10 @@ public final class Cliente implements Serializable {
             return true;
         }
 
-        if ((this.codigo == null) ? (other.codigo != null) : !this.codigo.equals(other.codigo)) {
-            return false;
+        if (this.contribuinte != null && this.contribuinte.equals(other.contribuinte)) {
+            return true;
         }
+
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
@@ -199,8 +211,8 @@ public final class Cliente implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.codigo != null ? this.codigo.hashCode() : 0);
         hash = 97 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 97 * hash + (this.contribuinte != null ? this.contribuinte.hashCode() : 0);
         return hash;
     }
 }

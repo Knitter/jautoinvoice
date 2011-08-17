@@ -22,23 +22,30 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @since 1.0
+ */
 public final class DTOLinhaGasto implements Serializable {
 
+    private String id;
     private DTOMaterial material;
     private double quantidade;
     private double precoUnitario;
     private DTOLinhaServico linhaServico;
+    private boolean activo;
 
     public DTOLinhaGasto() {
-        //DO NOTHING
+        activo = true;
     }
 
-    public DTOLinhaGasto(DTOMaterial material, double quantidade, double precoUnitario,
-            DTOLinhaServico linhaServico) {
+    public DTOLinhaGasto(String id, DTOMaterial material, double quantidade, double precoUnitario,
+            DTOLinhaServico linhaServico, boolean activo) {
         this.material = material;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
         this.linhaServico = linhaServico;
+        this.activo = activo;
     }
 
     public DTOLinhaServico getLinhaServico() {
@@ -73,6 +80,22 @@ public final class DTOLinhaGasto implements Serializable {
         this.quantidade = quantidade;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -82,6 +105,11 @@ public final class DTOLinhaGasto implements Serializable {
             return false;
         }
         final DTOLinhaGasto other = (DTOLinhaGasto) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if (this.material != other.material && (this.material == null || !this.material.equals(other.material))) {
             return false;
         }
@@ -100,6 +128,7 @@ public final class DTOLinhaGasto implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 37 * hash + (this.material != null ? this.material.hashCode() : 0);
         hash = 37 * hash + (int) this.quantidade;
         hash = 37 * hash + (int) this.precoUnitario;

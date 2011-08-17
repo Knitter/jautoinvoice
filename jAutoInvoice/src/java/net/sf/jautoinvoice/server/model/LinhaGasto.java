@@ -33,17 +33,20 @@ public final class LinhaGasto implements Serializable {
     private double quantidade;
     private double precoUnitario;
     private LinhaServico linhaServico;
+    private boolean activo;
 
     public LinhaGasto() {
-        //DO NOTHING
+        activo = true;
     }
 
-    public LinhaGasto(Material material, double quantidade, double precoUnitario,
-            LinhaServico linhaServico) {
+    public LinhaGasto(String id, Material material, double quantidade, double precoUnitario,
+            LinhaServico linhaServico, boolean activo) {
+        this.id = id;
         this.material = material;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
         this.linhaServico = linhaServico;
+        this.activo = activo;
     }
 
     public LinhaServico getLinhaServico() {
@@ -84,6 +87,14 @@ public final class LinhaGasto implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override

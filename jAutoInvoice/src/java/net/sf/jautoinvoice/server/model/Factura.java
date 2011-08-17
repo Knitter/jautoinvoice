@@ -27,7 +27,8 @@ public final class Factura implements Serializable {
 
     private String id;
 
-    public Factura() {
+    public Factura(String id) {
+        this.id = id;
     }
 
     public String getId() {

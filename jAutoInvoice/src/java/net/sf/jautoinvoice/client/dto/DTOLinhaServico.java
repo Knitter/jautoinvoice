@@ -23,8 +23,18 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Relaciona um serviço com uma folha de obra e agrupa os dados referentes ao 
+ * funcionário, ao valor hora, duração, etc.
+ * 
+ * Permite também associar linhas de gastos onde se registam os materiais que 
+ * foram usados.
+ * 
+ * @since 1.0
+ */
 public final class DTOLinhaServico implements Serializable {
 
+    private String id;
     private DTOFolhaObra folha;
     private double duracao;
     private DTOFuncionario funcionario;
@@ -32,13 +42,17 @@ public final class DTOLinhaServico implements Serializable {
     private DTOServico servico;
     private String notas;
     private ArrayList<DTOLinhaGasto> gastos;
+    private boolean activo;
 
     public DTOLinhaServico() {
+        activo = true;
         gastos = new ArrayList<DTOLinhaGasto>();
     }
 
-    public DTOLinhaServico(DTOFolhaObra folha, double duracao, DTOFuncionario funcionario,
-            double valorHora, DTOServico servico, String notas, ArrayList<DTOLinhaGasto> gastos) {
+    public DTOLinhaServico(String id, DTOFolhaObra folha, double duracao, DTOFuncionario funcionario,
+            double valorHora, DTOServico servico, String notas, ArrayList<DTOLinhaGasto> gastos,
+            boolean activo) {
+        this.id = id;
         this.folha = folha;
         this.duracao = duracao;
         this.funcionario = funcionario;
@@ -52,6 +66,8 @@ public final class DTOLinhaServico implements Serializable {
                 this.gastos.add(l);
             }
         }
+
+        this.activo = activo;
     }
 
     public void adicionarLinhaGasto(DTOLinhaGasto gasto) {
@@ -131,6 +147,22 @@ public final class DTOLinhaServico implements Serializable {
         this.valorHora = valorHora;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -140,6 +172,11 @@ public final class DTOLinhaServico implements Serializable {
             return false;
         }
         final DTOLinhaServico other = (DTOLinhaServico) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if (this.folha != other.folha && (this.folha == null || !this.folha.equals(other.folha))) {
             return false;
         }
@@ -167,6 +204,7 @@ public final class DTOLinhaServico implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 97 * hash + (this.folha != null ? this.folha.hashCode() : 0);
         hash = 97 * hash + (int) this.duracao;
         hash = 97 * hash + (this.funcionario != null ? this.funcionario.hashCode() : 0);

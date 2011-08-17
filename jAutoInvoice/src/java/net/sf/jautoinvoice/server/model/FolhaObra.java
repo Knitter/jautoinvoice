@@ -41,8 +41,9 @@ public final class FolhaObra implements Serializable {
         linhas = new ArrayList<LinhaServico>();
     }
 
-    public FolhaObra(Veiculo veiculo, String data, String descricaoAvaria, int kms,
+    public FolhaObra(String id, Veiculo veiculo, String data, String descricaoAvaria, int kms,
             Factura factura, ArrayList<LinhaServico> linhas) {
+        this.id = id;
         this.veiculo = veiculo;
         this.data = data;
         this.descricaoAvaria = descricaoAvaria;

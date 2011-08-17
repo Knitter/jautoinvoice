@@ -23,16 +23,25 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Representa a marca de um veículo.
+ * 
+ * @since 1.0
+ */
 public final class DTOMarca implements Serializable {
 
+    private String id;
     private String nome;
     private ArrayList<DTOModelo> modelos;
+    private boolean activo;
 
     public DTOMarca() {
+        activo = true;
         modelos = new ArrayList<DTOModelo>();
     }
 
-    public DTOMarca(String nome, ArrayList<DTOModelo> modelos) {
+    public DTOMarca(String id, String nome, ArrayList<DTOModelo> modelos, boolean activo) {
+        this.id = id;
         this.nome = nome;
 
         this.modelos = new ArrayList<DTOModelo>();
@@ -41,6 +50,8 @@ public final class DTOMarca implements Serializable {
                 this.modelos.add(m);
             }
         }
+
+        this.activo = activo;
     }
 
     /**
@@ -92,6 +103,22 @@ public final class DTOMarca implements Serializable {
         this.nome = nome;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -101,6 +128,11 @@ public final class DTOMarca implements Serializable {
             return false;
         }
         final DTOMarca other = (DTOMarca) obj;
+
+        if (this.id != null && this.id.equals(other.id)) {
+            return true;
+        }
+
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
@@ -110,6 +142,7 @@ public final class DTOMarca implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 89 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         return hash;
     }

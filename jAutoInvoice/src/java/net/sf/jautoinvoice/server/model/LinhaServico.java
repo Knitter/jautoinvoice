@@ -20,7 +20,6 @@
  */
 package net.sf.jautoinvoice.server.model;
 
-import net.sf.jautoinvoice.server.model.FolhaObra;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -43,13 +42,17 @@ public final class LinhaServico implements Serializable {
     private Servico servico;
     private String notas;
     private ArrayList<LinhaGasto> gastos;
+    private boolean activo;
 
     public LinhaServico() {
+        activo = true;
         gastos = new ArrayList<LinhaGasto>();
     }
 
-    public LinhaServico(FolhaObra folha, double duracao, Funcionario funcionario,
-            double valorHora, Servico servico, String notas, ArrayList<LinhaGasto> gastos) {
+    public LinhaServico(String id, FolhaObra folha, double duracao, Funcionario funcionario,
+            double valorHora, Servico servico, String notas, ArrayList<LinhaGasto> gastos, 
+            boolean activo) {
+        this.id = id;
         this.folha = folha;
         this.duracao = duracao;
         this.funcionario = funcionario;
@@ -63,6 +66,8 @@ public final class LinhaServico implements Serializable {
                 this.gastos.add(l);
             }
         }
+        
+        this.activo = activo;
     }
 
     public void adicionarLinhaGasto(LinhaGasto gasto) {
@@ -148,6 +153,14 @@ public final class LinhaServico implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override

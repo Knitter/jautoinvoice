@@ -25,7 +25,18 @@ import java.io.Serializable;
 
 public final class DTOFactura implements Serializable {
 
-    public DTOFactura() {
+    private String id;
+
+    public DTOFactura(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 //TODO: completar

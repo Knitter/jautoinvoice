@@ -22,22 +22,30 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * @author Sérgio Lopes
+ * @since 1.0
+ */
 public final class DTOFuncionario implements Serializable {
 
     private String id;
     private String nome;
     private String contribuinte;
     private double valorHora;
+    private DTOUtilizador utilizador;
     private boolean activo;
 
     public DTOFuncionario() {
         activo = true;
     }
 
-    public DTOFuncionario(String nome, String contribuinte, double valorHora, boolean activo) {
+    public DTOFuncionario(String id, String nome, String contribuinte, double valorHora, 
+            DTOUtilizador utilizador, boolean activo) {
+        this.id = id;
         this.nome = nome;
         this.contribuinte = contribuinte;
         this.valorHora = valorHora;
+        this.utilizador = utilizador;
         this.activo = activo;
     }
 
@@ -81,6 +89,14 @@ public final class DTOFuncionario implements Serializable {
         this.activo = activo;
     }
 
+    public DTOUtilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(DTOUtilizador utilizador) {
+        this.utilizador = utilizador;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -91,8 +107,12 @@ public final class DTOFuncionario implements Serializable {
         }
         final DTOFuncionario other = (DTOFuncionario) obj;
 
-        if (this.id.equals(other.id)) {
+        if (this.id != null && this.id.equals(other.id)) {
             return true;
+        }
+        
+        if ((this.utilizador == null) ? (other.utilizador != null) : !this.utilizador.equals(other.utilizador)) {
+            return false;
         }
 
         if ((this.contribuinte == null) ? (other.contribuinte != null) : !this.contribuinte.equals(other.contribuinte)) {
@@ -105,6 +125,7 @@ public final class DTOFuncionario implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 47 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 47 * hash + (this.utilizador != null ? this.utilizador.hashCode() : 0);
         hash = 47 * hash + (this.contribuinte != null ? this.contribuinte.hashCode() : 0);
         return hash;
     }

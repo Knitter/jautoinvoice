@@ -194,6 +194,10 @@ public final class JAutoInvoiceManager {
         return motor.listarVeiculosInspeccianadosPor(funcionario);
     }
 
+    public boolean autenticar(String nome, String password) {
+        return true;
+    }
+
     public boolean autenticado() {
         return true;
     }

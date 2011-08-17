@@ -37,7 +37,8 @@ public final class IVA implements Serializable {
         activo = true;
     }
 
-    public IVA(String descricao, double percentagem, boolean activo) {
+    public IVA(String id, String descricao, double percentagem, boolean activo) {
+        this.id = id;
         this.descricao = descricao;
         this.percentagem = percentagem;
         this.activo = activo;

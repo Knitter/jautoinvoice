@@ -22,6 +22,11 @@ package net.sf.jautoinvoice.client.dto;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Sérgio Lopes
+ * @since 1.0
+ */
 public final class DTOFornecedor implements Serializable {
 
     private String id;
@@ -36,20 +41,14 @@ public final class DTOFornecedor implements Serializable {
         activo = true;
     }
 
-    public DTOFornecedor(String nome, String email, String telefone, String fax, String notas, boolean activo) {
+    public DTOFornecedor(String id, String nome, String email, String telefone, String fax,
+            String notas, boolean activo) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.fax = fax;
         this.notas = notas;
-        this.activo = activo;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
@@ -59,6 +58,14 @@ public final class DTOFornecedor implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public String getEmail() {
@@ -111,7 +118,7 @@ public final class DTOFornecedor implements Serializable {
         }
         final DTOFornecedor other = (DTOFornecedor) obj;
 
-        if (this.id.equals(other.id)) {
+        if (this.id != null && this.id.equals(other.id)) {
             return true;
         }
 
@@ -127,7 +134,9 @@ public final class DTOFornecedor implements Serializable {
         if ((this.fax == null) ? (other.fax != null) : !this.fax.equals(other.fax)) {
             return false;
         }
-
+        if (this.activo != other.activo) {
+            return false;
+        }
         return true;
     }
 

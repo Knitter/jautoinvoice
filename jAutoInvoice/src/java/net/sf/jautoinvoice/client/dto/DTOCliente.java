@@ -23,15 +23,20 @@ package net.sf.jautoinvoice.client.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @since 1.0
+ */
 public final class DTOCliente implements Serializable {
 
     private String id;
-    private String codigo;
     private String nome;
+    private String contribuinte;
     private String email;
     private ArrayList<String> contactos;
     private String endereco;
     private ArrayList<DTOVeiculo> veiculos;
+    private DTOUtilizador utilizador;
     private boolean activo;
 
     public DTOCliente() {
@@ -40,12 +45,14 @@ public final class DTOCliente implements Serializable {
         activo = true;
     }
 
-    public DTOCliente(String codigo, String nome, String email, ArrayList<String> contactos,
-            String endereco, ArrayList<DTOVeiculo> veiculos, boolean activo) {
-        this.codigo = codigo;
+    public DTOCliente(String id, String nome, String contribuinte, String email, ArrayList<String> contactos,
+            String endereco, ArrayList<DTOVeiculo> veiculos, DTOUtilizador utilizador, boolean activo) {
+        this.id = id;
         this.nome = nome;
+        this.contribuinte = contribuinte;
         this.email = email;
         this.endereco = endereco;
+        this.utilizador = utilizador;
         this.activo = activo;
 
         this.contactos = new ArrayList<String>();
@@ -61,6 +68,7 @@ public final class DTOCliente implements Serializable {
                 this.veiculos.add(v);
             }
         }
+
     }
 
     public void adicionarContacto(String contacto) {
@@ -97,14 +105,6 @@ public final class DTOCliente implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public ArrayList<String> getContactos() {
@@ -167,6 +167,22 @@ public final class DTOCliente implements Serializable {
         this.id = id;
     }
 
+    public String getContribuinte() {
+        return contribuinte;
+    }
+
+    public void setContribuinte(String contribuinte) {
+        this.contribuinte = contribuinte;
+    }
+
+    public DTOUtilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(DTOUtilizador utilizador) {
+        this.utilizador = utilizador;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -177,13 +193,14 @@ public final class DTOCliente implements Serializable {
         }
         final DTOCliente other = (DTOCliente) obj;
 
-        if (this.id.equals(other.id)) {
+        if (this.id != null && this.id.equals(other.id)) {
             return true;
         }
 
-        if ((this.codigo == null) ? (other.codigo != null) : !this.codigo.equals(other.codigo)) {
-            return false;
+        if (this.contribuinte != null && this.contribuinte.equals(other.contribuinte)) {
+            return true;
         }
+
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
@@ -194,8 +211,8 @@ public final class DTOCliente implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.codigo != null ? this.codigo.hashCode() : 0);
         hash = 97 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 97 * hash + (this.contribuinte != null ? this.contribuinte.hashCode() : 0);
         return hash;
     }
 }

@@ -20,10 +20,6 @@
  */
 package net.sf.jautoinvoice.server.model;
 
-import net.sf.jautoinvoice.server.model.FolhaObra;
-import net.sf.jautoinvoice.server.model.ECategoria;
-import net.sf.jautoinvoice.server.model.ECombustivel;
-import net.sf.jautoinvoice.server.model.Cliente;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -46,23 +42,26 @@ public final class Veiculo implements Serializable {
     private Cliente dono;
     private ArrayList<Cliente> antigosDonos;
     private ArrayList<Inspeccao> inspeccoes;
-    private ECategoria categoria;
-    private ECombustivel combustivel;
+    private Categoria categoria;
+    private Combustivel combustivel;
     private String notas;
     private ArrayList<FolhaObra> folhasObra;
+    private boolean activo;
 
     public Veiculo() {
+        activo = true;
         antigosDonos = new ArrayList<Cliente>();
         inspeccoes = new ArrayList<Inspeccao>();
         folhasObra = new ArrayList<FolhaObra>();
     }
 
-    public Veiculo(Marca marca, Modelo modelo, String dataRegisto, String matricula,
+    public Veiculo(String id, Marca marca, Modelo modelo, String dataRegisto, String matricula,
             String nrChassis, String cilindrada, String nrMotor, Cliente dono,
             ArrayList<Cliente> antigosDonos, ArrayList<Inspeccao> inspeccoes,
-            ECategoria categoria, ECombustivel combustivel, String notas,
-            ArrayList<FolhaObra> folhasObra) {
+            Categoria categoria, Combustivel combustivel, String notas,
+            ArrayList<FolhaObra> folhasObra, boolean activo) {
 
+        this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.dataRegisto = dataRegisto;
@@ -95,6 +94,8 @@ public final class Veiculo implements Serializable {
                 this.folhasObra.add(f);
             }
         }
+
+        this.activo = activo;
     }
 
     /**
@@ -186,11 +187,11 @@ public final class Veiculo implements Serializable {
         }
     }
 
-    public ECategoria getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(ECategoria categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -202,11 +203,11 @@ public final class Veiculo implements Serializable {
         this.cilindrada = cilindrada;
     }
 
-    public ECombustivel getCombustivel() {
+    public Combustivel getCombustivel() {
         return combustivel;
     }
 
-    public void setCombustivel(ECombustivel combustivel) {
+    public void setCombustivel(Combustivel combustivel) {
         this.combustivel = combustivel;
     }
 
@@ -309,6 +310,14 @@ public final class Veiculo implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override
