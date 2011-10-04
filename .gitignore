@@ -1,7 +1,4 @@
 build/
 private/
 .DS_Store
-jAutoInvoiceS/dist/
-jAutoInvoiceS/*.log*
 /jAutoInvoice/dist/
-/www/assets/yiicache/
