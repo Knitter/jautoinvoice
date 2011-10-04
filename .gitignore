@@ -4,3 +4,4 @@ private/
 jAutoInvoiceS/dist/
 jAutoInvoiceS/*.log*
 /jAutoInvoice/dist/
+/www/assets/yiicache/

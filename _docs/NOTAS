@@ -1,0 +1,37 @@
+Utilização de UNSIGNED INTs para todos os IDs:
+ - A distinção de tipos de acordo com a sua utilização parece causar mais trabalho 
+e trazer poucas vantagens. O espaço utilizado nos casos onde se podia usar TINYINT ou SMALLINT
+é negligenciável.
+
+Não utilização de chave composta para tabela Modelo:
+ - Chave composta com auto_increment derrota um pouco a ideia
+
+SQL:
+
+CREATE TABLE `LinhaGasto` (
+`idLinhaGasto` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+`quantidade` TINYINT NOT NULL ,
+`precoUnitario` DECIMAL( 10,4 ) NOT NULL , 
+`activo` TINYINT NOT NULL DEFAULT 1,
+`idMaterial` INT UNSINED NOT NULL ,
+`idLInhaServico` INT UNSIGNED NOT NULL ,
+CONSTRAINT `fkLinhaGastoMaterial` FOREIGN KEY (`idMaterial`) REFERENCES `Material`(`idMaterial`)
+CONSTRAINT `fkLinhaGastoLinhaServico` FOREIGN KEY (`idLinhaServico`) REFERENCES `LinhaServico`(`idLinhaServico`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+CREATE TABLE `public final class DTOFolhaObra implements Serializable {
+`idVeiculo` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+    private String id;
+    private DTOVeiculo veiculo;
+    private String data;
+    private String descricaoAvaria;
+    private int kms;
+    private DTOFactura factura;
+    private ArrayList<DTOLinhaServico> linhas;
+    private boolean activo;
+CONSTRAINT `` FOREIGN KEY (``) REFERENCES ``(``)
+CONSTRAINT `` FOREIGN KEY (``) REFERENCES ``(``)
+CONSTRAINT `` FOREIGN KEY (``) REFERENCES ``(``)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+-- private ArrayList<DTOFolhaObra> folhasObra; relacão com os veiculos
