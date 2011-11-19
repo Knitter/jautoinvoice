@@ -21,16 +21,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class DefaultController extends CController {
-
-    public $layout = '//layouts/default';
+class DefaultController extends JAIController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
+
+        $this->layout = '//layouts/login';
     }
 
     public function actionIndex() {
-        $this->render('index');
+        $model = new LoginForm();
+
+        $this->render('index', array('model' => $model));
     }
 
     public function actionSobre() {
@@ -42,6 +44,10 @@ class DefaultController extends CController {
     }
 
     public function actionLogout() {
+        
+    }
+    
+    public function actionError() {
         
     }
 

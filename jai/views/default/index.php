@@ -1,4 +1,6 @@
-<div class="">
+<?php $this->title = 'jAutoInvoice :: Entrada'; ?>
+
+<div class="span-12 prepend-6 append-6">
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'login-form',
@@ -8,7 +10,8 @@
             'validateOnSubmit' => true
         ),
             ));
-    ?>    
+    ?>
+
     <p>
         <?php
         echo $form->labelEx($model, 'username'),
@@ -34,6 +37,5 @@
     <p>
         <?php echo CHtml::submitButton('Entrar'); ?>
     </p>
-
     <?php $this->endWidget(); ?>
 </div>

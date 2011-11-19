@@ -1,7 +1,7 @@
 <?php
 
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../yii/yii.php';
+$yii=dirname(__FILE__).'/../yii-1.1.8/yii.php';
 $config=dirname(__FILE__).'/../jai/config/main.php';
 
 // remove the following lines when in production mode
