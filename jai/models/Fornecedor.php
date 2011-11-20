@@ -1,34 +1,35 @@
 <?php
 
-/*
- * Fornecedor.php
- *
- * This file is part of jAutoInvoice, http://sourceforge.net/p/jautoinvoice
- *
- * Copyright (C) 2011 jAutoInvoice
- *
+/* Fornecedor.php
+ * 
+ * This file is part of jAutoInvoice, a car workshop management software.
+ * 
+ * Copyright (c) 2011, Sérgio Lopes.
+ * http://sourceforge.net/projects/jautoinvoice
+ * 
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
+ * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
- * This is the model class for table "jautoinvoice.Fornecedor".
- *
- * The followings are the available columns in table 'jautoinvoice.Fornecedor':
- * @property string $idFornecedor
+ * @property int $idFornecedor
  * @property string $nome
  * @property string $email
  * @property string $notas
+ * @property string $telemovel
+ * @property string $telefone
+ * @property string $website
+ * @property string $morada
  * @property integer $activo
  *
  * The followings are the available model relations:
@@ -38,81 +39,60 @@
 class Fornecedor extends CActiveRecord {
 
     /**
-     * Returns the static model of the specified AR class.
-     * @return Fornecedor the static model class
+     * @return Fornecedor
      */
     public static function model($className=__CLASS__) {
         return parent::model($className);
     }
 
-    /**
-     * @return string the associated database table name
-     */
     public function tableName() {
-        return 'jautoinvoice.Fornecedor';
+        return 'Fornecedor';
     }
 
-    /**
-     * @return array validation rules for model attributes.
-     */
     public function rules() {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
         return array(
             array('nome', 'required'),
-            array('activo', 'numerical', 'integerOnly' => true),
-            array('nome, email', 'length', 'max' => 255),
+            array('nome, email, morada, website', 'length', 'max' => 255),
+            array('telefone, telemovel', 'length', 'max' => 9),
             array('notas', 'safe'),
-            // The following rule is used by search().
-            // Please remove those attributes that should not be searched.
-            array('idFornecedor, nome, email, notas, activo', 'safe', 'on' => 'search'),
+            // search
+            array('nome, email', 'safe', 'on' => 'search'),
         );
     }
 
-    /**
-     * @return array relational rules.
-     */
-    public function relations() {
-        // NOTE: you may need to adjust the relation name and the related
-        // class name for the relations automatically generated below.
-        return array(
-            'contactos' => array(self::MANY_MANY, 'Contacto', 'ContactoFornecedor(idFornecedor, idContacto)'),
-            'materials' => array(self::HAS_MANY, 'Material', 'idFornecedor'),
-        );
-    }
+//    public function relations() {
+//        // NOTE: you may need to adjust the relation name and the related
+//        // class name for the relations automatically generated below.
+//        return array(
+//            'contactos' => array(self::MANY_MANY, 'Contacto', 'ContactoFornecedor(idFornecedor, idContacto)'),
+//            'materials' => array(self::HAS_MANY, 'Material', 'idFornecedor'),
+//        );
+//    }
 
-    /**
-     * @return array customized attribute labels (name=>label)
-     */
     public function attributeLabels() {
         return array(
-            'idFornecedor' => 'Id Fornecedor',
+            'idFornecedor' => 'ID',
             'nome' => 'Nome',
-            'email' => 'Email',
+            'email' => 'E-mail',
             'notas' => 'Notas',
-            'activo' => 'Activo',
+            'telefone' => 'Telefone',
+            'telemovel' => 'Telemóvel',
+            'website' => 'Endereço WEB',
+            'morada' => 'Morada'
         );
     }
 
     /**
-     * Retrieves a list of models based on the current search/filter conditions.
-     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     * @return CActiveDataProvider
      */
     public function search() {
-        // Warning: Please modify the following code to remove attributes that
-        // should not be searched.
+        $criteria = new CDbCriteria();
 
-        $criteria = new CDbCriteria;
-
-        $criteria->compare('idFornecedor', $this->idFornecedor, true);
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('email', $this->email, true);
-        $criteria->compare('notas', $this->notas, true);
-        $criteria->compare('activo', $this->activo);
+        $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider(get_class($this), array(
-                    'criteria' => $criteria,
-                ));
+        return new CActiveDataProvider('Fornecedor', array('criteria' => $criteria));
     }
 
 }
