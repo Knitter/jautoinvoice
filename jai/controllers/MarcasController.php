@@ -1,6 +1,6 @@
 <?php
 
-/* FuncionariosController.php
+/* Marcas.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class FuncionariosController extends JAIController {
+class MarcasController extends Controller {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -35,59 +35,54 @@ class FuncionariosController extends JAIController {
                         )), parent::accessRules());
     }
 
-    /**
-     * @param int $id
-     * @return Funcionario
-     */
-    public function carregarModeloFuncionario($id) {
-        if (($funcionario = Funcionario::model()->findByPk((int) $id)) === null) {
+    private function carregarModeloMarca($id) {
+        if (($marca = Marca::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
-        return $funcionario;
+        return $marca;
     }
 
     public function actionIndex() {
-        $filtro = new Funcionario();
+        $filtro = new Marca();
         $filtro->unsetAttributes();
 
-        if (isset($_REQUEST['Funcionario'])) {
-            $filtro->attributes = $_REQUEST['Funcionario'];
+        if (isset($_REQUEST['Marca'])) {
+            $filtro->attributes = $_REQUEST['Marca'];
         }
 
         $this->render('index', array('filtro' => $filtro));
     }
 
     public function actionAdicionar() {
-        $funcionario = new Funcionario();
+        $marca = new Marca();
 
-        // $this->performAjaxValidation($model);
+        // $this->performAjaxValidation($marca);
 
-        if (isset($_POST['Funcionario'])) {
-            $funcionario->attributes = $_POST['Funcionario'];
-            if ($funcionario->save())
-                $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
+        if (isset($_POST['Marca'])) {
+            $marca->attributes = $_POST['Marca'];
+            if ($marca->save())
+                $this->redirect(array('editar', 'id' => $marca->idMarca));
         }
 
-        $this->render('editar', array('funcionario' => $funcionario));
+        $this->render('editar', array('marca' => $marca));
     }
 
     public function actionEditar($id) {
-        $funcionario = $this->carregarModeloFuncionario($id);
+        $marca = $this->carregarModeloMarca($id);
 
-        // $this->performAjaxValidation($model);
+        // $this->performAjaxValidation($marca);
 
-        if (isset($_POST['Funcionario'])) {
-            $funcionario->attributes = $_POST['Funcionario'];
-            if ($funcionario->save())
-                $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
+        if (isset($_POST['Marca'])) {
+            $marca->attributes = $_POST['Marca'];
+            if ($marca->save())
+                $this->redirect(array('editar', 'id' => $marca->idMarca));
         }
 
-        $this->render('editar', array('funcionario' => $funcionario));
+        $this->render('editar', array('marca' => $marca));
     }
 
     public function actionApagar($id) {
-        if (Yii::app()->request->isPostRequest && ($funcionario = $this->carregarModeloFuncionario($id)) !== null) {
-
+        if (Yii::app()->request->isPostRequest && ($marca = $this->carregarModeloMarca($id))) {
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
