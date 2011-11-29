@@ -43,10 +43,9 @@ class Categoria extends CActiveRecord {
     public function rules() {
         return array(
             array('nome', 'required'),
-            array('activo', 'numerical', 'integerOnly' => true),
             array('nome', 'length', 'max' => 100),
             // search
-            array('idCategoria, nome, activo', 'safe', 'on' => 'search'),
+            array('nome', 'safe', 'on' => 'search'),
         );
     }
 
@@ -69,9 +68,8 @@ class Categoria extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->compare('idCategoria', $this->idCategoria);
         $criteria->compare('nome', $this->nome, true);
-        $criteria->compare('activo', $this->activo);
+        $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('Categoria', array('criteria' => $criteria));
     }

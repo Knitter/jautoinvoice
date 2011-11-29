@@ -26,14 +26,13 @@
  * @property string $data
  * @property string $descricaoAvaria
  * @property integer $kms
- * @property integer $activo
- * @property string $idVeiculo
- * @property string $idFuncionario
+ * @property int $activo
+ * 
+ * @property int $idVeiculo
+ * @property int $idFuncionario
  *
- * @property Veiculo $idVeiculo0
- * @property Funcionario $idFuncionario0
- * @property LinhaServico[] $linhaServicos
- * @property Veiculo[] $veiculos
+ * @property Veiculo $veiculo
+ * @property Funcionario $funcionario
  */
 class FolhaObra extends CActiveRecord {
 
@@ -51,34 +50,28 @@ class FolhaObra extends CActiveRecord {
     public function rules() {
         return array(
             array('data, descricaoAvaria, kms, idVeiculo, idFuncionario', 'required'),
-            array('kms, activo', 'numerical', 'integerOnly' => true),
-            array('idVeiculo, idFuncionario', 'length', 'max' => 10),
-            // The following rule is used by search().
-            // Please remove those attributes that should not be searched.
-            array('idFolhaObra, data, descricaoAvaria, kms, activo, idVeiculo, idFuncionario', 'safe', 'on' => 'search'),
+            array('kms, idVeiculo, idFuncionario', 'numerical', 'integerOnly' => true),
+            // search
+            array('data, descricaoAvaria, idVeiculo, idFuncionario', 'safe', 'on' => 'search'),
         );
     }
 
-//    public function relations() {
-//        // NOTE: you may need to adjust the relation name and the related
-//        // class name for the relations automatically generated below.
-//        return array(
-//            'idVeiculo0' => array(self::BELONGS_TO, 'Veiculo', 'idVeiculo'),
-//            'idFuncionario0' => array(self::BELONGS_TO, 'Funcionario', 'idFuncionario'),
+    public function relations() {
+        return array(
+            'veiculo' => array(self::BELONGS_TO, 'Veiculo', 'idVeiculo'),
+            'funcionario' => array(self::BELONGS_TO, 'Funcionario', 'idFuncionario'),
 //            'linhaServicos' => array(self::HAS_MANY, 'LinhaServico', 'idFolhaObra'),
-//            'veiculos' => array(self::MANY_MANY, 'Veiculo', 'VeiculoFolhaObra(idFolhaObra, idVeiculo)'),
-//        );
-//    }
+        );
+    }
 
     public function attributeLabels() {
         return array(
-            'idFolhaObra' => 'Id Folha Obra',
+            'idFolhaObra' => 'ID',
             'data' => 'Data',
-            'descricaoAvaria' => 'Descricao Avaria',
+            'descricaoAvaria' => 'Descrição da Avaria',
             'kms' => 'Kms',
-            'activo' => 'Activo',
-            'idVeiculo' => 'Id Veiculo',
-            'idFuncionario' => 'Id Funcionario',
+            'idVeiculo' => 'Veículo',
+            'idFuncionario' => 'Funcionário',
         );
     }
 
@@ -91,10 +84,10 @@ class FolhaObra extends CActiveRecord {
         $criteria->compare('data', $this->data, true);
         $criteria->compare('descricaoAvaria', $this->descricaoAvaria, true);
         $criteria->compare('kms', $this->kms);
-        $criteria->compare('activo', $this->activo);
-        $criteria->compare('idVeiculo', $this->idVeiculo, true);
-        $criteria->compare('idFuncionario', $this->idFuncionario, true);
-        $criteria->comprare('active', 1);
+
+        $criteria->compare('idVeiculo', $this->idVeiculo);
+        $criteria->compare('idFuncionario', $this->idFuncionario);
+        $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('FolhaObra', array('criteria' => $criteria));
     }

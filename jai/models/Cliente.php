@@ -30,6 +30,8 @@
  * @property string $telemovel
  * @property string $morada
  * @property int $activo
+ * 
+ * @property Veiculo[] veiculosActuais
  */
 class Cliente extends CActiveRecord {
 
@@ -54,13 +56,12 @@ class Cliente extends CActiveRecord {
         );
     }
 
-    //public function relations() {
-    //    return array(
-    //        'idCliente0' => array(self::BELONGS_TO, 'Utilizador', 'idCliente'),
-    //        'veiculos' => array(self::MANY_MANY, 'Veiculo', 'ClienteVeiculo(idCliente, idVeiculo)'),
-    //        'veiculos1' => array(self::HAS_MANY, 'Veiculo', 'idCliente'),
-    //    );
-    //}
+    public function relations() {
+        return array(
+            'veiculosActuais' => array(self::HAS_MANY, 'Veiculo', 'idCliente'),
+                //     'veiculos' => array(self::MANY_MANY, 'Veiculo', 'ClienteVeiculo(idCliente, idVeiculo)'),
+        );
+    }
 
     public function attributeLabels() {
         return array(
