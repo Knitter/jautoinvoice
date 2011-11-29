@@ -60,7 +60,7 @@ class FuncionariosController extends JAIController {
     public function actionAdicionar() {
         $funcionario = new Funcionario();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('funcionario-form', $funcionario);
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
@@ -74,7 +74,7 @@ class FuncionariosController extends JAIController {
     public function actionEditar($id) {
         $funcionario = $this->carregarModeloFuncionario($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('funcionario-form', $funcionario);
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];

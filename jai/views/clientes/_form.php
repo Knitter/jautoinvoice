@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'cliente-form',
     'enableAjaxValidation' => true,
@@ -44,7 +46,10 @@ echo $form->errorSummary($cliente);
     <?php echo $form->error($cliente, 'morada'); ?>
 </p>
 <p>
-    <?php echo CHtml::submitButton($cliente->isNewRecord ? 'Criar' : 'Gravar'); ?>
+    <?php
+    echo CHtml::submitButton($cliente->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    CHtml::link('Cancelar', $this->createUrl('clientes/index'));
+    ?>
 </p>
 
 <?php

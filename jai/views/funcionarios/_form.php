@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'funcionario-form',
     'enableAjaxValidation' => true,
@@ -23,14 +25,14 @@ echo $form->errorSummary($funcionario);
 <p>
     <?php
     echo $form->labelEx($funcionario, 'password'),
-    $form->textField($funcionario, 'password'),
+    $form->passwordField($funcionario, 'password'),
     $form->error($funcionario, 'password');
     ?>
 </p>
 <p>
     <?php
     echo $form->labelEx($funcionario, 'password2'),
-    $form->textField($funcionario, 'password2'),
+    $form->passwordField($funcionario, 'password2'),
     $form->error($funcionario, 'password2');
     ?>
 </p>
@@ -50,7 +52,10 @@ echo $form->errorSummary($funcionario);
 </p>
 
 <p>
-    <?php echo CHtml::submitButton($funcionario->isNewRecord ? 'Criar' : 'Gravar'); ?>
+    <?php
+    echo CHtml::submitButton($funcionario->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    CHtml::link('Cancelar', $this->createUrl('funcionarios/index'));
+    ?>
 </p>
 
 

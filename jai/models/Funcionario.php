@@ -73,7 +73,7 @@ class Funcionario extends CActiveRecord {
 
     public function attributeLabels() {
         return array(
-            'idFuncionario' => 'Id Funcionario',
+            'idFuncionario' => 'ID',
             'nome' => 'Nome',
             'contribuinte' => 'Contribuinte',
             'username' => 'Username',
@@ -89,9 +89,9 @@ class Funcionario extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->compare('nome', $this->idFuncionario, true);
-        $criteria->compare('contribuinte', $this->idFuncionario, true);
-        $criteria->compare('username', $this->idFuncionario, true);
+        $criteria->compare('nome', $this->nome, true);
+        $criteria->compare('contribuinte', $this->contribuinte, true);
+        $criteria->compare('username', $this->username, true);
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('Funcionario', array('criteria' => $criteria));

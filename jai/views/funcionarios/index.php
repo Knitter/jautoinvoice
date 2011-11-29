@@ -1,16 +1,30 @@
-<div class="span-18">
-    <span class="title-h2">Funcionários</span>
-</div>
-<div class="span-6 last">
-    <a href="<?php echo $this->createUrl('funcionarios/adicionar'); ?>"><img src="assets/images/icons/x16-funcionario-adicionar.png" /></a>
-</div>
+<?php
+$this->menu = array(
+    'voltar' => $this->createUrl('/dashboard'),
+    'links' => array(
+        array(
+            'url' => $this->createUrl('funcionarios/adicionar'),
+            'icon' => 'assets/images/icons/x32-funcionario-adicionar.png',
+            'label' => 'Adicionar'
+        )
+    )
+);
+?>
+
+<h2>Funcionários</h2>
+
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'funcionario-grid',
     'dataProvider' => $filtro->search(),
     'filter' => $filtro,
+    'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
+    'template' => '{items} {pager} {summary}',
     'columns' => array(
-        'idFuncionario',
+        array(
+            'name' => 'idFuncionario',
+            'filter' => false
+        ),
         'nome',
         'contribuinte',
         array(
@@ -19,7 +33,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'view' => array('visible' => 'false')
             ),
             'updateButtonImageUrl' => 'assets/images/icons/x16-funcionario-editar.png',
-            'deleteButtonImageUrl' => 'assets/images/icons/x16-funcionario-apagar.png'
+            'updateButtonUrl' => 'Yii::app()->createUrl("funcionarios/editar", array("id" => $data->idFuncionario))',
+            'deleteButtonImageUrl' => 'assets/images/icons/x16-funcionario-apagar.png',
+            'deleteButtonUrl' => 'Yii::app()->createUrl("funcionarios/apagar", array("id" => $data->idFuncionario))'
         ),
     ),
 ));

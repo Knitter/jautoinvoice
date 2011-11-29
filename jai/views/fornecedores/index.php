@@ -1,14 +1,25 @@
-<div class="span-18">
-    <span class="title-h2">Fornecedores</span>
-</div>
-<div class="span-6 last">
-    <a href="<?php echo $this->createUrl('fornecedores/adicionar'); ?>"><img src="assets/images/icons/x16-fornecedor-adicionar.png" /></a>
-</div>
+<?php
+$this->menu = array(
+    'voltar' => $this->createUrl('/dashboard'),
+    'links' => array(
+        array(
+            'url' => $this->createUrl('fornecedores/adicionar'),
+            'icon' => 'assets/images/icons/x32-fornecedor-adicionar.png',
+            'label' => 'Adicionar'
+        )
+    )
+);
+?>
+
+<h2>Fornecedores</h2>
+
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'funcionario-grid',
     'dataProvider' => $filtro->search(),
     'filter' => $filtro,
+    'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
+    'template' => '{items} {pager} {summary}',
     'columns' => array(
         array(
             'name' => 'idFornecedor',
@@ -22,7 +33,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'view' => array('visible' => 'false')
             ),
             'updateButtonImageUrl' => 'assets/images/icons/x16-fornecedor.png',
-            'deleteButtonImageUrl' => 'assets/images/icons/x16-fornecedor-apagar.png'
+            'updateButtonUrl' => 'Yii::app()->createUrl("fornecedores/editar", array("id" => $data->idFornecedor))',
+            'deleteButtonImageUrl' => 'assets/images/icons/x16-fornecedor-apagar.png',
+            'deleteButtonUrl' => 'Yii::app()->createUrl("fornecedores/apagar", array("id" => $data->idFornecedor))',
         ),
     ),
 ));

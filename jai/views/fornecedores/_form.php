@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'fornecedor-form',
     'enableAjaxValidation' => false,
@@ -59,7 +61,10 @@ echo $form->errorSummary($fornecedor);
 
 
 <p>
-    <?php echo CHtml::submitButton($fornecedor->isNewRecord ? 'Criar' : 'Gravar'); ?>
+    <?php
+    echo CHtml::submitButton($fornecedor->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    CHtml::link('Cancelar', $this->createUrl('fornecedores/index'));
+    ?>
 </p>
 
 <?php

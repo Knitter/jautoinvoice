@@ -15,23 +15,25 @@
     </head>
     <body>
         <div class="container">
+            <!-- THE MAIN MENU -->
             <ul id="menu">
-                <!-- <li><a href="<?php echo $this->createUrl('/folhasobra'); ?>"><img src="assets/images/icon-x32-folhaobra.png" /><br />Folhas Obra</a></li> -->
-                <!-- <li><a href="<?php echo $this->createUrl('/marcacoes'); ?>"><img src="assets/images/icon-x32-marcacoes.png" /><br />Marcações</a></li> -->
-                <!-- <li><a href="<?php echo $this->createUrl('/veiculos'); ?>"><img src="assets/images/icon-x32-veiculo.png" /><br />Veiculos</a></li> -->
-                <!-- <li><a href="<?php echo $this->createUrl('/fornecedores'); ?>"><img src="assets/images/icon-x32-fornecedor.png" /><br />Fornecedores</a></li> -->
-                <!-- <li><a href="<?php echo $this->createUrl('/facturas'); ?>"><img src="assets/images/icon-x32-factura.png" /><br />Facturas</a></li> -->
-                <li><a href="<?php echo $this->createUrl('/clientes'); ?>"><img src="assets/images/icons/x32-cliente.png" /><br />Clientes</a></li>
-                <li><a href="<?php echo $this->createUrl('/funcionarios'); ?>"><img src="assets/images/icons/x32-funcionario.png" /><br />Funcionários</a></li>
-                <li><a href="<?php echo $this->createUrl('/fornecedores'); ?>"><img src="assets/images/icons/x32-fornecedor.png" /><br />Fornecedores</a></li>
+                <?php if (isset($this->menu['voltar']) && $this->menu['voltar']) { ?>
+                    <li><a href="<?php echo $this->menu['voltar']; ?>"><img src="assets/images/icons/x32-back.png" /><br />Voltar</a></li>
+                <?php }
+                foreach ($this->menu['links'] as $item) { ?>
+                    <li><a href="<?php echo $item['url']; ?>"><img src="<?php echo $item['icon']; ?>" /><br /><?php echo $item['label']; ?></a></li>
+                <?php } ?>
             </ul>
         </div>
         <div class="container">
+            <!-- CENTER AREA -->
             <div class="span-24" id="content">
+                <!-- PAGE CONTENT -->
                 <?php echo $content; ?>
             </div>
         </div>
         <div id="footer">
+            <!-- FOOTER TEXT -->
             &copy; <?php echo date('Y'); ?> <a href="http://sourceforge.net/projects/jautoinvoice">jAutoInvoice</a> | <a href="<?php echo $this->createUrl('default/sobre'); ?>">Sobre</a>
         </div>
     </body>

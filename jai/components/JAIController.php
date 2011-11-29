@@ -25,11 +25,16 @@ class JAIController extends CController {
     public $layout = '//layouts/default';
     protected $title;
     protected $menu;
+    protected $breadcrumbs;
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
 
-        $this->menu = array();
+        $this->menu = array(
+            'voltar' => false,
+            'links' => array()
+        );
+        $this->breadcrumbs = array();
     }
 
     //public function filters() {
@@ -37,6 +42,7 @@ class JAIController extends CController {
     //        'accessControl', // perform access control for CRUD operations
     //    );
     //}
+
     public final function performAjaxValidation($form, $model) {
         if (isset($_POST['ajax']) && ($_POST['ajax'] === $form || (is_array($form) && in_array($_POST['ajax'], $form)))) {
             echo CActiveForm::validate($model);

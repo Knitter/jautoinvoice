@@ -1,0 +1,37 @@
+form {
+
+}
+
+fieldset {
+
+}
+
+legend {
+
+}
+
+label {
+    display: block;
+    float: left;
+    width: 140px;
+}
+
+input, select, textarea {
+    border: solid 1px #CCC;
+}
+
+input {
+
+}
+
+select {
+
+}
+
+textarea {
+
+}
+
+span.required {
+    color: #F00;
+}

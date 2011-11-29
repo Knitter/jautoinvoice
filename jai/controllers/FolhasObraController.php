@@ -47,14 +47,15 @@ class FolhasObraController extends JAIController {
     }
 
     public function actionIndex() {
-        $filtro = new FolhaObra();
-        $filtro->unsetAttributes();
+        //$filtro = new FolhaObra();
+        //$filtro->unsetAttributes();
 
-        if (isset($_REQUEST['FolhaObra'])) {
-            $filtro->attributes = $_REQUEST['FolhaObra'];
-        }
+        //if (isset($_REQUEST['FolhaObra'])) {
+        //    $filtro->attributes = $_REQUEST['FolhaObra'];
+        //}
 
-        $this->render('index', array('filtro' => $filtro));
+        //$this->render('index', array('filtro' => $filtro));
+        $this->render('index');
     }
 
     public function actionAdicionar() {
