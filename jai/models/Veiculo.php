@@ -72,7 +72,6 @@ class Veiculo extends CActiveRecord {
             'antigosDonos' => array(self::MANY_MANY, 'Cliente', 'ClienteVeiculo(idVeiculo, idCliente)'),
             'folhasObra' => array(self::MANY_MANY, 'FolhaObra', 'idVeiculo'),
             'marcacoes' => array(self::MANY_MANY, 'Marcacao', 'idVeiculo'),
-            //'inspeccaos' => array(self::MANY_MANY, 'Inspeccao', 'VeiculoInspeccao(idVeiculo, idInspeccao)'),
             'dono' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
             'categoria' => array(self::BELONGS_TO, 'Categoria', 'idCategoria'),
             'combustivel' => array(self::BELONGS_TO, 'Combustivel', 'idCombustivel'),

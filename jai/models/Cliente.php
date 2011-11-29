@@ -32,6 +32,7 @@
  * @property int $activo
  * 
  * @property Veiculo[] veiculosActuais
+ * @property Veiculo[] veiculosAntigos
  */
 class Cliente extends CActiveRecord {
 
@@ -59,7 +60,7 @@ class Cliente extends CActiveRecord {
     public function relations() {
         return array(
             'veiculosActuais' => array(self::HAS_MANY, 'Veiculo', 'idCliente'),
-                //     'veiculos' => array(self::MANY_MANY, 'Veiculo', 'ClienteVeiculo(idCliente, idVeiculo)'),
+            'veiculosAntigos' => array(self::MANY_MANY, 'Veiculo', 'ClienteVeiculo(idCliente, idVeiculo)'),
         );
     }
 

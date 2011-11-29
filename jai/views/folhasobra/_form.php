@@ -1,54 +1,66 @@
-<div class="form">
+<?php
+$form = $this->beginWidget('CActiveForm', array(
+    'id' => 'folha-obra-form',
+    'enableAjaxValidation' => false,
+        ));
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'folha-obra-form',
-	'enableAjaxValidation'=>false,
-)); ?>
+echo $form->errorSummary($folhaObra);
+?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<p>
+    <?php
+    echo $form->labelEx($folhaObra, 'data'),
+    $form->textField($folhaObra, 'data'),
+    $form->error($folhaObra, 'data');
+    ?>
+</p>
 
-	<?php echo $form->errorSummary($model); ?>
+<p>
+    <?php
+    echo $form->labelEx($folhaObra, 'descricaoAvaria'),
+    $form->textArea($folhaObra, 'descricaoAvaria', array('rows' => 6, 'cols' => 50)),
+    $form->error($folhaObra, 'descricaoAvaria');
+    ?>
+</p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'data'); ?>
-		<?php echo $form->textField($model,'data'); ?>
-		<?php echo $form->error($model,'data'); ?>
-	</div>
+<p>
+    <?php
+    echo $form->labelEx($folhaObra, 'kms'),
+    $form->textField($folhaObra, 'kms'),
+    $form->error($folhaObra, 'kms');
+    ?>
+</p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'descricaoAvaria'); ?>
-		<?php echo $form->textArea($model,'descricaoAvaria',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'descricaoAvaria'); ?>
-	</div>
+<p>
+    <?php
+    echo $form->labelEx($folhaObra, 'activo'),
+    $form->textField($folhaObra, 'activo'),
+    $form->error($folhaObra, 'activo');
+    ?>
+</p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'kms'); ?>
-		<?php echo $form->textField($model,'kms'); ?>
-		<?php echo $form->error($model,'kms'); ?>
-	</div>
+<p>
+    <?php
+    echo $form->labelEx($folhaObra, 'idVeiculo'),
+    $form->textField($folhaObra, 'idVeiculo', array('size' => 10, 'maxlength' => 10)),
+    $form->error($folhaObra, 'idVeiculo');
+    ?>
+</p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'activo'); ?>
-		<?php echo $form->textField($model,'activo'); ?>
-		<?php echo $form->error($model,'activo'); ?>
-	</div>
+<p>
+    <?php
+    echo $form->labelEx($folhaObra, 'idFuncionario'),
+    $form->textField($folhaObra, 'idFuncionario', array('size' => 10, 'maxlength' => 10)),
+    $form->error($folhaObra, 'idFuncionario');
+    ?>
+</p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'idVeiculo'); ?>
-		<?php echo $form->textField($model,'idVeiculo',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'idVeiculo'); ?>
-	</div>
+<p>
+    <?php
+    echo CHtml::submitButton($folhaObra->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    CHtml::link('Cancelar', $this->createUrl(''));
+    ?>
+</p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'idFuncionario'); ?>
-		<?php echo $form->textField($model,'idFuncionario',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'idFuncionario'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
+<?php
+$this->endWidget();
