@@ -40,6 +40,7 @@
  * @property Categoria $categoria
  * @property Combustivel $combustivel
  * @property Modelo $modelo
+ * @property FolhaObra[] $folhasObra
  */
 class Veiculo extends CActiveRecord {
 
@@ -69,7 +70,8 @@ class Veiculo extends CActiveRecord {
     public function relations() {
         return array(
             'antigosDonos' => array(self::MANY_MANY, 'Cliente', 'ClienteVeiculo(idVeiculo, idCliente)'),
-            //'folhaObras' => array(self::MANY_MANY, 'FolhaObra', 'VeiculoFolhaObra(idVeiculo, idFolhaObra)'),
+            'folhasObra' => array(self::MANY_MANY, 'FolhaObra', 'idVeiculo'),
+            'marcacoes' => array(self::MANY_MANY, 'Marcacao', 'idVeiculo'),
             //'inspeccaos' => array(self::MANY_MANY, 'Inspeccao', 'VeiculoInspeccao(idVeiculo, idInspeccao)'),
             'dono' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
             'categoria' => array(self::BELONGS_TO, 'Categoria', 'idCategoria'),

@@ -60,16 +60,13 @@ class Funcionario extends CActiveRecord {
         );
     }
 
-//    public function relations() {
-//        // NOTE: you may need to adjust the relation name and the related
-//        // class name for the relations automatically generated below.
-//        return array(
-//            'folhaObras' => array(self::HAS_MANY, 'FolhaObra', 'idFuncionario'),
-//            'idFuncionario0' => array(self::BELONGS_TO, 'Utilizador', 'idFuncionario'),
+    public function relations() {
+        return array(
+            'folhaObras' => array(self::HAS_MANY, 'FolhaObra', 'idFuncionario'),
 //            'inspeccaos' => array(self::HAS_MANY, 'Inspeccao', 'idFuncionario'),
 //            'linhaServicos' => array(self::HAS_MANY, 'LinhaServico', 'idFuncionario'),
-//        );
-//    }
+        );
+    }
 
     public function attributeLabels() {
         return array(

@@ -1,6 +1,6 @@
 <?php
 
-/* FolhaObra.php
+/* Marcacao.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
@@ -22,58 +22,53 @@
  */
 
 /**
- * @property int $idFolhaObra
- * @property string $data
- * @property string $descricaoAvaria
- * @property integer $kms
+ * @property int $idMarcacao
+ * @property string $dataMarcacao
+ * @property string $criado
  * @property int $activo
  * 
+ * @property int $idFolhaObra
  * @property int $idVeiculo
- * @property int $idFuncionario
  *
+ * @property FolhaObra $folhaObra
  * @property Veiculo $veiculo
- * @property Funcionario $funcionario
- * @property Marcacao $marcacao
+ * 
  */
-class FolhaObra extends CActiveRecord {
+class Modelo extends CActiveRecord {
 
     /**
-     * @return FolhaObra
+     * @return Marcacao
      */
     public static function model($className=__CLASS__) {
         return parent::model($className);
     }
 
     public function tableName() {
-        return 'FolhaObra';
+        return 'Marcacao';
     }
 
     public function rules() {
         return array(
-            array('data, descricaoAvaria, kms, idVeiculo, idFuncionario', 'required'),
-            array('kms, idVeiculo, idFuncionario', 'numerical', 'integerOnly' => true),
+            array('dataMarcacao, idVeiculo', 'required'),
             // search
-            array('data, descricaoAvaria, idVeiculo, idFuncionario', 'safe', 'on' => 'search'),
+            array('dataMarcacao, nome', 'safe', 'on' => 'search'),
         );
     }
 
     public function relations() {
         return array(
+            'marca' => array(self::BELONGS_TO, 'FolhaObra', 'idFolhaObra'),
             'veiculo' => array(self::BELONGS_TO, 'Veiculo', 'idVeiculo'),
-            'marcacao' => array(self::HAS_ONE, 'Marcacao', 'idMarcacao'),
-            'funcionario' => array(self::BELONGS_TO, 'Funcionario', 'idFuncionario'),
-//            'linhaServicos' => array(self::HAS_MANY, 'LinhaServico', 'idFolhaObra'),
         );
     }
 
     public function attributeLabels() {
         return array(
-            'idFolhaObra' => 'ID',
-            'data' => 'Data',
-            'descricaoAvaria' => 'Descrição da Avaria',
-            'kms' => 'Kms',
+            'idMarcacao' => 'ID',
+            'dataMarcacao' => 'Data',
+            'criado' => 'Registado',
             'idVeiculo' => 'Veículo',
-            'idFuncionario' => 'Funcionário',
+            'idFolhaObra' => 'Folha de Obra'
         );
     }
 
@@ -83,15 +78,11 @@ class FolhaObra extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->compare('data', $this->data, true);
-        $criteria->compare('descricaoAvaria', $this->descricaoAvaria, true);
-        $criteria->compare('kms', $this->kms);
-
-        $criteria->compare('idVeiculo', $this->idVeiculo);
-        $criteria->compare('idFuncionario', $this->idFuncionario);
+        $criteria->compare('dataMarcacao', $this->dataMarcacao);
+        $criteria->compare('criado', $this->criado);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('FolhaObra', array('criteria' => $criteria));
+        return new CActiveDataProvider('Marcacao', array('criteria' => $criteria));
     }
 
 }
