@@ -29,7 +29,12 @@ class ConfiguracoesController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());

@@ -28,12 +28,22 @@ class ServicosController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
+    /**
+     *
+     * @param int $id
+     * @return Servico 
+     */
     private function carregarModeloServico($id) {
         if (($servico = Servico::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -50,6 +60,48 @@ class ServicosController extends SistemaController {
         }
 
         $this->render('index', array('filtro' => $filtro));
+    }
+
+    public function actionAdicionar() {
+        $servico = new Servico();
+
+        $this->performAjaxValidation('servico-form', $servico);
+
+        if (isset($_POST['Servico'])) {
+            $servico->attributes = $_POST['Servico'];
+            if ($servico->save())
+                $this->redirect(array('editar', 'id' => $servico->idServico));
+        }
+
+        $this->render('editar', array('servico' => $servico));
+    }
+
+    public function actionEditar($id) {
+        $servico = $this->carregarModeloServico($id);
+
+        $this->performAjaxValidation('servico-form', $servico);
+
+        if (isset($_POST['Servico'])) {
+            $servico->attributes = $_POST['Servico'];
+            if ($servico->save())
+                $this->redirect(array('editar', 'id' => $servico->idServico));
+        }
+
+        $this->render('editar', array('servico' => $servico));
+    }
+
+    public function actionApagar($id) {
+        if (Yii::app()->request->isPostRequest && ($servico = $this->carregarModeloServico($id)) !== null) {
+
+            $servico->activo = 0;
+            $servico->save();
+
+            if (!isset($_GET['ajax'])) {
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+            }
+        } else {
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+        }
     }
 
 }

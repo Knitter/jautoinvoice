@@ -29,7 +29,12 @@ class IVAController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -37,57 +42,61 @@ class IVAController extends SistemaController {
 
     /**
      * @param int $id
-     * @return Cliente
+     * @return IVA
      */
-    private function carregarModeloCliente($id) {
-        if (($cliente = Cliente::model()->findByPk((int) $id)) === null) {
+    private function carregarModeloIVA($id) {
+        if (($iva = Cliente::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 
-        return $cliente;
+        return $iva;
     }
 
     public function actionIndex() {
-        $filtro = new Cliente();
+        $filtro = new IVA();
         $filtro->unsetAttributes();
 
-        if (isset($_REQUEST['Cliente'])) {
-            $filtro->attributes = $_REQUEST['Cliente'];
+        if (isset($_REQUEST['Iva'])) {
+            $filtro->attributes = $_REQUEST['Iva'];
         }
 
         $this->render('index', array('filtro' => $filtro));
     }
 
     public function actionAdicionar() {
-        $cliente = new Cliente();
+        $iva = new IVA();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('iva-form', $iva);
 
-        if (isset($_POST['Cliente'])) {
-            $cliente->attributes = $_POST['Cliente'];
-            if ($cliente->save())
-                $this->redirect(array('editar', 'id' => $cliente->idCliente));
+        if (isset($_POST['Iva'])) {
+            $iva->attributes = $_POST['Iva'];
+            if ($iva->save())
+                $this->redirect(array('editar', 'id' => $iva->idIVA));
         }
 
-        $this->render('editar', array('cliente' => $cliente));
+        $this->render('editar', array('iva' => $iva));
     }
 
     public function actionEditar($id) {
-        $cliente = $this->carregarModeloCliente($id);
+        $iva = $this->carregarModeloIVA($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('iva-form', $iva);
 
-        if (isset($_POST['Cliente'])) {
-            $cliente->attributes = $_POST['Cliente'];
-            if ($cliente->save())
-                $this->redirect(array('editar', 'id' => $cliente->idCliente));
+        if (isset($_POST['Iva'])) {
+            $iva->attributes = $_POST['Iva'];
+            if ($iva->save())
+                $this->redirect(array('editar', 'id' => $iva->idIVA));
         }
 
-        $this->render('editar', array('cliente' => $cliente));
+        $this->render('editar', array('iva' => $iva));
     }
 
     public function actionApagar($id) {
-        if (Yii::app()->request->isPostRequest && ($cliente = $this->carregarModeloCliente($id)) !== null) {
+        if (Yii::app()->request->isPostRequest && ($iva = $this->carregarModeloIVA($id)) !== null) {
+
+            $iva->activo = 0;
+            $iva->save();
+
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }

@@ -29,12 +29,22 @@ class MarcasController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
+    /**
+     *
+     * @param int $id
+     * @return Marca 
+     */
     private function carregarModeloMarca($id) {
         if (($marca = Marca::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -56,7 +66,7 @@ class MarcasController extends SistemaController {
     public function actionAdicionar() {
         $marca = new Marca();
 
-        // $this->performAjaxValidation($marca);
+        $this->performAjaxValidation('marca-form', $marca);
 
         if (isset($_POST['Marca'])) {
             $marca->attributes = $_POST['Marca'];
@@ -70,7 +80,7 @@ class MarcasController extends SistemaController {
     public function actionEditar($id) {
         $marca = $this->carregarModeloMarca($id);
 
-        // $this->performAjaxValidation($marca);
+        $this->performAjaxValidation('marca-form', $marca);
 
         if (isset($_POST['Marca'])) {
             $marca->attributes = $_POST['Marca'];
@@ -83,6 +93,10 @@ class MarcasController extends SistemaController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($marca = $this->carregarModeloMarca($id))) {
+
+            $marca->activo = 0;
+            $marca->save();
+
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }

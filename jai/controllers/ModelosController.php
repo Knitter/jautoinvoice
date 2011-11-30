@@ -28,12 +28,22 @@ class ModelosController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        array(
+                            'deny',
+                            'users' => array('?')
+                        ),
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
+    /**
+     *
+     * @param int $id
+     * @return Modelo 
+     */
     private function carregarModeloModelo($id) {
         if (($modelo = Modelo::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -55,7 +65,7 @@ class ModelosController extends SistemaController {
     public function actionCreate() {
         $modelo = new Modelo();
 
-        // $this->performAjaxValidation($modelo);
+        $this->performAjaxValidation('modelo-form', $modelo);
 
         if (isset($_POST['Modelo'])) {
             $modelo->attributes = $_POST['Modelo'];
@@ -70,7 +80,7 @@ class ModelosController extends SistemaController {
     public function actionUpdate($id) {
         $modelo = $this->carregarModeloModelo($id);
 
-        // $this->performAjaxValidation($modelo);
+        $this->performAjaxValidation('modelo-form', $modelo);
 
         if (isset($_POST['Modelo'])) {
             $modelo->attributes = $_POST['Modelo'];
@@ -84,6 +94,10 @@ class ModelosController extends SistemaController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($modelo = $this->carregarModeloModelo($id)) !== null) {
+
+            $modelo->activo = 0;
+            $modelo->save();
+
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }

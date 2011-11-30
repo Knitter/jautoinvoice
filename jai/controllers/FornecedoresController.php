@@ -29,12 +29,22 @@ class FornecedoresController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
+    /**
+     *
+     * @param int $id
+     * @return Fornecedor 
+     */
     private function carregarModeloFornecedor($id) {
         if (($fornecedor = Fornecedor::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -56,7 +66,7 @@ class FornecedoresController extends SistemaController {
     public function actionAdicionar() {
         $fornecedor = new Fornecedor();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('fornecedor-form', $fornecedor);
 
         if (isset($_POST['Fornecedor'])) {
             $fornecedor->attributes = $_POST['Fornecedor'];
@@ -70,7 +80,7 @@ class FornecedoresController extends SistemaController {
     public function actionEditar($id) {
         $fornecedor = $this->carregarModeloFornecedor($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('fornecedor-form', $fornecedor);
 
         if (isset($_POST['Fornecedor'])) {
             $fornecedor->attributes = $_POST['Fornecedor'];
@@ -83,8 +93,12 @@ class FornecedoresController extends SistemaController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($fornecedor = $this->carregarModeloFornecedor($id))) {
+
+            $fornecedor->activo = 0;
+            $fornecedor->save();
+
             if (!isset($_GET['ajax'])) {
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');

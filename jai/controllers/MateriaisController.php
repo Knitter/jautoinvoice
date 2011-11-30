@@ -29,7 +29,12 @@ class MateriaisController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -37,7 +42,7 @@ class MateriaisController extends SistemaController {
 
     /**
      * @param int $id
-     * @return Cliente
+     * @return Material
      */
     private function carregarModeloMaterial($id) {
         if (($material = Material::model()->findByPk((int) $id)) === null) {
@@ -59,35 +64,39 @@ class MateriaisController extends SistemaController {
     }
 
     public function actionAdicionar() {
-        $cliente = new Cliente();
+        $material = new Material();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('material-form', $material);
 
         if (isset($_POST['Material'])) {
-            $cliente->attributes = $_POST['Material'];
-            if ($cliente->save())
-                $this->redirect(array('editar', 'id' => $cliente->idCliente));
+            $material->attributes = $_POST['Material'];
+            if ($material->save())
+                $this->redirect(array('editar', 'id' => $material->idMaterial));
         }
 
-        $this->render('editar', array('cliente' => $cliente));
+        $this->render('editar', array('material' => $material));
     }
 
     public function actionEditar($id) {
-        $cliente = $this->carregarModeloCliente($id);
+        $material = $this->carregarModeloMaterial($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('material-form', $material);
 
-        if (isset($_POST['Cliente'])) {
-            $cliente->attributes = $_POST['Cliente'];
-            if ($cliente->save())
-                $this->redirect(array('editar', 'id' => $cliente->idCliente));
+        if (isset($_POST['Material'])) {
+            $material->attributes = $_POST['Material'];
+            if ($material->save())
+                $this->redirect(array('editar', 'id' => $material->idMaterial));
         }
 
-        $this->render('editar', array('cliente' => $cliente));
+        $this->render('editar', array('material' => $material));
     }
 
     public function actionApagar($id) {
-        if (Yii::app()->request->isPostRequest && ($cliente = $this->carregarModeloCliente($id)) !== null) {
+        if (Yii::app()->request->isPostRequest && ($material = $this->carregarModeloMaterial($id)) !== null) {
+
+            $material->activo = 0;
+            $material->save();
+
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }

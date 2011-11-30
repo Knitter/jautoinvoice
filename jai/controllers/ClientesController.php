@@ -29,7 +29,12 @@ class ClientesController extends AdministracaoController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -61,7 +66,7 @@ class ClientesController extends AdministracaoController {
     public function actionAdicionar() {
         $cliente = new Cliente();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('cliente-form', $cliente);
 
         if (isset($_POST['Cliente'])) {
             $cliente->attributes = $_POST['Cliente'];
@@ -75,7 +80,7 @@ class ClientesController extends AdministracaoController {
     public function actionEditar($id) {
         $cliente = $this->carregarModeloCliente($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('cliente-form', $cliente);
 
         if (isset($_POST['Cliente'])) {
             $cliente->attributes = $_POST['Cliente'];
@@ -88,6 +93,10 @@ class ClientesController extends AdministracaoController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($cliente = $this->carregarModeloCliente($id)) !== null) {
+
+            $cliente->activo = 0;
+            $cliente->save();
+
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }

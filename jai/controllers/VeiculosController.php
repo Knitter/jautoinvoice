@@ -65,7 +65,7 @@ class VeiculosController extends AdministracaoController {
     public function actionAdicionar() {
         $veiculo = new Veiculo();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('veiculo-form', $veiculo);
 
         if (isset($_POST['Veiculo'])) {
             $veiculo->attributes = $_POST['Veiculo'];
@@ -79,7 +79,7 @@ class VeiculosController extends AdministracaoController {
     public function actionEditar($id) {
         $veiculo = $this->carregarModeloVeiculo($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation('veiculo-form', $veiculo);
 
         if (isset($_POST['Veiculo'])) {
             $veiculo->attributes = $_POST['Veiculo'];
@@ -92,6 +92,10 @@ class VeiculosController extends AdministracaoController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($veiculo = $this->carregarModeloVeiculo($id)) !== null) {
+
+            $veiculo->activo = 0;
+            $veiculo->save();
+
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }

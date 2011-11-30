@@ -30,6 +30,10 @@ class DashboardController extends AdministracaoController {
     public function accessRules() {
         return array_merge(array(
                     array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
                         'allow',
                         'actions' => array('sair'),
                         'users' => array('@')

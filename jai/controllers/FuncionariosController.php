@@ -29,7 +29,12 @@ class FuncionariosController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -87,6 +92,9 @@ class FuncionariosController extends SistemaController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($funcionario = $this->carregarModeloFuncionario($id)) !== null) {
+            
+            $funcionario->activo = 0;
+            $funcionario->save();
 
             if (!isset($_GET['ajax'])) {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));

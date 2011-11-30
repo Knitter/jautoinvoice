@@ -1,6 +1,6 @@
 <?php
 
-/* MarcacoesController.php
+/* DadosPessoaisController.php
  * 
  * This file is part of jAutoInvoice.
  *
@@ -21,7 +21,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class MarcacoesController extends AdministracaoController {
+class DadosPessoaisController extends ClienteController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -35,12 +35,18 @@ class MarcacoesController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
-                        'expression' => '$user->tipo > 1'
+                        'actions' => array('sair'),
+                        'users' => array('@')
+                    ),
+                    array(
+                        'allow',
+                        'actions' => array('index'),
+                        'expression' => '$user->tipo == 1'
                         )), parent::accessRules());
     }
 
     public function actionIndex() {
+        //TODO: not implemented yet, gráficos e informações úteis
         $this->render('index');
     }
 
