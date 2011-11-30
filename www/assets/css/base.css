@@ -39,8 +39,21 @@ ul {
     margin-right: .5em;
 }
 
-.title-h2 {
-    
+#titulo {
+}
+
+#titulo h2 {
+    float: left;
+    width: 70%;
+}
+
+#opcoes {
+    float: left;
+    width: 28%;
+}
+
+#opcoes img {
+    vertical-align: middle;
 }
 
 

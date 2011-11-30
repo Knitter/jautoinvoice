@@ -39,20 +39,20 @@ class MateriaisController extends SistemaController {
      * @param int $id
      * @return Cliente
      */
-    private function carregarModeloCliente($id) {
-        if (($cliente = Cliente::model()->findByPk((int) $id)) === null) {
+    private function carregarModeloMaterial($id) {
+        if (($material = Material::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 
-        return $cliente;
+        return $material;
     }
 
     public function actionIndex() {
-        $filtro = new Cliente();
+        $filtro = new Material();
         $filtro->unsetAttributes();
 
-        if (isset($_REQUEST['Cliente'])) {
-            $filtro->attributes = $_REQUEST['Cliente'];
+        if (isset($_REQUEST['Material'])) {
+            $filtro->attributes = $_REQUEST['Material'];
         }
 
         $this->render('index', array('filtro' => $filtro));
@@ -63,8 +63,8 @@ class MateriaisController extends SistemaController {
 
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Cliente'])) {
-            $cliente->attributes = $_POST['Cliente'];
+        if (isset($_POST['Material'])) {
+            $cliente->attributes = $_POST['Material'];
             if ($cliente->save())
                 $this->redirect(array('editar', 'id' => $cliente->idCliente));
         }
