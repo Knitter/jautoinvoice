@@ -1,16 +1,3 @@
-<?php
-$this->menu = array(
-    'voltar' => $this->createUrl('/dashboard'),
-    'links' => array(
-        array(
-            'url' => $this->createUrl('funcionarios/adicionar'),
-            'icon' => 'assets/images/icons/x32-funcionario-adicionar.png',
-            'label' => 'Adicionar'
-        )
-    )
-);
-?>
-
 <h2>Funcionários</h2>
 
 <?php

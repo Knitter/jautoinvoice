@@ -14,15 +14,13 @@
         <title><?php echo $this->title; ?></title>
     </head>
     <body>
-        <div class="container" id="mainarea">
-            <div class="container">
-                <div id="content">
-                    <?php echo $content; ?>
-                </div>
+        <div class="container">
+            <div class="span-24" id="content">
+                <?php echo $content; ?>
             </div>
         </div>
         <div id="footer">
-            &copy; <?php echo date('Y'); ?> jAutoInvoice | <a href="<?php echo $this->createUrl('default/sobre'); ?>">Sobre</a>
+            &copy; <?php echo date('Y'); ?> <a href="http://sourceforge.net/projects/jautoinvoice">jAutoInvoice</a> | <a href="<?php echo $this->createUrl('default/sobre'); ?>">Sobre</a>
         </div>
     </body>
 </html>

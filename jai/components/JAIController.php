@@ -1,6 +1,6 @@
 <?php
 
-/* .php
+/* JAIController.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * Copyright (c) 2011, Sérgio Lopes.
@@ -22,26 +22,22 @@
 
 class JAIController extends CController {
 
-    public $layout = '//layouts/default';
+    public $layout;
     protected $title;
     protected $menu;
-    protected $breadcrumbs;
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
 
-        $this->menu = array(
-            'voltar' => false,
-            'links' => array()
-        );
-        $this->breadcrumbs = array();
+        $this->layout = '//layouts/default';
+        $this->menu = array();
     }
 
-    //public function filters() {
-    //    return array(
-    //        'accessControl', // perform access control for CRUD operations
-    //    );
-    //}
+    public function filters() {
+        return array(
+            'accessControl'
+        );
+    }
 
     public final function performAjaxValidation($form, $model) {
         if (isset($_POST['ajax']) && ($_POST['ajax'] === $form || (is_array($form) && in_array($_POST['ajax'], $form)))) {
@@ -49,6 +45,10 @@ class JAIController extends CController {
 
             Yii::app()->end();
         }
+    }
+
+    public final function logout() {
+        
     }
 
     public function accessRules() {

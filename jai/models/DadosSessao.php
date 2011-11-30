@@ -1,8 +1,9 @@
 <?php
 
-/* .php
+/* DadosSessao.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
+ * 
  * Copyright (c) 2011, Sérgio Lopes.
  * http://sourceforge.net/projects/jautoinvoice
  * 
@@ -20,30 +21,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class DefaultController extends PublicoController {
+/**
+ * @property int $idDadosSessao
+ * @property string $token
+ * @property string $dataExpiracao
+ * @property string $ultimaActividade
+ * 
+ * @property int $idCliente
+ * @property int $idFuncionario
+ */
+class DadosSessao extends CActiveRecord {
 
-    public function __construct($id, $module = null) {
-        parent::__construct($id, $module);
+    /**
+     * @return DadosSessao
+     */
+    public static function model($className=__CLASS__) {
+        return parent::model($className);
     }
 
-    public function actionIndex() {
-        $formulario = new LoginForm();
-
-        if (isset($_POST['LoginForm'])) {
-            $formulario->attributes = $_POST['LoginForm'];
-            if ($formulario->validate() && $formulario->login()) {
-                $this->redirect(Yii::app()->user->returnUrl);
-            }
-        }
-        $this->render('index', array('formulario' => $formulario));
-    }
-
-    public function actionSobre() {
-        $this->render('sobre');
-    }
-
-    public function actionError() {
-        
+    public function tableName() {
+        return 'DadosSessao';
     }
 
 }

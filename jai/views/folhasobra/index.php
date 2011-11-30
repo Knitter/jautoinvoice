@@ -1,15 +1,3 @@
-<?php
-$this->menu = array(
-    'voltar' => $this->createUrl('/dashboard'),
-    'links' => array(
-        array(
-            'url' => $this->createUrl('folhasobra/adicionar'),
-            'icon' => 'assets/images/icons/x32-folhaobra-adicionar.png',
-            'label' => 'Adicionar'
-        )
-    )
-);
-?>
 <h2>Folhas de Obra</h2>
 
 <?php /*

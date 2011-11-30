@@ -25,6 +25,47 @@ class ConfiguracoesController extends JAIController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
+
+        $this->menu = array(
+            'voltar' => $this->createUrl('/dashboard'),
+            'links' => array(
+                array(
+                    'url' => $this->createUrl('/fornecedores'),
+                    'icon' => 'assets/images/icons/x32-fornecedor.png',
+                    'label' => 'Fornecedores'
+                ),
+                array(
+                    'url' => $this->createUrl('/materiais'),
+                    'icon' => 'assets/images/icons/x32-material.png',
+                    'label' => 'Materiais'
+                ),
+                array(
+                    'url' => $this->createUrl('/servicos'),
+                    'icon' => 'assets/images/icons/x32-servico.png',
+                    'label' => 'Serviços'
+                ),
+                array(
+                    'url' => $this->createUrl('/marcas'),
+                    'icon' => 'assets/images/icons/x32-marca.png',
+                    'label' => 'Marcas'
+                ),
+                array(
+                    'url' => $this->createUrl('/iva'),
+                    'icon' => 'assets/images/icons/x32-iva.png',
+                    'label' => 'Taxas de IVA'
+                ),
+                array(
+                    'url' => $this->createUrl('/funcionarios'),
+                    'icon' => 'assets/images/icons/x32-funcionario.png',
+                    'label' => 'Funcionários'
+                ),
+                array(
+                    'url' => $this->createUrl('/permissoes'),
+                    'icon' => 'assets/images/icons/x32-permissoes.png',
+                    'label' => 'Permissões'
+                ),
+            )
+        );
     }
 
     public function accessRules() {

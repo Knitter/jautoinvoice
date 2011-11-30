@@ -1,16 +1,3 @@
-<?php
-$this->menu = array(
-    'voltar' => $this->createUrl('/dashboard'),
-    'links' => array(
-        array(
-            'url' => $this->createUrl('fornecedores/adicionar'),
-            'icon' => 'assets/images/icons/x32-fornecedor-adicionar.png',
-            'label' => 'Adicionar'
-        )
-    )
-);
-?>
-
 <h2>Fornecedores</h2>
 
 <?php

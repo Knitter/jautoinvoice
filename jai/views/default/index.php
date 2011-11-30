@@ -1,37 +1,37 @@
-<?php $this->title = 'jAutoInvoice :: Entrada'; ?>
+<?php
+$this->title = 'jAutoInvoice :: Entrada';
+
+Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+?>
 
 <div class="span-12 prepend-6 append-6">
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'login-form',
-        'enableAjaxValidation' => false,
-        'enableClientValidation' => true,
-        'clientOptions' => array(
-            'validateOnSubmit' => true
-        ),
+        'enableAjaxValidation' => false
             ));
     ?>
 
     <p>
         <?php
-        echo $form->labelEx($model, 'username'),
-        $form->textField($model, 'username'),
-        $form->error($model, 'username');
+        echo $form->labelEx($formulario, 'identificacao'),
+        $form->textField($formulario, 'identificacao'),
+        $form->error($formulario, 'identificacao');
         ?>
     </p>
 
     <p>
         <?php
-        echo $form->labelEx($model, 'password'),
-        $form->passwordField($model, 'password'),
-        $form->error($model, 'password');
+        echo $form->labelEx($formulario, 'password'),
+        $form->passwordField($formulario, 'password'),
+        $form->error($formulario, 'password');
         ?>
     </p>
     <p>
         <?php
-        echo $form->checkBox($model, 'rememberMe'),
-        $form->label($model, 'rememberMe'),
-        $form->error($model, 'rememberMe');
+        echo $form->checkBox($formulario, 'lembrarMe'),
+        $form->label($formulario, 'lembrarMe'),
+        $form->error($formulario, 'lembrarMe');
         ?>
     </p>
     <p>

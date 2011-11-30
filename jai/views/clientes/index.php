@@ -1,16 +1,3 @@
-<?php
-$this->menu = array(
-    'voltar' => $this->createUrl('/dashboard'),
-    'links' => array(
-        array(
-            'url' => $this->createUrl('clientes/adicionar'),
-            'icon' => 'assets/images/icons/x32-cliente-adicionar.png',
-            'label' => 'Adicionar'
-        )
-    )
-);
-?>
-
 <h2>Clientes</h2>
 
 <?php

@@ -1,3 +1,12 @@
+CREATE TABLE `DadosSessao` (
+`idDadosSessao` INT UNSIGNED NOT NULL PRIMARY KEY ,
+`token` VARCHAR( 32 ) NULL, 
+`dataExpiracao` DATETIME NULL ,
+`ultimaActividade` DATETIME NULL ,
+`idCliente` INT UNSIGNED NULL ,
+`idFuncionario` INT UNSIGNED NULL
+) ENGINE=MyISAM ;
+
 CREATE TABLE `Cliente` (
 `idCliente` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
 `email` VARCHAR( 255 ) NULL ,
@@ -17,6 +26,7 @@ CREATE TABLE `Funcionario` (
 `valorHora` DECIMAL (10,4) NULL ,
 `nome` VARCHAR( 255 ) NOT NULL ,
 `contribuinte` VARCHAR( 9 ) NOT NULL ,
+`admin` TINYINT NOT NULL DEFAULT 0,
 `activo` TINYINT NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
 

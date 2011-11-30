@@ -1,8 +1,9 @@
 <?php
 
-/* .php
+/* JAIWebUser.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
+ * 
  * Copyright (c) 2011, Sérgio Lopes.
  * http://sourceforge.net/projects/jautoinvoice
  * 
@@ -20,30 +21,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class DefaultController extends PublicoController {
+class JAIWebUser extends CWebUser {
 
-    public function __construct($id, $module = null) {
-        parent::__construct($id, $module);
-    }
+    public function beforeLogin($id, $states, $fromCookie) {
 
-    public function actionIndex() {
-        $formulario = new LoginForm();
-
-        if (isset($_POST['LoginForm'])) {
-            $formulario->attributes = $_POST['LoginForm'];
-            if ($formulario->validate() && $formulario->login()) {
-                $this->redirect(Yii::app()->user->returnUrl);
-            }
+        if (!$fromCookie) {
+            return true;
         }
-        $this->render('index', array('formulario' => $formulario));
-    }
 
-    public function actionSobre() {
-        $this->render('sobre');
-    }
+        $sessao = DadosSessao::model()->findByPk($id);
+        if ($sessao === null || $sessao->token !== $states['token'] || strtotime($sessao->dataExpiracao) < time()) {
+            return false;
+        }
 
-    public function actionError() {
-        
+        return false;
     }
 
 }

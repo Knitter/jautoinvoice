@@ -1,15 +1,3 @@
-<?php
-$this->menu = array(
-    'voltar' => $this->createUrl('/dashboard'),
-    'links' => array(
-        array(
-            'url' => $this->createUrl('veiculos/adicionar'),
-            'icon' => 'assets/images/icons/x32-veiculo-adicionar.png',
-            'label' => 'Adicionar'
-        )
-    )
-);
-?>
 <h2>Veículos</h2>
 
 <?php

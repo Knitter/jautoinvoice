@@ -1,6 +1,6 @@
 <?php
 
-/* .php
+/* ClienteController.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * Copyright (c) 2011, Sérgio Lopes.
@@ -20,30 +20,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class DefaultController extends PublicoController {
+class ClienteController extends JAIController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
-    }
 
-    public function actionIndex() {
-        $formulario = new LoginForm();
-
-        if (isset($_POST['LoginForm'])) {
-            $formulario->attributes = $_POST['LoginForm'];
-            if ($formulario->validate() && $formulario->login()) {
-                $this->redirect(Yii::app()->user->returnUrl);
-            }
-        }
-        $this->render('index', array('formulario' => $formulario));
-    }
-
-    public function actionSobre() {
-        $this->render('sobre');
-    }
-
-    public function actionError() {
-        
+        $this->layout = '';
+        $this->title = '';
+        $this->menu = array();
     }
 
 }

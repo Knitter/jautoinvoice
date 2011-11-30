@@ -94,4 +94,8 @@ class Funcionario extends CActiveRecord {
         return new CActiveDataProvider('Funcionario', array('criteria' => $criteria));
     }
 
+    public static function hash($password) {
+        return sha1(Yii::app()->params['hash'] . $password);
+    }
+
 }
