@@ -47,10 +47,6 @@ class JAIController extends CController {
         }
     }
 
-    public final function logout() {
-        
-    }
-
     public function accessRules() {
         return array(array('deny', 'users' => array('*')));
     }

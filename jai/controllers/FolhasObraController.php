@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class FolhasObraController extends JAIController {
+class FolhasObraController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

@@ -21,7 +21,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class DashboardController extends JAIController {
+class DashboardController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -29,14 +29,26 @@ class DashboardController extends JAIController {
 
     public function accessRules() {
         return array_merge(array(
-                    array('allow',
+                    array(
+                        'allow',
+                        'actions' => array('sair'),
+                        'users' => array('@')
+                    ),
+                    array(
+                        'allow',
                         'actions' => array('index'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
     public function actionIndex() {
+        //TODO: not implemented yet, gráficos e informações úteis
         $this->render('index');
+    }
+
+    public function actionSair() {
+        //TODO: not implemented yet, logout.
+        $this->redirect(array('default/index'));
     }
 
 }

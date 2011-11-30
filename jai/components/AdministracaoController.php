@@ -20,6 +20,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Controlador pai de todos os controladores que fornencem serviços de 
+ * administração/configuração do sistema.
+ */
 class AdministracaoController extends JAIController {
 
     public function __construct($id, $module = null) {
@@ -28,11 +32,11 @@ class AdministracaoController extends JAIController {
         $this->menu = array(
             'voltar' => false,
             'links' => array(
-//                array(
-//                    'url' => $this->createUrl('/dashboard'),
-//                    'icon' => 'assets/images/icons/x32-folhaobra.png',
-//                    'label' => 'Folhas de Obra'
-//                ),
+                array(
+                    'url' => $this->createUrl('/dashboard'),
+                    'icon' => 'assets/images/icons/x32-dashboard.png',
+                    'label' => 'Dashboard'
+                ),
                 array(
                     'url' => $this->createUrl('/folhasobra'),
                     'icon' => 'assets/images/icons/x32-folhaobra.png',
@@ -59,7 +63,7 @@ class AdministracaoController extends JAIController {
                     'label' => 'Configurações'
                 ),
                 array(
-                    'url' => $this->createUrl('site/sair'),
+                    'url' => $this->createUrl('dashboard/sair'),
                     'icon' => 'assets/images/icons/x32-sair.png',
                     'label' => 'Sair'
                 )

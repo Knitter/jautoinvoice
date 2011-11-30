@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class ModelosController extends Controller {
+class ModelosController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

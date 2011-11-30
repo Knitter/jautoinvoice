@@ -21,7 +21,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class FornecedoresController extends JAIController {
+class FornecedoresController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

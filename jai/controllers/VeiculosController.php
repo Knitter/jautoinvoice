@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class VeiculosController extends JAIController {
+class VeiculosController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

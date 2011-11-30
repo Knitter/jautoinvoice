@@ -4,25 +4,17 @@ return array(
     'basePath' => dirname(__FILE__) . '/..',
     'name' => 'jAutoInvoice',
     'defaultController' => 'default',
-    // preloading 'log' component
-    'preload' => array('log'),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
         'application.components.*',
     ),
-    'modules' => array(
-        // use Gii
-        'gii' => array(
-            'class' => 'system.gii.GiiModule',
-            'password' => 'demo',
-            'ipFilters' => array('127.0.0.1', '::1'),
-        ),
-    ),
     // application components
     'components' => array(
         'user' => array(
             'allowAutoLogin' => true,
+            'class' => 'JAIWebUser',
+            'loginUrl' => array('default/index'),
         ),
         'assetManager' => array(
             'basePath' => 'assets/yiicache',
@@ -38,15 +30,9 @@ return array(
         ),
         'errorHandler' => array(
             'errorAction' => 'default/error'
-        ),
-        'log' => array(
-            'class' => 'CLogRouter',
-            'routes' => array(
-                array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning'
-                )
-            )
         )
+    ),
+    'params' => array(
+        'hash' => ''
     )
 );

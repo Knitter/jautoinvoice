@@ -38,7 +38,7 @@ class Credenciais extends CBaseUserIdentity {
         $cliente = Cliente::model()->findByAttributes(array('email' => $this->identificacao));
         $funcionario = Funcionario::model()->findByAttributes(array('username' => $this->identificacao));
 
-        if ($cliente === null || $funcionario === NULL) {
+        if ($cliente === null && $funcionario === NULL) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         } else {
             $sessao = null;
