@@ -1,6 +1,6 @@
 <?php
 
-/* SistemaController.php
+/* .php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * Copyright (c) 2011, Sérgio Lopes.

@@ -50,6 +50,13 @@ echo $form->errorSummary($funcionario);
     $form->error($funcionario, 'valorHora');
     ?>
 </p>
+<p>
+    <?php
+    echo $form->labelEx($funcionario, 'Aumentar previlégios'),
+    $form->checkBox($funcionario, 'admin'),
+    $form->error($funcionario, 'admin');
+    ?>
+</p>
 
 <p>
     <?php

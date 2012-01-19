@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'material-form',
     'enableAjaxValidation' => false,
@@ -25,14 +27,6 @@ echo $form->errorSummary($material);
 
 <p>
     <?php
-    echo $form->labelEx($material, 'descricao'),
-    $form->textArea($material, 'descricao', array('rows' => 6, 'cols' => 50)),
-    $form->error($material, 'descricao');
-    ?>
-</p>
-
-<p>
-    <?php
     echo $form->labelEx($material, 'idFornecedor'),
     $form->textField($material, 'idFornecedor', array('size' => 10, 'maxlength' => 10)),
     $form->error($material, 'idFornecedor');
@@ -49,8 +43,16 @@ echo $form->errorSummary($material);
 
 <p>
     <?php
+    echo $form->labelEx($material, 'descricao'),
+    $form->textArea($material, 'descricao', array('rows' => 6, 'cols' => 50)),
+    $form->error($material, 'descricao');
+    ?>
+</p>
+
+<p>
+    <?php
     echo CHtml::submitButton($material->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl(''));
+    CHtml::link('Cancelar', $this->createUrl('materiais/index'));
     ?>
 </p>
 

@@ -1,28 +1,28 @@
 <?php
+Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'marca-form',
     'enableAjaxValidation' => false,
         ));
+
+echo $form->errorSummary($marca);
 ?>
 
-<p class="note">Fields with <span class="required">*</span> are required.</p>
+<p>
+    <?php
+    echo $form->labelEx($marca, 'nome'),
+    $form->textField($marca, 'nome', array('size' => 60, 'maxlength' => 100)),
+    $form->error($marca, 'nome');
+    ?>
+</p>
 
-<?php echo $form->errorSummary($model); ?>
+<p>
+    <?php
+    echo CHtml::submitButton($marca->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    CHtml::link('Cancelar', $this->createUrl('marcas/index'));
+    ?>
+</p>
 
-<div class="row">
-    <?php echo $form->labelEx($model, 'nome'); ?>
-    <?php echo $form->textField($model, 'nome', array('size' => 60, 'maxlength' => 100)); ?>
-    <?php echo $form->error($model, 'nome'); ?>
-</div>
-
-<div class="row">
-    <?php echo $form->labelEx($model, 'activo'); ?>
-    <?php echo $form->textField($model, 'activo'); ?>
-    <?php echo $form->error($model, 'activo'); ?>
-</div>
-
-<div class="row buttons">
-    <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-</div>
-
-<?php $this->endWidget(); ?>
+<?php
+$this->endWidget();
