@@ -22,7 +22,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class IVAController extends SistemaController {
+class IvaController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -36,7 +36,7 @@ class IVAController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -64,7 +64,7 @@ class IVAController extends SistemaController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionAdicionar() {
+    public function actionCriar() {
         $iva = new IVA();
 
         $this->performAjaxValidation('iva-form', $iva);
