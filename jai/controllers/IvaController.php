@@ -46,7 +46,7 @@ class IvaController extends SistemaController {
      * @return IVA
      */
     private function carregarModeloIVA($id) {
-        if (($iva = Cliente::model()->findByPk((int) $id)) === null) {
+        if (($iva = IVA::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 

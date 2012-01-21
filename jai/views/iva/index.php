@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Taxas de IVA</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('iva/adicionar'); ?>"><img src="assets/images/icons/x16-iva-adicionar.png" /> Adicionar</a>
+        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/x16.iva.criar.png" /> Criar</a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -23,12 +23,16 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'buttons' => array(
-                'view' => array('visible' => 'false')
+                'view' => array('visible' => 'false'),
+                'update' => array(
+                    'imageUrl' => 'assets/images/icons/x16-iva-editar.png',
+                    'url' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIVA))',
+                ),
+                'delete' => array(
+                    'imageUrl' => 'assets/images/icons/x16-iva-apagar.png',
+                    'url' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIVA))',
+                )
             ),
-            'updateButtonImageUrl' => 'assets/images/icons/x16-iva-editar.png',
-            'updateButtonUrl' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIVA))',
-            'deleteButtonImageUrl' => 'assets/images/icons/x16-iva-apagar.png',
-            'deleteButtonUrl' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIVA))',
         ),
     ),
 ));

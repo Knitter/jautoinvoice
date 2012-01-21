@@ -26,7 +26,7 @@ echo $form->errorSummary($servico);
 <p>
     <?php
     echo CHtml::submitButton($servico->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl(''));
+    CHtml::link('Cancelar', $this->createUrl('/servicos'));
     ?>
 </p>
 

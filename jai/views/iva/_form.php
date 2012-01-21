@@ -1,9 +1,9 @@
 <?php
-Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'iva-form',
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
         ));
 
 echo $form->errorSummary($iva);
@@ -29,7 +29,7 @@ echo $form->errorSummary($iva);
 <p>
     <?php
     echo CHtml::submitButton($iva->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('iva/index'));
+    CHtml::link('Cancelar', $this->createUrl('/iva'));
     ?>
 </p>
 
