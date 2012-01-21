@@ -4,8 +4,7 @@
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2011, Sérgio Lopes.
- * http://sourceforge.net/projects/jautoinvoice
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +18,8 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
@@ -26,6 +27,7 @@
  * @property string $dataMarcacao
  * @property string $criado
  * @property int $activo
+ * @property string $descricao
  * 
  * @property int $idFolhaObra
  * @property int $idVeiculo
@@ -34,12 +36,12 @@
  * @property Veiculo $veiculo
  * 
  */
-class Modelo extends CActiveRecord {
+class Marcacao extends CActiveRecord {
 
     /**
      * @return Marcacao
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -50,6 +52,7 @@ class Modelo extends CActiveRecord {
     public function rules() {
         return array(
             array('dataMarcacao, idVeiculo', 'required'),
+            array('descricao', 'length', 'max' => 150),
             // search
             array('dataMarcacao, nome', 'safe', 'on' => 'search'),
         );
@@ -68,7 +71,8 @@ class Modelo extends CActiveRecord {
             'dataMarcacao' => 'Data',
             'criado' => 'Registado',
             'idVeiculo' => 'Veículo',
-            'idFolhaObra' => 'Folha de Obra'
+            'idFolhaObra' => 'Folha de Obra',
+            'descricacao' => 'Descrição'
         );
     }
 
@@ -80,6 +84,7 @@ class Modelo extends CActiveRecord {
 
         $criteria->compare('dataMarcacao', $this->dataMarcacao);
         $criteria->compare('criado', $this->criado);
+        $criteria->compare('descricao', $this->descricao);
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('Marcacao', array('criteria' => $criteria));

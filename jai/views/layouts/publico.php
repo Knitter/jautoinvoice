@@ -4,12 +4,12 @@
         <meta charset="utf-8">
 
         <!-- blueprint CSS framework -->
-        <link rel="stylesheet" type="text/css" href="assets/css/blueprint/screen.css" media="screen, projection" />
-        <link rel="stylesheet" type="text/css" href="assets/css/blueprint/print.css" media="print" />
+        <link rel="stylesheet" type="text/css" href="css/blueprint/screen.css" media="screen, projection" />
+        <link rel="stylesheet" type="text/css" href="css/blueprint/print.css" media="print" />
         <!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" href="assets/css/blueprint/ie.css" media="screen, projection" />
+        <link rel="stylesheet" type="text/css" href="css/blueprint/ie.css" media="screen, projection" />
         <![endif]-->
-        <link rel="stylesheet" type="text/css" href="assets/css/base.css" />
+        <link rel="stylesheet" type="text/css" href="css/base.css" />
 
         <title><?php echo $this->title; ?></title>
     </head>

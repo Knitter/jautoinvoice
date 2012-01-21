@@ -1,5 +1,5 @@
 <?php
-Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'funcionario-form',
@@ -42,6 +42,17 @@ echo $form->errorSummary($funcionario);
     $form->textField($funcionario, 'contribuinte', array('maxlength' => 9)),
     $form->error($funcionario, 'contribuinte');
     ?>
+</p>
+<p>
+    <?php echo $form->labelEx($funcionario, 'telefone'); ?>
+    <?php echo $form->textField($funcionario, 'telefone', array('maxlength' => 9)); ?>
+    <?php echo $form->error($funcionario, 'telefone'); ?>
+</p>
+
+<p>
+    <?php echo $form->labelEx($funcionario, 'telemovel'); ?>
+    <?php echo $form->textField($funcionario, 'telemovel', array('maxlength' => 9)); ?>
+    <?php echo $form->error($funcionario, 'telemovel'); ?>
 </p>
 <p>
     <?php

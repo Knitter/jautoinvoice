@@ -1,5 +1,5 @@
 <?php
-Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'marca-form',
@@ -20,7 +20,7 @@ echo $form->errorSummary($marca);
 <p>
     <?php
     echo CHtml::submitButton($marca->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('marcas/index'));
+    CHtml::link('Cancelar', $this->createUrl('/marcas'));
     ?>
 </p>
 

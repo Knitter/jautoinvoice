@@ -1,7 +1,9 @@
 <?php
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'modelo-form',
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
         ));
 
 echo $form->errorSummary($modelo);
@@ -18,7 +20,7 @@ echo $form->errorSummary($modelo);
 <p>
     <?php
     echo $form->labelEx($modelo, 'idMarca'),
-    $form->textField($modelo, 'idMarca', array('size' => 10, 'maxlength' => 10)),
+    $form->dropDownList($modelo, 'idMarca', CHtml::listData($marcas, 'idMarca', 'nome'), array('empty' => '- escolha uma marca -'));
     $form->error($modelo, 'idMarca');
     ?>
 </p>
@@ -26,9 +28,9 @@ echo $form->errorSummary($modelo);
 <p>
     <?php
     echo CHtml::submitButton($modelo->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl(''));
+    CHtml::link('Cancelar', $this->createUrl('/modelos'));
     ?>
 </p>
 
-<?php
-$this->endWidget();
+    <?php
+    $this->endWidget();

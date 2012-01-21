@@ -39,6 +39,10 @@ ul {
     margin-right: .5em;
 }
 
+li.separador {
+    /*TODO: not implemented yet */
+}
+
 #titulo {
 }
 

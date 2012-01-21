@@ -46,7 +46,7 @@ class Modelo extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('nome', 'required'),
+            array('nome, idMarca', 'required'),
             array('nome', 'length', 'max' => 100),
             // search
             array('idMarca, nome', 'safe', 'on' => 'search'),

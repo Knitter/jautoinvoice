@@ -3,8 +3,8 @@
 /* Funcionario.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
- * Copyright (c) 2011, Sérgio Lopes.
- * http://sourceforge.net/projects/jautoinvoice
+ * 
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,12 +18,16 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
  * @property int $idFuncionario
  * @property string $nome
  * @property string $contribuinte
+ * @property string $telefone
+ * @property string $telemovel
  * @property string $username
  * @property string $password
  * @property string $valorHora
@@ -41,7 +45,7 @@ class Funcionario extends CActiveRecord {
     /**
      * @return Funcionario
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -55,6 +59,7 @@ class Funcionario extends CActiveRecord {
             array('username', 'length', 'max' => 100),
             array('nome', 'length', 'max' => 255),
             array('contribuinte', 'length', 'max' => 9),
+            array('telefone, telemovel', 'length', 'max' => 13),
             // search
             array('nome, username, contribuinte', 'safe', 'on' => 'search'),
         );
@@ -76,7 +81,9 @@ class Funcionario extends CActiveRecord {
             'username' => 'Username',
             'password' => 'Password',
             'password2' => 'Repetir Password',
-            'valorHora' => 'Valor/Hora'
+            'valorHora' => 'Valor/Hora',
+            'telefone' => 'Telefone',
+            'telemovel' => 'Telemóvel'
         );
     }
 
@@ -89,6 +96,8 @@ class Funcionario extends CActiveRecord {
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('contribuinte', $this->contribuinte, true);
         $criteria->compare('username', $this->username, true);
+        $criteria->compare('telefone', $this->telefone, true);
+        $criteria->compare('telemovel', $this->telemovel, true);
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('Funcionario', array('criteria' => $criteria));

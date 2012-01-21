@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'categoria-form',
     'enableAjaxValidation' => true,
@@ -18,7 +20,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <p>
     <?php
     echo CHtml::submitButton($categoria->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl(''));
+    CHtml::link('Cancelar', $this->createUrl('/categorias'));
     ?>
 </p>
 

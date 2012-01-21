@@ -2,7 +2,10 @@
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../yii-1.1.8/yii.php';
-$config=dirname(__FILE__).'/../jai/config/main.php';
+
+//switch these two lines
+//$config=dirname(__FILE__).'/../jai/config/main.php';
+$config=dirname(__FILE__).'/../jai/config/main-dev.php';
 
 // remove the following lines when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);

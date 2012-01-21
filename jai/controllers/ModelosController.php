@@ -1,10 +1,10 @@
 <?php
 
-/* .php
+/* ModelosController.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
- * Copyright (c) 2011, Sérgio Lopes.
- * http://sourceforge.net/projects/jautoinvoice
+ * 
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,6 +18,8 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * http://sourceforge.net/projects/jautoinvoice
  */
 
 class ModelosController extends SistemaController {
@@ -29,12 +31,12 @@ class ModelosController extends SistemaController {
     public function accessRules() {
         return array_merge(array(
                     array(
-                        array(
-                            'deny',
-                            'users' => array('?')
-                        ),
+                        'deny',
+                        'users' => array('?')
+                    ),
+                    array(
                         'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -58,11 +60,19 @@ class ModelosController extends SistemaController {
         if (isset($_REQUEST['Modelo'])) {
             $filtro->attributes = $_REQUEST['Modelo'];
         }
+        
+        $criteria = new CDbCriteria();
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+        $marcas = Marca::model()->findAll($criteria);
 
-        $this->render('index', array('filtro' => $filtro));
+        $this->render('index', array(
+            'filtro' => $filtro,
+            'marcas' => $marcas
+            ));
     }
 
-    public function actionCreate() {
+    public function actionCriar() {
         $modelo = new Modelo();
 
         $this->performAjaxValidation('modelo-form', $modelo);
@@ -70,14 +80,22 @@ class ModelosController extends SistemaController {
         if (isset($_POST['Modelo'])) {
             $modelo->attributes = $_POST['Modelo'];
             if ($modelo->save()) {
-                $this->redirect(array('view', 'id' => $modelo->idModelo));
+                $this->redirect(array('editar', 'id' => $modelo->idModelo));
             }
         }
 
-        $this->render('editar', array('modelo' => $modelo));
+        $criteria = new CDbCriteria();
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+        $marcas = Marca::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'modelo' => $modelo,
+            'marcas' => $marcas
+        ));
     }
 
-    public function actionUpdate($id) {
+    public function actionEditar($id) {
         $modelo = $this->carregarModeloModelo($id);
 
         $this->performAjaxValidation('modelo-form', $modelo);
@@ -89,7 +107,15 @@ class ModelosController extends SistemaController {
             }
         }
 
-        $this->render('editar', array('modelo' => $modelo));
+        $criteria = new CDbCriteria();
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+        $marcas = Marca::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'modelo' => $modelo,
+            'marcas' => $marcas
+        ));
     }
 
     public function actionApagar($id) {

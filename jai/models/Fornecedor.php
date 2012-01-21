@@ -4,8 +4,7 @@
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2011, Sérgio Lopes.
- * http://sourceforge.net/projects/jautoinvoice
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +18,8 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ *  http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
@@ -53,7 +54,7 @@ class Fornecedor extends CActiveRecord {
         return array(
             array('nome', 'required'),
             array('nome, email, morada, website', 'length', 'max' => 255),
-            array('telefone, telemovel', 'length', 'max' => 9),
+            array('telefone, telemovel', 'length', 'max' => 13),
             array('notas', 'safe'),
             // search
             array('nome, email', 'safe', 'on' => 'search'),

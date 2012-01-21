@@ -33,35 +33,45 @@ class SistemaController extends JAIController {
             'voltar' => $this->createUrl('/dashboard'),
             'links' => array(
                 array(
+                    'url' => $this->createUrl('/categorias'),
+                    'icon' => 'imagens/icones/x32.fornecedor.png',
+                    'label' => 'Categorias'
+                ),
+                array(
+                    'url' => $this->createUrl('/combustiveis'),
+                    'icon' => 'imagens/icones/x32.fornecedor.png',
+                    'label' => 'Combustíveis'
+                ),
+                array(
                     'url' => $this->createUrl('/fornecedores'),
-                    'icon' => 'assets/images/icons/x32-fornecedor.png',
+                    'icon' => 'imagens/icones/x32.fornecedor.png',
                     'label' => 'Fornecedores'
                 ),
                 array(
+                    'url' => $this->createUrl('/marcas'),
+                    'icon' => 'imagens/icones/x32.marcas.png',
+                    'label' => 'Marcas'
+                ),
+                array(
+                    'url' => $this->createUrl('/modelos'),
+                    'icon' => 'imagens/icones/x32.modelos.png',
+                    'label' => 'Modelos'
+                ),
+                array(
                     'url' => $this->createUrl('/materiais'),
-                    'icon' => 'assets/images/icons/x32-material.png',
+                    'icon' => 'assets/images/icons/x32.materiais.png',
                     'label' => 'Materiais'
                 ),
                 array(
                     'url' => $this->createUrl('/servicos'),
-                    'icon' => 'assets/images/icons/x32-servico.png',
+                    'icon' => 'assets/images/icons/x32.servico.png',
                     'label' => 'Serviços'
                 ),
                 array(
-                    'url' => $this->createUrl('/marcas'),
-                    'icon' => 'assets/images/icons/x32-marca.png',
-                    'label' => 'Marcas'
-                ),
-                array(
                     'url' => $this->createUrl('/iva'),
-                    'icon' => 'assets/images/icons/x32-iva.png',
+                    'icon' => 'assets/images/icons/x32.iva.png',
                     'label' => 'Taxas de IVA'
                 ),
-                array(
-                    'url' => $this->createUrl('/funcionarios'),
-                    'icon' => 'assets/images/icons/x32-funcionario.png',
-                    'label' => 'Funcionários'
-                )
             )
         );
     }

@@ -1,5 +1,5 @@
 <?php
-Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'fornecedor-form',

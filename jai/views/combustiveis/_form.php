@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'combustivel-form',
     'enableAjaxValidation' => false,
@@ -18,7 +20,7 @@ echo $form->errorSummary($combustivel);
 <p>
     <?php
     echo CHtml::submitButton($combustivel->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl(''));
+    CHtml::link('Cancelar', $this->createUrl('/combustiveis'));
     ?>
 </p>
 

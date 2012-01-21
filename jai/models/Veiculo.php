@@ -35,12 +35,12 @@
  * @property int $idCombustivel
  * @property int $idModelo
  *
- * @property Cliente[] $antigosDonos
  * @property Cliente $dono
  * @property Categoria $categoria
  * @property Combustivel $combustivel
  * @property Modelo $modelo
  * @property FolhaObra[] $folhasObra
+ * @property Cliente[] $antigosDonos
  */
 class Veiculo extends CActiveRecord {
 
@@ -57,7 +57,7 @@ class Veiculo extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('matricula, idCliente, idCategoria, idCombustivel, idModelo', 'required'),
+            array('matricula, idCategoria, idCombustivel, idModelo', 'required'),
             array('idCliente, idCategoria, idCombustivel, idModelo', 'numerical', 'integerOnly' => true),
             array('matricula', 'length', 'max' => 12),
             array('nrChassis, cilindrada, nrMotor', 'length', 'max' => 25),

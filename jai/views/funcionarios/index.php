@@ -1,7 +1,8 @@
+<?php $this->title = 'Lista de Funcionários'; ?>
 <div id="titulo">
     <h2>Funcionários</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('funcionarios/adicionar'); ?>"><img src="assets/images/icons/x16-funcionario-adicionar.png" /> Adicionar</a>
+        <a href="<?php echo $this->createUrl('funcionarios/criar'); ?>"><img src="imagens/icones/x16.funcionario.criar.png" /> Criar</a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -15,20 +16,25 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'template' => '{items} {pager} {summary}',
     'columns' => array(
         array(
-            'name' => 'idFuncionario',
-            'filter' => false
+            'name' => 'nome',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->nome, array("funcionarios/editar", "id" => $data->idFuncionario))'
         ),
-        'nome',
         'contribuinte',
         array(
+            'header' => 'Operações',
             'class' => 'CButtonColumn',
             'buttons' => array(
-                'view' => array('visible' => 'false')
+                'view' => array('visible' => 'false'),
+                'delete' => array(
+                    'imageUrl' => 'imagens/icones/x16.funcionario.apagar.png',
+                    'url' => 'Yii::app()->createUrl("funcionarios/apagar", array("id" => $data->idFuncionario))'
+                ),
+                'update' => array(
+                    'imageUrl' => 'imagens/icones/x16.funcionario.editar.png',
+                    'url' => 'Yii::app()->createUrl("funcionarios/editar", array("id" => $data->idFuncionario))',
+                ),
             ),
-            'updateButtonImageUrl' => 'assets/images/icons/x16-funcionario-editar.png',
-            'updateButtonUrl' => 'Yii::app()->createUrl("funcionarios/editar", array("id" => $data->idFuncionario))',
-            'deleteButtonImageUrl' => 'assets/images/icons/x16-funcionario-apagar.png',
-            'deleteButtonUrl' => 'Yii::app()->createUrl("funcionarios/apagar", array("id" => $data->idFuncionario))'
         ),
     ),
 ));

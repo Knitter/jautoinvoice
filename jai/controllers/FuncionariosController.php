@@ -1,10 +1,10 @@
 <?php
 
-/* .php
+/* FuncionariosController.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
- * Copyright (c) 2011, Sérgio Lopes.
- * http://sourceforge.net/projects/jautoinvoice
+ * 
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,9 +18,11 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * http://sourceforge.net/projects/jautoinvoice
  */
 
-class FuncionariosController extends SistemaController {
+class FuncionariosController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -34,7 +36,7 @@ class FuncionariosController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -61,13 +63,15 @@ class FuncionariosController extends SistemaController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionAdicionar() {
+    public function actionCriar() {
         $funcionario = new Funcionario();
 
         $this->performAjaxValidation('funcionario-form', $funcionario);
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
+            $funcionario->password = Funcionario::hash($funcionario->password);
+            
             if ($funcionario->save())
                 $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
         }
@@ -82,6 +86,8 @@ class FuncionariosController extends SistemaController {
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
+            $funcionario->password = Funcionario::hash($funcionario->password);
+            
             if ($funcionario->save())
                 $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
         }
@@ -91,7 +97,7 @@ class FuncionariosController extends SistemaController {
 
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($funcionario = $this->carregarModeloFuncionario($id)) !== null) {
-            
+
             $funcionario->activo = 0;
             $funcionario->save();
 

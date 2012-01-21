@@ -1,10 +1,10 @@
 <?php
 
-/* .php
+/* MarcasController.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
- * Copyright (c) 2011, Sérgio Lopes.
- * http://sourceforge.net/projects/jautoinvoice
+ * 
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,6 +18,8 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * http://sourceforge.net/projects/jautoinvoice
  */
 
 class MarcasController extends SistemaController {
@@ -34,7 +36,7 @@ class MarcasController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -62,7 +64,7 @@ class MarcasController extends SistemaController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionAdicionar() {
+    public function actionCriar() {
         $marca = new Marca();
 
         $this->performAjaxValidation('marca-form', $marca);

@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Combustíveis</h2>
     <div id="opcoes">
-        <a href=""><img src="assets/images/icons/x16-combustivel-adicionar.png" /> Adicionar</a>
+        <a href=""><img src="imagens/icones/x16.combustivel.criar.png" /> Criar</a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -14,20 +14,20 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(
-        array(
-            'name' => 'idCombustivel',
-            'filter' => false
-        ),
         'nome',
         array(
             'class' => 'CButtonColumn',
             'buttons' => array(
-                'view' => array('visible' => 'false')
+                'view' => array('visible' => 'false'),
+                'update' => array(
+                    'imageUrl' => 'imagens/icones/x16.combustivel.editar.png',
+                    'url' => 'Yii::app()->createUrl("combustiveis/editar", array("id" => $data->idCombustivel))',
+                ),
+                'delete' => array(
+                    'imageUrl' => 'imagens/icones/x16.combustivel.apagar.png',
+                    'url' => 'Yii::app()->createUrl("combustiveis/apagar", array("id" => $data->idCombustivel))',
+                )
             ),
-            'updateButtonImageUrl' => 'assets/images/icons/x16-combustivel-editar.png',
-            'updateButtonUrl' => 'Yii::app()->createUrl("combustiveis/editar", array("id" => $data->idCombustivel))',
-            'deleteButtonImageUrl' => 'assets/images/icons/x16-combustivel-apagar.png',
-            'deleteButtonUrl' => 'Yii::app()->createUrl("combustiveis/apagar", array("id" => $data->idCombustivel))',
         ),
     ),
 ));
