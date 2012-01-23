@@ -18,10 +18,7 @@
             <!-- THE MAIN MENU -->
             <?php if (!empty($this->menu)) { ?>
                 <ul id="menu">
-                    <?php if (isset($this->menu['voltar']) && $this->menu['voltar']) { ?>
-                        <li><a href="<?php echo $this->menu['voltar']; ?>"><img src="images/icons/x32-back.png" /><br />Voltar</a></li>
-                    <?php }
-                    foreach ($this->menu['links'] as $item) { ?>
+                    <?php foreach ($this->menu['links'] as $item) { ?>
                         <li><a href="<?php echo $item['url']; ?>"><img src="<?php echo $item['icon']; ?>" /><br /><?php echo $item['label']; ?></a></li>
                     <?php } ?>
                 </ul>

@@ -54,6 +54,7 @@ li.separador {
 #opcoes {
     float: left;
     width: 28%;
+    text-align: right;
 }
 
 #opcoes img {

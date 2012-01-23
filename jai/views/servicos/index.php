@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Serviços</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('servicos/criar'); ?>"><img src="assets/images/icons/x16.servico.criar.png" /> Criar</a>
+        <a href="<?php echo $this->createUrl('servicos/criar'); ?>"><img src="imagens/icones/x16.servico.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -20,11 +20,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'assets/images/icons/x16-servico-editar.png',
+                    'imageUrl' => 'imagens/icones/x16.servico.editar.png',
                     'url' => 'Yii::app()->createUrl("servicos/editar", array("id" => $data->idServico))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'assets/images/icons/x16-servico-apagar.png',
+                    'imageUrl' => 'imagens/icones/x16.servico.apagar.png',
                     'url' => 'Yii::app()->createUrl("servicos/apagar", array("id" => $data->idServico))',
                 )
             ),

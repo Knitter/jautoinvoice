@@ -2,7 +2,7 @@
 <div id="titulo">
     <h2>Funcionários</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('funcionarios/criar'); ?>"><img src="imagens/icones/x16.funcionario.criar.png" /> Criar</a>
+        <a href="<?php echo $this->createUrl('funcionarios/criar'); ?>"><img src="imagens/icones/x16.funcionario.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>

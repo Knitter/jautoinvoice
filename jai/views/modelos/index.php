@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Modelos</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('modelos/criar'); ?>"><img src="imagens/icones/x16.modelo.criar.png" /> Criar</a>
+        <a href="<?php echo $this->createUrl('modelos/criar'); ?>"><img src="imagens/icones/x16.modelo.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>

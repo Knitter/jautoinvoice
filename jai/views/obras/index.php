@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Folhas de Obra</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('folhasobra/adicionar'); ?>"><img src="assets/images/icons/x16-cliente-adicionar.png" /> Adicionar</a>
+        <a href="<?php echo $this->createUrl('folhasobra/criar'); ?>"><img src="imagens/icones/x16.folhaobra.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -21,12 +21,16 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'buttons' => array(
-                'view' => array('visible' => 'false')
+                'view' => array('visible' => 'false'),
+                'update' => array(
+                    'imageUrl' => 'imagens/icones/x16.folhaobra.editar.png',
+                    'url' => 'Yii::app()->createUrl("folhasobra/editar", array("id" => $data->idFolhaObra))',
+                ),
+                'delete' => array(
+                    'imageUrl' => 'imagens/icones/x16.folhaobra.apagar.png',
+                    'url' => 'Yii::app()->createUrl("folhasobra/apagar", array("id" => $data->idFolhaObra))',
+                )
             ),
-            'updateButtonImageUrl' => 'assets/images/icons/x16-folhaobra-editar.png',
-            'updateButtonUrl' => 'Yii::app()->createUrl("folhasobra/editar", array("id" => $data->idFolhaObra))',
-            'deleteButtonImageUrl' => 'assets/images/icons/x16-folhaobra-apagar.png',
-            'deleteButtonUrl' => 'Yii::app()->createUrl("folhasobra/apagar", array("id" => $data->idFolhaObra))',
         ),
     ),
 ));

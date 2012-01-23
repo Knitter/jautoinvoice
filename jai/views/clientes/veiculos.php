@@ -1,8 +1,9 @@
 <div id="titulo">
     <h2>Veículos de <?php echo $cliente->nome; ?></h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('clientes/adicionarveiculo', array('id' => $cliente->idCliente)); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /> Adicionar</a>
-        <!-- <a href="<?php echo $this->createUrl('clientes/passarveiculo', array('id' => $cliente->idCliente)); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /> Adicionar</a> -->
+        <a href="<?php echo $this->createUrl('/clientes'); ?>"><img src="imagens/icones/x16.voltar.png" /></a>
+        
+        <a href="<?php echo $this->createUrl('clientes/adicionarveiculo', array('id' => $cliente->idCliente)); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>

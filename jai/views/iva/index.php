@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Taxas de IVA</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/x16.iva.criar.png" /> Criar</a>
+        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/x16.iva.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -14,10 +14,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(
-        array(
-            'name' => 'idIVA',
-            'filter' => false
-        ),
         'descricao',
         'percentagem',
         array(

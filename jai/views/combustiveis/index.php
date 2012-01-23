@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Combustíveis</h2>
     <div id="opcoes">
-        <a href=""><img src="imagens/icones/x16.combustivel.criar.png" /> Criar</a>
+        <a href=""><img src="imagens/icones/x16.combustivel.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>

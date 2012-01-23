@@ -8,7 +8,7 @@ Yii::app()->clientScript->registerCssFile('css/colorbox/jquery.colorbox.css');
 <div id="titulo">
     <h2>Fornecedores</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/x16.fornecedor.criar.png" /> Criar</a>
+        <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/x16.fornecedor.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>

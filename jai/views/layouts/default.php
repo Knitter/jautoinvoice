@@ -19,14 +19,10 @@
                 <!-- THE MAIN MENU -->
                 <ul id="menu">
                     <?php
-                    if (isset($this->menu['voltar']) && $this->menu['voltar']) {
-                        ?>
-                        <li><a href="<?php echo $this->menu['voltar']; ?>"><img src="imagens/icones/x32.voltar.png" /><br />Voltar</a></li>
-                        <?php
-                    }
                     foreach ($this->menu['links'] as $item) {
-                        if ($item['label'] === 'separador') { ?>
-                        <li class="separador"></li>
+                        if ($item['label'] === 'separador') {
+                            ?>
+                            <li class="separador"></li>
                         <?php } else { ?>
                             <li><a href="<?php echo $item['url']; ?>"><img src="<?php echo $item['icon']; ?>" /><br /><?php echo $item['label']; ?></a></li>
                             <?php
@@ -35,12 +31,12 @@
                     ?> 
                 </ul>
             </div>
-        <?php } ?>
+<?php } ?>
         <div class="container">
             <!-- CENTER AREA -->
             <div class="span-24" id="content">
                 <!-- PAGE CONTENT -->
-                <?php echo $content; ?>
+<?php echo $content; ?>
             </div>
         </div>
         <div id="footer">

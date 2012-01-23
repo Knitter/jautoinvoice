@@ -56,26 +56,13 @@ class AdministracaoController extends JAIController {
                     'icon' => 'imagens/icones/x32.cliente.png',
                     'label' => 'Clientes'
                 ),
-                //array(
-                //    'url' => $this->createUrl('/veiculos'),
-                //    'icon' => 'imagens/icones/x32.veiculo.png',
-                //    'label' => 'Veículos'
-                //),
+                array('label' => 'separador'),
                 array(
-                    'url' => $this->createUrl('/funcionarios'),
-                    'icon' => 'imagens/icones/x32.funcionario.png',
-                    'label' => 'Funcionários'
+                    'url' => $this->createUrl('/configuracoes'),
+                    'icon' => 'imagens/icones/x32.configuracoes.png',
+                    'label' => 'Configurações'
                 ),
-                //array(
-                //    'url' => $this->createUrl('/facturacao'),
-                //    'icon' => 'imagens/icones/x32.folhaobra.png',
-                //    'label' => 'Facturação'
-                //),
-                //array(
-                //    'url' => $this->createUrl('/configuracoes'),
-                //    'icon' => 'imagens/icones/x32.configuracoes.png',
-                //    'label' => 'Configurações'
-                //),
+                array('label' => 'separador'),
                 array(
                     'url' => $this->createUrl('dashboard/sair'),
                     'icon' => 'imagens/icones/x32.sair.png',
