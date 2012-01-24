@@ -1,3 +1,5 @@
+<?php $this->title = 'Marcas de Veículos'; ?>
+
 <div id="titulo">
     <h2>Marcas</h2>
     <div id="opcoes">
@@ -21,6 +23,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(

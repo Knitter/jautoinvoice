@@ -22,7 +22,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class ServicosController extends SistemaController {
+class ServicosController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -75,7 +75,15 @@ class ServicosController extends SistemaController {
                 $this->redirect(array('editar', 'id' => $servico->idServico));
         }
 
-        $this->render('editar', array('servico' => $servico));
+        $criteria = new CDbCriteria();
+        $criteria->order = 'descricao';
+        $criteria->compare('activo', 1);
+        $ivas = IVA::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'servico' => $servico,
+            'ivas' => $ivas
+        ));
     }
 
     public function actionEditar($id) {
@@ -89,7 +97,15 @@ class ServicosController extends SistemaController {
                 $this->redirect(array('editar', 'id' => $servico->idServico));
         }
 
-        $this->render('editar', array('servico' => $servico));
+        $criteria = new CDbCriteria();
+        $criteria->order = 'descricao';
+        $criteria->compare('activo', 1);
+        $ivas = IVA::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'servico' => $servico,
+            'iva' => $ivas
+        ));
     }
 
     public function actionApagar($id) {

@@ -25,7 +25,7 @@
 /**
  * 
  */
-class ClientesController extends AdministracaoController {
+class ClientesController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

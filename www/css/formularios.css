@@ -35,3 +35,13 @@ textarea {
 span.required {
     color: #F00;
 }
+
+.errorMessage {
+    display: inline;
+    margin-left: .5em;
+    color: red;
+}
+
+.row {
+    margin: 1em 0;
+}

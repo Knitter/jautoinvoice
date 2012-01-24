@@ -1,3 +1,4 @@
+<?php $this->title = 'Modelos de Veículos'; ?>
 <div id="titulo">
     <h2>Modelos</h2>
     <div id="opcoes">
@@ -22,10 +23,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'idMarca',
             'value' => '$data->marca->nome',
-            'filter' => CHtml::listData($marcas, 'idMarca', 'nome')
+            'filter' => CHtml::listData($marcas, 'idMarca', 'nome'),
+            'htmlOptions' => array('class' => 'small-column')
         ),
         array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(

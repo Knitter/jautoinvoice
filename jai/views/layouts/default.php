@@ -14,24 +14,15 @@
         <title><?php echo $this->title; ?></title>
     </head>
     <body>
-        <?php if (!empty($this->menu)) { ?>
-            <div class="container">
-                <!-- THE MAIN MENU -->
-                <ul id="menu">
-                    <?php
-                    foreach ($this->menu['links'] as $item) {
-                        if ($item['label'] === 'separador') {
-                            ?>
-                                                    <!-- <li><span class="separador"></span></li> -->
-                        <?php } else { ?>
-                            <li><a href="<?php echo $item['url']; ?>"><img src="<?php echo $item['icon']; ?>" /><br /><?php echo $item['label']; ?></a></li>
-                            <?php
-                        }
-                    }
-                    ?> 
-                </ul>
-            </div>
-        <?php } ?>
+        <div class="container">
+            <!-- THE MAIN MENU -->
+            <?php
+            $this->widget('ext.JaiMenu', array(
+                'items' => $this->menu,
+                'id' => 'menu'
+            ));
+            ?>
+        </div>
         <div class="container">
             <!-- CENTER AREA -->
             <div class="span-24" id="content">

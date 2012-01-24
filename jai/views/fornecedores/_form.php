@@ -3,69 +3,73 @@ Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'fornecedor-form',
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
+    'focus' => array($fornecedor, 'nome')
         ));
-echo $form->errorSummary($fornecedor);
 ?>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'nome'),
     $form->textField($fornecedor, 'nome', array('maxlength' => 255)),
     $form->error($fornecedor, 'nome');
     ?>
-</p>
-<p>
+</div>
+
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'email'),
     $form->textField($fornecedor, 'email', array('maxlength' => 255)),
     $form->error($fornecedor, 'email');
     ?>
-</p>
-<p>
+</div>
+
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'telefone'),
     $form->textField($fornecedor, 'telefone', array('maxlength' => 9)),
     $form->error($fornecedor, 'telefone');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'telemovel'),
     $form->textField($fornecedor, 'telemovel', array('maxlength' => 9)),
     $form->error($fornecedor, 'telemove');
     ?>
-</p>
-<p>
+</div>
+
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'website'),
     $form->textField($fornecedor, 'website', array('maxlength' => 255)),
     $form->error($fornecedor, 'website');
     ?>
-</p>
-<p>
+</div>
+
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'morada'),
     $form->textField($fornecedor, 'morada', array('maxlength' => 255)),
     $form->error($fornecedor, 'morada');
     ?>
-</p>
-<p>
+</div>
+
+<div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'notas'),
-    $form->textArea($fornecedor, 'notas'),
+    $form->textArea($fornecedor, 'notas', array('cols' => 80, 'rows' => 5)),
     $form->error($fornecedor, 'notas');
     ?>
-</p>
+</div>
 
-
-<p>
+<div class="row">
     <?php
     echo CHtml::submitButton($fornecedor->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('fornecedores/index'));
+    CHtml::link('Cancelar', $this->createUrl('/fornecedores'));
     ?>
-</p>
+</div>
 
 <?php
 $this->endWidget();

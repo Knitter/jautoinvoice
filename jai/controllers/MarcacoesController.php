@@ -22,7 +22,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class MarcacoesController extends AdministracaoController {
+class MarcacoesController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

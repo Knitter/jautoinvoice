@@ -25,7 +25,7 @@
 /**
  * 
  */
-class DashboardController extends AdministracaoController {
+class DashboardController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

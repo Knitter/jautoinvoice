@@ -1,7 +1,6 @@
 body {
     margin: 0;
     padding: 0;
-    /*color: #555555;*/
     background: #EFEFEF;
 }
 
@@ -33,15 +32,12 @@ ul {
 
 #menu li {
     list-style: none;
-    display: inline;
+    display: inline-block;
     float: left;
     text-align: center;
     margin-right: .5em;
+    height: 55px;
 }
-
-/*.separador {
-    padding: 0 .5em 0 .5em;
-}*/
 
 #titulo {
 }
@@ -49,6 +45,12 @@ ul {
 #titulo h2 {
     float: left;
     width: 70%;
+}
+
+h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555;
 }
 
 #opcoes {
@@ -61,6 +63,13 @@ ul {
     vertical-align: middle;
 }
 
+.small-column {
+    width: 15%;
+}
+
+.medium-column {
+    width: 30%;
+}
 
 /*div.flash-error, div.flash-notice, div.flash-success {
     padding:.8em;

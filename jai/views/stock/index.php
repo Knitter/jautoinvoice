@@ -1,3 +1,4 @@
+<?php $this->title = 'Gestão de Stock'; ?>
 <div id="titulo">
     <h2>Stock</h2>
     <div id="opcoes">
@@ -21,6 +22,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(

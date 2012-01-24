@@ -1,5 +1,6 @@
+<?php $this->title = 'Combustíveis/Fontes de Energia'; ?>
 <div id="titulo">
-    <h2>Combustíveis</h2>
+    <h2>Combustíveis/Fontes de Energia</h2>
     <div id="opcoes">
         <a href="<?php echo $this->createUrl('combustiveis/criar'); ?>"><img src="imagens/icones/x16.combustivel.criar.png" /></a>
     </div>
@@ -21,6 +22,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(

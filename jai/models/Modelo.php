@@ -73,6 +73,8 @@ class Modelo extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
+        
+        $criteria->order = 'nome';
 
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('idMarca', $this->idMarca);

@@ -32,7 +32,7 @@ class Combustivel extends CActiveRecord {
     /**
      * @return Combustivel
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -68,8 +68,10 @@ class Combustivel extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
+        $criteria->order = 'nome';
+
         $criteria->compare('nome', $this->nome, true);
-        $criteria->compare('activo', $this->activo);
+        $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('Combustivel', array('criteria' => $criteria));
     }

@@ -1,7 +1,9 @@
+<?php $this->title = 'Folhas de Obra'; ?>
+
 <div id="titulo">
     <h2>Folhas de Obra</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('folhasobra/criar'); ?>"><img src="imagens/icones/x16.folhaobra.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('obras/criar'); ?>"><img src="imagens/icones/x16.folhaobra.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -15,11 +17,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'template' => '{items} {pager} {summary}',
     'columns' => array(
         array(
-            'name' => 'idFolhaObra',
-            'filter' => false
-        ),
-        array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(

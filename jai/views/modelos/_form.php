@@ -4,33 +4,32 @@ Yii::app()->clientScript->registerCssFile('css/formularios.css');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'modelo-form',
     'enableAjaxValidation' => true,
+    'focus' => array($modelo, 'nome')
         ));
-
-echo $form->errorSummary($modelo);
 ?>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($modelo, 'nome'),
     $form->textField($modelo, 'nome', array('size' => 60, 'maxlength' => 100)),
     $form->error($modelo, 'nome');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($modelo, 'idMarca'),
     $form->dropDownList($modelo, 'idMarca', CHtml::listData($marcas, 'idMarca', 'nome'), array('empty' => '- escolha uma marca -'));
     $form->error($modelo, 'idMarca');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo CHtml::submitButton($modelo->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
     CHtml::link('Cancelar', $this->createUrl('/modelos'));
     ?>
-</p>
+</div>
 
-    <?php
-    $this->endWidget();
+<?php
+$this->endWidget();

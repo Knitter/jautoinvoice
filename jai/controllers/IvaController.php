@@ -22,7 +22,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class IvaController extends SistemaController {
+class IvaController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

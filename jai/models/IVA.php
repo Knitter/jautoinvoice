@@ -33,7 +33,7 @@ class IVA extends CActiveRecord {
     /**
      * @return IVA
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -70,6 +70,8 @@ class IVA extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
+
+        $criteria->order = 'descricao';
 
         $criteria->compare('descricao', $this->descricao, true);
         $criteria->compare('percentagem', $this->percentagem);

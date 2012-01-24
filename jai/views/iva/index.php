@@ -1,3 +1,6 @@
+<?php
+$this->title = 'Taxas de IVA'
+?>
 <div id="titulo">
     <h2>Taxas de IVA</h2>
     <div id="opcoes">
@@ -19,9 +22,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'type' => 'raw',
             'value' => 'CHtml::link($data->descricao, array("iva/editar", "id" => $data->idIVA))'
         ),
-        'percentagem',
+        array(
+            'name' => 'percentagem',
+            'filter' => false,
+            'htmlOptions' => array('class' => 'small-column')
+        ),
         array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(

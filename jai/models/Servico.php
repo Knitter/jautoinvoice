@@ -78,6 +78,8 @@ class Servico extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
+        
+        $criteria->order = 'nome';
 
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('descricao', $this->descricao, true);

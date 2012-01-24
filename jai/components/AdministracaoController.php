@@ -32,43 +32,61 @@ class AdministracaoController extends JAIController {
         parent::__construct($id, $module);
 
         $this->menu = array(
-            'voltar' => false,
-            'links' => array(
-                array(
-                    'url' => $this->createUrl('/dashboard'),
-                    'icon' => 'imagens/icones/x32.dashboard.png',
-                    'label' => 'Dashboard'
-                ),
-                array('label' => 'separador'),
-                array(
-                    'url' => $this->createUrl('/obras'),
-                    'icon' => 'imagens/icones/x32.folhaobra.png',
-                    'label' => 'Folhas de Obra'
-                ),
-                array(
-                    'url' => $this->createUrl('/marcacoes'),
-                    'icon' => 'imagens/icones/x32.marcacoes.png',
-                    'label' => 'Marcações'
-                ),
-                array('label' => 'separador'),
-                array(
-                    'url' => $this->createUrl('/clientes'),
-                    'icon' => 'imagens/icones/x32.cliente.png',
-                    'label' => 'Clientes'
-                ),
-                array('label' => 'separador'),
-                array(
-                    'url' => $this->createUrl('/configuracoes'),
-                    'icon' => 'imagens/icones/x32.configuracoes.png',
-                    'label' => 'Configurações'
-                ),
-                array('label' => 'separador'),
-                array(
-                    'url' => $this->createUrl('dashboard/sair'),
-                    'icon' => 'imagens/icones/x32.sair.png',
-                    'label' => 'Sair'
-                )
-            )
+            array(
+                'label' => 'Voltar',
+                'url' => $this->createUrl('/dashboard'),
+                'icon' => 'imagens/icones/x32.voltar.png',
+            ),
+            array(
+                'label' => 'Configurações',
+                'url' => $this->createUrl('/configuracoes'),
+                'icon' => 'imagens/icones/x32.configuracoes.png',
+            ),
+            array(
+                'label' => 'Funcionários',
+                'url' => $this->createUrl('/funcionarios'),
+                'icon' => 'imagens/icones/x32.funcionario.png',
+            ),
+            array(
+                'label' => 'Fornecedores',
+                'url' => $this->createUrl('/fornecedores'),
+                'icon' => 'imagens/icones/x32.fornecedor.png',
+            ),
+            array(
+                'label' => 'Stock',
+                'url' => $this->createUrl('/stock'),
+                'icon' => 'imagens/icones/x32.material.png',
+            ),
+            array(
+                'label' => 'Serviços',
+                'url' => $this->createUrl('/servicos'),
+                'icon' => 'imagens/icones/x32.servico.png',
+            ),
+            array(
+                'label' => 'Categorias',
+                'url' => $this->createUrl('/categorias'),
+                'icon' => 'imagens/icones/x32.categoria.png',
+            ),
+            array(
+                'label' => 'Combustíveis',
+                'url' => $this->createUrl('/combustiveis'),
+                'icon' => 'imagens/icones/x32.combustivel.png',
+            ),
+            array(
+                'label' => 'Marcas',
+                'url' => $this->createUrl('/marcas'),
+                'icon' => 'imagens/icones/x32.marca.png',
+            ),
+            array(
+                'label' => 'Modelos',
+                'url' => $this->createUrl('/modelos'),
+                'icon' => 'imagens/icones/x32.modelo.png',
+            ),
+            array(
+                'label' => 'Taxas de IVA',
+                'url' => $this->createUrl('/iva'),
+                'icon' => 'imagens/icones/x32.iva.png',
+            ),
         );
     }
 

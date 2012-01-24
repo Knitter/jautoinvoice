@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class ObrasController extends AdministracaoController {
+class ObrasController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -34,7 +34,7 @@ class ObrasController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -61,10 +61,10 @@ class ObrasController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionAdicionar() {
+    public function actionCriar() {
         $folha = new FolhaObra();
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation($folha, 'folhaobra-form');
 
         if (isset($_POST['FolhaObra'])) {
             $folha->attributes = $_POST['FolhaObra'];
@@ -72,13 +72,13 @@ class ObrasController extends AdministracaoController {
                 $this->redirect(array('editar', 'id' => $folha->idFolhaObra));
         }
 
-        $this->render('editar', array('folha' => $folha));
+        $this->render('editar', array('folhaObra' => $folha));
     }
 
     public function actionEditar($id) {
         $folha = $this->carregarModeloFolhaObra($id);
 
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation($folha, 'folhaobra-form');
 
         if (isset($_POST['FolhaObra'])) {
             $folha->attributes = $_POST['FolhaObra'];
@@ -86,7 +86,7 @@ class ObrasController extends AdministracaoController {
                 $this->redirect(array('editar', 'id' => $folha->idFolhaObra));
         }
 
-        $this->render('editar', array('editar' => $folha));
+        $this->render('editar', array('folhaObra' => $folha));
     }
 
     public function actionApagar($id) {

@@ -4,25 +4,24 @@ Yii::app()->clientScript->registerCssFile('css/formularios.css');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'categoria-form',
     'enableAjaxValidation' => true,
+    'focus' => array($categoria, 'nome')
         ));
 ?>
 
-<?php echo $form->errorSummary($categoria); ?>
-
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($categoria, 'nome'),
     $form->textField($categoria, 'nome', array('size' => 60, 'maxlength' => 100)),
     $form->error($categoria, 'nome');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo CHtml::submitButton($categoria->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
     CHtml::link('Cancelar', $this->createUrl('/categorias'));
     ?>
-</p>
+</div>
 
 <?php
 $this->endWidget();

@@ -1,4 +1,4 @@
-<?php $this->title = 'Lista de Funcionários'; ?>
+<?php $this->title = 'Funcionários'; ?>
 <div id="titulo">
     <h2>Funcionários</h2>
     <div id="opcoes">
@@ -20,10 +20,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'type' => 'raw',
             'value' => 'CHtml::link($data->nome, array("funcionarios/editar", "id" => $data->idFuncionario))'
         ),
-        'contribuinte',
         array(
-            'header' => 'Operações',
+            'name' => 'contribuinte',
+            'htmlOptions' => array('class' => 'small-column'),
+        ),
+        array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'delete' => array(

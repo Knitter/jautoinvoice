@@ -47,7 +47,7 @@ class Veiculo extends CActiveRecord {
     /**
      * @return Veiculo
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -100,6 +100,8 @@ class Veiculo extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
+
+        $criteria->order = 'matricula, dataRegisto DESC';
 
         $criteria->compare('dataRegisto', $this->dataRegisto, true);
         $criteria->compare('matricula', $this->matricula, true);

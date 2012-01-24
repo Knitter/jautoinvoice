@@ -1,8 +1,7 @@
 <?php
-Yii::app()->clientScript->registerScriptFile('js/colorbox/jquery.colorbox.min.js');
-Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
+$this->title = 'Fornecedores';
 
-Yii::app()->clientScript->registerCssFile('css/colorbox/jquery.colorbox.css');
+Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
 ?>
 
 <div id="titulo">
@@ -39,10 +38,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     'url' => '"javascript:caixaEmail({$data->idFornecedor})";'
                 ),
             ),
-            'template' => '{email}'
+            'template' => '{email}',
         ),
         array(
             'class' => 'CButtonColumn',
+            'header' => 'Operações',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
