@@ -14,7 +14,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(
-        'nome',
+        array(
+            'name' => 'nome',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->nome, array("marcas/editar", "id" => $data->idMarca))'
+        ),
         array(
             'class' => 'CButtonColumn',
             'buttons' => array(

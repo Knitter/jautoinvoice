@@ -1,4 +1,6 @@
 <?php
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
+
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'servico-form',
     'enableAjaxValidation' => false,

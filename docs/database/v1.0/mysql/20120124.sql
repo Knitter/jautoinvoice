@@ -1,0 +1,5 @@
+ALTER TABLE `Marcacao` CHANGE `descricao` `descricao` TEXT NULL ;
+
+ALTER TABLE `Servico` ADD `preco` DECIMAL (10, 4) NULL ;
+ALTER TABLE `Servico` ADD `idIVA` INT UNSIGNED NULL ;
+ALTER TABLE `Servico` ADD CONSTRAINT `fkServicoIVA` FOREIGN KEY (`idIVA`) REFERENCES `IVA`(`idIVA`) ;

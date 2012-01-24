@@ -1,6 +1,6 @@
 <?php
 
-/* MateriaisController.php
+/* StockController.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
@@ -22,7 +22,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class MateriaisController extends SistemaController {
+class StockController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -75,7 +75,15 @@ class MateriaisController extends SistemaController {
                 $this->redirect(array('editar', 'id' => $material->idMaterial));
         }
 
-        $this->render('editar', array('material' => $material));
+        $criteria = new CDbCriteria(array('order' => 'descricao'));
+        $criteria->compare('activo', 1);
+
+        $ivas = IVA::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'material' => $material,
+            'ivas' => $ivas
+            ));
     }
 
     public function actionEditar($id) {

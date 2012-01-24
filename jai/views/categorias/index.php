@@ -1,7 +1,7 @@
 <div id="titulo">
     <h2>Categorias</h2>
     <div id="opcoes">
-        <a href=""><img src="imagens/icones/x16.categoria.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('categorias/criar'); ?>"><img src="imagens/icones/x16.categoria.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -14,7 +14,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(
-        'nome',
+        array(
+            'name' => 'nome',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->nome, array("categorias/editar", "id" => $data->idCategoria))'
+        ),
         array(
             'class' => 'CButtonColumn',
             'buttons' => array(

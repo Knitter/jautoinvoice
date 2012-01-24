@@ -54,9 +54,9 @@ class SistemaController extends JAIController {
                 ),
                 array('label' => 'separador'),
                 array(
-                    'url' => $this->createUrl('/materiais'),
+                    'url' => $this->createUrl('/stock'),
                     'icon' => 'imagens/icones/x32.material.png',
-                    'label' => 'Materiais'
+                    'label' => 'Stock'
                 ),
                 array(
                     'url' => $this->createUrl('/servicos'),
@@ -66,7 +66,7 @@ class SistemaController extends JAIController {
                 array('label' => 'separador'),
                 array(
                     'url' => $this->createUrl('/categorias'),
-                    'icon' => '#',
+                    'icon' => 'imagens/icones/x32.categoria.png',
                     'label' => 'Categorias'
                 ),
                 array(
@@ -76,12 +76,12 @@ class SistemaController extends JAIController {
                 ),
                 array(
                     'url' => $this->createUrl('/marcas'),
-                    'icon' => '#',
+                    'icon' => 'imagens/icones/x32.marca.png',
                     'label' => 'Marcas'
                 ),
                 array(
                     'url' => $this->createUrl('/modelos'),
-                    'icon' => '#',
+                    'icon' => 'imagens/icones/x32.modelo.png',
                     'label' => 'Modelos'
                 ),
                 array('label' => 'separador'),

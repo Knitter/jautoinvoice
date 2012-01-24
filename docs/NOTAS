@@ -1,1 +1,29 @@
 -- //TODO: Nr. da factura e data da compra para controlar os stocks.
+
+- Implementar gestão de:
+ - Modelos
+ - Marcas
+ - Combustíveis
+ - Categorias
+ - Stocks (Adicionar campos à BD: nome, multiplos fornecedores, etc)
+ - Serviços
+ - Fornecedores
+ - Funcionários
+ - Configurações
+ - Clientes
+ - Marcações
+ - Folhas Obra
+ - Dashboard
+ - Envio de mensagens e notificações
+ - Conta de cliente
+ 
+Alguns serviços podem dar origem a avisos que se irão repetir de tempos a tempo, por exemplo,
+uma inspeção ou uma mudança de óleo pode originar um aviso que irá disparar na data prevista
+
+Relatórios? (FPDF?)
+ - Número de veículos servidos
+ - Serviço mais usado
+ - Serviço menos usado
+ - Funcionário com mais serviços
+
+Incluir QRCodes, http://sourceforge.net/projects/phpqrcode/ ?

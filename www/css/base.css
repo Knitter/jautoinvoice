@@ -39,9 +39,9 @@ ul {
     margin-right: .5em;
 }
 
-li.separador {
-    /*TODO: not implemented yet */
-}
+/*.separador {
+    padding: 0 .5em 0 .5em;
+}*/
 
 #titulo {
 }

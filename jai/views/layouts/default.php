@@ -22,7 +22,7 @@
                     foreach ($this->menu['links'] as $item) {
                         if ($item['label'] === 'separador') {
                             ?>
-                            <li class="separador"></li>
+                                                    <!-- <li><span class="separador"></span></li> -->
                         <?php } else { ?>
                             <li><a href="<?php echo $item['url']; ?>"><img src="<?php echo $item['icon']; ?>" /><br /><?php echo $item['label']; ?></a></li>
                             <?php
@@ -31,12 +31,12 @@
                     ?> 
                 </ul>
             </div>
-<?php } ?>
+        <?php } ?>
         <div class="container">
             <!-- CENTER AREA -->
             <div class="span-24" id="content">
                 <!-- PAGE CONTENT -->
-<?php echo $content; ?>
+                <?php echo $content; ?>
             </div>
         </div>
         <div id="footer">

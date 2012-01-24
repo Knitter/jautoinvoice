@@ -1,5 +1,5 @@
 <?php
-Yii::app()->clientScript->registerCssFile('assets/css/formularios.css');
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'material-form',
@@ -11,17 +11,16 @@ echo $form->errorSummary($material);
 
 <p>
     <?php
-    echo $form->labelEx($material, 'precoUnitario'),
-    $form->textField($material, 'precoUnitario', array('size' => 10, 'maxlength' => 10)),
-    $form->error($material, 'precoUnitario');
-    ?>
-</p>
-
-<p>
-    <?php
     echo $form->labelEx($material, 'referencia'),
     $form->textField($material, 'referencia', array('size' => 25, 'maxlength' => 25)),
     $form->error($material, 'referencia');
+    ?>
+</p>
+<p>
+    <?php
+    echo $form->labelEx($material, 'precoUnitario'),
+    $form->textField($material, 'precoUnitario', array('size' => 10, 'maxlength' => 10)),
+    $form->error($material, 'precoUnitario');
     ?>
 </p>
 
@@ -36,7 +35,7 @@ echo $form->errorSummary($material);
 <p>
     <?php
     echo $form->labelEx($material, 'idIVA'),
-    $form->textField($material, 'idIVA', array('size' => 10, 'maxlength' => 10)),
+    $form->dropDownList($material, 'idIVA', CHtml::listData($ivas, 'idIVA', 'descricao')),
     $form->error($material, 'idIVA');
     ?>
 </p>
@@ -52,7 +51,7 @@ echo $form->errorSummary($material);
 <p>
     <?php
     echo CHtml::submitButton($material->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('materiais/index'));
+    CHtml::link('Cancelar', $this->createUrl('/stock'));
     ?>
 </p>
 

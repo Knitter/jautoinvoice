@@ -4,7 +4,6 @@ Yii::app()->clientScript->registerScriptFile('js/timepicker/jquery.timepicker.js
 
 Yii::app()->clientScript->registerScript('initPicker', '$("#hora").timepicker({showPeriodLabels: false});');
 ?>
-
 <p>
     <?php
     echo CHtml::label('Contribuinte', 'contribuinte');
@@ -41,8 +40,8 @@ Yii::app()->clientScript->registerScript('initPicker', '$("#hora").timepicker({s
 
 <p>
     <?php
-    echo CHtml::label('Descrição', 'descricao'),
-    CHtml::textField('descricao', null, array('maxlenght' => 150));
+    echo CHtml::label('Notas', 'descricao'),
+    CHtml::textArea('descricao');
     ?>
 </p>
 

@@ -25,6 +25,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'options' => array(
         'title' => 'Marcar ',
         'autoOpen' => false,
+        'minWidth' => 640,
+        'minHeight' => 320
     ),
 ));
 

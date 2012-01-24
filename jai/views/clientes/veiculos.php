@@ -38,7 +38,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     'url' => 'Yii::app()->createUrl("clientes/removerveiculo", array("idc" => $data->idCliente, "idv" => $data->idVeiculo))'
                 ),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.veiculo.png',
+                    'imageUrl' => 'imagens/icones/x16.veiculo.editar.png',
                     'url' => 'Yii::app()->createUrl("clientes/editarveiculo", array("idc" => $data->idCliente, "idv" => $data->idVeiculo))'
                 )
             ),

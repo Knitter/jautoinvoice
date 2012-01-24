@@ -14,18 +14,22 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(
-        'descricao',
+        array(
+            'name' => 'descricao',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->descricao, array("iva/editar", "id" => $data->idIVA))'
+        ),
         'percentagem',
         array(
             'class' => 'CButtonColumn',
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'assets/images/icons/x16-iva-editar.png',
+                    'imageUrl' => 'imagens/icones/x16.iva.editar.png',
                     'url' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIVA))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'assets/images/icons/x16-iva-apagar.png',
+                    'imageUrl' => 'imagens/icones/x16.iva.apagar.png',
                     'url' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIVA))',
                 )
             ),

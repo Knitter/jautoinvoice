@@ -21,7 +21,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(
-        'nome',
+        array(
+            'name' => 'nome',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->nome, array("fornecedores/editar", "id" => $data->idFornecedor))'
+        ),
         array(
             'class' => 'CButtonColumn',
             'header' => 'Contactar',
@@ -42,7 +46,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.fornecedor.png',
+                    'imageUrl' => 'imagens/icones/x16.fornecedor.editar.png',
                     'url' => 'Yii::app()->createUrl("fornecedores/editar", array("id" => $data->idFornecedor))'
                 ),
                 'delete' => array(

@@ -52,7 +52,7 @@ class Marcacao extends CActiveRecord {
     public function rules() {
         return array(
             array('dataMarcacao, idVeiculo', 'required'),
-            array('descricao', 'length', 'max' => 150),
+            array('descricao', 'safe'),
             // search
             array('dataMarcacao, nome', 'safe', 'on' => 'search'),
         );
