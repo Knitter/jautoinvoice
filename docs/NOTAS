@@ -1,23 +1,8 @@
 -- //TODO: Nr. da factura e data da compra para controlar os stocks.
 
-- Ver questão da password, que deve ser safe em editar
-- Rever formulários para adicionar tamanhos correctos aos campos.
-- Rever dados das tabelas e adicionar os que faltem.
-
 - Implementar gestão de:
- - Modelos
- - Marcas
- - Combustíveis
- - Categorias
  - Stocks (Adicionar campos à BD: nome, multiplos fornecedores, etc)
  - Serviços
- - Fornecedores
- - Funcionários
- - Configurações
- - Clientes
- - Marcações
- - Folhas Obra
- - Dashboard
  - Envio de mensagens e notificações
  - Conta de cliente
  

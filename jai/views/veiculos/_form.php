@@ -4,27 +4,19 @@ Yii::app()->clientScript->registerCssFile('css/formularios.css');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'veiculo-form',
     'enableAjaxValidation' => true,
+    'focus' => array($veiculo, 'matricula')
         ));
-
-echo $form->errorSummary($veiculo);
 ?>
 
-<p>
+<div class="row">
     <?php
-    echo $form->labelEx($veiculo, 'matricula');
-
-    $this->widget('CMaskedTextField', array(
-        'attribute' => 'matricula',
-        'model' => $veiculo,
-        'mask' => '**-**-**',
-        'placeholder' => ' '
-    ));
-
+    echo $form->labelEx($veiculo, 'matricula'),
+    $form->textField($veiculo, 'matricula'),
     $form->error($veiculo, 'matricula');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'dataRegisto');
 
@@ -35,70 +27,76 @@ echo $form->errorSummary($veiculo);
 
     echo $form->error($veiculo, 'dataRegisto');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'idCategoria'),
-    $form->dropDownList($veiculo, 'idCategoria', CHtml::listData($categorias, 'idCategoria', 'nome'), array('empty' => '- escolha -')),
+    $form->dropDownList($veiculo, 'idCategoria'
+            , CHtml::listData($categorias, 'idCategoria', 'nome')
+            , array('empty' => '- escolha uma categoria-')),
     $form->error($veiculo, 'idCategoria');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'idCombustivel'),
-    $form->dropDownList($veiculo, 'idCombustivel', CHtml::listData($combustiveis, 'idCombustivel', 'nome'), array('empty' => '- escolha -')),
+    $form->dropDownList($veiculo, 'idCombustivel'
+            , CHtml::listData($combustiveis, 'idCombustivel', 'nome')
+            , array('empty' => '- escolha um combustível -')),
     $form->error($veiculo, 'idCombustivel');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'idModelo'),
-    $form->dropDownList($veiculo, 'idModelo', CHtml::listData($modelos, 'idModelo', 'nome', 'marca.nome'), array('empty' => '- escolha -')),
+    $form->dropDownList($veiculo, 'idModelo'
+            , CHtml::listData($modelos, 'idModelo', 'nome', 'marca.nome')
+            , array('empty' => '- escolha um modelo -')),
     $form->error($veiculo, 'idModelo');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'nrChassis'),
     $form->textField($veiculo, 'nrChassis', array('size' => 25, 'maxlength' => 25)),
     $form->error($veiculo, 'nrChassis');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'cilindrada'),
     $form->textField($veiculo, 'cilindrada', array('size' => 25, 'maxlength' => 25)),
     $form->error($veiculo, 'cilindrada');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'nrMotor'),
     $form->textField($veiculo, 'nrMotor', array('size' => 25, 'maxlength' => 25)),
     $form->error($veiculo, 'nrMotor');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo $form->labelEx($veiculo, 'notas'),
-    $form->textArea($veiculo, 'notas', array('rows' => 6, 'cols' => 50)),
+    $form->textArea($veiculo, 'notas', array('rows' => 5, 'cols' => 80)),
     $form->error($veiculo, 'notas');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
     echo CHtml::submitButton($veiculo->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;';
-    //CHtml::link('Cancelar', $this->createUrl(''));
+    CHtml::link('Cancelar', $this->createUrl($url));
     ?>
-</p>
+</div>
 
 <?php
 $this->endWidget();

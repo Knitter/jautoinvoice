@@ -53,7 +53,7 @@ class SistemaController extends JAIController {
             array(
                 'label' => 'Administração',
                 'url' => $this->createUrl('/configuracoes'),
-                'icon' => 'imagens/icones/x32.configuracoes.png',
+                'icon' => 'imagens/icones/x32.administracao.png',
             ),
             array(
                 'label' => 'Sair',

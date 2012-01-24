@@ -1,8 +1,6 @@
 <?php
-Yii::app()->clientScript->registerScriptFile('js/colorbox/jquery.colorbox.min.js');
+$this->title = 'Clientes';
 Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
-
-Yii::app()->clientScript->registerCssFile('css/colorbox/jquery.colorbox.css');
 ?>
 
 <div id="titulo">
@@ -26,7 +24,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'type' => 'raw',
             'value' => 'CHtml::link($data->nome, array("clientes/editar", "id" => $data->idCliente))'
         ),
-        'contribuinte',
+        array(
+            'name' => 'contribuinte',
+            'htmlOptions' => array('class' => 'small-column')
+        ),
         array(
             'class' => 'CButtonColumn',
             'header' => 'Contactar',
@@ -63,7 +64,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'carros' => array(
                     'label' => 'Veículos',
                     'imageUrl' => 'imagens/icones/x16.veiculo.png',
-                    'url' => 'Yii::app()->createUrl("clientes/veiculos", array("id" => $data->idCliente))'
+                    'url' => 'Yii::app()->createUrl("veiculos/lista", array("id" => $data->idCliente, "l" => 1))'
                 ),
             ),
             'template' => '{update} {delete} {carros}'
