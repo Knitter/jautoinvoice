@@ -27,7 +27,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($servico, 'idIVA'),
-    $form->DropDownList($servico, 'idIVA', CHtml::listData($ivas, 'idIVA', 'descricao')),
+    $form->DropDownList($servico, 'idIVA', CHtml::listData($ivas, 'idIVA', 'descricao'), array('empty' => 'Sem IVA')),
     $form->error($servico, 'idIVA');
     ?>
 </div>

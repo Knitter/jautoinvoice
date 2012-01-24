@@ -104,7 +104,7 @@ class ServicosController extends AdministracaoController {
 
         $this->render('editar', array(
             'servico' => $servico,
-            'iva' => $ivas
+            'ivas' => $ivas
         ));
     }
 
