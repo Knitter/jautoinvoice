@@ -72,26 +72,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
 ));
 
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-    'id' => 'smsForm',
-    'options' => array(
-        'title' => 'Enviar SMS',
-        'autoOpen' => false,
-    ),
-));
-
 $this->renderPartial('//_common/_sms');
 
-$this->endWidget('zii.widgets.jui.CJuiDialog');
-
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-    'id' => 'emailForm',
-    'options' => array(
-        'title' => 'Enviar e-mail',
-        'autoOpen' => false,
-    ),
-));
-
 $this->renderPartial('//_common/_email');
-
-$this->endWidget('zii.widgets.jui.CJuiDialog');

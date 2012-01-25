@@ -20,27 +20,4 @@ Yii::app()->clientScript->registerScript('calInit', $js);
 <div id="calendar"></div>
 
 <?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-    'id' => 'janelaMarcacao',
-    'options' => array(
-        'title' => 'Marcar ',
-        'autoOpen' => false,
-        'minWidth' => 560,
-        'minHeight' => 270,
-        'buttons' => array(
-            array(
-                'text' => 'Criar',
-                'click' => "js:function() { marcar('{$this->createUrl('marcacoes/marcar')}') }"
-            ),
-            array(
-                'text' => 'Cancelar',
-                'click' => 'js:function() { $(this).dialog("close"); }'
-            )
-        ),
-        'close' => 'js:fechar'
-    ),
-));
-
 $this->renderPartial('_marcacao');
-
-$this->endWidget('zii.widgets.jui.CJuiDialog');
