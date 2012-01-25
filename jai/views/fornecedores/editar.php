@@ -3,6 +3,7 @@
 <div id="titulo">
     <h2><?php echo $fornecedor->isNewRecord ? 'Criar' : 'Editar'; ?> Fornecedor</h2>
     <div id="opcoes">
+        <a href="<?php echo $this->createUrl('/fornecedores'); ?>"><img src="imagens/icones/x16.voltar.png" /></a>&nbsp;&nbsp;
         <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/x16.fornecedor.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
