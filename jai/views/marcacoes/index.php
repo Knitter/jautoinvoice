@@ -25,8 +25,19 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'options' => array(
         'title' => 'Marcar ',
         'autoOpen' => false,
-        'minWidth' => 640,
-        'minHeight' => 320
+        'minWidth' => 560,
+        'minHeight' => 270,
+        'buttons' => array(
+            array(
+                'text' => 'Criar',
+                'click' => "js:function() { marcar('{$this->createUrl('marcacoes/marcar')}') }"
+            ),
+            array(
+                'text' => 'Cancelar',
+                'click' => 'js:function() { $(this).dialog("close"); }'
+            )
+        ),
+        'close' => 'js:fechar'
     ),
 ));
 

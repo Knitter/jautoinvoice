@@ -2,47 +2,50 @@
 Yii::app()->clientScript->registerCssFile('css/timepicker/jquery.timepicker.css');
 Yii::app()->clientScript->registerScriptFile('js/timepicker/jquery.timepicker.js');
 
-Yii::app()->clientScript->registerScript('initPicker', '$("#hora").timepicker({showPeriodLabels: false});');
+Yii::app()->clientScript->registerScript('timeInit', 'initTimePicker();');
+
+Yii::app()->clientScript->registerCssFile('css/formularios.css');
 ?>
-<p>
+<div class="row">
     <?php
-    echo CHtml::label('Contribuinte', 'contribuinte');
-
-    $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-        'name' => 'contribuinte',
-        'sourceUrl' => $this->createUrl('marcacoes/accontribuinte'),
-        'options' => array(
-            'minLength' => '3',
-        )
-    ));
-
     echo Chtml::label('Matrícula', 'matricula');
     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
         'name' => 'matricula',
         'sourceUrl' => $this->createUrl('marcacoes/acmatricula'),
         'options' => array(
-            'minLength' => '3',
+            'minLength' => '3'
         )
     ));
     ?>
-</p>
+</div>
 
-<p>
-    Veículos
-</p>
-
-<p>
+<div class="row">
     <?php
-    echo CHtml::label('Hora:', 'hora'),
+    echo CHtml::label('Data', 'data');
+
+    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+        'name' => 'data'
+    ));
+    ?>
+</div>
+
+<div class="row">
+    <?php
+    echo CHtml::label('Hora', 'hora'),
     CHtml::textField('hora');
     ?>
-</p>
+</div>
 
-<p>
+<div class="row">
     <?php
-    echo CHtml::label('Notas', 'descricao'),
-    CHtml::textArea('descricao');
+    echo CHtml::label('Descricao', 'descricao', array('maxlength' => 150)),
+    CHtml::textField('descricao');
     ?>
-</p>
+</div>
 
-<?php echo CHtml::button('Criar', array('onclick' => 'marcar();')); ?>
+<div class="row">
+    <?php
+    echo CHtml::label('Notas', 'notas'),
+    CHtml::textArea('notas', null, array('rows' => 5, 'cols' => 50));
+    ?>
+</div>

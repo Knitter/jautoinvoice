@@ -71,7 +71,7 @@ CREATE TABLE `Combustivel` (
 CREATE TABLE `Veiculo` (
 `idVeiculo` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
 `dataRegisto` DATE NULL ,
-`matricula` VARCHAR( 12 ) NOT NULL ,
+`matricula` VARCHAR( 12 ) NOT NULL UNIQUE ,
 `nrChassis` VARCHAR( 25 ) NULL ,
 `cilindrada` VARCHAR( 25 ) NULL ,
 `nrMotor` VARCHAR( 25 ) NULL ,   

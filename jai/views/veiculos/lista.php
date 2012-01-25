@@ -1,20 +1,17 @@
 <?php
 $this->title = 'Lista de Veículos';
 
-$params = array('id' => $cliente->idCliente);
-if (isset($lista)) {
-    $url = $this->createUrl('/clientes');
-    $params['l'] = 1;
+if ($op == 'editar') {
+    $voltar = $this->createUrl('/clientes/editar', array('id' => $cliente->idCliente));
 } else {
-    $url = $this->createUrl('clientes/editar', array('id' => $cliente->idCliente));
+    $voltar = $this->createUrl('/clientes');
 }
 ?>
-
 <div id="titulo">
     <h2>Veículos de <?php echo $cliente->nome; ?></h2>
     <div id="opcoes">
-        <a href="<?php echo $url; ?>"><img src="imagens/icones/x16.voltar.png" /></a>
-        <a href="<?php echo $this->createUrl('veiculos/criar', $params); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /></a>
+        <a href="<?php echo $voltar; ?>"><img src="imagens/icones/x16.voltar.png" /></a>
+        <a href="<?php echo $this->createUrl('veiculos/criar', array('id' => $cliente->idCliente, 'op' => $op)); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -51,7 +48,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 ),
                 'update' => array(
                     'imageUrl' => 'imagens/icones/x16.veiculo.editar.png',
-                    'url' => 'Yii::app()->createUrl("veiculos/editar", array("id" => $data->idVeiculo' . isset($lista) ? ', "l" => 1' : '' . '))'
+                    'url' => 'Yii::app()->createUrl("veiculos/editar", array("id" => $data->idVeiculo, "op" => "' . $op . '"))'
                 )
             ),
         ),

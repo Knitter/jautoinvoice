@@ -4,7 +4,7 @@
     <div id="opcoes">
         <a href="<?php echo $this->createUrl('clientes/criar'); ?>"><img src="imagens/icones/x16.cliente.criar.png" /></a>
         <?php if (!$cliente->isNewRecord) { ?>
-            <a href="<?php echo $this->createUrl('veiculos/lista', array('id' => $cliente->idCliente)); ?>"><img src="imagens/icones/x16.veiculo.png" /></a>
+            <a href="<?php echo $this->createUrl('veiculos/lista', array('id' => $cliente->idCliente, 'op' => 'editar')); ?>"><img src="imagens/icones/x16.veiculo.png" /></a>
         <?php } ?>
     </div>
     <div style="clear: both"></div>

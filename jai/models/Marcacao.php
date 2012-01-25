@@ -28,6 +28,7 @@
  * @property string $criado
  * @property int $activo
  * @property string $descricao
+ * @property string $notas
  * 
  * @property int $idFolhaObra
  * @property int $idVeiculo
@@ -51,10 +52,11 @@ class Marcacao extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('dataMarcacao, idVeiculo', 'required'),
-            array('descricao', 'safe'),
+            array('dataMarcacao', 'required'),
+            array('descricao', 'length', 'max' => 150),
+            array('notas', 'safe'),
             // search
-            array('dataMarcacao, nome', 'safe', 'on' => 'search'),
+            array('dataMarcacao, descricao, criado, notas', 'safe', 'on' => 'search'),
         );
     }
 
@@ -72,7 +74,8 @@ class Marcacao extends CActiveRecord {
             'criado' => 'Registado',
             'idVeiculo' => 'Veículo',
             'idFolhaObra' => 'Folha de Obra',
-            'descricacao' => 'Descrição'
+            'descricacao' => 'Descrição',
+            'notas' => 'Notas'
         );
     }
 
@@ -82,9 +85,12 @@ class Marcacao extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->compare('dataMarcacao', $this->dataMarcacao);
-        $criteria->compare('criado', $this->criado);
-        $criteria->compare('descricao', $this->descricao);
+        $criteria->order = 'dataMarcacao, descricao';
+
+        $criteria->compare('dataMarcacao', $this->dataMarcacao, true);
+        $criteria->compare('criado', $this->criado, true);
+        $criteria->compare('descricao', $this->descricao, true);
+        $criteria->compare('notas', $this->notas, true);
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider('Marcacao', array('criteria' => $criteria));

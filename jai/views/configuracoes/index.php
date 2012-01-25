@@ -1,10 +1,18 @@
-<h2>Configurações</h2>
+<?php 
+$this->title = 'Configurações de Sistema';
 
-<ul>
-    <li>Configurações Luso SMS</li>
-    <li>Chave de Suporte</li>
-    <li>Acesso de Clientes</li>
-    <li>Envio de Notificações</li>
-    <li>Sistema Activo</li>
-    <li>Configurações de E-mail</li>
-</ul>
+Yii::app()->clientScript->registerScriptFile('js/collapse/jquery.collapse.js');
+
+Yii::app()->clientScript->registerScript('init', '$("#tixa").collapse();');
+?>
+<h2>Configurações de Sistema</h2>
+
+<div id="tixa">
+    <?php
+    $this->renderPartial('_intro');
+    $this->renderPartial('_geral');
+    $this->renderPartial('_email');
+    $this->renderPartial('_sms');
+    $this->renderPartial('_suporte');
+    ?>
+</div>

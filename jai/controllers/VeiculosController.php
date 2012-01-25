@@ -76,7 +76,7 @@ class VeiculosController extends SistemaController {
         $this->redirect(array('/clientes'));
     }
 
-    public function actionLista($id, $l = null) {
+    public function actionLista($id, $op = 'lista') {
         $cliente = $this->carregarModeloCliente($id);
 
         $filtro = new Veiculo();
@@ -86,11 +86,11 @@ class VeiculosController extends SistemaController {
         $this->render('lista', array(
             'cliente' => $cliente,
             'filtro' => $filtro,
-            'lista' => $l !== null
+            'op' => $op
         ));
     }
 
-    public function actionCriar($id, $l = null) {
+    public function actionCriar($id) {
         $cliente = $this->carregarModeloCliente($id);
         $veiculo = new Veiculo();
 
@@ -107,9 +107,6 @@ class VeiculosController extends SistemaController {
                     'idv' => $veiculo->idVeiculo
                 );
 
-            if ($l) {
-                $params['l'] = 1;
-            }
             $this->redirect($params);
         }
 
@@ -131,12 +128,11 @@ class VeiculosController extends SistemaController {
             'cliente' => $cliente,
             'combustiveis' => $combustiveis,
             'categorias' => $categorias,
-            'modelos' => $modelos,
-            'lista' => $l !== null
+            'modelos' => $modelos
         ));
     }
 
-    public function actionEditar($idc, $idv, $l = null) {
+    public function actionEditar($idc, $idv) {
         $cliente = $this->carregarModeloCliente($idc);
 
         $veiculo = $this->carregarModeloVeiculo($idv);
@@ -151,10 +147,6 @@ class VeiculosController extends SistemaController {
                     'idc' => $cliente->idCliente,
                     'idv' => $veiculo->idVeiculo
                 );
-
-            if ($l) {
-                $params['l'] = 1;
-            }
         }
 
         $criteria = new CDbCriteria();
@@ -176,7 +168,6 @@ class VeiculosController extends SistemaController {
             'combustiveis' => $combustiveis,
             'categorias' => $categorias,
             'modelos' => $modelos,
-            'lista' => $l !== null
         ));
     }
 

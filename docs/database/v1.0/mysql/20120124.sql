@@ -1,4 +1,4 @@
-ALTER TABLE `Marcacao` CHANGE `descricao` `descricao` TEXT NULL ;
+ALTER TABLE `Marcacao` ADD `notas` TEXT NULL ;
 
 ALTER TABLE `Servico` ADD `preco` DECIMAL (10, 4) NULL ;
 ALTER TABLE `Servico` ADD `idIVA` INT UNSIGNED NULL ;

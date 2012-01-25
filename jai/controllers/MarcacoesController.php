@@ -71,24 +71,47 @@ class MarcacoesController extends SistemaController {
         Yii::app()->end();
     }
 
-    public function actionAcContribuinte() {
-        $criteria = new CDbCriteria();
-        $criteria->order = 'nome';
-        $criteria->compare('contribuinte', $_GET['term'], true);
-        $criteria->compare('activo', 1);
+    public function actionMarcar() {
+        $resultado = (object) array('sucesso' => 0);
+        $marcacao = new Marcacao();
 
-        $clientes = array();
-        foreach (Cliente::model()->findAll($criteria) as $cliente) {
-            $clientes[] = $cliente->contribuinte;
+        if (!empty($_POST['matricula'])) {
+            $criteria = new CDbCriteria();
+            $criteria->compare('matricula', $_POST['matricula']);
+            $criteria->compare('activo', 1);
+
+            if (($veiculo = Veiculo::model()->find($criteria)) !== null) {
+                $marcacao->idVeiculo = $veiculo->idVeiculo;
+            }
         }
 
-        echo json_encode($clientes);
+        $data = date('Y-m-d', $_POST['data'] / 1000);
+        if (!empty($_POST['hora'])) {
+            $tempo = explode(':', $_POST['hora']);
+            if (count($tempo) == 2) {
+                $data .= sprintf(' %d:%d:00', $tempo[0], $tempo[1]);
+            }
+        }
+        $marcacao->dataMarcacao = $data;
+        $marcacao->descricao = !empty($_POST['descricao']) ? $_POST['descricao'] :
+                ($marcacao->idVeiculo ? 'Serviço a ' . $veiculo->matricula : 'Serviço desconhecido');
 
+        if (!empty($_POST['notas'])) {
+            $marcacao->notas = $_POST['notas'];
+        }
+
+        if ($marcacao->save()) {
+            $resultado->sucesso = 1;
+            $resultado->evento = (object) array(
+                        'id' => $marcacao->idMarcacao,
+                        'title' => $marcacao->descricao,
+                        'start' => strtotime($marcacao->dataMarcacao),
+                        'allDay' => false
+            );
+        }
+
+        echo json_encode($resultado);
         Yii::app()->end();
-    }
-
-    public function actionMarcar() {
-        
     }
 
     public function actionCancelar($id) {
@@ -105,7 +128,8 @@ class MarcacoesController extends SistemaController {
 
             foreach (Marcacao::model()->findAll($criteria) as $evt) {
                 $eventos[] = (object) array(
-                            'title' => ($evt->descricao ? $evt->descricao : $evt->veiculo->matricula),
+                            'id' => $evt->idMarcacao,
+                            'title' => $evt->descricao,
                             'start' => strtotime($evt->dataMarcacao),
                             'allDay' => false
                 );
