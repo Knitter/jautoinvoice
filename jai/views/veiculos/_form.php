@@ -93,8 +93,8 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
     <?php
-    echo CHtml::submitButton($veiculo->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;';
-    CHtml::link('Cancelar', $this->createUrl($url));
+    echo CHtml::submitButton($veiculo->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    CHtml::link('Cancelar', $this->createUrl('veiculos/lista', array('id' => $cliente->idCliente, 'op' => $op)));
     ?>
 </div>
 

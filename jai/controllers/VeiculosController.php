@@ -90,7 +90,7 @@ class VeiculosController extends SistemaController {
         ));
     }
 
-    public function actionCriar($id) {
+    public function actionCriar($id, $op = 'lista') {
         $cliente = $this->carregarModeloCliente($id);
         $veiculo = new Veiculo();
 
@@ -100,14 +100,9 @@ class VeiculosController extends SistemaController {
             $veiculo->attributes = $_POST['Veiculo'];
             $veiculo->idCliente = $cliente->idCliente;
 
-            if ($veiculo->save())
-                $params = array(
-                    'editar',
-                    'idc' => $cliente->idCliente,
-                    'idv' => $veiculo->idVeiculo
-                );
-
-            $this->redirect($params);
+            if ($veiculo->save()) {
+                $this->redirect(array('editar', 'idc' => $cliente->idCliente, 'idv' => $veiculo->idVeiculo, 'op' => $op));
+            }
         }
 
         $criteria = new CDbCriteria();
@@ -128,11 +123,12 @@ class VeiculosController extends SistemaController {
             'cliente' => $cliente,
             'combustiveis' => $combustiveis,
             'categorias' => $categorias,
-            'modelos' => $modelos
+            'modelos' => $modelos,
+            'op' => $op
         ));
     }
 
-    public function actionEditar($idc, $idv) {
+    public function actionEditar($idc, $idv, $op = 'lista') {
         $cliente = $this->carregarModeloCliente($idc);
 
         $veiculo = $this->carregarModeloVeiculo($idv);
@@ -141,12 +137,9 @@ class VeiculosController extends SistemaController {
 
         if (isset($_POST['Veiculo'])) {
             $veiculo->attributes = $_POST['Veiculo'];
-            if ($veiculo->save())
-                $params = array(
-                    'editar',
-                    'idc' => $cliente->idCliente,
-                    'idv' => $veiculo->idVeiculo
-                );
+            if ($veiculo->save()) {
+                $this->redirect(array('editar', 'idc' => $cliente->idCliente, 'idv' => $veiculo->idVeiculo, 'op' => $op));
+            }
         }
 
         $criteria = new CDbCriteria();
@@ -168,6 +161,7 @@ class VeiculosController extends SistemaController {
             'combustiveis' => $combustiveis,
             'categorias' => $categorias,
             'modelos' => $modelos,
+            'op' => $op
         ));
     }
 
