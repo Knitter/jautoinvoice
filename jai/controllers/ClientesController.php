@@ -40,7 +40,7 @@ class ClientesController extends SistemaController {
                     array(
                         'allow',
                         'actions' => array('index', 'criar', 'editar', 'apagar',
-                            'emai', 'sms'
+                            'email', 'sms'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -113,17 +113,69 @@ class ClientesController extends SistemaController {
     }
 
     public function actionEmail() {
-        //TODO: not implemented yet!
-        if (!empty($_POST['idClienteEmail'])) {
-            //new Email($nomeDestino, $enderecoDestino, $nomeOrigem, $enderecoOrigem, $assunto, $mensagem);
+        $resultado = (object) array('sucesso' => 0);
+        if (!empty($_POST['cliente']) && !empty($_POST['mensagem'])
+                && ($cliente = Cliente::model()->findByPk((int) $_POST['cliente'])) !== null) {
+            if ($cliente->email) {
+                if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null
+                        && $enderecoEmail->valor != '') {
+
+                    Yii::import('ext.email.*');
+
+                    //TODO: permitir personalização do nome da empresa.
+                    $email = new Email($cliente->nome, $cliente->email, 'jAutoInvoice', $enderecoEmail->valor
+                                    , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
+                    try {
+                        $email->enviar();
+                        $resultado->sucesso = 1;
+                    } catch (Exception $e) {
+                        $resultado->motivo = $e->getMessage();
+                    }
+                } else {
+                    $resultado->motivo = 'Não está definido um endereço de origem.';
+                }
+            }
         }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
     }
 
     public function actionSms() {
-        //TODO: not implemented yet!
-        if (!empty($_POST['idClienteSms'])) {
-            //new LusoSMS($username, $password, $mensagem, $de, $para);
+        $resultado = (object) array('sucesso' => 0);
+        if (!empty($_POST['sms']) && !empty($_POST['cliente'])
+                && ($cliente = Cliente::model()->findByPk((int) $_POST['cliente'])) !== null) {
+
+            if ($cliente->telemovel) {
+                Yii::import('ext.lusosms.*');
+
+                if (($cUsername = Configuracao::model()->findByPk('utilizadorLSMS')) !== null
+                        && ($cPassword = Configuracao::model()->findByPk('passwordLSMS')) !== null) {
+
+                    try {
+                        $sms = new LusoSMS($cUsername->valor, $cPassword->valor, $_POST['sms'], '969623141', $cliente->telemovel);
+                        $sms->enviar();
+
+                        $resultado->sucesso = 1;
+                    } catch (CaracteresExcedidosException $cee) {
+                        $resultado->motivo = 'Número de caracteres excedidos.';
+                    } catch (ErroComunicacaoException $ece) {
+                        $resultado->motivo = 'Ocorreu um erro de comunicação com o sistema Luso SMS.';
+                    } catch (CreditoInsuficienteException $cie) {
+                        $resultado->motivo = 'Não possui créditos suficientes para enviar novas SMSs.';
+                    } catch (AutenticacaoInvalidaException $aie) {
+                        $resultado->motivo = 'Falha na autenticação do sistema Luso SMS.';
+                    } catch (SintaxeInvalidaException $sie) {
+                        $resultado->motivo = 'Erro interno.';
+                    } catch (Exception $e) {
+                        $resultado->motivo = 'Erro desconhecido.';
+                    }
+                }
+            }
         }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
     }
 
 }

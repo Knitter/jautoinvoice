@@ -2,8 +2,8 @@
 
 class LusoSMS {
 
-    private static $URL_CREDITO = "//http://www.lusosms.com/ver_credito_get.php";
-    private static $URL_API = "//http://www.lusosms.com/enviar_sms_get.php";
+    private static $URL_CREDITO = "http://www.lusosms.com/ver_credito_get.php";
+    private static $URL_API = "http://www.lusosms.com/enviar_sms_get.php";
     private static $MAX = 150;
 
     /**
@@ -39,6 +39,15 @@ class LusoSMS {
         $this->para = $para;
     }
 
+    /**
+     *
+     * @throws Exception
+     * @throws CaracteresExcedidosException
+     * @throws ErroComunicacaoException
+     * @throws CreditoInsuficienteException
+     * @throws AutenticacaoInvalidaException
+     * @throws SintaxeInvalidaException 
+     */
     public function enviar() {
         if (empty($this->mensagem)) {
             throw new Exception('A tentar enviar uma SMS sem texto.');
@@ -110,6 +119,15 @@ class LusoSMS {
         $this->para = $para;
     }
 
+    /**
+     *
+     * @param type $username
+     * @param type $password
+     * @return type
+     * @throws Exception
+     * @throws AutenticacaoInvalidaException
+     * @throws SintaxeInvalidaException 
+     */
     public static function verificarCreditos($username, $password) {
         if (empty($username) || empty($password)) {
             throw new Exception('Os dados de acesso indicados não são válidos.');
@@ -134,7 +152,7 @@ class LusoSMS {
                 $creditos = intval($resultado);
         }
 
-        return $resultado;
+        return intval($resultado);
     }
 
 }

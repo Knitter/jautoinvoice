@@ -23,11 +23,11 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 ?>
 <div class="row">
     <?php
-    echo CHtml::label('Mensagem', 'sms'), CHtml::textField('sms', null, array('maxlength' => '140'));
+    echo CHtml::label('Mensagem', 'sms'), CHtml::textField('sms', null, array('maxlength' => '150'));
     ?>
 </div>
 
-<span class="info">Limite de 140 caracteres.</p>
+<span class="info">Limite de 150 caracteres.</p>
 <?php
 echo CHtml::hiddenField('idClienteSms');
 

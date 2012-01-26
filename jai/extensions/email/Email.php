@@ -18,50 +18,69 @@ class Email {
         $this->mensagem = $mensagem;
     }
 
+    /**
+     *
+     * @throws Exception 
+     */
     public function enviar() {
         if (!$this->enderecoOrigem) {
-            throw new Exception('');
+            throw new Exception('Não é possível enviar e-mails sem endereço de origem.');
         }
 
-        //$port = Config::getInstance()->get('email.smtp.port');
-        if (!$port) {
-            $port = 25;
+        if (($htmlEmails = Configuracao::model()->findByPk('htmlEmails')) !== null) {
+            $htmlEmails = intval($htmlEmails->valor);
         }
 
-        //$lang = explode('_', Config::getInstance()->get('locale.language'));
-        //$lang = $lang[0];
+        if (($usarSMTP = Configuracao::model()->findByPk('usarSMTP')) !== null) {
+            $usarSMTP = intval($usarSMTP->valor);
+        }
 
         $mailer = new PHPMailer();
-        //$mailer->SetLanguage($lang, APPROOT . '/core/helpser/phpmailer/languages/');
+        $mailer->SetLanguage('pt', Yii::getPathOfAlias('ext.email.languages') . '/');
 
         $mailer->AddAddress($this->enderecoDestino, $this->nomeDestino);
-        //$mailer->From = Config::getInstance()->get('email.email');
+        $mailer->From = $this->enderecoOrigem;
 
+        $mailer->Subject = $this->assunto;
         $mailer->Body = $this->mensagem;
 
-        //if (Config::getInstance()->get('email.html')) {
-        //$mailer->IsHTML(true);
-        //$mailer->AltBody = strip_tags($this->message);
-        //}
-        //if (Config::getInstance()->get('email.usesmtp')) {
-        //$username = Config::getInstance()->get('email.smtp.username');
-        //$password = Config::getInstance()->get('email.smtp.password');
-        //$host = Config::getInstance()->get('email.smtp.host');
-        //if (!$username || !$password || !$host) {
-        //throw new Exception('');
-        //}
-        //$mailer->IsSMTP(true);
-        //$mailer->Username = $username;
-        //$mailer->Password = $password;
-        //$mailer->Port = $port;
-        //$mailer->Host = $host;
-        //$mailer->SMTPSecure = Config::getInstance()->get('email.smtp.prefix');
-        //}
+        if ($htmlEmails) {
+            $mailer->IsHTML(true);
+            $mailer->AltBody = strip_tags($this->message);
+        }
+        if ($usarSMTP) {
+            $mailer->IsSMTP(true);
+
+            if (($utilizadorSMTP = Configuracao::model()->findByPk('utilizadorSMTP')) === null || $utilizadorSMTP->valor == '') {
+                throw new Exception('O utilizador SMTP não está definido.');
+            }
+            $mailer->Username = $utilizadorSMTP->valor;
+
+            if (($passwordSMTP = Configuracao::model()->findByPk('passwordSMTP')) === null || $passwordSMTP->valor == '') {
+                throw new Exception('A password de SMTP não está definida.');
+            }
+            $mailer->Password = $passwordSMTP->valor;
+
+            if (($servidorSMTP = Configuracao::model()->findByPk('servidorSMTP')) === null || $servidorSMTP->vaor == '') {
+                throw new Exception('Servidor de SMTP inválido.');
+            }
+            $mailer->Host = $servidorSMTP->valor;
+
+            $mailer->Port = 25;
+            if (($portoSMTP = Configuracao::model()->findByPk('portoSMTP')) !== null) {
+                $mailer->Port = intval($portoSMTP->valor);
+            }
+
+            $mailer->SMTPSecure = 'ssl';
+            if (($prefixoSMTP = Configuracao::model()->findByPk('prefixoSMTP')) !== null && $prefixoSMTP->valor != '') {
+                $mailer->SMTPSecure = $prefixoSMTP->valor;
+            }
+        }
 
         try {
             $mailer->Send();
         } catch (phpmailerException $pe) {
-            throw new Exception('', $pe);
+            throw new Exception('Erro interno.', $pe);
         }
     }
 

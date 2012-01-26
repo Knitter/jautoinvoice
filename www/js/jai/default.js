@@ -37,7 +37,7 @@ function enviarEmail(url) {
             if(json.sucesso) {
                 alert('Mensagem enviada.');
             } else {
-                alert('Não foi possível enviar o e-mail.');
+                alert(json.motivo ? json.motivo : 'Não foi possível enviar o e-mail.');
             }
         },
         complete: function() {
@@ -59,12 +59,30 @@ function enviarSMS(url) {
             if(json.sucesso) {
                 alert('Mensagem enviada.');
             } else {
-                alert('Não foi possível enviar a mensagem.');
+                alert(json.motivo ? json.motivo : 'Não foi possível enviar a mensagem.');
             }
         },
         complete: function() {
             $("#smsForm").dialog("close");
         }
     });   
+}
+
+function actualizarCreditos(url) {
+    $.ajax({
+        url: url,
+        type: 'POST',
+        dataType: 'json',
+        success: function(json){
+            if(json.sucesso) {
+                $('#creditosSMS').html(json.creditos);
+            } else {
+                $('#creditosSMS').html('#ERRO!');
+                if(json.motivo) {
+                    alert(json.motivo);
+                }
+            }
+        }
+    });
 }
 

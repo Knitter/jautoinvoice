@@ -71,6 +71,23 @@ h2 {
     width: 30%;
 }
 
+.configuracoes {
+    padding: 0 0 1.5em 1.5em;
+}
+
+#creditosSMS {
+    padding: 0 1em 0 1em;
+    font-weight: bold;
+}
+
+.row {
+    
+}
+
+.row img {
+    vertical-align: middle;
+}
+
 /*div.flash-error, div.flash-notice, div.flash-success {
     padding:.8em;
     margin-bottom:1em;

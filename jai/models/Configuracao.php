@@ -1,6 +1,6 @@
 <?php
 
-/* Combustivel.php
+/* Configuracacao.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
@@ -23,44 +23,38 @@
  */
 
 /**
- * @property int $idCombustivel
- * @property string $nome
- * @property int $activo
- *
- * @property Veiculo[] $veiculos
+ * @property string $chave
+ * @property string $valor
+ * @property string $grupo
  */
-class Combustivel extends CActiveRecord {
+class Configuracao extends CActiveRecord {
 
     /**
-     * @return Combustivel
+     * @return Categoria
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
     public function tableName() {
-        return 'Combustivel';
+        return 'Configuracao';
     }
 
     public function rules() {
         return array(
-            array('nome', 'required'),
-            array('nome', 'length', 'max' => 100),
+            array('chave', 'required'),
+            array('chave, grupo', 'length', 'max' => 150),
+            array('valor', 'length', 'max' => 255),
             // search
-            array('nome', 'safe', 'on' => 'search'),
-        );
-    }
-
-    public function relations() {
-        return array(
-            'veiculos' => array(self::HAS_MANY, 'Veiculo', 'idCombustivel'),
+            array('chave, valor, grupo', 'safe', 'on' => 'search'),
         );
     }
 
     public function attributeLabels() {
         return array(
-            'idCombustivel' => 'ID',
-            'nome' => 'Nome'
+            'chave' => 'Chave',
+            'valor' => 'Valor',
+            'grupo' => 'Grupo'
         );
     }
 
@@ -70,12 +64,13 @@ class Combustivel extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'nome';
+        $criteria->order = 'grupo, chave';
 
-        $criteria->compare('nome', $this->nome, true);
-        $criteria->compare('activo', 1);
+        $criteria->compare('chave', $this->chave, true);
+        $criteria->compare('valor', $this->valor, true);
+        $criteria->compare('grupo', $this->grupo, true);
 
-        return new CActiveDataProvider('Combustivel', array('criteria' => $criteria));
+        return new CActiveDataProvider('Configuracao', array('criteria' => $criteria));
     }
 
 }
