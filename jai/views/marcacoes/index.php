@@ -9,8 +9,16 @@ Yii::app()->clientScript->registerCoreScript('jquery.ui');
 Yii::app()->clientScript->registerScriptFile('js/fullcalendar/fullcalendar.min.js');
 Yii::app()->clientScript->registerScriptFile('js/jai/marcacoes.js');
 
-$url = $this->createUrl('marcacoes/eventos');
-$js = "initCalendar('{$url}');";
+$js = <<<JS
+globais.url.calendario = '{$this->createUrl('marcacoes/eventos')}';
+globais.url.marcar = '{$this->createUrl('marcacoes/marcar')}';
+globais.url.actualizar = '{$this->createUrl('marcacoes/actualizar')}';
+globais.url.folha = '{$this->createUrl('obras/folhademarcacao')}';
+globais.url.cancelar = '{$this->createUrl('marcacoes/cancelar')}';
+
+initCalendar();
+initTimePicker();
+JS;
 
 Yii::app()->clientScript->registerScript('calInit', $js);
 ?>
@@ -21,3 +29,5 @@ Yii::app()->clientScript->registerScript('calInit', $js);
 
 <?php
 $this->renderPartial('_marcacao');
+
+$this->renderPartial('_evento');

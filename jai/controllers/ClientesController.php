@@ -115,14 +115,14 @@ class ClientesController extends SistemaController {
     public function actionEmail() {
         //TODO: not implemented yet!
         if (!empty($_POST['idClienteEmail'])) {
-            
+            //new Email($nomeDestino, $enderecoDestino, $nomeOrigem, $enderecoOrigem, $assunto, $mensagem);
         }
     }
 
     public function actionSms() {
         //TODO: not implemented yet!
         if (!empty($_POST['idClienteSms'])) {
-            
+            //new LusoSMS($username, $password, $mensagem, $de, $para);
         }
     }
 

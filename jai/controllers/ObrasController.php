@@ -34,7 +34,9 @@ class ObrasController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar',
+                            'folhaDeMarcacao'
+                        ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -98,6 +100,16 @@ class ObrasController extends SistemaController {
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
+    }
+
+    public function actionFolhaDeMarcacao($id) {
+        if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+
+        $this->render('demarcacao', array(
+            'marcacao' => $marcacao
+        ));
     }
 
 }

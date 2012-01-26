@@ -2,8 +2,6 @@
 Yii::app()->clientScript->registerCssFile('css/timepicker/jquery.timepicker.css');
 Yii::app()->clientScript->registerScriptFile('js/timepicker/jquery.timepicker.js');
 
-Yii::app()->clientScript->registerScript('timeInit', 'initTimePicker();');
-
 Yii::app()->clientScript->registerCssFile('css/formularios.css');
 
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
@@ -16,21 +14,27 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
         'buttons' => array(
             array(
                 'text' => 'Criar',
-                'click' => "js:function() { marcar('{$this->createUrl('marcacoes/marcar')}') }"
+                'click' => 'js:marcar'
             ),
             array(
                 'text' => 'Cancelar',
                 'click' => 'js:function() { $(this).dialog("close"); }'
             )
         ),
-        'close' => 'js:fechar'
+        'close' => 'js:fecharJanelaMarcacao'
     )
 ));
 ?>
+<div class="row">
+    <?php
+    echo CHtml::label('Descricao', 'descricao', array('maxlength' => 150)),
+    CHtml::textField('descricao');
+    ?>
+</div>
 
 <div class="row">
     <?php
-    echo Chtml::label('Matrícula', 'matricula');
+    echo CHtml::label('Matrícula', 'matricula');
     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
         'name' => 'matricula',
         'sourceUrl' => $this->createUrl('marcacoes/acmatricula'),
@@ -43,10 +47,13 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 
 <div class="row">
     <?php
-    echo CHtml::label('Data', 'data');
+    echo CHtml::label('Data', 'dataMarcacao');
 
     $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-        'name' => 'data'
+        'name' => 'dataMarcacao',
+        'htmlOptions' => array(
+            'class' => 'datas'
+        )
     ));
     ?>
 </div>
@@ -54,14 +61,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 <div class="row">
     <?php
     echo CHtml::label('Hora', 'hora'),
-    CHtml::textField('hora');
-    ?>
-</div>
-
-<div class="row">
-    <?php
-    echo CHtml::label('Descricao', 'descricao', array('maxlength' => 150)),
-    CHtml::textField('descricao');
+    CHtml::textField('hora', '', array('class' => 'horas'));
     ?>
 </div>
 

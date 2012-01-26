@@ -36,8 +36,8 @@ class MarcacoesController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'marcar',
-                            'cancelar', 'eventos', 'acContribuinte', 'acMatricula'
+                        'actions' => array('index', 'marcar', 'actualizar',
+                            'apagar', 'eventos', 'acMatricula'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -106,7 +106,10 @@ class MarcacoesController extends SistemaController {
                         'id' => $marcacao->idMarcacao,
                         'title' => $marcacao->descricao,
                         'start' => strtotime($marcacao->dataMarcacao),
-                        'allDay' => false
+                        'allDay' => false,
+                        'notas' => $marcacao->notas,
+                        //TODO: mover matricula para dentro da marcacao
+                        'matricula' => ($marcacao->idVeiculo ? $veiculo->matricula : '')
             );
         }
 
@@ -114,8 +117,18 @@ class MarcacoesController extends SistemaController {
         Yii::app()->end();
     }
 
-    public function actionCancelar($id) {
-        
+    public function actionApagar() {
+        $resultado = (object) array('sucesso' => 0);
+        if (!empty($_POST['id'])) {
+            $marcacao = $this->carregarModeloMarcacao($_POST['id']);
+
+            $marcacao->activo = 0;
+            if ($marcacao->save()) {
+                $resultado->sucesso = 1;
+            }
+        }
+        echo json_encode($resultado);
+        Yii::app()->end();
     }
 
     public function actionEventos() {
@@ -131,12 +144,66 @@ class MarcacoesController extends SistemaController {
                             'id' => $evt->idMarcacao,
                             'title' => $evt->descricao,
                             'start' => strtotime($evt->dataMarcacao),
-                            'allDay' => false
+                            'allDay' => false,
+                            'notas' => $evt->notas,
+                            'matricula' => ($evt->idVeiculo ? $evt->veiculo->matricula : '')
                 );
             }
         }
 
         echo json_encode($eventos);
+        Yii::app()->end();
+    }
+
+    public function actionActualizar() {
+        $resultado = (object) array('sucesso' => 0);
+        if (!empty($_POST['id'])) {
+            $marcacao = $this->carregarModeloMarcacao($_POST['id']);
+
+            if (!empty($_POST['matricula'])) {
+                $criteria = new CDbCriteria();
+                $criteria->compare('matricula', $_POST['matricula']);
+                $criteria->compare('activo', 1);
+
+                if (($veiculo = Veiculo::model()->find($criteria)) !== null) {
+                    $marcacao->idVeiculo = $veiculo->idVeiculo;
+                }
+            } else if ($marcacao->idVeiculo) {
+                $marcacao->idVeiculo = null;
+                //$marcacao->matricula = null;
+            }
+
+            $data = date('Y-m-d', $_POST['data'] / 1000);
+            if (!empty($_POST['hora'])) {
+                $tempo = explode(':', $_POST['hora']);
+                if (count($tempo) == 2) {
+                    $data .= sprintf(' %d:%d:00', $tempo[0], $tempo[1]);
+                }
+            }
+            $marcacao->dataMarcacao = $data;
+            $marcacao->descricao = !empty($_POST['descricao']) ? $_POST['descricao'] :
+                    ($marcacao->idVeiculo ? 'Serviço a ' . $veiculo->matricula : 'Serviço desconhecido');
+
+            if (!empty($_POST['notas'])) {
+                $marcacao->notas = $_POST['notas'];
+            } else if ($marcacao->notas) {
+                $marcacao->notas = null;
+            }
+
+            if ($marcacao->save()) {
+                $resultado->sucesso = 1;
+                $resultado->evento = (object) array(
+                            'id' => $marcacao->idMarcacao,
+                            'title' => $marcacao->descricao,
+                            'start' => strtotime($marcacao->dataMarcacao),
+                            'allDay' => false,
+                            'notas' => $marcacao->notas,
+                            //TODO: mover matricula para dentro da marcacao
+                            'matricula' => ($marcacao->idVeiculo ? $veiculo->matricula : '')
+                );
+            }
+        }
+        echo json_encode($resultado);
         Yii::app()->end();
     }
 

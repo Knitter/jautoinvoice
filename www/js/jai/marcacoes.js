@@ -1,23 +1,33 @@
-function initCalendar(url) {
+var globais = {
+    url: {
+        calendario: '',
+        marcar: '',
+        actualizar: '',
+        folha: '',
+        apagar: ''
+    }
+}
+
+function initCalendar() {
     $("#calendar").fullCalendar({
         header: {
             left: 'month,basicWeek,basicDay',
             center: 'title',
             right: 'today prev,next'
         },     
-        
+        theme: true,
+        //TODO: Fazer com que seja possível alterar o dia de arranque da semana
+        firstDay: 1,
+        //TODO: Permitir a configuração de marcações ao fim de semana
+        //weekends: false,
         firstHour: 8,
-        events: url,
+        events: globais.url.calendario,
         timeFormat: {
             agenda: 'H:mm{ - H:mm}', 
             '': 'H(:mm)'
         },
         buttonText:
         {
-            prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
-            next:     '&nbsp;&#9658;&nbsp;',  // right triangle
-            prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
-            nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
             today:    'Hoje',
             month:    'Mês',
             week:     'Semana',
@@ -27,20 +37,26 @@ function initCalendar(url) {
         monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
         dayNames: ['Domingo', '2ª Feira', '3ª Feira', '4ª Feira', '5ª Feira', '6ª Feira', 'Sábado'],
         dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sáb'],
-        eventClick: function(event) {
-        //$("#janelaEvento").dialog("open");
+        eventClick: function(calEvent, jsEvent, view) {
+            $('#idEvento').val(calEvent.id);
+            $('#descricaoEvento').val(calEvent.title);
+            $('#matriculaEvento').val(calEvent.matricula);
+            $('#dataEvento').datepicker('setDate', calEvent.start);
+            $('#horaEvento').val(calEvent.start.getHours() + ':' + calEvent.start.getMinutes());
+            $('#notasEvento').val(calEvent.notas);
+            
+            $('#janelaEvento').dialog('open');
         },
         dayClick: function(date, allDay, jsEvent, view) {
             //TODO: actualizar valor correcto de acordo com horário de funcionamento
-            $('#data').datepicker('setDate', date);
-            //$("#hora").val(date.getHours() + ':' + date.getMinutes());
+            $('#dataMarcacao').datepicker('setDate', date);
             $('#janelaMarcacao').dialog('open');
         }
     });
 }
 
 function initTimePicker() {
-    $("#hora").timepicker({
+    $(".horas").timepicker({
         showPeriodLabels: false,
         //TODO: personalizavel
         hours: {
@@ -54,13 +70,13 @@ function initTimePicker() {
     });
 }
 
-function marcar(url) {
+function marcar() {
     $.ajax({
-        url: url,
+        url: globais.url.marcar,
         type: 'POST',
         dataType: 'json',
         data: {
-            data: $('#data').datepicker('getDate').getTime(),
+            data: $('#dataMarcacao').datepicker('getDate').getTime(),
             matricula: $('#matricula').val(),
             hora: $('#hora').val(),
             descricao: $('#descricao').val(),
@@ -76,13 +92,87 @@ function marcar(url) {
         complete: function() {
             $("#janelaMarcacao").dialog("close");
         }
-    });   
+    });
 }
 
-function fechar() {   
-    $('#data').datepicker('setDate', new Date());
+function fecharJanelaMarcacao() {   
+    $('#dataMarcacao').datepicker('setDate', new Date());
     $('#matricula').val('');
     $('#hora').val('');
     $('#descricao').val('');
     $('#notas').val('');
+}
+
+function fecharJanelaEvento() {
+    $('#idEvento').val(0);
+    $('#descricaoEvento').val('');
+    $('#matriculaEvento').val('');
+    $('#dataEvento').datepicker('setDate', new Date());
+    $('#horaEvento').val('');
+    $('#notasEvento').val('');
+}
+
+function folhaObra() {
+    window.location = globais.url.folha + '&id=' + $('#idEvento').val();
+}
+
+function guardar() {
+    var id = $('#idEvento').val(), calendario = $('#calendar'), 
+    eventos = calendario.fullCalendar('clientEvents', id),
+    evento = null;
+    
+    $.ajax({
+        url: globais.url.actualizar,
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: id,
+            data: $('#dataEvento').datepicker('getDate').getTime(),
+            matricula: $('#matriculaEvento').val(),
+            hora: $('#horaEvento').val(),
+            descricao: $('#descricaoEvento').val(),
+            notas: $('#notasEvento').val()
+        },
+        success: function(json) {
+            if(json.sucesso) {
+                evento = eventos[0];
+                
+                evento.title = json.evento.title;
+                evento.start = json.evento.start;
+                evento.matricula = json.evento.matricula;
+                evento.allDay = json.evento.allDay;
+                evento.notas = json.evento.notas;
+                
+                calendario.fullCalendar('updateEvent', evento);
+            } else {
+                alert('Não foi possível guardas as alterações.');
+            }
+        },
+        complete: function() {
+            $("#janelaEvento").dialog("close");
+        }
+    });   
+}
+
+function apagar() {
+    if(confirm('Tem a certeza que deseja remover a marcação?')) {
+        $.ajax({
+            url: globais.url.apagar,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: $('#idEvento').val()
+            },
+            success: function(json){
+                if(json.sucesso) {
+                    $('#calendar').fullCalendar('removeEvents', $('#idEvento').val());
+                } else {
+                    alert('Não foi possível remover a marcação seleccionada.');
+                }
+            },
+            complete: function() {
+                $("#janelaEvento").dialog("close");
+            }
+        });
+    }
 }
