@@ -11,7 +11,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($marca, 'nome'),
-    $form->textField($marca, 'nome', array('size' => 60, 'maxlength' => 100)),
+    $form->textField($marca, 'nome', array('class' => 'medium-field', 'maxlength' => 100)),
     $form->error($marca, 'nome');
     ?>
 </div>

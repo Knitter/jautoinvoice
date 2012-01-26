@@ -11,7 +11,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($servico, 'nome'),
-    $form->textField($servico, 'nome', array('size' => 60, 'maxlength' => 255)),
+    $form->textField($servico, 'nome', array('class' => 'long-field', 'maxlength' => 255)),
     $form->error($servico, 'nome');
     ?>
 </div>
@@ -19,7 +19,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($servico, 'preco'),
-    $form->textField($servico, 'preco'), '&nbsp;&euro;',
+    $form->textField($servico, 'preco', array('class' => 'small-field')), '&nbsp;&euro;',
     $form->error($servico, 'preco');
     ?>
 </div>

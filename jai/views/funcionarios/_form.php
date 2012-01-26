@@ -10,7 +10,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($funcionario, 'nome'),
-    $form->textField($funcionario, 'nome', array('maxlength' => 255)),
+    $form->textField($funcionario, 'nome', array('class' => 'medium-field', 'maxlength' => 255)),
     $form->error($funcionario, 'nome');
     ?>
 </div>
@@ -62,7 +62,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($funcionario, 'valorHora'),
-    $form->textField($funcionario, 'valorHora', array('maxlength' => 10)),
+    $form->textField($funcionario, 'valorHora', array('class' => 'small-field', 'maxlength' => 10)), '&nbsp;&euro;',
     $form->error($funcionario, 'valorHora');
     ?>
 </div>

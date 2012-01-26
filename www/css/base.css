@@ -80,12 +80,10 @@ h2 {
     font-weight: bold;
 }
 
-.row {
-    
-}
-
-.row img {
-    vertical-align: middle;
+.info {
+    font-size: smaller;
+    color: #777;
+    font-style: italic;
 }
 
 /*div.flash-error, div.flash-notice, div.flash-success {

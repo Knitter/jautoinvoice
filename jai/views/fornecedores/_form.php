@@ -11,7 +11,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'nome'),
-    $form->textField($fornecedor, 'nome', array('maxlength' => 255)),
+    $form->textField($fornecedor, 'nome', array('class' => 'medium-field', 'maxlength' => 255)),
     $form->error($fornecedor, 'nome');
     ?>
 </div>
@@ -19,7 +19,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'email'),
-    $form->textField($fornecedor, 'email', array('maxlength' => 255)),
+    $form->textField($fornecedor, 'email', array('class' => 'medium-field', 'maxlength' => 255)),
     $form->error($fornecedor, 'email');
     ?>
 </div>
@@ -43,7 +43,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'website'),
-    $form->textField($fornecedor, 'website', array('maxlength' => 255)),
+    $form->textField($fornecedor, 'website', array('class' => 'medium-field', 'maxlength' => 255)),
     $form->error($fornecedor, 'website');
     ?>
 </div>
@@ -51,7 +51,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'morada'),
-    $form->textField($fornecedor, 'morada', array('maxlength' => 255)),
+    $form->textField($fornecedor, 'morada', array('class' => 'long-field', 'maxlength' => 255)),
     $form->error($fornecedor, 'morada');
     ?>
 </div>
@@ -59,7 +59,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($fornecedor, 'notas'),
-    $form->textArea($fornecedor, 'notas', array('cols' => 80, 'rows' => 5)),
+    $form->textArea($fornecedor, 'notas', array('cols' => 76, 'rows' => 5)),
     $form->error($fornecedor, 'notas');
     ?>
 </div>

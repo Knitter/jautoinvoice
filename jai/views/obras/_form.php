@@ -19,7 +19,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($folhaObra, 'descricaoAvaria'),
-    $form->textArea($folhaObra, 'descricaoAvaria', array('rows' => 6, 'cols' => 50)),
+    $form->textArea($folhaObra, 'descricaoAvaria', array('rows' => 5, 'cols' => 76)),
     $form->error($folhaObra, 'descricaoAvaria');
     ?>
 </div>
@@ -27,16 +27,8 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($folhaObra, 'kms'),
-    $form->textField($folhaObra, 'kms'),
+    $form->textField($folhaObra, 'kms', array('class' => 'small-field')),
     $form->error($folhaObra, 'kms');
-    ?>
-</div>
-
-<div class="row">
-    <?php
-    echo $form->labelEx($folhaObra, 'activo'),
-    $form->textField($folhaObra, 'activo'),
-    $form->error($folhaObra, 'activo');
     ?>
 </div>
 

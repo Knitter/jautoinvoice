@@ -7,7 +7,6 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
         'title' => 'Editar Marcação',
         'autoOpen' => false,
         'minWidth' => 560,
-        //'minHeight' => 270,
         'buttons' => array(
             array(
                 'text' => 'Guardar',
@@ -33,8 +32,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 
 <div class="row">
     <?php
-    echo CHtml::label('Descricao', 'descricaoEvento', array('maxlength' => 150)),
-    CHtml::textField('descricaoEvento');
+    echo CHtml::label('Descricao', 'descricaoEvento'),
+    CHtml::textField('descricaoEvento', null, array('class' => 'medium-field', 'maxlength' => 150));
     ?>
 </div>
 
@@ -67,14 +66,14 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 <div class="row">
     <?php
     echo CHtml::label('Hora', 'horaEvento'),
-    CHtml::textField('horaEvento', '', array('class' => 'horas'));
+    CHtml::textField('horaEvento', '', array('class' => 'horas small-field'));
     ?>
 </div>
 
 <div class="row">
     <?php
     echo CHtml::label('Notas', 'notasEvento'),
-    CHtml::textArea('notasEvento', null, array('rows' => 5, 'cols' => 50));
+    CHtml::textArea('notasEvento', null, array('rows' => 5, 'cols' => 45));
     ?>
 </div>
 

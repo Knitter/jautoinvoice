@@ -11,7 +11,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($combustivel, 'nome'),
-    $form->textField($combustivel, 'nome', array('size' => 60, 'maxlength' => 100)),
+    $form->textField($combustivel, 'nome', array('class' => 'medium-field', 'maxlength' => 100)),
     $form->error($combustivel, 'nome');
     ?>
 </div>

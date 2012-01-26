@@ -11,7 +11,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($modelo, 'nome'),
-    $form->textField($modelo, 'nome', array('size' => 60, 'maxlength' => 100)),
+    $form->textField($modelo, 'nome', array('class' => 'medium-field', 'maxlength' => 100)),
     $form->error($modelo, 'nome');
     ?>
 </div>
@@ -19,7 +19,8 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($modelo, 'idMarca'),
-    $form->dropDownList($modelo, 'idMarca', CHtml::listData($marcas, 'idMarca', 'nome'), array('empty' => '- escolha uma marca -'));
+    $form->dropDownList($modelo, 'idMarca', CHtml::listData($marcas, 'idMarca', 'nome')
+            , array('empty' => '- escolha uma marca -')),
     $form->error($modelo, 'idMarca');
     ?>
 </div>

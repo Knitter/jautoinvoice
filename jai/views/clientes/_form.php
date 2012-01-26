@@ -11,14 +11,14 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($cliente, 'nome'),
-    $form->textField($cliente, 'nome', array('maxlength' => 255)),
+    $form->textField($cliente, 'nome', array('class' => 'medium-field', 'maxlength' => 255)),
     $form->error($cliente, 'nome');
     ?>
 </div>
 
 <div class="row">
     <?php echo $form->labelEx($cliente, 'email'); ?>
-    <?php echo $form->textField($cliente, 'email', array('maxlength' => 255)); ?>
+    <?php echo $form->textField($cliente, 'email', array('class' => 'medium-field', 'maxlength' => 255)); ?>
     <?php echo $form->error($cliente, 'email'); ?>
 </div>
 
@@ -42,7 +42,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
     <?php echo $form->labelEx($cliente, 'morada'); ?>
-    <?php echo $form->textField($cliente, 'morada', array('maxlength' => 255)); ?>
+    <?php echo $form->textField($cliente, 'morada', array('class' => 'long-field', 'maxlength' => 255)); ?>
     <?php echo $form->error($cliente, 'morada'); ?>
 </div>
 

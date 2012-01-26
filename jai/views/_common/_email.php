@@ -23,13 +23,13 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 ?>
 <div class="row">
     <?php
-    echo CHtml::label('Assunto', 'assunto'), CHtml::textField('assunto', null, array('maxlength' => 200));
+    echo CHtml::label('Assunto', 'assunto'), CHtml::textField('assunto', null, array('class' => 'medium-field', 'maxlength' => 200));
     ?>
 </div>
 
 <div class="row">
     <?php
-    echo CHtml::label('Mensagem', 'mensagem'), CHtml::textArea('mensagem', null, array('rows' => 5, 'cols' => 50));
+    echo CHtml::label('Mensagem', 'mensagem'), CHtml::textArea('mensagem', null, array('rows' => 5, 'cols' => 45));
     ?>
 </div>
 

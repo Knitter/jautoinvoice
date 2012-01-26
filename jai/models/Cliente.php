@@ -38,6 +38,7 @@
  */
 class Cliente extends CActiveRecord {
 
+    public $password2;
     /**
      * @return Cliente
      */
@@ -76,7 +77,8 @@ class Cliente extends CActiveRecord {
             'contribuinte' => 'Contribuinte',
             'telefone' => 'Telefone',
             'telemovel' => 'Telemóvel',
-            'morada' => 'Morada'
+            'morada' => 'Morada',
+            'password2' => 'Repetir Password'
         );
     }
 

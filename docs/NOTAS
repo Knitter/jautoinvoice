@@ -22,7 +22,7 @@ Incluir QRCodes, http://sourceforge.net/projects/phpqrcode/ ?
 
 Settings:
     - enderecoEmail, endereço de origem para envio de e-mails;
-:nome, nome da empresa;
+    - nome, nome da empresa;
     - enviarEmails, indica se são enviados e-mails de contacto ou não;
     - sistemaActivo, indica se o sistema está activo se é possível usar;
     - enviarNotificacoes, indica se são enviadas notificações por e-mail, sms, ambas, ou nenhumas
@@ -38,13 +38,16 @@ Settings:
     - enviarSMS, indica se são enviadas SMSs usando o sistema da Luso SMS
     - utilizadorLSMS, , configuração de SMS;
     - passwordLSMS, configuração de SMS;
+    - telemovelLSMS, número de telefone a usar na Luso SMS
     - creditosLSMS, , configuração de SMS, guarda o número de créditso;
 
-:inicioActividade, indica a hora de início da actividade para fins de marcações;
-:fimActividade, igual ao inicioActividade;
-:endereco
-:codigopostal
-:longitude, para google maps
-:latitude, para google maps
-:mostrarPContacto, mostrar a página de contactos
-:gmapskey, chave google maps.
+    - inicioActividade, indica a hora de início da actividade para fins de marcações;
+    - fimActividade, igual ao inicioActividade;
+    - endereco
+    - telefone
+    - telemovel
+    - fax
+    - longitude, para google maps
+    - latitude, para google maps
+    - mostrarPContacto, mostrar a página de contactos
+    - gmapskey, chave google maps.

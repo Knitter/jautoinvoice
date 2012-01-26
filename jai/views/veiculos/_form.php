@@ -86,7 +86,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($veiculo, 'notas'),
-    $form->textArea($veiculo, 'notas', array('rows' => 5, 'cols' => 80)),
+    $form->textArea($veiculo, 'notas', array('rows' => 5, 'cols' => 76)),
     $form->error($veiculo, 'notas');
     ?>
 </div>

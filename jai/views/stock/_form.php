@@ -11,7 +11,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($material, 'referencia'),
-    $form->textField($material, 'referencia', array('size' => 25, 'maxlength' => 25)),
+    $form->textField($material, 'referencia', array('class' => 'small-field', 'maxlength' => 25)),
     $form->error($material, 'referencia');
     ?>
 </div>
@@ -19,7 +19,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($material, 'precoUnitario'),
-    $form->textField($material, 'precoUnitario', array('size' => 10, 'maxlength' => 10)), '&nbsp;&euro;',
+    $form->textField($material, 'precoUnitario', array('class' => 'small-field', 'maxlength' => 10)), '&nbsp;&euro;',
     $form->error($material, 'precoUnitario');
     ?>
 </div>
@@ -43,7 +43,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($material, 'descricao'),
-    $form->textArea($material, 'descricao', array('rows' => 5, 'cols' => 80)),
+    $form->textArea($material, 'descricao', array('rows' => 5, 'cols' => 76)),
     $form->error($material, 'descricao');
     ?>
 </div>

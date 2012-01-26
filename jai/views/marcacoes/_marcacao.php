@@ -27,8 +27,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 ?>
 <div class="row">
     <?php
-    echo CHtml::label('Descricao', 'descricao', array('maxlength' => 150)),
-    CHtml::textField('descricao');
+    echo CHtml::label('Descricao', 'descricao'),
+    CHtml::textField('descricao', null, array('class' => 'medium-field', 'maxlength' => 150));
     ?>
 </div>
 
@@ -61,14 +61,14 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 <div class="row">
     <?php
     echo CHtml::label('Hora', 'hora'),
-    CHtml::textField('hora', '', array('class' => 'horas'));
+    CHtml::textField('hora', '', array('class' => 'horas small-field'));
     ?>
 </div>
 
 <div class="row">
     <?php
     echo CHtml::label('Notas', 'notas'),
-    CHtml::textArea('notas', null, array('rows' => 5, 'cols' => 50));
+    CHtml::textArea('notas', null, array('rows' => 5, 'cols' => 45));
     ?>
 </div>
 

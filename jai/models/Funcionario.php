@@ -55,7 +55,9 @@ class Funcionario extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('nome, username, password, password2, contribuinte', 'required'),
+            array('nome, username, contribuinte', 'required'),
+            array('password, password2', 'required', 'on' => 'insert'),
+            array('password', 'compare', 'compareAttribute' => 'password2', 'on' => 'update'),
             array('username', 'length', 'max' => 100),
             array('nome', 'length', 'max' => 255),
             array('contribuinte', 'length', 'max' => 9),
@@ -92,7 +94,7 @@ class Funcionario extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
-        
+
         $criteria->order = 'nome';
 
         $criteria->compare('nome', $this->nome, true);

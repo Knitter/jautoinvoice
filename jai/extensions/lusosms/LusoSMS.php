@@ -4,7 +4,7 @@ class LusoSMS {
 
     private static $URL_CREDITO = "http://www.lusosms.com/ver_credito_get.php";
     private static $URL_API = "http://www.lusosms.com/enviar_sms_get.php";
-    private static $MAX = 150;
+    private static $MAX = 160;
 
     /**
      * @var string

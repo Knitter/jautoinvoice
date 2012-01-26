@@ -10,7 +10,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($iva, 'descricao'),
-    $form->textField($iva, 'descricao', array('size' => 60, 'maxlength' => 255)),
+    $form->textField($iva, 'descricao', array('class' => 'medium-field', 'maxlength' => 255)),
     $form->error($iva, 'descricao');
     ?>
 </div>
@@ -18,7 +18,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($iva, 'percentagem'),
-    $form->textField($iva, 'percentagem'),
+    $form->textField($iva, 'percentagem', array('class' => 'small-field')),
     $form->error($iva, 'percentagem');
     ?>
 </div>

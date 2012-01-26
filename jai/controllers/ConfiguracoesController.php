@@ -55,16 +55,28 @@ class ConfiguracoesController extends AdministracaoController {
                     'portoSMTP' => 25,
                     'prefixoSMTP' => '',
                     'chaveSuporte' => '',
-                    'enviarSMS' => 0,
+                    'enviarSMS' => 'sim',
+                    'telemovelLSMS' => '',
                     'utilizadorLSMS' => '',
                     'passwordLSMS' => '',
-                    'creditosLSMS' => 0
+                    'creditosLSMS' => 0,
+                    //TODO: obter da BD
+                    'endereco' => '',
+                    'telefone' => '',
+                    'telemovel' => '',
+                    'fax' => '',
+                    'inicioActividade' => '',
+                    'fimActividade' => '',
+                    'mostrarPContacto' => 0,
+                    'longitude' => '',
+                    'latitude' => '',
+                    'gmapskey' => '',
         );
 
         if (($c = Configuracao::model()->findByPk('enderecoEmail')) !== null) {
             $configuracoes->enderecoEmail = $c->valor;
         }
-        
+
         if (($c = Configuracao::model()->findByPk('enviarEmails')) !== null) {
             $configuracoes->enviarEmails = intval($c->valor);
         }
