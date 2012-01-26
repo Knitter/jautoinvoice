@@ -9,7 +9,7 @@ Yii::app()->clientScript->registerScript('init', '$("#tixa").collapse();');
 
 <div id="tixa">
     <?php
-    $nim = array(0 => 'Não', 1 => 'Sim');
+    $nim = array('nao' => 'Não', 'sim' => 'Sim');
 
     echo CHtml::form();
 

@@ -43,12 +43,12 @@ class ConfiguracoesController extends AdministracaoController {
     public function actionIndex() {
         $configuracoes = (object) array(
                     'enderecoEmail' => '',
-                    'enviarEmails' => 0,
-                    'sistemaActivo' => 1,
-                    'enviarNotificacoes' => 0,
-                    'permitirClientes' => 0,
+                    'enviarEmails' => 'nao',
+                    'sistemaActivo' => 'sim',
+                    'enviarNotificacoes' => 'nao',
+                    'permitirClientes' => 'nao',
                     'htmlEmails' => 1,
-                    'usarSMTP' => 0,
+                    'usarSMTP' => 'nao',
                     'utilizadorSMTP' => '',
                     'passwordSMTP' => '',
                     'servidorSMTP' => '',
@@ -144,6 +144,7 @@ class ConfiguracoesController extends AdministracaoController {
                 if (($cCreditos = Configuracao::model()->findByPk('creditosLSMS')) == null) {
                     $cCreditos = new Configuracao();
                     $cCreditos->chave = 'creditosLSMS';
+                    $cCreditos->grupo = 'Luso SMS';
                 }
 
                 $cCreditos->valor = $resultado->creditos;
