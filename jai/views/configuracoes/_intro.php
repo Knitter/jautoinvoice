@@ -1,2 +1,2 @@
-<h3>Intro</h3>
+<h3 class="active">Intro</h3>
 <div class="configuracoes"></div>

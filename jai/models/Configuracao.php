@@ -25,7 +25,6 @@
 /**
  * @property string $chave
  * @property string $valor
- * @property string $grupo
  */
 class Configuracao extends CActiveRecord {
 
@@ -43,10 +42,10 @@ class Configuracao extends CActiveRecord {
     public function rules() {
         return array(
             array('chave', 'required'),
-            array('chave, grupo', 'length', 'max' => 150),
+            array('chave', 'length', 'max' => 150),
             array('valor', 'length', 'max' => 255),
             // search
-            array('chave, valor, grupo', 'safe', 'on' => 'search'),
+            array('chave, valor', 'safe', 'on' => 'search'),
         );
     }
 
@@ -64,11 +63,10 @@ class Configuracao extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'grupo, chave';
+        $criteria->order = 'chave';
 
         $criteria->compare('chave', $this->chave, true);
         $criteria->compare('valor', $this->valor, true);
-        $criteria->compare('grupo', $this->grupo, true);
 
         return new CActiveDataProvider('Configuracao', array('criteria' => $criteria));
     }

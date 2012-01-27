@@ -10,7 +10,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
         'buttons' => array(
             array(
                 'text' => 'Enviar',
-                'click' => "js:function() { enviarEmail('{$this->createUrl('clientes/email')}') }"
+                'click' => "js:function() { enviarEmail('{$url}') }"
             ),
             array(
                 'text' => 'Cancelar',
@@ -34,6 +34,6 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 </div>
 
 <?php
-echo CHtml::hiddenField('idClienteEmail');
+echo CHtml::hiddenField('idDestinatario');
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');

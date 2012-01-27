@@ -10,6 +10,14 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
     <?php
+    echo $form->labelEx($material, 'nome'),
+    $form->textField($material, 'nome', array('class' => 'medium-field', 'maxlength' => 150)),
+    $form->error($material, 'nome');
+    ?>
+</div>
+
+<div class="row">
+    <?php
     echo $form->labelEx($material, 'referencia'),
     $form->textField($material, 'referencia', array('class' => 'small-field', 'maxlength' => 25)),
     $form->error($material, 'referencia');
@@ -19,16 +27,24 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="row">
     <?php
     echo $form->labelEx($material, 'precoUnitario'),
-    $form->textField($material, 'precoUnitario', array('class' => 'small-field', 'maxlength' => 10)), '&nbsp;&euro;',
+    $form->textField($material, 'precoUnitario', array('class' => 'small-field', 'maxlength' => 15)), '&nbsp;&euro;',
     $form->error($material, 'precoUnitario');
     ?>
 </div>
 
 <div class="row">
     <?php
-    echo $form->labelEx($material, 'idFornecedor'),
-    $form->textField($material, 'idFornecedor', array('size' => 10, 'maxlength' => 10)),
-    $form->error($material, 'idFornecedor');
+    echo $form->labelEx($material, 'desconto'),
+    $form->textField($material, 'desconto', array('class' => 'small-field', 'maxlength' => 15)), '&nbsp;&euro;',
+    $form->error($material, 'desconto');
+    ?>
+</div>
+
+<div class="row">
+    <?php
+    echo $form->labelEx($material, 'quantidadeStock'),
+    $form->textField($material, 'quantidadeStock', array('class' => 'small-field', 'maxlength' => 10)),
+    $form->error($material, 'quantidadeStock');
     ?>
 </div>
 
@@ -45,6 +61,15 @@ $form = $this->beginWidget('CActiveForm', array(
     echo $form->labelEx($material, 'descricao'),
     $form->textArea($material, 'descricao', array('rows' => 5, 'cols' => 76)),
     $form->error($material, 'descricao');
+    ?>
+</div>
+
+<div class="row">
+    <?php
+    echo $form->labelEx($material, 'fornecedores'),
+    $form->listBox($material, 'fornecedores', CHtml::listData($fornecedores, 'idFornecedor', 'nome')
+            , array('class' => 'medium-field', 'multiple' => 'multiple', 'empty' => '')),
+    $form->error($material, 'fornecedores');
     ?>
 </div>
 

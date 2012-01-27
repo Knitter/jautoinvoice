@@ -16,8 +16,8 @@ function caixaSms(idCliente) {
     return false;
 }
 
-function caixaEmail(idCliente) {
-    $("#idClienteEmail").val(idCliente);
+function caixaEmail(idDestinatario) {
+    $("#idDestinatario").val(idDestinatario);
     
     $("#emailForm").dialog("open");
     return false;
@@ -31,7 +31,7 @@ function enviarEmail(url) {
         data: {
             assunto: $('#assunto').val(),
             mensagem: $('#mensagem').val(),
-            cliente: $('#idClienteEmail').val()
+            cliente: $('#idDestinatario').val()
         },
         success: function(json){
             if(json.sucesso) {

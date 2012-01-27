@@ -11,7 +11,7 @@ Yii::app()->clientScript->registerScript('init', '$("#tixa").collapse();');
     <?php
     $nim = array('nao' => 'Não', 'sim' => 'Sim');
 
-    echo CHtml::form();
+    echo CHtml::form($this->createUrl('configuracoes/gravar'));
 
     $this->renderPartial('_intro');
     $this->renderPartial('_geral', array('config' => $config, 'nim' => $nim));
@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScript('init', '$("#tixa").collapse();');
     $this->renderPartial('_suporte', array('config' => $config, 'nim' => $nim));
     ?>
     <div class="row">
-        <?php echo CHtml::submitButton('Gravar'); ?>
+        <?php echo CHtml::submitButton('Gravar', array('name' => 'save')); ?>
     </div>
     <?php echo CHtml::endForm(); ?>
 </div>

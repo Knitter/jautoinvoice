@@ -106,6 +106,8 @@ class ObrasController extends SistemaController {
         if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
+        
+        
 
         $this->render('demarcacao', array(
             'marcacao' => $marcacao

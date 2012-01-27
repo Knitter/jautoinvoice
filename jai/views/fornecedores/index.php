@@ -59,8 +59,5 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ));
 ?>
 
-<div style="display: none">
-    <div id="emailForm">
-        <?php $this->renderPartial('//_common/_email'); ?>
-    </div>
-</div>
+<?php
+$this->renderPartial('//_common/_email', array('url' => $this->createUrl('fornecededores/email')));

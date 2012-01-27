@@ -114,16 +114,21 @@ class ClientesController extends SistemaController {
 
     public function actionEmail() {
         $resultado = (object) array('sucesso' => 0);
-        if (!empty($_POST['cliente']) && !empty($_POST['mensagem'])
-                && ($cliente = Cliente::model()->findByPk((int) $_POST['cliente'])) !== null) {
+        if (!empty($_POST['destinatario']) && !empty($_POST['mensagem'])
+                && ($cliente = Cliente::model()->findByPk((int) $_POST['destinatario'])) !== null) {
             if ($cliente->email) {
                 if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null
                         && $enderecoEmail->valor != '') {
 
                     Yii::import('ext.email.*');
 
-                    //TODO: permitir personalização do nome da empresa.
-                    $email = new Email($cliente->nome, $cliente->email, 'jAutoInvoice', $enderecoEmail->valor
+                    $nome = 'jAutoInvoice';
+                    $config = Configuracao::model()->findByPk('nome');
+                    if ($config && $config->valor != '') {
+                        $nome = $config->valor;
+                    }
+
+                    $email = new Email($cliente->nome, $cliente->email, $nome, $enderecoEmail->valor
                                     , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
                     try {
                         $email->enviar();
@@ -134,6 +139,8 @@ class ClientesController extends SistemaController {
                 } else {
                     $resultado->motivo = 'Não está definido um endereço de origem.';
                 }
+            } else {
+                $resultado->motivo = 'Não existe endereço de destino.';
             }
         }
 

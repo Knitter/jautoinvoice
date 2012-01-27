@@ -74,4 +74,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 $this->renderPartial('//_common/_sms');
 
-$this->renderPartial('//_common/_email');
+$this->renderPartial('//_common/_email', array('url' => $this->createUrl('clientes/email')));

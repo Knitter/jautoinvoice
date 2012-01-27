@@ -5,7 +5,7 @@
         <div class="row">
             <?php
             echo CHtml::label('Chave', 'chaveSuporte'),
-            CHtml::textField('chave', $config->chaveSuporte, array('class' => 'medium-field'));
+            CHtml::textField('chaveSuporte', $config->chaveSuporte, array('class' => 'medium-field'));
             ?>
         </div>
     </fieldset>

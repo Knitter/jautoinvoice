@@ -16,9 +16,15 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'template' => '{items} {pager} {summary}',
     'columns' => array(
         array(
+            'name' => 'nome',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->nome, array("stock/editar", "id" => $data->idMaterial))'
+        ),
+        array(
             'name' => 'referencia',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->referencia, array("stock/editar", "id" => $data->idMaterial))'
+            'value' => 'CHtml::link($data->referencia, array("stock/editar", "id" => $data->idMaterial))',
+            'htmlOptions' => array('class' => 'small-column')
         ),
         array(
             'class' => 'CButtonColumn',

@@ -24,15 +24,16 @@
 
 /**
  * @property int $idMaterial
+ * @property string $nome
  * @property string $precoUnitario
  * @property string $referencia
  * @property string $descricao
+ * @property int $quantidadeStock
+ * @property string $desconto
  * @property int $activo
- * 
- * @property int $idFornecedor
  * @property int $idIVA
  *
- * @property Fornecedor $fornecedor
+ * @property Fornecedor[] $fornecedores
  * @property IVA $iva
  */
 class Material extends CActiveRecord {
@@ -40,7 +41,7 @@ class Material extends CActiveRecord {
     /**
      * @return Material
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -50,19 +51,21 @@ class Material extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('precoUnitario, referencia, idFornecedor, idIVA', 'required'),
-            array('precoUnitario', 'numerical'),
+            array('nome, precoUnitario, referencia, idIVA, quantidadeStock', 'required'),
+            array('nome', 'length', 'max' => 150),
             array('referencia', 'length', 'max' => 25),
+            array('precoUnitario, desconto', 'numerical'),
             array('descricao', 'safe'),
-            // serach
-            array('precoUnitario, referencia, descricao, idFornecedor, idIVA', 'safe', 'on' => 'search'),
+            array('quantidadeStock', 'numerical', 'integerOnly' => true),
+            // search
+            array('nome, referencia, descricao', 'safe', 'on' => 'search'),
         );
     }
 
     public function relations() {
         return array(
             //'linhaGastos' => array(self::HAS_MANY, 'LinhaGasto', 'idMaterial'),
-            'fornecedor' => array(self::BELONGS_TO, 'Fornecedor', 'idFornecedor'),
+            'fornecedores' => array(self::MANY_MANY, 'Fornecedor', 'MaterialFornecedor(idMaterial, idFornecedor)'),
             'iva' => array(self::BELONGS_TO, 'IVA', 'idIVA'),
         );
     }
@@ -70,10 +73,12 @@ class Material extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'idMaterial' => 'ID',
+            'nome' => 'Nome',
             'precoUnitario' => 'Preço Unitário',
             'referencia' => 'Referência',
             'descricao' => 'Descrição',
-            'idFornecedor' => 'Fornecedor',
+            'quantidadeStock' => 'Em Stock',
+            'desconto' => 'Desconto Possível',
             'idIVA' => 'IVA',
         );
     }
@@ -84,12 +89,11 @@ class Material extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->compare('precoUnitario', $this->precoUnitario);
+        $criteria->order = 'nome';
+
+        $criteria->compare('nome', $this->nome, true);
         $criteria->compare('referencia', $this->referencia, true);
         $criteria->compare('descricao', $this->descricao, true);
-
-        $criteria->compare('idFornecedor', $this->idFornecedor);
-        $criteria->compare('idIVA', $this->idIVA);
 
         $criteria->compare('activo', 1);
 

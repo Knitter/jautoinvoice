@@ -36,7 +36,9 @@ class StockController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array('index', 'criar', 'editar', 'apagar',
+                            'doFornecedor', 'listaFornecedores'
+                        ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -71,8 +73,17 @@ class StockController extends AdministracaoController {
 
         if (isset($_POST['Material'])) {
             $material->attributes = $_POST['Material'];
-            if ($material->save())
+            if ($material->save()) {
+                foreach ($_POST['Material']['fornecedores'] as $fornecedor) {
+                    $mf = new MaterialFornecedor();
+                    $mf->idMaterial = $material->idMaterial;
+                    $mf->idFornecedor = (int) $fornecedor;
+
+                    $mf->save();
+                }
+
                 $this->redirect(array('editar', 'id' => $material->idMaterial));
+            }
         }
 
         $criteria = new CDbCriteria(array('order' => 'descricao'));
@@ -80,10 +91,14 @@ class StockController extends AdministracaoController {
 
         $ivas = IVA::model()->findAll($criteria);
 
+        $criteria->order = 'nome';
+        $fornecedores = Fornecedor::model()->findAll($criteria);
+
         $this->render('editar', array(
             'material' => $material,
-            'ivas' => $ivas
-            ));
+            'ivas' => $ivas,
+            'fornecedores' => $fornecedores
+        ));
     }
 
     public function actionEditar($id) {
@@ -93,11 +108,35 @@ class StockController extends AdministracaoController {
 
         if (isset($_POST['Material'])) {
             $material->attributes = $_POST['Material'];
-            if ($material->save())
+            if ($material->save()) {
+                MaterialFornecedor::model()->deleteAll('idMaterial = :id', array(':id' => $material->idMaterial));
+
+                foreach ($_POST['Material']['fornecedores'] as $fornecedor) {
+                    if ($fornecedor) {
+                        $mf = new MaterialFornecedor();
+                        $mf->idMaterial = $material->idMaterial;
+                        $mf->idFornecedor = (int) $fornecedor;
+
+                        $mf->save();
+                    }
+                }
                 $this->redirect(array('editar', 'id' => $material->idMaterial));
+            }
         }
 
-        $this->render('editar', array('material' => $material));
+        $criteria = new CDbCriteria(array('order' => 'descricao'));
+        $criteria->compare('activo', 1);
+
+        $ivas = IVA::model()->findAll($criteria);
+
+        $criteria->order = 'nome';
+        $fornecedores = Fornecedor::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'material' => $material,
+            'ivas' => $ivas,
+            'fornecedores' => $fornecedores
+        ));
     }
 
     public function actionApagar($id) {

@@ -106,4 +106,40 @@ class FornecedoresController extends AdministracaoController {
         }
     }
 
+    public function actionEmail() {
+        $resultado = (object) array('sucesso' => 0);
+        if (!empty($_POST['destinatario']) && !empty($_POST['mensagem'])
+                && ($fornecedor = Fornecedor::model()->findByPk((int) $_POST['destinatario'])) !== null) {
+            if ($fornecedor->email) {
+                if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null
+                        && $enderecoEmail->valor != '') {
+
+                    Yii::import('ext.email.*');
+
+                    $nome = 'jAutoInvoice';
+                    $config = Configuracao::model()->findByPk('nome');
+                    if ($config && $config->valor != '') {
+                        $nome = $config->valor;
+                    }
+
+                    $email = new Email($fornecedor->nome, $fornecedor->email, $nome, $enderecoEmail->valor
+                                    , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
+                    try {
+                        $email->enviar();
+                        $resultado->sucesso = 1;
+                    } catch (Exception $e) {
+                        $resultado->motivo = $e->getMessage();
+                    }
+                } else {
+                    $resultado->motivo = 'Não está definido um endereço de origem.';
+                }
+            } else {
+                $resultado->motivo = 'Não existe endereço de destino.';
+            }
+        }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
+    }
+
 }

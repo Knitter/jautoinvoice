@@ -34,114 +34,50 @@ class ConfiguracoesController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'verCreditosSMS'
+                        'actions' => array('index', 'verCreditosSMS', 'gravar'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
     public function actionIndex() {
-        $configuracoes = (object) array(
-                    'enderecoEmail' => '',
-                    'enviarEmails' => 'nao',
-                    'sistemaActivo' => 'sim',
-                    'enviarNotificacoes' => 'nao',
-                    'permitirClientes' => 'nao',
-                    'htmlEmails' => 1,
-                    'usarSMTP' => 'nao',
-                    'utilizadorSMTP' => '',
-                    'passwordSMTP' => '',
-                    'servidorSMTP' => '',
-                    'portoSMTP' => 25,
-                    'prefixoSMTP' => '',
-                    'chaveSuporte' => '',
-                    'enviarSMS' => 'sim',
-                    'telemovelLSMS' => '',
-                    'utilizadorLSMS' => '',
-                    'passwordLSMS' => '',
-                    'creditosLSMS' => 0,
-                    //TODO: obter da BD
-                    'endereco' => '',
-                    'telefone' => '',
-                    'telemovel' => '',
-                    'fax' => '',
-                    'inicioActividade' => '',
-                    'fimActividade' => '',
-                    'mostrarPContacto' => 0,
-                    'longitude' => '',
-                    'latitude' => '',
-                    'gmapskey' => '',
+        $configuracoes = array(
+            'nome' => '',
+            'enderecoEmail' => '',
+            'enviarEmails' => 'nao',
+            'sistemaActivo' => 'sim',
+            'enviarNotificacoes' => 'nao',
+            'permitirClientes' => 'nao',
+            'htmlEmails' => 1,
+            'usarSMTP' => 'nao',
+            'utilizadorSMTP' => '',
+            'passwordSMTP' => '',
+            'servidorSMTP' => '',
+            'portoSMTP' => 25,
+            'prefixoSMTP' => '',
+            'chaveSuporte' => '',
+            'enviarSMS' => 'sim',
+            'telemovelLSMS' => '',
+            'utilizadorLSMS' => '',
+            'passwordLSMS' => '',
+            'creditosLSMS' => 0,
+            'endereco' => '',
+            'telefone' => '',
+            'telemovel' => '',
+            'fax' => '',
+            'inicioActividade' => '',
+            'fimActividade' => '',
+            'mostrarPContacto' => 0,
+            'longitude' => '',
+            'latitude' => '',
+            'gmapskey' => '',
         );
 
-        if (($c = Configuracao::model()->findByPk('enderecoEmail')) !== null) {
-            $configuracoes->enderecoEmail = $c->valor;
+        foreach (Configuracao::model()->findAll() as $configuracao) {
+            $configuracoes[$configuracao->chave] = $configuracao->valor;
         }
 
-        if (($c = Configuracao::model()->findByPk('enviarEmails')) !== null) {
-            $configuracoes->enviarEmails = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('sistemaActivo')) !== null) {
-            $configuracoes->sistemaActivo = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('enviarNotificacoes')) !== null) {
-            $configuracoes->enviarNotificacoes = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('permitirClientes')) !== null) {
-            $configuracoes->permitirClientes = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('htmlEmails')) !== null) {
-            $configuracoes->htmlEmails = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('usarSMTP')) !== null) {
-            $configuracoes->usarSMTP = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('utilizadorSMTP')) !== null) {
-            $configuracoes->utilizadorSMTP = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('passwordSMTP')) !== null) {
-            $configuracoes->passwordSMTP = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('servidorSMTP')) !== null) {
-            $configuracoes->servidorSMTP = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('portoSMTP')) !== null) {
-            $configuracoes->portoSMTP = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('prefixoSMTP')) !== null) {
-            $configuracoes->prefixoSMTP = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('chaveSuporte')) !== null) {
-            $configuracoes->chaveSuporte = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('enviarSMS')) !== null) {
-            $configuracoes->enviarSMS = intval($c->valor);
-        }
-
-        if (($c = Configuracao::model()->findByPk('utilizadorLSMS')) !== null) {
-            $configuracoes->utilizadorLSMS = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('passwordLSMS')) !== null) {
-            $configuracoes->passwordLSMS = $c->valor;
-        }
-
-        if (($c = Configuracao::model()->findByPk('creditosLSMS')) !== null) {
-            $configuracoes->creditosLSMS = intval($c->valor);
-        }
-
-        $this->render('index', array('config' => $configuracoes));
+        $this->render('index', array('config' => (object) $configuracoes));
     }
 
     public function actionVerCreditosSMS() {
@@ -156,7 +92,6 @@ class ConfiguracoesController extends AdministracaoController {
                 if (($cCreditos = Configuracao::model()->findByPk('creditosLSMS')) == null) {
                     $cCreditos = new Configuracao();
                     $cCreditos->chave = 'creditosLSMS';
-                    $cCreditos->grupo = 'Luso SMS';
                 }
 
                 $cCreditos->valor = $resultado->creditos;
@@ -173,6 +108,23 @@ class ConfiguracoesController extends AdministracaoController {
 
         echo json_encode($resultado);
         Yii::app()->end();
+    }
+
+    public function actionGravar() {
+        foreach ($_POST as $chave => $valor) {
+            if ($chave != 'save') {
+                if (($config = Configuracao::model()->findByPk($chave)) === null) {
+                    $config = new Configuracao();
+                    $config->chave = $chave;
+                }
+                $config->valor = $valor;
+
+                //NOTE: ignoring save errors
+                $config->save();
+            }
+        }
+
+        $this->redirect(array('/configuracoes'));
     }
 
 }

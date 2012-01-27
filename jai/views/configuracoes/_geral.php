@@ -32,6 +32,12 @@
         <legend>Empresa</legend>
         <div class="row">
             <?php
+            echo CHtml::label('Nome', 'nome'),
+            CHtml::textField('nome', $config->nome, array('class' => 'medium-field', 'maxlength' => 255));
+            ?>
+        </div>
+        <div class="row">
+            <?php
             echo CHtml::label('Endereço', 'endereco'),
             CHtml::textField('endereco', $config->endereco, array('class' => 'long-field', 'maxlength' => 255));
             ?>
@@ -74,10 +80,10 @@
         </div>
         <div class="row">
             <?php
-            echo CHtml::label('Coordenadas (Latitude/Longitude)', 'latitude'),
+            echo CHtml::label('Coordenadas (Lat/Lon)', 'latitude'),
             CHtml::textField('latitude', $config->latitude),
             ' : ',
-            CHtml::textField('longitude', $config->latitude);
+            CHtml::textField('longitude', $config->longitude);
             ?>
         </div>
         <div class="row">
