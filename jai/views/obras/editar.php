@@ -9,4 +9,9 @@
 </div>
 
 <?php
-$this->renderPartial('_form', array('folhaObra' => $folhaObra));
+$this->renderPartial('_form', array(
+    'folhaObra' => $folhaObra,
+    'funcionarios' => $funcionarios,
+    'servicos' => $servicos,
+    'materiais' => $materiais
+));

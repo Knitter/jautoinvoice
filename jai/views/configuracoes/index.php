@@ -20,7 +20,12 @@ Yii::app()->clientScript->registerScript('init', '$("#tixa").collapse();');
     $this->renderPartial('_suporte', array('config' => $config, 'nim' => $nim));
     ?>
     <div class="row">
-        <?php echo CHtml::submitButton('Gravar', array('name' => 'save')); ?>
+        <?php
+        echo CHtml::submitButton('Gravar', array(
+            'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only',
+            'name' => 'save'
+        ));
+        ?>
     </div>
     <?php echo CHtml::endForm(); ?>
 </div>

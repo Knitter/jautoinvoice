@@ -37,7 +37,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     echo CHtml::label('Matrícula', 'matricula');
     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
         'name' => 'matricula',
-        'sourceUrl' => $this->createUrl('marcacoes/acmatricula'),
+        'sourceUrl' => $this->createUrl('veiculos/acmatricula'),
         'options' => array(
             'minLength' => '3'
         )

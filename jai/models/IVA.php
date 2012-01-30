@@ -73,13 +73,15 @@ class IVA extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'descricao';
-
         $criteria->compare('descricao', $this->descricao, true);
         $criteria->compare('percentagem', $this->percentagem);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('IVA', array('criteria' => $criteria));
+        return new CActiveDataProvider('IVA', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'descricao ASC',
+                        )));
     }
 
 }

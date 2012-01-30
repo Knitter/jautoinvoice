@@ -37,7 +37,7 @@ class MarcacoesController extends SistemaController {
                     array(
                         'allow',
                         'actions' => array('index', 'marcar', 'actualizar',
-                            'apagar', 'eventos', 'acMatricula'
+                            'apagar', 'eventos'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -52,23 +52,20 @@ class MarcacoesController extends SistemaController {
     }
 
     public function actionIndex() {
-        $this->render('index');
-    }
-
-    public function actionAcMatricula() {
-        $criteria = new CDbCriteria();
-        $criteria->order = 'matricula';
-        $criteria->compare('matricula', $_GET['term'], true);
-        $criteria->compare('activo', 1);
-
-        $veiculos = array();
-        foreach (Veiculo::model()->findAll($criteria) as $veiculo) {
-            $veiculos[] = $veiculo->matricula;
+        $inicio = 8;
+        if (($config = Configuracao::model()->findByPk('inicioActividade')) !== null && intval($config->valor)) {
+            $inicio = int($config->valor);
         }
 
-        echo json_encode($veiculos);
+        $fim = 18;
+        if (($config = Configuracao::model()->findByPk('fimActividade')) !== null && intval($config->valor)) {
+            $fim = int($config->valor);
+        }
 
-        Yii::app()->end();
+        $this->render('index', array(
+            'inicio' => $inicio,
+            'fim' => $fim
+        ));
     }
 
     public function actionMarcar() {

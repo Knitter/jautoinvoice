@@ -70,11 +70,26 @@ class ObrasController extends SistemaController {
 
         if (isset($_POST['FolhaObra'])) {
             $folha->attributes = $_POST['FolhaObra'];
-            if ($folha->save())
+            if ($folha->save()) {
                 $this->redirect(array('editar', 'id' => $folha->idFolhaObra));
+            }
         }
 
-        $this->render('editar', array('folhaObra' => $folha));
+        $criteria = new CDbCriteria();
+
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+
+        $funcionarios = Funcionario::model()->findAll($criteria);
+        $servicos = Servico::model()->findAll($criteria);
+        $materiais = Material::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'folhaObra' => $folha,
+            'funcionarios' => $funcionarios,
+            'servicos' => $servicos,
+            'materiais' => $materiais
+        ));
     }
 
     public function actionEditar($id) {
@@ -106,8 +121,8 @@ class ObrasController extends SistemaController {
         if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
-        
-        
+
+
 
         $this->render('demarcacao', array(
             'marcacao' => $marcacao

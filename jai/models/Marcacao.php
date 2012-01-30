@@ -85,15 +85,17 @@ class Marcacao extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'dataMarcacao, descricao';
-
         $criteria->compare('dataMarcacao', $this->dataMarcacao, true);
         $criteria->compare('criado', $this->criado, true);
         $criteria->compare('descricao', $this->descricao, true);
         $criteria->compare('notas', $this->notas, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Marcacao', array('criteria' => $criteria));
+        return new CActiveDataProvider('Marcacao', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'dataMarcacao DESC',
+                        )));
     }
 
 }

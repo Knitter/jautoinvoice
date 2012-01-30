@@ -157,10 +157,11 @@ class ClientesController extends SistemaController {
                 Yii::import('ext.lusosms.*');
 
                 if (($cUsername = Configuracao::model()->findByPk('utilizadorLSMS')) !== null
-                        && ($cPassword = Configuracao::model()->findByPk('passwordLSMS')) !== null) {
+                        && ($cPassword = Configuracao::model()->findByPk('passwordLSMS')) !== null
+                        && ($cOrigem = Configuracao::model()->findByPk('passwordLSMS')) !== null) {
 
                     try {
-                        $sms = new LusoSMS($cUsername->valor, $cPassword->valor, $_POST['sms'], '969623141', $cliente->telemovel);
+                        $sms = new LusoSMS($cUsername->valor, $cPassword->valor, $_POST['sms'], $cOrigem->valor, $cliente->telemovel);
                         $sms->enviar();
 
                         $resultado->sucesso = 1;
@@ -177,7 +178,11 @@ class ClientesController extends SistemaController {
                     } catch (Exception $e) {
                         $resultado->motivo = 'Erro desconhecido.';
                     }
+                } else {
+                    $resultado->motivo = 'Configurações Luso SMS inválidas.';
                 }
+            } else {
+                $resultado->motivo = 'Sem telemóvel de destino.';
             }
         }
 

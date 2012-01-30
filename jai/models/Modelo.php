@@ -37,7 +37,7 @@ class Modelo extends CActiveRecord {
     /**
      * @return Modelo
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -74,14 +74,16 @@ class Modelo extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
-        
-        $criteria->order = 'nome';
 
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('idMarca', $this->idMarca);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Modelo', array('criteria' => $criteria));
+        return new CActiveDataProvider('Modelo', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'nome ASC',
+                        )));
     }
 
 }

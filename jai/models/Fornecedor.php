@@ -88,14 +88,16 @@ class Fornecedor extends CActiveRecord {
      */
     public function search() {
         $criteria = new CDbCriteria();
-        
-        $criteria->order = 'nome';
 
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('email', $this->email, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Fornecedor', array('criteria' => $criteria));
+        return new CActiveDataProvider('Fornecedor', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'nome ASC',
+                    )));
     }
 
 }

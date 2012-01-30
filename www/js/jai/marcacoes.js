@@ -5,6 +5,10 @@ var globais = {
         actualizar: '',
         folha: '',
         apagar: ''
+    },
+    horario: {
+        inicio: 8,
+        fim: 18
     }
 }
 
@@ -16,11 +20,8 @@ function initCalendar() {
             right: 'today prev,next'
         },     
         theme: true,
-        //TODO: Fazer com que seja possível alterar o dia de arranque da semana
         firstDay: 1,
-        //TODO: Permitir a configuração de marcações ao fim de semana
-        //weekends: false,
-        firstHour: 8,
+        firstHour: globais.horario.inicio,
         events: globais.url.calendario,
         timeFormat: {
             agenda: 'H:mm{ - H:mm}', 
@@ -48,7 +49,6 @@ function initCalendar() {
             $('#janelaEvento').dialog('open');
         },
         dayClick: function(date, allDay, jsEvent, view) {
-            //TODO: actualizar valor correcto de acordo com horário de funcionamento
             $('#dataMarcacao').datepicker('setDate', date);
             $('#janelaMarcacao').dialog('open');
         }
@@ -58,10 +58,9 @@ function initCalendar() {
 function initTimePicker() {
     $(".horas").timepicker({
         showPeriodLabels: false,
-        //TODO: personalizavel
         hours: {
-            starts: 9,
-            ends: 18
+            starts: globais.horario.inicio,
+            ends: globais.horario.fim
         },
         showDeselectButton: true,
         deselectButtonText: 'Limpar',

@@ -70,12 +70,14 @@ class Combustivel extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'nome';
-
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Combustivel', array('criteria' => $criteria));
+        return new CActiveDataProvider('Combustivel', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'nome ASC',
+                    )));
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 Yii::app()->clientScript->registerCssFile('css/formularios.css');
+//Yii::app()->clientScript->registerPackage('jquery.ui');
 
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'veiculo-form',
@@ -93,7 +94,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
     <?php
-    echo CHtml::submitButton($veiculo->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    echo CHtml::submitButton($veiculo->isNewRecord ? 'Criar' : 'Gravar', array(
+        'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
+    )),
+    '&nbsp;&nbsp;&nbsp;',
     CHtml::link('Cancelar', $this->createUrl('veiculos/lista', array('id' => $cliente->idCliente, 'op' => $op)));
     ?>
 </div>

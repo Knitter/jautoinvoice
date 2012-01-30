@@ -22,3 +22,8 @@ PRIMARY KEY (`idMaterial`, `idFornecedor`),
 CONSTRAINT `fkMFMaterial` FOREIGN KEY (`idMaterial`) REFERENCES `Material`(`idMaterial`) ,
 CONSTRAINT `fkMFFornecedor` FOREIGN KEY (`idFornecedor`) REFERENCES `Fornecedor`(`idFornecedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+ALTER TABLE `FolhaObra` CHANGE `idVeiculo` `idVeiculo` INT UNSIGNED NULL ;
+ALTER TABLE `FolhaObra` ADD `matricula` VARCHAR( 12 ) NOT NULL ;
+
+ALTER TABLE `LinhaServico` CHANGE `notas` `notas` VARCHAR( 255 ) NULL ;

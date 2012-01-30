@@ -77,7 +77,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
     <?php
-    echo CHtml::submitButton($funcionario->isNewRecord ? 'Criar' : 'Gravar'), '&nbsp;&nbsp;&nbsp;',
+    echo CHtml::submitButton($funcionario->isNewRecord ? 'Criar' : 'Gravar', array(
+        'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
+    )),
+    '&nbsp;&nbsp;&nbsp;',
     CHtml::link('Cancelar', $this->createUrl('/funcionarios'));
     ?>
 </div>

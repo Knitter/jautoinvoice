@@ -1,6 +1,6 @@
 <?php
 
-/* Material.php
+/* LinhaGasto.php
  * 
  * This file is part of jAutoInvoice, a car workshop management software.
  * 
@@ -17,69 +17,66 @@
  * GNU Affero General Public License for more details.
  * 
  * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
  * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
- * @property int $idMaterial
- * @property string $nome
- * @property string $precoUnitario
- * @property string $referencia
- * @property string $descricao
- * @property int $quantidadeStock
- * @property string $desconto
+ * @property int $idLinhaGasto
+ * @property int $quantidade
+ * @property float $precoUnitario
+ * @property float $desconto
  * @property int $activo
- * @property int $idIVA
+ * 
+ * @property int $idMaterial
+ * @property int $idIva
+ * @property int $idLinhaServico
  *
- * @property Fornecedor[] $fornecedores
+ * @property Material $material
  * @property IVA $iva
+ * @property LinhaServico $linhaServico
  */
-class Material extends CActiveRecord {
+class LinhaGasto extends CActiveRecord {
 
     /**
-     * @return Material
+     * @return LinhaGasto
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
     public function tableName() {
-        return 'Material';
+        return 'LinhaGasto';
     }
 
     public function rules() {
         return array(
-            array('nome, precoUnitario, referencia, idIVA, quantidadeStock', 'required'),
-            array('nome', 'length', 'max' => 150),
-            array('referencia', 'length', 'max' => 25),
+            array('quantidade, precoUnitario, idMaterial, idIVA, idLinhaServico', 'required'),
+            array('quantidade, idLinhaServico, idIva, idMaterial', 'numerical', 'integerOnly' => true),
             array('precoUnitario, desconto', 'numerical'),
-            array('descricao', 'safe'),
-            array('quantidadeStock', 'numerical', 'integerOnly' => true),
             // search
-            array('nome, referencia, descricao', 'safe', 'on' => 'search'),
+            array('quantidade, precoUnitario, desconto, idMaterial, idIVA, idLinhaServico', 'safe', 'on' => 'search'),
         );
     }
 
     public function relations() {
         return array(
-            //'linhaGastos' => array(self::HAS_MANY, 'LinhaGasto', 'idMaterial'),
-            'fornecedores' => array(self::MANY_MANY, 'Fornecedor', 'MaterialFornecedor(idMaterial, idFornecedor)'),
+            'linhaSercivo' => array(self::BELONGS_TO, 'LinhaServico', 'idLinhaServico'),
+            'material' => array(self::BELONGS_TO, 'Material', 'idMaterial'),
             'iva' => array(self::BELONGS_TO, 'IVA', 'idIVA'),
         );
     }
 
     public function attributeLabels() {
         return array(
-            'idMaterial' => 'ID',
-            'nome' => 'Nome',
-            'precoUnitario' => 'Preço Unitário',
-            'referencia' => 'Referência',
-            'descricao' => 'Descrição',
-            'quantidadeStock' => 'Em Stock',
-            'desconto' => 'Desconto Possível',
+            'idLinhaGasto' => 'ID',
+            'quantidade' => 'Quantidade',
+            'precoUnitario' => 'Preço Uni.',
+            'desconto' => 'Desconto',
+            'idMaterial' => 'Material',
             'idIVA' => 'IVA',
+            'idLinhaServico' => 'Serviço',
         );
     }
 
@@ -89,16 +86,20 @@ class Material extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->compare('nome', $this->nome, true);
-        $criteria->compare('referencia', $this->referencia, true);
-        $criteria->compare('descricao', $this->descricao, true);
+        $criteria->compare('quantidade', $this->quantidade);
+        $criteria->compare('precoUnitario', $this->precoUnitario);
+        $criteria->compare('desconto', $this->desconto);
+
+        $criteria->compare('idMaterial', $this->idMaterial);
+        $criteria->compare('idIVA', $this->idIVA);
+        $criteria->compare('idLinhaServico', $this->idLinhaServico);
 
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Material', array(
+        return new CActiveDataProvider('LinhaGasto', array(
                     'criteria' => $criteria,
                     'sort' => array(
-                        'defaultOrder' => 'nome ASC',
+                        'defaultOrder' => 'idLinhaGasto'
                         )));
     }
 

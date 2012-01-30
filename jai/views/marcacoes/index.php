@@ -15,6 +15,9 @@ globais.url.marcar = '{$this->createUrl('marcacoes/marcar')}';
 globais.url.actualizar = '{$this->createUrl('marcacoes/actualizar')}';
 globais.url.folha = '{$this->createUrl('obras/folhademarcacao')}';
 globais.url.cancelar = '{$this->createUrl('marcacoes/cancelar')}';
+    
+globais.horario.inicio = {$inicio};
+globais.horario.fim = {$fim};
 
 initCalendar();
 initTimePicker();

@@ -103,8 +103,6 @@ class Veiculo extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'matricula, dataRegisto DESC';
-
         $criteria->compare('dataRegisto', $this->dataRegisto, true);
         $criteria->compare('matricula', $this->matricula, true);
         $criteria->compare('nrChassis', $this->nrChassis, true);
@@ -119,7 +117,11 @@ class Veiculo extends CActiveRecord {
 
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Veiculo', array('criteria' => $criteria));
+        return new CActiveDataProvider('Veiculo', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'matricula ASC',
+                        )));
     }
 
 }

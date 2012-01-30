@@ -36,8 +36,8 @@ class StockController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar',
-                            'doFornecedor', 'listaFornecedores'
+                        'actions' => array(
+                            'index', 'criar', 'editar', 'apagar', 'dadosJSON'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -151,6 +151,25 @@ class StockController extends AdministracaoController {
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
+    }
+
+    public function actionDadosJSON() {
+        $resultado = (object) array('sucesso' => 0);
+        if (isset($_POST['id']) && ($material = $this->carregarModeloMaterial($_POST['id'])) !== null) {
+            $resultado->sucesso = 1;
+            $resultado->material = (object) array(
+                        'precoUnitario' => $material->precoUnitario,
+                        'desconto' => $material->desconto,
+                        'iva' => (object) array(
+                            'idIVA' => $material->idIVA,
+                            'descIVA' => $material->iva->descricao,
+                            'valorIVA' => $material->iva->percentagem
+                        )
+            );
+        }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
     }
 
 }

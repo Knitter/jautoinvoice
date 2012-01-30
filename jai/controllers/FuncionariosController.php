@@ -36,7 +36,9 @@ class FuncionariosController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array(
+                            'index', 'criar', 'editar', 'apagar', 'dadosJSON'
+                        ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -71,7 +73,7 @@ class FuncionariosController extends AdministracaoController {
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
             $funcionario->password = Funcionario::hash($funcionario->password);
-            
+
             if ($funcionario->save())
                 $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
         }
@@ -87,7 +89,7 @@ class FuncionariosController extends AdministracaoController {
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
             $funcionario->password = Funcionario::hash($funcionario->password);
-            
+
             if ($funcionario->save())
                 $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
         }
@@ -107,6 +109,21 @@ class FuncionariosController extends AdministracaoController {
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
+    }
+
+    public function actionDadosJSON() {
+        $resultado = (object) array('sucesso' => 0);
+        if (isset($_POST['id']) && ($funcionario = $this->carregarModeloFuncionario($_POST['id'])) !== null) {
+            $resultado->sucesso = 1;
+            $resultado->funcionario = (object) array(
+                        'idFuncionario' => $funcionario->idFuncionario,
+                        'nome' => $funcionario->nome,
+                        'valorHora' => $funcionario->valorHora ? $funcionario->valorHora : 0
+            );
+        }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
     }
 
 }

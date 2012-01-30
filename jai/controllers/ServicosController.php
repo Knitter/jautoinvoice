@@ -36,7 +36,9 @@ class ServicosController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array(
+                            'index', 'criar', 'editar', 'apagar', 'dadosJSON'
+                        ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -120,6 +122,29 @@ class ServicosController extends AdministracaoController {
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
+    }
+
+    public function actionDadosJSON() {
+        $resultado = (object) array('sucesso' => 0);
+        if (isset($_POST['id']) && ($servico = $this->carregarModeloServico($_POST['id'])) !== null) {
+            $resultado->sucesso = 1;
+            $resultado->servico = (object) array(
+                        'idServico' => $servico->idServico,
+                        'nome' => $servico->nome,
+                        'preco' => $servico->preco
+            );
+
+            if ($servico->idIVA) {
+                $resultado->servico->iva = (object) array(
+                            'idIVA' => $servico->idIVA,
+                            'descIVA' => $servico->iva->descricao,
+                            'valorIVA' => $servico->iva->percentagem
+                );
+            }
+        }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
     }
 
 }

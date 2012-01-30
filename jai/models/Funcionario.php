@@ -95,8 +95,6 @@ class Funcionario extends CActiveRecord {
     public function search() {
         $criteria = new CDbCriteria();
 
-        $criteria->order = 'nome';
-
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('contribuinte', $this->contribuinte, true);
         $criteria->compare('username', $this->username, true);
@@ -104,7 +102,11 @@ class Funcionario extends CActiveRecord {
         $criteria->compare('telemovel', $this->telemovel, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Funcionario', array('criteria' => $criteria));
+        return new CActiveDataProvider('Funcionario', array(
+                    'criteria' => $criteria,
+                    'sort' => array(
+                        'defaultOrder' => 'nome ASC',
+                    )));
     }
 
     public static function hash($password) {

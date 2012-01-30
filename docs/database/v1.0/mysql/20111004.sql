@@ -157,15 +157,3 @@ CONSTRAINT `fkLinhaServicoFuncionario` FOREIGN KEY (`idFuncionario`) REFERENCES 
 CONSTRAINT `fkLinhaServicoFolhaObra` FOREIGN KEY (`idFolhaObra`) REFERENCES `FolhaObra`(`idFolhaObra`) ,
 CONSTRAINT `fkLinhaServicoServico` FOREIGN KEY (`idServico`) REFERENCES `Servico`(`idServico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
-
-/*
-CREATE TABLE `LinhaGasto` (
-`idLinhaGasto` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-`quantidade` TINYINT NOT NULL ,
-`precoUnitario` DECIMAL( 10,4 ) NOT NULL , 
-`activo` TINYINT NOT NULL DEFAULT 1 ,
-`idMaterial` INT UNSIGNED NOT NULL ,
-`idLInhaServico` INT UNSIGNED NOT NULL ,
-CONSTRAINT `fkLinhaGastoMaterial` FOREIGN KEY (`idMaterial`) REFERENCES `Material`(`idMaterial`) ,
-CONSTRAINT `fkLinhaGastoLinhaServico` FOREIGN KEY (`idLinhaServico`) REFERENCES `LinhaServico`(`idLinhaServico`)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ; */

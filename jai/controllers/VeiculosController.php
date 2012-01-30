@@ -39,7 +39,8 @@ class VeiculosController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar', 'lista'
+                        'actions' => array('index', 'criar', 'editar', 'apagar',
+                            'lista', 'acMatricula'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -177,6 +178,23 @@ class VeiculosController extends SistemaController {
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
+    }
+
+    //TODO: limitar a pedidos AJAX
+    public function actionAcMatricula() {
+        $criteria = new CDbCriteria();
+        $criteria->order = 'matricula';
+        $criteria->compare('matricula', $_GET['term'], true);
+        $criteria->compare('activo', 1);
+
+        $veiculos = array();
+        foreach (Veiculo::model()->findAll($criteria) as $veiculo) {
+            $veiculos[] = $veiculo->matricula;
+        }
+
+        echo json_encode($veiculos);
+
+        Yii::app()->end();
     }
 
 }
