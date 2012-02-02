@@ -7,7 +7,7 @@ Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
 <div id="titulo">
     <h2>Fornecedores</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/x16.fornecedor.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/fornecedor.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -43,14 +43,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
+            'headerHtmlOptions' => array(
+                'class' => 'buttons-2'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.fornecedor.editar.png',
+                    'imageUrl' => 'imagens/icones/fornecedor.editar.png',
                     'url' => 'Yii::app()->createUrl("fornecedores/editar", array("id" => $data->idFornecedor))'
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/x16.fornecedor.apagar.png',
+                    'imageUrl' => 'imagens/icones/fornecedor.remover.png',
                     'url' => 'Yii::app()->createUrl("fornecedores/apagar", array("id" => $data->idFornecedor))',
                 )
             ),

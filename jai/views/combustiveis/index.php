@@ -2,7 +2,7 @@
 <div id="titulo">
     <h2>Combustíveis/Fontes de Energia</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('combustiveis/criar'); ?>"><img src="imagens/icones/x16.combustivel.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('combustiveis/criar'); ?>"><img src="imagens/icones/combustivel.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -23,14 +23,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
+            'headerHtmlOptions' => array(
+                'class' => 'buttons-2'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.combustivel.editar.png',
+                    'imageUrl' => 'imagens/icones/combustivel.editar.png',
                     'url' => 'Yii::app()->createUrl("combustiveis/editar", array("id" => $data->idCombustivel))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/x16.combustivel.apagar.png',
+                    'imageUrl' => 'imagens/icones/combustivel.remover.png',
                     'url' => 'Yii::app()->createUrl("combustiveis/apagar", array("id" => $data->idCombustivel))',
                 )
             ),

@@ -33,32 +33,32 @@ class SistemaController extends JAIController {
             array(
                 'label' => 'Dashboard',
                 'url' => $this->createUrl('/dashboard'),
-                'icon' => 'imagens/icones/x32.dashboard.png',
+                'icon' => 'imagens/icones/dashboard.png',
             ),
             array(
                 'label' => 'Folhas de Obra',
                 'url' => $this->createUrl('/obras'),
-                'icon' => 'imagens/icones/x32.folhaobra.png',
+                'icon' => 'imagens/icones/folhaobra.png',
             ),
             array(
                 'label' => 'Marcações',
                 'url' => $this->createUrl('/marcacoes'),
-                'icon' => 'imagens/icones/x32.marcacoes.png',
+                'icon' => 'imagens/icones/marcacoes.png',
             ),
             array(
                 'label' => 'Clientes',
                 'url' => $this->createUrl('/clientes'),
-                'icon' => 'imagens/icones/x32.cliente.png',
+                'icon' => 'imagens/icones/cliente.png',
             ),
             array(
                 'label' => 'Administração',
                 'url' => $this->createUrl('/configuracoes'),
-                'icon' => 'imagens/icones/x32.administracao.png',
+                'icon' => 'imagens/icones/administracao.png',
             ),
             array(
                 'label' => 'Sair',
                 'url' => $this->createUrl('dashboard/sair'),
-                'icon' => 'imagens/icones/x32.sair.png',
+                'icon' => 'imagens/icones/sair.png',
             )
         );
     }

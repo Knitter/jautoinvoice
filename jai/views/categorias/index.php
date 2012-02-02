@@ -2,7 +2,7 @@
 <div id="titulo">
     <h2>Categorias</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('categorias/criar'); ?>"><img src="imagens/icones/x16.categoria.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('categorias/criar'); ?>"><img src="imagens/icones/categoria.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -23,14 +23,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
+            'headerHtmlOptions' => array(
+                'class' => 'buttons-2'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.categoria.editar.png',
+                    'imageUrl' => 'imagens/icones/categoria.editar.png',
                     'url' => 'Yii::app()->createUrl("categorias/editar", array("id" => $data->idCategoria))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/x16.categoria.apagar.png',
+                    'imageUrl' => 'imagens/icones/categoria.remover.png',
                     'url' => 'Yii::app()->createUrl("categorias/apagar", array("id" => $data->idCategoria))',
                 )
             ),

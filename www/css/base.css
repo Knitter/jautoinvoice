@@ -98,7 +98,20 @@ h2 {
 /*FORMULÁRIOS*/
 
 /*FOLHAS DE OBRA*/
-
 .coluna-gastos {
     padding-left: 2em;
+}
+
+
+/**/
+input[type="image"] {
+    border: none;
+}
+
+.buttons-2 {
+    width: 8em;
+}
+
+.buttons-3 {
+    width: 12em;
 }

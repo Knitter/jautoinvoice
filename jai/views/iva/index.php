@@ -4,7 +4,7 @@ $this->title = 'Taxas de IVA'
 <div id="titulo">
     <h2>Taxas de IVA</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/x16.iva.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/iva.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -30,14 +30,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
+            'headerHtmlOptions' => array(
+                'class' => 'buttons-2'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.iva.editar.png',
+                    'imageUrl' => 'imagens/icones/iva.editar.png',
                     'url' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIVA))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/x16.iva.apagar.png',
+                    'imageUrl' => 'imagens/icones/iva.remover.png',
                     'url' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIVA))',
                 )
             ),

@@ -192,11 +192,15 @@ function criarLinhaGasto() {
                 .append($(document.createElement('td')).html($('#material option:selected').text()))
                 .append($(document.createElement('td')).html(linha.subTotal.toFixed(2)))
                 .append($(document.createElement('td')).append(
-                    $(document.createElement('input')).attr({
-                        type: 'button',
-                        onclick: 'removerLinhaGasto(' + linha.ordem + ');',
-                        value: '-'
-                    })))
+                    $(document.createElement('a')).attr({
+                        onclick: 'removerLinhaGasto(' + linha.ordem + ');'
+                    })
+                    .append($(document.createElement('img'))
+                        .attr({
+                            src: 'imagens/icones/remover.png'
+                        })
+                        )
+                    ))
                 .appendTo($('#linhasGasto'));
                 
                 $('#quantidade').val('');

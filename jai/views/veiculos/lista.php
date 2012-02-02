@@ -10,7 +10,7 @@ if ($op == 'editar') {
 <div id="titulo">
     <h2>Veículos de <?php echo $cliente->nome; ?></h2>
     <div id="opcoes">
-        <a href="<?php echo $voltar; ?>"><img src="imagens/icones/x16.voltar.png" /></a>&nbsp;&nbsp;
+        <a href="<?php echo $voltar; ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
         <a href="<?php echo $this->createUrl('veiculos/criar', array('id' => $cliente->idCliente, 'op' => $op)); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /></a>
     </div>
     <div style="clear: both"></div>
@@ -40,14 +40,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
+            'headerHtmlOptions' => array(
+                'class' => 'buttons-2'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/x16.veiculo.apagar.png',
+                    'imageUrl' => 'imagens/icones/veiculo.remover.png',
                     'url' => 'Yii::app()->createUrl("veiculos/apagar", array("id" => $data->idVeiculo))'
                 ),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.veiculo.editar.png',
+                    'imageUrl' => 'imagens/icones/veiculo.editar.png',
                     'url' => 'Yii::app()->createUrl("veiculos/editar", array("id" => $data->idVeiculo, "op" => "' . $op . '"))'
                 )
             ),

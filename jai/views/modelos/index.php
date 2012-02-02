@@ -29,14 +29,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
+            'headerHtmlOptions' => array(
+                'class' => 'buttons-2'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/x16.modelo.editar.png',
+                    'imageUrl' => 'imagens/icones/modelo.editar.png',
                     'url' => 'Yii::app()->createUrl("marcas/editar", array("id" => $data->idMarca))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/x16.modelo.apagar.png',
+                    'imageUrl' => 'imagens/icones/modelo.remover.png',
                     'url' => 'Yii::app()->createUrl("marcas/apagar", array("id" => $data->idMarca))'
                 )
             ),
