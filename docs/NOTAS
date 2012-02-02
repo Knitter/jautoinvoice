@@ -10,6 +10,10 @@
  - Tornar as acções dependentes das configurações
  - Controlar encomendas
  - Contemplar IVAs e corrigir contas
+ - Juntar CSS e JS e alterar tema para cupertino
+ - Impedir a alteração de percentagem de IVA se já é usado em facturas/linhasgasto
+ - optimizar utilização de clientScript guardando a instância
+ - permitir adicionar linha de gasto ao clicar no adicionar linha de serviço, assumir o valor preenchido como uma linha válida
 
 Alguns serviços podem dar origem a avisos que se irão repetir de tempos a tempo, por exemplo,
 uma inspeção ou uma mudança de óleo pode originar um aviso que irá disparar na data prevista

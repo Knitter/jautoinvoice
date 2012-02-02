@@ -77,14 +77,8 @@ class ServicosController extends AdministracaoController {
                 $this->redirect(array('editar', 'id' => $servico->idServico));
         }
 
-        $criteria = new CDbCriteria();
-        $criteria->order = 'descricao';
-        $criteria->compare('activo', 1);
-        $ivas = IVA::model()->findAll($criteria);
-
         $this->render('editar', array(
-            'servico' => $servico,
-            'ivas' => $ivas
+            'servico' => $servico
         ));
     }
 
@@ -99,14 +93,8 @@ class ServicosController extends AdministracaoController {
                 $this->redirect(array('editar', 'id' => $servico->idServico));
         }
 
-        $criteria = new CDbCriteria();
-        $criteria->order = 'descricao';
-        $criteria->compare('activo', 1);
-        $ivas = IVA::model()->findAll($criteria);
-
         $this->render('editar', array(
-            'servico' => $servico,
-            'ivas' => $ivas
+            'servico' => $servico
         ));
     }
 
@@ -133,14 +121,6 @@ class ServicosController extends AdministracaoController {
                         'nome' => $servico->nome,
                         'preco' => $servico->preco
             );
-
-            if ($servico->idIVA) {
-                $resultado->servico->iva = (object) array(
-                            'idIVA' => $servico->idIVA,
-                            'descIVA' => $servico->iva->descricao,
-                            'valorIVA' => $servico->iva->percentagem
-                );
-            }
         }
 
         echo json_encode($resultado);

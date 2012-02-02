@@ -1,218 +1,230 @@
-var globais = {
-    url: {
-        funcionarios: '',
-        servicos: '',
-        materiais: ''
-    }
-}, linhasServico = new Array(), linhasGasto = null;
+var urlMaterial = '', urlServico = '', urlFuncionario = '', linhasServico = new Array(), linhasGasto = null;
 
 function adicionarLinhaServico() {
     linhasGasto = new Array();
-    
     $('#dlgLinhaServico').dialog('open');
 }
 
 function criarLinhaServico() {
-    var valor = $('#valorHora').val() != '' ? parseFloat($('#valorHora').val()) : 0,
-    duracao = $('#duracao').val() != '' ? parseInt($('#duracao').val(), 10) : 0,
-    base = $('#valor').val() != '' ? parseFloat( $('#valor').val()) : 0,
-    iva = $('#valorIvaServico').val() != '' ? parseFloat($('#valorIvaServico').val()) : 0;
+    var linha = null, subTotalGastos = 0, tabela = null, max = 0, i = 0, l = null,
+    funcionario = null, servico = null, duracao = 0, actual = null;
     
-    valor = (valor * duracao) + (base * (1 + iva));
-            
-    $(document.createElement('tr'))
-    .append($(document.createElement('td')).html($('#funcionario option:selected').text()))
-    .append($(document.createElement('td')).html($('#servico option:selected').text()))
-    .append($(document.createElement('td')).html(duracao))
-    .append($(document.createElement('td')).html(valor))
-    .append($(document.createElement('td')).html($('#notas').val()))
-    .append($(document.createElement('td'))
-        .append($(document.createElement('input')).attr({
-            type: 'button',
-            onclick: 'removerLinhaServico();',
-            value: '-'
-        })))
-    .appendTo($('#linhasServico'));
-    
-    linhasServico.push({
-        id: linhasServico.length + 1,
-        funcionario: {
-            id: $('#funcionario').val(),
-            valorHora: $('#valorHora').val(),
-            nome: $('#funcionario option:selected').text()
+    //SYNC?
+    $.ajax({
+        async: false,
+        url: urlFuncionario,
+        dataType: 'json',
+        type: 'POST',
+        data: {
+            id: $('#funcionario').val() 
         },
-        servico: {
-            id: $('#servico').val(),
-            nome: $('#servico option:selected').text()
-        },
-        duracao: $('#duracao').val(),
-        preco: $('#valor').val(),
-        iva: {
-            id: $('#idIvaServico').val(),
-            valor: iva,
-            nome: $('#descIvaServico').val()
-        },
-        notas: $('#notas').val(),
-        gastos: linhasGasto
+        success: function(json) {
+            if(json.sucesso) {
+                funcionario = {
+                    id: json.funcionario.idFuncionario,
+                    valorHora: json.funcionario.valorHora
+                }
+            } else {
+                alert('Não foi possível obter os dados do funcionário.');
+            }
+        }
     });
+
+    //SYNC?
+    $.ajax({
+        async: false,
+        url: urlServico,
+        dataType: 'json',
+        type: 'POST',
+        data: {
+            id: $('#servico').val() 
+        },
+        success: function(json) {
+            if(json.sucesso) {
+                servico = {
+                    id: json.servico.idServico,
+                    preco: json.servico.preco
+                }
+            } else {
+                alert('Não foi possível obter os dados do servico.');
+            }
+        }
+    });
+    
+    if(funcionario != null && servico != null) {
+        max = linhasGasto.length;
+        for(i = 0; i < max; i++) {
+            subTotalGastos += linhasGasto[i].subTotal;
+        }
+        
+        duracao = $('#duracao').val() != '' ? parseInt($('#duracao').val(), 10) : 0;
+                
+        linha = {
+            ordem: linhasServico.length + 1,
+            funcionario: funcionario,
+            servico: servico,
+            duracao: duracao,
+            notas: $('#notas').val(),
+            gastos: linhasGasto,
+            subTotalGastos: subTotalGastos,
+            valor: (subTotalGastos + servico.preco + (funcionario.valorHora * duracao))
+        }, 
+        linhasServico.push(linha);
+            
+        $(document.createElement('tr'))
+        //.attr()
+        .append($(document.createElement('td')).html($('#funcionario option:selected').text()))
+        .append($(document.createElement('td')).html($('#servico option:selected').text()))
+        .append($(document.createElement('td')).html(linha.duracao))
+        .append($(document.createElement('td')).html(linha.notas))
+        .append($(document.createElement('td')).html(parseFloat(linha.valor).toFixed(2)))
+        .append($(document.createElement('td'))
+            .append($(document.createElement('input')).attr({
+                type: 'button',
+                onclick: 'removerLinhaServico(' + linha.ordem +');',
+                value: '-'
+            })))
+        .appendTo($('#linhasServico'));
+    
+        tabela = $(document.createElement('table'))
+        .append($(document.createElement('tr'))
+            .append($(document.createElement('td')).html('Material'))
+            .append($(document.createElement('td')).addClass('small-column').html('Quantidade'))
+            .append($(document.createElement('td')).addClass('small-column').html('Unit. ( &euro; ) / IVA'))
+            .append($(document.createElement('td')).addClass('small-column').html('Sub-total ( &euro; )'))
+            );
+    
+        max = linha.gastos.length;
+        for(i = 0; i < max; i++) {
+            actual = linha.gastos[i];
+            
+            $(document.createElement('tr'))
+            .append($(document.createElement('td')).html(actual.material.nome))
+            .append($(document.createElement('td')).html(actual.quantidade))
+            .append($(document.createElement('td')).html(parseFloat(actual.material.precoUnitario).toFixed(2) 
+                + ' / ' + actual.material.iva.percentagem + '%'))
+            .append($(document.createElement('td')).html(parseFloat(actual.subTotal).toFixed(2)))
+            .appendTo(tabela);
+        }
+
+        tabela.append($(document.createElement('tr'))
+            .append($(document.createElement('td')).attr('colspan', 3).html('Sub-total ( &euro; )'))
+            .append($(document.createElement('td')).html(parseFloat(linha.subTotalGastos).toFixed(2)))
+            );
+                
+        $(document.createElement('tr'))
+        //.attr()
+        //Columna base para a tabela de gastos
+        .append($(document.createElement('td'))
+            .addClass('coluna-gastos')
+            .attr('colspan', 6)
+            .append(tabela)
+            )
+        .appendTo($('#linhasServico'));
+            
+        $(document.createElement('input')).attr({
+            id: 'ls-' + linha.id,
+            name: 'linhasServico[]',
+            type: 'hidden',
+            value: JSON.stringify(linha)
+        })
+        .appendTo($('#folhaobra-form'));
    
-    $('#dlgLinhaServico').dialog('close');
+        $('#dlgLinhaServico').dialog('close');
+    } else {
+        alert('Ocorreu um erro interno.');
+    }
 }
 
-function limparCamposDlgLinhaServico() {
-    $('#valorHora').val('');
+function limparCamposDlgLinhaServico() {   
     $('#duracao').val('');
-    $('#valor').val('');
-    $('#valorIvaServico').val(0);
-    $('#descIvaServico').val('');
     $('#funcionario').val('');
     $('#servico').val('');
-    $('#notas').val(''); 
+    $('#notas').val('');
+    $('#material').val('');
+    $('#quantidade').val('');
+    
+//each linhaGasto    
+//removerLinhaGasto();
+
+//deactivate add button
+//deactivate add linha gasto button
 }
 
-function removerLinhaServico() {
-    alert('Por implementar');
+function removerLinhaServico(ordem) {
+//var deleted = linhasServico.splice(ordem, 1), i = deleted[0].gastos.length;
+//remover linhas de gasto já colocadas no DOM do form
 }
 
 function criarLinhaGasto() {
-    var total = 0.0, precoUnitario = $('#precoUnitario').val() != '' ? parseFloat($('#precoUnitario').val()) : 0,
-    iva = $('#valorIvaMaterial').val() != '' ? parseFloat($('#valorIvaMaterial').val()) : 0, 
-    desconto = $('#desconto').val() != '' ? parseFloat($('#desconto').val()) : 0,
-    quantidade = $('#quantidade').val() != '' ? parseInt($('#quantidade').val(), 10) : 0;
+    var linha = null, quantidade = 0;
     
-    total = ((precoUnitario * (1 + iva)) - desconto) * quantidade;
-    
-    linhasGasto.push({
-        ordem: linhasGasto.length + 1,
-        quantidade: quantidade,
-        material: {
-            id: $('#material').val(),
-            nome: $('#material option:selected').text()
+    $.ajax({
+        url: urlMaterial,
+        dataType: 'json',
+        type: 'POST',
+        data: {
+            id: $('#material').val()
         },
-        preco: precoUnitario,
-        iva: {
-            id: $('#idIvaMaterial').val(),
-            valor: iva,
-            nome: $('#descIvaMaterial').val()
-        },
-        desconto: desconto
-    });    
-    
-    $(document.createElement('tr'))
-    .append($(document.createElement('td')).html(quantidade))
-    .append($(document.createElement('td')).html($('#material option:selected').text()))
-    .append($(document.createElement('td')).html(precoUnitario))
-    .append($(document.createElement('td')).html($('#descIvaMaterial').val()))
-    .append($(document.createElement('td')).html(desconto))
-    .append($(document.createElement('td')).html(total))
-    .append($(document.createElement('td')).append(
-        $(document.createElement('input')).attr({
-            type: 'button',
-            onclick: 'removerLinhaGasto();',
-            value: '-'
-        })))
-    .appendTo($('#linhasGasto'));
-    
-    $('#btnAdicionarLG').attr('disabled', 'disabled');
-    limparCamposDlgLinhaGastos();
+        success: function(json) {
+            if(json.sucesso) {
+                quantidade = $('#quantidade').val() != '' ? parseInt($('#quantidade').val(), 10) : 1;
+                linha = {
+                    ordem: linhasGasto.length + 1,
+                    quantidade: quantidade,
+                    material: {
+                        id: json.material.idMaterial,
+                        nome: json.material.nome,
+                        precoUnitario: json.material.precoUnitario,
+                        iva: {
+                            id: json.material.iva.idIVA,
+                            percentagem: json.material.iva.percentagem
+                        }
+                    },
+                    subTotal: quantidade * json.material.precoUnitario * (1 + json.material.iva.percentagem / 100)
+                };
+                linhasGasto.push(linha);
+                
+                $(document.createElement('tr')).attr({
+                    id: 'lg-' + linha.ordem
+                })
+                .append($(document.createElement('td')).html(linha.quantidade))
+                .append($(document.createElement('td')).html($('#material option:selected').text()))
+                .append($(document.createElement('td')).html(linha.subTotal.toFixed(2)))
+                .append($(document.createElement('td')).append(
+                    $(document.createElement('input')).attr({
+                        type: 'button',
+                        onclick: 'removerLinhaGasto(' + linha.ordem + ');',
+                        value: '-'
+                    })))
+                .appendTo($('#linhasGasto'));
+                
+                $('#quantidade').val('');
+                $('#material').val('');
+            } else {
+                alert('Não foi possível obter os dados do material.');
+            }
+        }
+    });
 }
 
-//TODO: verificar se é reutilizado além da função criarLinhaGasto
-function limparCamposDlgLinhaGastos() {
-    $('#quantidade').val('');
-    $('#material').val('');
-    $('#precoUnitario').val(0);
-    $('#descIvaMaterial').val('');
-    $('#desconto').val(0);
-    $('#valorIvaMaterial').val(0);
-    $('#idIvaMaterial').val(0)
-}
-
-function removerLinhaGasto() {
-    alert('Por implementar');
-}
-
-function pedirDadosFuncionario() {
-    if($('#funcionario').val() != '') { 
-        $.ajax({
-            url: globais.url.funcionarios,
-            dataType: 'json',
-            type: 'POST',
-            data: {
-                id: $('#funcionario').val()
-            },
-            success: function(json) {
-                if(json.sucesso) {
-                    $('#valorHora').val(json.funcionario.valorHora);
-                }
-            },
-            complete: verificarBotaoAdicionar
-        });
-    }
-}
-
-function pedirDadosServico() {
-    if($('#servico').val() != '') {
-        $.ajax({
-            url: globais.url.servicos,
-            dataType: 'json',
-            type: 'POST',
-            data: {
-                id: $('#servico').val()
-            },
-            success: function(json) {
-                if(json.sucesso) {
-                    $('#valor').val(json.servico.preco);
-                    if(json.servico.iva) {
-                        $('#idIvaServico').val(json.servico.iva.idIVA);
-                        $('#valorIvaServico').val(json.servico.iva.valorIVA / 100);
-                        $('#dscIva').html('(' + json.servico.iva.descIVA + ')');
-                    } else {
-                        $('#idIvaServico').val(0);
-                        $('#valorIvaServico').val(0);
-                        $('#dscIva').html('(Sem IVA)');
-                    }
-                }
-            },
-            complete: verificarBotaoAdicionar
-        });
-    }
+function removerLinhaGasto(ordem) {
+    linhasGasto.splice(ordem, 1);
+    $('#lg-' + ordem).remove();
 }
 
 function verificarBotaoAdicionar() {
-    if($('#funcionario').val() != '' && $('#servico').val() != '') {
-        $('#btnAdicionarLS').attr('disabled', false);
-    } else {
-        $('#btnAdicionarLS').attr('disabled', 'disabled');
-    }
+//if($('#funcionario').val() != '' && $('#servico').val() != '') {
+//    $('#btnAdicionarLS').attr('disabled', false).removeClass('ui-state-disabled');
+//} else {
+//    $('#btnAdicionarLS').attr('disabled', 'disabled').addClass('ui-state-disabled');
+//}
 }
 
-function pedirDadosMaterial() {
-    if($('#material').val()) {
-        $.ajax({
-            url: globais.url.materiais,
-            dataType: 'json',
-            type: 'POST',
-            data: {
-                id: $('#material').val()
-            },
-            success: function(json) {
-                if(json.sucesso) {
-                    $('#precoUnitario').val(json.material.precoUnitario);
-                    $('#maxDesconto').val(json.material.desconto);
-                    //iva
-                    $('#descIvaMaterial').val(json.material.iva.descIVA);
-                    $('#valorIvaMaterial').val(json.material.iva.valorIVA / 100);
-                    $('#idIvaMaterial').val(json.material.iva.idIVA);
-                }
-            },
-            complete: function () {
-                if($('#material').val() != '') {
-                    $('#btnAdicionarLG').attr('disabled', false);
-                } else {
-                    $('#btnAdicionarLG').attr('disabled', 'disabled');
-                }
-            }
-        });
-    }
+function verificarBotaoAdicionarLG () {
+//if($('#material').val() != '' && $('#quantidade').val() != '') {
+//    $('#btnAdicionarLG').attr('disabled', false);
+//} else {
+//    $('#btnAdicionarLG').attr('disabled', 'disabled');
+//}
 }

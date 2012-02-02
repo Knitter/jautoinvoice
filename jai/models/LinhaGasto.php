@@ -26,7 +26,6 @@
  * @property int $idLinhaGasto
  * @property int $quantidade
  * @property float $precoUnitario
- * @property float $desconto
  * @property int $activo
  * 
  * @property int $idMaterial
@@ -54,9 +53,9 @@ class LinhaGasto extends CActiveRecord {
         return array(
             array('quantidade, precoUnitario, idMaterial, idIVA, idLinhaServico', 'required'),
             array('quantidade, idLinhaServico, idIva, idMaterial', 'numerical', 'integerOnly' => true),
-            array('precoUnitario, desconto', 'numerical'),
+            array('precoUnitario', 'numerical'),
             // search
-            array('quantidade, precoUnitario, desconto, idMaterial, idIVA, idLinhaServico', 'safe', 'on' => 'search'),
+            array('quantidade, idMaterial, idIVA, idLinhaServico', 'safe', 'on' => 'search'),
         );
     }
 
@@ -73,7 +72,6 @@ class LinhaGasto extends CActiveRecord {
             'idLinhaGasto' => 'ID',
             'quantidade' => 'Quantidade',
             'precoUnitario' => 'Preço Uni.',
-            'desconto' => 'Desconto',
             'idMaterial' => 'Material',
             'idIVA' => 'IVA',
             'idLinhaServico' => 'Serviço',
@@ -88,7 +86,6 @@ class LinhaGasto extends CActiveRecord {
 
         $criteria->compare('quantidade', $this->quantidade);
         $criteria->compare('precoUnitario', $this->precoUnitario);
-        $criteria->compare('desconto', $this->desconto);
 
         $criteria->compare('idMaterial', $this->idMaterial);
         $criteria->compare('idIVA', $this->idIVA);

@@ -51,8 +51,9 @@ class FolhaObra extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('data, descricaoAvaria, kms, idFuncionario, matricula', 'required'),
+            array('data, kms, idFuncionario, matricula', 'required'),
             array('kms', 'numerical', 'integerOnly' => true),
+            array('descricaoAvaria', 'safe'),
             // search
             array('data, descricaoAvaria, idFuncionario, matricula', 'safe', 'on' => 'search'),
         );

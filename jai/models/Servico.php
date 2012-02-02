@@ -27,11 +27,9 @@
  * @property string $nome
  * @property string $descricao
  * @property string $preco
- * @property int $idIVA
  * @property int $activo
  *
  * @property LinhaServico[] $linhasServico
- * @property IVA $iva
  */
 class Servico extends CActiveRecord {
 
@@ -50,9 +48,8 @@ class Servico extends CActiveRecord {
         return array(
             array('nome', 'required'),
             array('nome', 'length', 'max' => 255),
-            array('idIVA', 'numerical', 'integerOnly' => true),
+            array('preco', 'numerical'),
             array('descricao', 'safe'),
-            //TODO: regra para preço
             // search
             array('nome, descricao', 'safe', 'on' => 'search'),
         );
@@ -60,8 +57,7 @@ class Servico extends CActiveRecord {
 
     public function relations() {
         return array(
-            'linhasServico' => array(self::HAS_MANY, 'LinhaServico', 'idServico'),
-            'iva' => array(self::BELONGS_TO, 'IVA', 'idIVA')
+            'linhasServico' => array(self::HAS_MANY, 'LinhaServico', 'idServico')
         );
     }
 
@@ -70,8 +66,7 @@ class Servico extends CActiveRecord {
             'idServico' => 'ID',
             'nome' => 'Nome',
             'descricao' => 'Descrição',
-            'preco' => 'Preco',
-            'idIVA' => 'IVA'
+            'preco' => 'Preço',
         );
     }
 

@@ -28,6 +28,7 @@
  * @property string $valorHora
  * @property string $notas
  * @property int $activo
+ * @property string $custoServico
  * 
  * @property int $idFuncionario
  * @property int $idServico
@@ -54,6 +55,7 @@ class LinhaServico extends CActiveRecord {
         return array(
             array('duracao, valorHora, idFuncionario, idServico, idFolhaObra', 'required'),
             array('idFuncionario, idServico, idFolhaObra', 'numerical', 'integerOnly' => true),
+            array('custoServico', 'numerical'),
             array('duracao, valorHora', 'numerical'),
             array('notas', 'length', 'max' => 255),
             // search
@@ -78,6 +80,7 @@ class LinhaServico extends CActiveRecord {
             'idFuncionario' => 'Funcionário',
             'idServico' => 'Serviço',
             'idFolhaObra' => 'Folha de Obra',
+            'custoServico' => 'Custo de Serviço'
         );
     }
 
@@ -88,7 +91,6 @@ class LinhaServico extends CActiveRecord {
         $criteria = new CDbCriteria();
 
         $criteria->compare('duracao', $this->duracao);
-        $criteria->compare('valorHora', $this->valorHora);
         $criteria->compare('notas', $this->notas, true);
 
         $criteria->compare('idFuncionario', $this->idFuncionario);

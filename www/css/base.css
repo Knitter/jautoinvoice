@@ -1,7 +1,28 @@
+/*GERAL*/
 body {
     margin: 0;
     padding: 0;
     background: #EFEFEF;
+}
+
+table {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555;
 }
 
 #content {
@@ -18,16 +39,6 @@ body {
     width: 950px;
     font-size: 0.8em;
     text-align: center;
-}
-
-a {
-    text-decoration: none;
-}
-
-ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
 }
 
 #menu {
@@ -49,12 +60,6 @@ ul {
 #titulo h2 {
     float: left;
     width: 70%;
-}
-
-h2 {
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #555;
 }
 
 #opcoes {
@@ -88,4 +93,12 @@ h2 {
     font-size: smaller;
     color: #777;
     font-style: italic;
+}
+
+/*FORMULÁRIOS*/
+
+/*FOLHAS DE OBRA*/
+
+.coluna-gastos {
+    padding-left: 2em;
 }

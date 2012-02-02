@@ -1,18 +1,18 @@
 <?php
 $js = <<<JS
-globais.url.funcionarios = '{$this->createUrl('funcionarios/dadosJSON')}';
-globais.url.servicos = '{$this->createUrl('servicos/dadosJSON')}';
-globais.url.materiais = '{$this->createUrl('stock/dadosJSON')}';
+urlMaterial = '{$this->createUrl('stock/dadosJSON')}';
+urlServico = '{$this->createUrl('servicos/dadosJSON')}';
+urlFuncionario = '{$this->createUrl('funcionarios/dadosJSON')}';
 JS;
 
-Yii::app()->clientScript->registerScript('urls', $js);
+Yii::app()->clientScript->registerScript('initUrls', $js);
 
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id' => 'dlgLinhaServico',
     'options' => array(
         'title' => 'Adicionar Serviço',
         'autoOpen' => false,
-        'minWidth' => 960,
+        'minWidth' => 640,
         'close' => 'js:limparCamposDlgLinhaServico'
     ),
 ));
@@ -23,13 +23,9 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     echo CHtml::label('Funcionário', 'funcionario'),
     CHtml::dropDownList('funcionario', null, CHtml::listData($funcionarios, 'idFuncionario', 'nome'), array(
         'empty' => '- funcionário -',
-        'onchange' => 'pedirDadosFuncionario();'
+        'onchange' => 'verificarBotaoAdicionar();'
     ));
     ?>
-</div>
-
-<div class="row">
-    <?php echo CHtml::label('Valor/Hora', 'valorHora'), CHtml::textField('valorHora', null, array('class' => 'small-field')), '&nbsp;&euro;'; ?>
 </div>
 
 <div class="row">
@@ -37,18 +33,9 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     echo CHtml::label('Serviço', 'servico'),
     CHtml::dropDownList('servico', null, CHtml::listData($servicos, 'idServico', 'nome'), array(
         'empty' => '- serviço -',
-        'onchange' => 'pedirDadosServico();'
+        'onchange' => 'verificarBotaoAdicionar();'
     ));
     ?>
-</div>
-
-<div class="row">
-    <?php
-    echo CHtml::label('Valor', 'valor'),
-    CHtml::textField('valor', null, array('class' => 'small-field'))
-    , '&nbsp;&euro;';
-    ?>
-    <span id="dscIva"></span>
 </div>
 
 <div class="row">
@@ -63,11 +50,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     <legend>Gastos de Material</legend>
     <table id="linhasGasto">
         <tr>
-            <th>Quantidade</th>
+            <th class="small-column">Quantidade</th>
             <th>Material</th>
-            <th>Preço Uni. ( &euro; )</th>
-            <th>IVA</th>
-            <th>Desconto ( &euro; )</th>
             <th>Sub-total ( &euro; )</th>
             <th style="width: 22px;"></th>
         </tr>
@@ -77,19 +61,15 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
                 <?php
                 echo CHtml::dropDownList('material', null, CHtml::listData($materiais, 'idMaterial', 'nome'), array(
                     'empty' => '- material usado -',
-                    'onchange' => 'pedirDadosMaterial();'
+                    'onchange' => 'verificarBotaoAdicionarLG();'
                 ));
                 ?>
             </td>
-            <td><?php echo CHtml::textField('precoUnitario', null, array('class' => 'small-field')); ?></td>
-            <td></td>
-            <td><?php echo CHtml::textField('desconto', 0, array('class' => 'small-field')); ?></td>
             <td></td>
             <td>
                 <?php
                 echo CHtml::button('+', array(
                     'onclick' => 'criarLinhaGasto();',
-                    'disabled' => 'disabled',
                     'id' => 'btnAdicionarLG'
                 ));
                 ?>
@@ -103,17 +83,11 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     echo CHtml::button('Adicionar', array(
         'id' => 'btnAdicionarLS',
         'onclick' => 'criarLinhaServico();',
-        'disabled' => 'disabled',
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar');
+    CHtml::link('Cancelar', 'javascript:;', array('onclick' => "javascript:$('#dlgLinhaServico').dialog('close');"));
     ?>
 </div>
 
 <?php
-echo CHtml::hiddenField('valorIvaServico'), CHtml::hiddenField('idIvaServico'),
- CHtml::hiddenField('descIvaServico'), CHtml::hiddenField('maxDesconto'),
- CHtml::hiddenField('descIvaMaterial'), CHtml::hiddenField('valorIvaMaterial'),
- CHtml::hiddenField('idIvaMaterial');
-
 $this->endWidget('zii.widgets.jui.CJuiDialog');

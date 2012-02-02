@@ -68,9 +68,9 @@ $form = $this->beginWidget('CActiveForm', array(
         <tr>
             <th>Funcionário</th>
             <th>Serviço</th>
-            <th>Duração (horas)</th>
-            <th>Valor ( &euro; )</th>
+            <th class="small-column">Duração (horas)</th>
             <th>Notas</th>
+            <th class="small-column">Preço ( &euro; )</th>
             <th style="width: 22px;"><?php echo CHtml::button('+', array('onclick' => 'adicionarLinhaServico();')); ?></th>
         </tr>
     </table>

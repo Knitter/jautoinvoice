@@ -34,7 +34,8 @@ class ObrasController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar',
+                        'actions' => array(
+                            'index', 'criar', 'editar', 'apagar',
                             'folhaDeMarcacao'
                         ),
                         'expression' => '$user->tipo > 1'
@@ -69,8 +70,45 @@ class ObrasController extends SistemaController {
         $this->performAjaxValidation($folha, 'folhaobra-form');
 
         if (isset($_POST['FolhaObra'])) {
+            
+            
+            print_r($_POST);
+            die;
             $folha->attributes = $_POST['FolhaObra'];
             if ($folha->save()) {
+                if (!empty($_POST['linhasServico'])) {
+                    foreach ($_POST['linhasServico'] as $ls) {
+                        $jls = json_decode($ls);
+
+                        $linhaServico = new LinhaServico();
+                        $linhaServico->idFolhaObra = $folha->idFolhaObra;
+                        $linhaServico->duracao = $jls->duracao;
+                        $linhaServico->notas = $jls->notas;
+
+                        $funcionario = Funcionario::model()->findByPk($jls->funcionario);
+                        $linhaServico->idFuncionario = $funcionario->idFuncionario;
+                        $linhaServico->valorHora = $funcionario->valorHora;
+
+                        $servico = Servico::model()->findByPk($jls->servico);
+                        $linhaServico->idServico = $servico->idServico;
+                        $linhaServico->custoServico = $servico->preco;
+
+                        if ($linhaServico->save()) {
+                            foreach ($jls->gastos as $lg) {
+                                $linhaGasto = new LinhaGasto();
+                                $linhaGasto->idLinhaServico = $linhaServico->idLinhaServico;
+
+                                $material = Material::model()->findByPk($lg->material);
+                                $linhaGasto->idMaterial = $material->idMaterial;
+                                $linhaGasto->precoUnitario = $material->precoUnitario;
+                                $linhaGasto->idIva = $material->idIVA;
+
+                                $linhaGasto->save();
+                            }
+                        }
+                    }
+                }
+
                 $this->redirect(array('editar', 'id' => $folha->idFolhaObra));
             }
         }
@@ -93,40 +131,20 @@ class ObrasController extends SistemaController {
     }
 
     public function actionEditar($id) {
-        $folha = $this->carregarModeloFolhaObra($id);
-
-        $this->performAjaxValidation($folha, 'folhaobra-form');
-
-        if (isset($_POST['FolhaObra'])) {
-            $folha->attributes = $_POST['FolhaObra'];
-            if ($folha->save())
-                $this->redirect(array('editar', 'id' => $folha->idFolhaObra));
-        }
-
-        $this->render('editar', array('folhaObra' => $folha));
+        
     }
 
     public function actionApagar($id) {
-        if (Yii::app()->request->isPostRequest && ($folha = $this->carregarModeloFolhaObra($id)) !== null) {
-
-            if (!isset($_GET['ajax'])) {
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-            }
-        } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
-        }
+        
     }
 
     public function actionFolhaDeMarcacao($id) {
-        if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
-        }
-
-
-
-        $this->render('demarcacao', array(
-            'marcacao' => $marcacao
-        ));
+        //if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
+        //    throw new CHttpException(404, 'The requested page does not exist.');
+        //}
+        //$this->render('demarcacao', array(
+        //    'marcacao' => $marcacao
+        //));
     }
 
 }

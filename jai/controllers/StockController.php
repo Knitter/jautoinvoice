@@ -158,12 +158,13 @@ class StockController extends AdministracaoController {
         if (isset($_POST['id']) && ($material = $this->carregarModeloMaterial($_POST['id'])) !== null) {
             $resultado->sucesso = 1;
             $resultado->material = (object) array(
+                        'idMaterial' => $material->idMaterial,
+                        'nome' => $material->nome,
                         'precoUnitario' => $material->precoUnitario,
-                        'desconto' => $material->desconto,
                         'iva' => (object) array(
                             'idIVA' => $material->idIVA,
-                            'descIVA' => $material->iva->descricao,
-                            'valorIVA' => $material->iva->percentagem
+                            'descricao' => $material->iva->descricao,
+                            'percentagem' => $material->iva->percentagem
                         )
             );
         }
