@@ -1,11 +1,11 @@
 <?php
 $js = <<<JS
-urlMaterial = '{$this->createUrl('stock/dadosJSON')}';
-urlServico = '{$this->createUrl('servicos/dadosJSON')}';
-urlFuncionario = '{$this->createUrl('funcionarios/dadosJSON')}';
+g.folhasObra.urls.material = '{$this->createUrl('stock/dadosJSON')}';
+g.folhasObra.urls.servico = '{$this->createUrl('servicos/dadosJSON')}';
+g.folhasObra.urls.funcionario = '{$this->createUrl('funcionarios/dadosJSON')}';
 JS;
 
-Yii::app()->clientScript->registerScript('initUrls', $js);
+Yii::app()->clientScript->registerScript('initFolhasObra', $js);
 
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id' => 'dlgLinhaServico',
@@ -13,6 +13,16 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
         'title' => 'Adicionar Serviço',
         'autoOpen' => false,
         'minWidth' => 640,
+        'buttons' => array(
+            array(
+                'text' => 'Criar',
+                'click' => 'js:criarLinhaServico'
+            ),
+            array(
+                'text' => 'Cancelar',
+                'click' => 'js:function () {$("#dlgLinhaServico").dialog("close");}'
+            ),
+        ),
         'close' => 'js:limparCamposDlgLinhaServico'
     ),
 ));
@@ -22,8 +32,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     <?php
     echo CHtml::label('Funcionário', 'funcionario'),
     CHtml::dropDownList('funcionario', null, CHtml::listData($funcionarios, 'idFuncionario', 'nome'), array(
-        'empty' => '- funcionário -',
-        'onchange' => 'verificarBotaoAdicionar();'
+        'empty' => '- funcionário -'
     ));
     ?>
 </div>
@@ -32,8 +41,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     <?php
     echo CHtml::label('Serviço', 'servico'),
     CHtml::dropDownList('servico', null, CHtml::listData($servicos, 'idServico', 'nome'), array(
-        'empty' => '- serviço -',
-        'onchange' => 'verificarBotaoAdicionar();'
+        'empty' => '- serviço -'
     ));
     ?>
 </div>
@@ -60,8 +68,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
             <td>
                 <?php
                 echo CHtml::dropDownList('material', null, CHtml::listData($materiais, 'idMaterial', 'nome'), array(
-                    'empty' => '- material usado -',
-                    'onchange' => 'verificarBotaoAdicionarLG();'
+                    'empty' => '- material usado -'
                 ));
                 ?>
             </td>
@@ -77,17 +84,6 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
         </tr>
     </table>
 </fieldset>
-
-<div class="row">
-    <?php
-    echo CHtml::button('Adicionar', array(
-        'id' => 'btnAdicionarLS',
-        'onclick' => 'criarLinhaServico();',
-        'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
-    )), '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', 'javascript:;', array('onclick' => "javascript:$('#dlgLinhaServico').dialog('close');"));
-    ?>
-</div>
 
 <?php
 $this->endWidget('zii.widgets.jui.CJuiDialog');

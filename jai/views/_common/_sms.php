@@ -1,6 +1,4 @@
 <?php
-Yii::app()->clientScript->registerCssFile('css/formularios.css');
-
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id' => 'smsForm',
     'options' => array(

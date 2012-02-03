@@ -70,38 +70,38 @@ class ObrasController extends SistemaController {
         $this->performAjaxValidation($folha, 'folhaobra-form');
 
         if (isset($_POST['FolhaObra'])) {
-            
-            
-            print_r($_POST);
-            die;
             $folha->attributes = $_POST['FolhaObra'];
+
+            if (($veiculo = Veiculo::model()->find('matricula = :m', array(':m' => $_POST['FolhaObra']['matricula']))) != null) {
+                $folha->idVeiculo = $veiculo->idVeiculo;
+            }
+
             if ($folha->save()) {
                 if (!empty($_POST['linhasServico'])) {
                     foreach ($_POST['linhasServico'] as $ls) {
-                        $jls = json_decode($ls);
+                        $linhaJSON = json_decode($ls);
 
                         $linhaServico = new LinhaServico();
                         $linhaServico->idFolhaObra = $folha->idFolhaObra;
-                        $linhaServico->duracao = $jls->duracao;
-                        $linhaServico->notas = $jls->notas;
+                        $linhaServico->duracao = $linhaJSON->duracao;
+                        $linhaServico->notas = $linhaJSON->notas;
 
-                        $funcionario = Funcionario::model()->findByPk($jls->funcionario);
-                        $linhaServico->idFuncionario = $funcionario->idFuncionario;
-                        $linhaServico->valorHora = $funcionario->valorHora;
+                        $linhaServico->idFuncionario = $linhaJSON->funcionario->id;
+                        $linhaServico->valorHora = $linhaJSON->funcionario->valorHora;
 
-                        $servico = Servico::model()->findByPk($jls->servico);
-                        $linhaServico->idServico = $servico->idServico;
-                        $linhaServico->custoServico = $servico->preco;
+                        $linhaServico->idServico = $linhaJSON->servico->id;
+                        $linhaServico->custoServico = $linhaJSON->servico->preco;
 
                         if ($linhaServico->save()) {
-                            foreach ($jls->gastos as $lg) {
+                            foreach ($linhaJSON->gastos as $linhaJSON) {
+
                                 $linhaGasto = new LinhaGasto();
                                 $linhaGasto->idLinhaServico = $linhaServico->idLinhaServico;
+                                $linhaGasto->quantidade = $linhaJSON->quantidade;
 
-                                $material = Material::model()->findByPk($lg->material);
-                                $linhaGasto->idMaterial = $material->idMaterial;
-                                $linhaGasto->precoUnitario = $material->precoUnitario;
-                                $linhaGasto->idIva = $material->idIVA;
+                                $linhaGasto->idMaterial = $linhaJSON->material->id;
+                                $linhaGasto->precoUnitario = $linhaJSON->material->precoUnitario;
+                                $linhaGasto->idIva = $linhaJSON->material->iva->id;
 
                                 $linhaGasto->save();
                             }

@@ -1,7 +1,5 @@
 <?php
 $this->title = 'Fornecedores';
-
-Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
 ?>
 
 <div id="titulo">
@@ -34,7 +32,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'delete' => array('visible' => 'false'),
                 'email' => array(
                     'label' => 'Enviar e-mail',
-                    'imageUrl' => 'imagens/icones/x16.email.png',
+                    'imageUrl' => 'imagens/icones/email.png',
                     'url' => '"javascript:caixaEmail({$data->idFornecedor})";'
                 ),
             ),

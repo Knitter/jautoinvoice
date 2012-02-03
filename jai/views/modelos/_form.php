@@ -1,6 +1,4 @@
 <?php
-Yii::app()->clientScript->registerCssFile('css/formularios.css');
-
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'modelo-form',
     'enableAjaxValidation' => true,

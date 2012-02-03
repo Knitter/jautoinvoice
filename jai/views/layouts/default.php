@@ -3,13 +3,16 @@
     <head>
         <meta charset="utf-8">
 
-        <!-- blueprint CSS framework -->
-        <link rel="stylesheet" type="text/css" href="css/blueprint/screen.css" media="screen, projection" />
-        <link rel="stylesheet" type="text/css" href="css/blueprint/print.css" media="print" />
+        <link rel="stylesheet" type="text/css" href="css/all.styles<?php echo (YII_DEBUG ? '' : '.min'); ?>.css" media="screen, projection" />       
         <!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" href="css/blueprint/ie.css" media="screen, projection" />
+        <link rel="stylesheet" type="text/css" href="css/blueprint.ie.css" media="screen, projection" />
         <![endif]-->
-        <link rel="stylesheet" type="text/css" href="css/base.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/jquery.ui.1.8.17.min.css" media="screen, projection" />
+
+        <script type="text/javascript" src="js/jquery.1.7.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.ui.1.8.17.min.js"></script>
+        <script type="text/javascript" src="js/jai.all<?php echo (YII_DEBUG ? '' : '.min'); ?>.js"></script>
 
         <title><?php echo $this->title; ?></title>
     </head>

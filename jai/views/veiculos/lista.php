@@ -11,7 +11,7 @@ if ($op == 'editar') {
     <h2>Veículos de <?php echo $cliente->nome; ?></h2>
     <div id="opcoes">
         <a href="<?php echo $voltar; ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('veiculos/criar', array('id' => $cliente->idCliente, 'op' => $op)); ?>"><img src="imagens/icones/x16.veiculo.criar.png" /></a>
+        <a href="<?php echo $this->createUrl('veiculos/criar', array('id' => $cliente->idCliente, 'op' => $op)); ?>"><img src="imagens/icones/veiculo.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
 </div>

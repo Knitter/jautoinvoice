@@ -1,7 +1,4 @@
 <?php
-Yii::app()->clientScript->registerCssFile('css/formularios.css');
-//Yii::app()->clientScript->registerPackage('jquery.ui');
-
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'veiculo-form',
     'enableAjaxValidation' => true,

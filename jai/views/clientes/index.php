@@ -1,6 +1,5 @@
 <?php
 $this->title = 'Clientes';
-Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
 ?>
 
 <div id="titulo">

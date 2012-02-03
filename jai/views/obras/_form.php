@@ -1,10 +1,7 @@
 <?php
-Yii::app()->clientScript->registerCssFile('css/formularios.css');
-Yii::app()->clientScript->registerScriptFile('js/jai/folhasobra.js');
-
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'folhaobra-form',
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
     'focus' => array($folhaObra, 'matricula')
         ));
 ?>
@@ -71,7 +68,7 @@ $form = $this->beginWidget('CActiveForm', array(
             <th class="small-column">Duração (horas)</th>
             <th>Notas</th>
             <th class="small-column">Preço ( &euro; )</th>
-            <th style="width: 22px;">
+            <th class="buttons-2">
                 <?php
                 echo CHtml::link(CHtml::image('imagens/icones/adicionar.png'), 'javascript:;', array(
                     'onclick' => 'adicionarLinhaServico();',

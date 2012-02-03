@@ -1,5 +1,3 @@
-<?php Yii::app()->clientScript->registerScriptFile('js/jai/default.js'); ?>
-
 <h3>Sistema de SMSs</h3>
 <div class="configuracoes">
     <fieldset>

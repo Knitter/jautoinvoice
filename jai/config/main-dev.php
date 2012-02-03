@@ -11,6 +11,13 @@ return array(
         'application.components.*',
     ),
     'components' => array(
+        'clientScript' => array(
+            'scriptMap' => array(
+                'jquery.js' => false,
+                'jquery.min.js' => false,
+                'jquery-ui.css' => false
+            )
+        ),
         'user' => array(
             'allowAutoLogin' => true,
             'class' => 'JAIWebUser',

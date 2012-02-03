@@ -1,7 +1,5 @@
 <?php
 $this->title = 'jAutoInvoice :: Entrada';
-
-Yii::app()->clientScript->registerCssFile('css/formularios.css');
 ?>
 
 <div class="span-12 prepend-6 append-6">

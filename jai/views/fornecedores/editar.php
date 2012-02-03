@@ -1,7 +1,5 @@
 <?php 
-$this->title = $fornecedor->isNewRecord ? 'Criar Fornecedor' : 'Editar ' . $fornecedor->nome; 
-
-Yii::app()->clientScript->registerScriptFile('js/jai/default.js');
+$this->title = $fornecedor->isNewRecord ? 'Criar Fornecedor' : 'Editar ' . $fornecedor->nome;
 ?>
 
 <div id="titulo">

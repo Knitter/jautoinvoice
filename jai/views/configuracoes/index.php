@@ -1,9 +1,10 @@
 <?php
 $this->title = 'Configurações de Sistema';
 
-Yii::app()->clientScript->registerCssFile('css/formularios.css');
-Yii::app()->clientScript->registerScriptFile('js/collapse/jquery.collapse.js');
-Yii::app()->clientScript->registerScript('init', '$("#tixa").collapse();');
+$cs = Yii::app()->clientScript;
+
+$cs->registerScriptFile('js/jquery.collapse.min.js');
+$cs->registerScript('initTixa', '$("#tixa").collapse();');
 ?>
 <h2>Configurações de Sistema</h2>
 
