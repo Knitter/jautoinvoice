@@ -24,7 +24,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'idMarca',
             'value' => '$data->marca->nome',
             'filter' => CHtml::listData($marcas, 'idMarca', 'nome'),
-            'htmlOptions' => array('class' => 'small-column')
+            'headerHtmlOptions' => array('class' => 'small-column')
         ),
         array(
             'class' => 'CButtonColumn',
@@ -36,11 +36,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => 'imagens/icones/modelo.editar.png',
-                    'url' => 'Yii::app()->createUrl("marcas/editar", array("id" => $data->idMarca))',
+                    'url' => 'Yii::app()->createUrl("modelos/editar", array("id" => $data->idMarca))',
                 ),
                 'delete' => array(
                     'imageUrl' => 'imagens/icones/modelo.remover.png',
-                    'url' => 'Yii::app()->createUrl("marcas/apagar", array("id" => $data->idMarca))'
+                    'url' => 'Yii::app()->createUrl("modelos/apagar", array("id" => $data->idMarca))'
                 )
             ),
         ),

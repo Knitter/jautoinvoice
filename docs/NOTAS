@@ -3,7 +3,6 @@
 -- Se for indicada uma matrícula de um veículo não existente o que fazer? Registar nas notas para pesquisa posterior?
 
 - Implementar gestão de:
- - Stocks (Adicionar campos à BD: nome, multiplos fornecedores, etc)
  - Envio de mensagens e notificações
  - Conta de cliente
  - Permitir newsletters ou e-mails em grupo
@@ -23,35 +22,3 @@ Relatórios? (FPDF?)
  - Funcionário com mais serviços
 
 Incluir QRCodes, http://sourceforge.net/projects/phpqrcode/ ?
-
-Settings:
-    - enderecoEmail, endereço de origem para envio de e-mails;
-    - nome, nome da empresa;
-    - enviarEmails, indica se são enviados e-mails de contacto ou não;
-    - sistemaActivo, indica se o sistema está activo se é possível usar;
-    - enviarNotificacoes, indica se são enviadas notificações por e-mail, sms, ambas, ou nenhumas
-    - permitirClientes, indica se os clientes têm acesso ao sistema;
-    - htmlEmails, indica se os e-mails enviados vão em HTML;
-    - usarSMTP, indica se se usa SMTP para envio de e-mails;
-    - utilizadorSMTP, configuração do SMTP;
-    - passwordSMTP, configuração do SMTP;
-    - servidorSMTP, configuração do SMTP;
-    - portoSMTP, configuração do SMTP;
-    - prefixoSMTP, configuração do SMTP;
-    - chaveSuporte, caso este sistema tenha acesso a suporte 
-    - enviarSMS, indica se são enviadas SMSs usando o sistema da Luso SMS
-    - utilizadorLSMS, , configuração de SMS;
-    - passwordLSMS, configuração de SMS;
-    - telemovelLSMS, número de telefone a usar na Luso SMS
-    - creditosLSMS, , configuração de SMS, guarda o número de créditso;
-
-    - inicioActividade, indica a hora de início da actividade para fins de marcações;
-    - fimActividade, igual ao inicioActividade;
-    - endereco
-    - telefone
-    - telemovel
-    - fax
-    - longitude, para google maps
-    - latitude, para google maps
-    - mostrarPContacto, mostrar a página de contactos
-    - gmapskey, chave google maps.

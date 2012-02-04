@@ -24,16 +24,8 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
     <?php
-    echo $form->labelEx($servico, 'idIVA'),
-    $form->DropDownList($servico, 'idIVA', CHtml::listData($ivas, 'idIVA', 'descricao'), array('empty' => 'Sem IVA')),
-    $form->error($servico, 'idIVA');
-    ?>
-</div>
-
-<div class="row">
-    <?php
     echo $form->labelEx($servico, 'descricao'),
-    $form->textArea($servico, 'descricao', array('rows' => 5, 'cols' => 80)),
+    $form->textArea($servico, 'descricao', array('rows' => 5, 'cols' => 76)),
     $form->error($servico, 'descricao');
     ?>
 </div>

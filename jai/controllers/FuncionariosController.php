@@ -72,10 +72,13 @@ class FuncionariosController extends AdministracaoController {
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
+            
             $funcionario->password = Funcionario::hash($funcionario->password);
+            $funcionario->password2 = Funcionario::hash($funcionario->password2);
 
-            if ($funcionario->save())
+            if ($funcionario->save()) {
                 $this->redirect(array('editar', 'id' => $funcionario->idFuncionario));
+            }
         }
 
         $this->render('editar', array('funcionario' => $funcionario));
@@ -88,6 +91,7 @@ class FuncionariosController extends AdministracaoController {
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
+
             $funcionario->password = Funcionario::hash($funcionario->password);
 
             if ($funcionario->save())

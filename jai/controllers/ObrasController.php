@@ -61,7 +61,16 @@ class ObrasController extends SistemaController {
             $filtro->attributes = $_REQUEST['FolhaObra'];
         }
 
-        $this->render('index', array('filtro' => $filtro));
+        $criteria = new CDbCriteria();
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+
+        $funcionarios = Funcionario::model()->findAll($criteria);
+
+        $this->render('index', array(
+            'filtro' => $filtro,
+            'funcionarios' => $funcionarios
+        ));
     }
 
     public function actionCriar() {

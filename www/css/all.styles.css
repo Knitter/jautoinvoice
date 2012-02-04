@@ -1,6 +1,4 @@
 /* -----------------------------------------------------------------------
-
-
  Blueprint CSS Framework 1.0
  http://blueprintcss.org
 
@@ -8,9 +6,7 @@
    * See README for instructions on how to use Blueprint.
    * For credits and origins, see AUTHORS.
    * This is a compressed file. See the sources in the 'src' directory.
-
 ----------------------------------------------------------------------- */
-
 /* reset.css */
 html {margin:0;padding:0;border:0;}
 body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
@@ -23,7 +19,6 @@ blockquote:before, blockquote:after, q:before, q:after {content:'';}
 blockquote, q {quotes:"" "";}
 a img {border:none;}
 :focus {outline:0;}
-
 /* typography.css */
 html {font-size:100.01%;}
 body {font-size:75%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
@@ -76,7 +71,6 @@ caption {background:#eee;}
 .last {margin-right:0;padding-right:0;}
 .top {margin-top:0;padding-top:0;}
 .bottom {margin-bottom:0;padding-bottom:0;}
-
 /* grid.css */
 .container {width:950px;margin:0 auto;}
 .showgrid {background:url(src/grid.png);}
@@ -238,9 +232,11 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
 
-
-
-
+/*
+--------------------------------------------------------------------------------
+Estilos para JAI
+--------------------------------------------------------------------------------
+*/
 
 /*GERAL*/
 body {
@@ -406,4 +402,49 @@ input[type="image"] {
 
 .buttons-3 {
     width: 12em;
+}
+
+/*DASHBOARD*/
+#coluna-1, #coluna-2 {
+    min-height: 30px;
+    text-align:center;
+}
+
+.widget {
+    margin-bottom: .5em;
+    min-height: 200px;
+    border: 1px solid #000;
+}
+
+.widget-header {
+    height: 25px;    
+    cursor: move; 
+    text-align: left;
+    /*TODO:*/
+    background: lightgoldenrodyellow;
+}        
+
+.widget-body {
+    min-height: 175px;
+    height:auto;
+}
+
+.ui-sortable-placeholder { 
+    border: 1px dashed black; 
+    visibility: visible !important; 
+    height: 50px !important; 
+}
+
+.ui-sortable-placeholder * { visibility: hidden; }
+
+/*CONFIGURAÇÕES*/
+#tixa h3 {
+    padding-left: 24px;
+    background-image: url(../imagens/icones/item.mais.png);
+    background-repeat: no-repeat;
+    background-position: -5px;
+}
+
+#tixa h3.active {
+    background-image: url(../imagens/icones/item.menos.png);
 }

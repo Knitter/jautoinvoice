@@ -25,7 +25,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'contribuinte',
-            'htmlOptions' => array('class' => 'small-column')
+            'headerHtmlOptions' => array('class' => 'small-column')
         ),
         array(
             'class' => 'CButtonColumn',

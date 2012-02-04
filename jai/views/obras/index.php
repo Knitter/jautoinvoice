@@ -17,6 +17,20 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'template' => '{items} {pager} {summary}',
     'columns' => array(
         array(
+            'name' => 'matricula',
+            'headerHtmlOptions' => array('class' => 'small-column')
+        ),
+        array(
+            'name' => 'data',
+            'headerHtmlOptions' => array('class' => 'small-column')
+        ),
+        array(
+            'name' => 'idFuncionario',
+            'type' => 'raw',
+            'value' => '$data->funcionario->nome',
+            'filter' => CHtml::listData($funcionarios, 'idFuncionario', 'nome')
+        ),
+        array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(

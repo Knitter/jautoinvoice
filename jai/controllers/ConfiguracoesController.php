@@ -43,7 +43,9 @@ class ConfiguracoesController extends AdministracaoController {
     public function actionIndex() {
         $configuracoes = array(
             'nome' => '',
-            'enderecoEmail' => '',
+            'email' => '',
+            'url' => '',
+            'enderecoEnvio' => '',
             'enviarEmails' => 'nao',
             'sistemaActivo' => 'sim',
             'enviarNotificacoes' => 'nao',

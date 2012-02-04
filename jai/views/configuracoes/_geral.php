@@ -62,6 +62,18 @@
         </div>
         <div class="row">
             <?php
+            echo CHtml::label('E-mail', 'email'),
+            CHtml::textField('email', $config->email, array('class' => 'medium-field', 'maxlength' => 255));
+            ?>
+        </div>
+        <div class="row">
+            <?php
+            echo CHtml::label('Website', 'url'),
+            CHtml::textField('url', $config->url, array('class' => 'medium-field', 'maxlength' => 255));
+            ?>
+        </div>
+        <div class="row">
+            <?php
             echo CHtml::label('Horário', 'inicioActividade'),
             CHtml::textField('inicioActividade', $config->inicioActividade, array('class' => 'small-field')),
             ' ás ',
@@ -80,7 +92,7 @@
         </div>
         <div class="row">
             <?php
-            echo CHtml::label('Coordenadas (Lat/Lon)', 'latitude'),
+            echo CHtml::label('Coordenadas (lat/long)', 'latitude'),
             CHtml::textField('latitude', $config->latitude),
             ' : ',
             CHtml::textField('longitude', $config->longitude);

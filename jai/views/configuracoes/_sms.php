@@ -28,7 +28,8 @@
         </div>
     </fieldset>
     <div class="row">
+        <a href="javascript:;" onclick="actualizarCreditos('<?php echo $this->createUrl('configuracoes/vercreditossms'); ?>');"><img src="imagens/icones/actualizar.png" /></a>
+        &nbsp;&nbsp;&nbsp;
         Nr. Créditos Disponíveis <span id="creditosSMS"><?php echo $config->creditosLSMS; ?></span> 
-        <a href="javascript:actualizarCreditos('<?php echo $this->createUrl('configuracoes/vercreditossms'); ?>');"><img src="imagens/icones/x16.geral.actualizar" /></a>
     </div>
 </div>

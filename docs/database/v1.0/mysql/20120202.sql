@@ -9,3 +9,5 @@ ALTER TABLE `FolhaObra` CHANGE `descricaoAvaria` `descricaoAvaria` TEXT NULL ;
 ALTER TABLE `IVA` CHANGE `percentagem` `percentagem` FLOAT NOT NULL ;
 
 ALTER TABLE `LinhaGasto` DROP `desconto`;
+
+ALTER TABLE `Material` DROP `desconto` ;

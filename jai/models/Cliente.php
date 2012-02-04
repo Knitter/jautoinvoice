@@ -56,10 +56,33 @@ class Cliente extends CActiveRecord {
             array('contribuinte, nome', 'required'),
             array('email, nome, morada', 'length', 'max' => 255),
             array('telefone, telemovel', 'length', 'max' => 13),
+            //
             array('contribuinte', 'length', 'max' => 9),
+            array('contribuinte', 'validarContribuinte'),
             // search
             array('nome, contribuinte, telefone, telemovel', 'safe', 'on' => 'search'),
         );
+    }
+
+    /**
+     * @param string $attribute the name of the attribute to be validated
+     * @param array $params options specified in the validation rule
+     */
+    public function validarContribuinte($attribute, $params) {
+        /* if (!in_array($this->contribuinte[0], array('1', '2', '5', '6', '8', '9'))) {
+          $this->addError('contribuinte', 'Número de contribuinte inválido.');
+
+          return;
+          }
+
+          $soma = 0;
+          for ($i = 0, $d = 9; $i < 9; $i++, $d--) {
+          $soma += $d * (int) $this->contribuinte[$i];
+          }
+
+          if ($soma % 11 !== 0) {
+
+          } */
     }
 
     public function relations() {

@@ -8,4 +8,4 @@
     <div style="clear: both"></div>
 </div>
 <?php
-$this->renderPartial('_form', array('servico' => $servico, 'ivas' => $ivas));
+$this->renderPartial('_form', array('servico' => $servico));

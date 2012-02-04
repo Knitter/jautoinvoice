@@ -29,7 +29,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'dataRegisto',
             'type' => 'date',
             'value' => 'strtotime($data->dataRegisto)',
-            'htmlOptions' => array('class' => 'small-column')
+            'headerHtmlOptions' => array('class' => 'small-column')
         ),
         array(
             'header' => 'Modelo',

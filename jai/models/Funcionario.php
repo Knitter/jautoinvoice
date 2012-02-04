@@ -41,6 +41,7 @@
 class Funcionario extends CActiveRecord {
 
     public $password2;
+    public $passwordHash;
 
     /**
      * @return Funcionario
@@ -57,21 +58,32 @@ class Funcionario extends CActiveRecord {
         return array(
             array('nome, username, contribuinte', 'required'),
             array('password, password2', 'required', 'on' => 'insert'),
-            array('password', 'compare', 'compareAttribute' => 'password2', 'on' => 'update'),
+            array('password', 'compare', 'compareAttribute' => 'password2'),
+            //
             array('username', 'length', 'max' => 100),
             array('nome', 'length', 'max' => 255),
+            //
             array('contribuinte', 'length', 'max' => 9),
+            array('contribuinte', 'validarContribuinte'),
+            //
             array('telefone, telemovel', 'length', 'max' => 13),
             // search
             array('nome, username, contribuinte', 'safe', 'on' => 'search'),
         );
     }
 
+    /**
+     * @param string $attribute the name of the attribute to be validated
+     * @param array $params options specified in the validation rule
+     */
+    public function validarContribuinte($attribute, $params) {
+        //$this->addError('contribuinte', '');
+    }
+
     public function relations() {
         return array(
             'folhaObras' => array(self::HAS_MANY, 'FolhaObra', 'idFuncionario'),
-//            'inspeccaos' => array(self::HAS_MANY, 'Inspeccao', 'idFuncionario'),
-//            'linhaServicos' => array(self::HAS_MANY, 'LinhaServico', 'idFuncionario'),
+            'linhaServicos' => array(self::HAS_MANY, 'LinhaServico', 'idFuncionario'),
         );
     }
 
@@ -106,11 +118,25 @@ class Funcionario extends CActiveRecord {
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',
-                    )));
+                        )));
     }
 
     public static function hash($password) {
         return sha1(Yii::app()->params['hash'] . $password);
+    }
+
+    public function beforeSave() {
+        if (empty($this->password) && empty($this->password2) && !empty($this->passwordHash))
+            $this->password = $this->password2 = $this->passwordHash;
+
+        return parent::beforeSave();
+    }
+
+    public function afterFind() {
+        $this->passwordHash = $this->password;
+        $this->password = null;
+
+        parent::afterFind();
     }
 
 }

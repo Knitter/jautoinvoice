@@ -11,7 +11,7 @@
         <div class="row">
             <?php
             echo CHtml::label('E-mail de Envio', 'enderecoEmail'),
-            CHtml::textField('enderecoEmail', $config->enderecoEmail, array('class' => 'medium-field', 'maxlength' => 255));
+            CHtml::textField('enderecoEnvio', $config->enderecoEnvio, array('class' => 'medium-field', 'maxlength' => 255));
             ?>
         </div>
         <div class="row">

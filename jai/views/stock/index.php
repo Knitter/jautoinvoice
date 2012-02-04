@@ -24,7 +24,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'referencia',
             'type' => 'raw',
             'value' => 'CHtml::link($data->referencia, array("stock/editar", "id" => $data->idMaterial))',
-            'htmlOptions' => array('class' => 'small-column')
+            'headerHtmlOptions' => array('class' => 'small-column')
         ),
         array(
             'class' => 'CButtonColumn',

@@ -35,7 +35,7 @@ class Marca extends CActiveRecord {
     /**
      * @return Marca
      */
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
@@ -78,7 +78,7 @@ class Marca extends CActiveRecord {
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',
-                    )));
+                        )));
     }
 
 }

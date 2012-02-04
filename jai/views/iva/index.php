@@ -25,7 +25,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'percentagem',
             'filter' => false,
-            'htmlOptions' => array('class' => 'small-column')
+            'headerHtmlOptions' => array('class' => 'small-column')
         ),
         array(
             'class' => 'CButtonColumn',

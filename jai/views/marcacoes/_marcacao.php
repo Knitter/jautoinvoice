@@ -67,7 +67,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 <div class="row">
     <?php
     echo CHtml::label('Notas', 'notas'),
-    CHtml::textArea('notas', null, array('rows' => 5, 'cols' => 45));
+    CHtml::textArea('notas', null, array('rows' => 5, 'cols' => 39));
     ?>
 </div>
 

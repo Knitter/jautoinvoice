@@ -77,7 +77,7 @@ class Combustivel extends CActiveRecord {
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',
-                    )));
+                        )));
     }
 
 }

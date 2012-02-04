@@ -29,7 +29,6 @@
  * @property string $referencia
  * @property string $descricao
  * @property int $quantidadeStock
- * @property string $desconto
  * @property int $activo
  * @property int $idIVA
  *
@@ -54,7 +53,7 @@ class Material extends CActiveRecord {
             array('nome, precoUnitario, referencia, idIVA, quantidadeStock', 'required'),
             array('nome', 'length', 'max' => 150),
             array('referencia', 'length', 'max' => 25),
-            array('precoUnitario, desconto', 'numerical'),
+            array('precoUnitario', 'numerical'),
             array('descricao', 'safe'),
             array('quantidadeStock', 'numerical', 'integerOnly' => true),
             // search
@@ -64,7 +63,7 @@ class Material extends CActiveRecord {
 
     public function relations() {
         return array(
-            //'linhaGastos' => array(self::HAS_MANY, 'LinhaGasto', 'idMaterial'),
+            'linhaGastos' => array(self::HAS_MANY, 'LinhaGasto', 'idMaterial'),
             'fornecedores' => array(self::MANY_MANY, 'Fornecedor', 'MaterialFornecedor(idMaterial, idFornecedor)'),
             'iva' => array(self::BELONGS_TO, 'IVA', 'idIVA'),
         );
