@@ -22,7 +22,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class DefaultController extends PublicoController {
+class DefaultController extends JaiController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -44,8 +44,17 @@ class DefaultController extends PublicoController {
         $this->render('sobre');
     }
 
-    public function actionError() {
-        
+    public function actionErro() {
+        $this->render('erro');
+    }
+
+    public function accessRules() {
+        return array_merge(array(
+                    array(
+                        'allow',
+                        'users' => array('*')
+                    ),
+                        ), parent::accessRules());
     }
 
 }

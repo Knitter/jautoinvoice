@@ -32,7 +32,7 @@ return array(
             'charset' => 'utf8'
         ),
         'errorHandler' => array(
-            'errorAction' => 'default/error'
+            'errorAction' => 'default/erro'
         ),
         'log' => array(
             'class' => 'CLogRouter',
