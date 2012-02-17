@@ -56,7 +56,7 @@ class ServicosController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Servico();
+        $filtro = new Servico('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Servico'])) {

@@ -21,7 +21,7 @@ return array(
         'user' => array(
             'allowAutoLogin' => true,
             'class' => 'JAIWebUser',
-            'loginUrl' => array('default/index'),
+            'loginUrl' => array('default/login'),
         ),
         //MySQL database
         //'db' => array(

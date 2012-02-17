@@ -56,7 +56,7 @@ class StockController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Material();
+        $filtro = new Material('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Material'])) {

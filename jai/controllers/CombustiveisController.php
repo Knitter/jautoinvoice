@@ -54,7 +54,7 @@ class CombustiveisController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Combustivel();
+        $filtro = new Combustivel('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Combustivel'])) {

@@ -26,9 +26,46 @@ class DefaultController extends JaiController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
+
+        $this->menu = array(
+            array(
+                'label' => 'Início',
+                'url' => $this->createUrl('/default'),
+                'icon' => 'imagens/icones/inicio.png',
+            ),
+            array(
+                'label' => 'Contactos',
+                'url' => $this->createUrl('default/contactos'),
+                'icon' => 'imagens/icones/contactos.png',
+            ),
+            array(
+                'label' => 'Entrar',
+                'url' => $this->createUrl('default/login'),
+                'icon' => 'imagens/icones/login.png',
+                'visible' => Yii::app()->user->isGuest
+            ),
+            array(
+                'label' => 'Dashboard',
+                'url' => $this->createUrl('/dashboard'),
+                'icon' => 'imagens/icones/dashboard.png',
+                'visible' => !Yii::app()->user->isGuest
+            ),
+        );
     }
 
     public function actionIndex() {
+        $this->render('index');
+    }
+
+    public function actionSobre() {
+        $this->render('sobre');
+    }
+
+    public function actionContactos() {
+        $this->render('contactos');
+    }
+
+    public function actionLogin() {
         $formulario = new LoginForm();
 
         if (isset($_POST['LoginForm'])) {
@@ -37,15 +74,17 @@ class DefaultController extends JaiController {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
-        $this->render('index', array('formulario' => $formulario));
-    }
-
-    public function actionSobre() {
-        $this->render('sobre');
+        $this->render('login', array('formulario' => $formulario));
     }
 
     public function actionErro() {
-        $this->render('erro');
+        if (($erro = Yii::app()->errorHandler->error)) {
+            if (Yii::app()->request->isAjaxRequest) {
+                echo $erro['message'];
+            } else {
+                $this->render('erro', $erro);
+            }
+        }
     }
 
     public function accessRules() {

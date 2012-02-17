@@ -29,7 +29,7 @@
  * @property int $activo
  * 
  * @property int $idMaterial
- * @property int $idIva
+ * @property int $idIVA
  * @property int $idLinhaServico
  *
  * @property Material $material
@@ -52,7 +52,7 @@ class LinhaGasto extends CActiveRecord {
     public function rules() {
         return array(
             array('quantidade, precoUnitario, idMaterial, idIVA, idLinhaServico', 'required'),
-            array('quantidade, idLinhaServico, idIva, idMaterial', 'numerical', 'integerOnly' => true),
+            array('quantidade, idLinhaServico, idIVA, idMaterial', 'numerical', 'integerOnly' => true),
             array('precoUnitario', 'numerical'),
             // search
             array('quantidade, idMaterial, idIVA, idLinhaServico', 'safe', 'on' => 'search'),

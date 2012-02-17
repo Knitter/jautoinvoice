@@ -55,7 +55,7 @@ class FuncionariosController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Funcionario();
+        $filtro = new Funcionario('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Funcionario'])) {

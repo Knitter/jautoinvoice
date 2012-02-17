@@ -11,6 +11,7 @@
  - Contemplar IVAs e corrigir contas
  - Impedir a alteração de percentagem de IVA se já é usado em facturas/linhasgasto
  - permitir adicionar linha de gasto ao clicar no adicionar linha de serviço, assumir o valor preenchido como uma linha válida
+ - Impressão de folhas de obra vazias, documentos a preencher pelo funcionário
 
 Alguns serviços podem dar origem a avisos que se irão repetir de tempos a tempo, por exemplo,
 uma inspeção ou uma mudança de óleo pode originar um aviso que irá disparar na data prevista

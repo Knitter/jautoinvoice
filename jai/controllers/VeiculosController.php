@@ -80,7 +80,7 @@ class VeiculosController extends SistemaController {
     public function actionLista($id, $op = 'lista') {
         $cliente = $this->carregarModeloCliente($id);
 
-        $filtro = new Veiculo();
+        $filtro = new Veiculo('search');
         $filtro->unsetAttributes();
         $filtro->idCliente = $cliente->idCliente;
 

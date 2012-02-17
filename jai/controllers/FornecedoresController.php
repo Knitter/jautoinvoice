@@ -54,7 +54,7 @@ class FornecedoresController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Fornecedor();
+        $filtro = new Fornecedor('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Fornecedor'])) {

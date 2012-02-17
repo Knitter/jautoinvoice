@@ -54,7 +54,7 @@ class ObrasController extends SistemaController {
     }
 
     public function actionIndex() {
-        $filtro = new FolhaObra();
+        $filtro = new FolhaObra('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['FolhaObra'])) {
@@ -110,7 +110,7 @@ class ObrasController extends SistemaController {
 
                                 $linhaGasto->idMaterial = $linhaJSON->material->id;
                                 $linhaGasto->precoUnitario = $linhaJSON->material->precoUnitario;
-                                $linhaGasto->idIva = $linhaJSON->material->iva->id;
+                                $linhaGasto->idIVA = $linhaJSON->material->iva->id;
 
                                 $linhaGasto->save();
                             }
@@ -148,12 +148,35 @@ class ObrasController extends SistemaController {
     }
 
     public function actionFolhaDeMarcacao($id) {
-        //if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
-        //    throw new CHttpException(404, 'The requested page does not exist.');
+        if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+
+        $folhaObra = new FolhaObra();
+        $folhaObra->data = $marcacao->dataMarcacao;
+        $folhaObra->descricaoAvaria = $marcacao->descricao . "\n" . $marcacao->notas;
+        //TODO: ver a matricula de veículos não existentes
+        //$folhaObra->matricula = $marcacao->matricula;
+        //if ($marcacao->idVeiculo && ($veiculo = Veiculo::model()->find('matriculoa = :m', array(':m' => $marcacao->matricula))) !== null) {
+        //    $folhaObra->idVeiculo = $marcacao->idVeiculo;
         //}
-        //$this->render('demarcacao', array(
-        //    'marcacao' => $marcacao
-        //));
+        $folhaObra->idFuncionario = Yii::app()->user->id;
+
+        $criteria = new CDbCriteria();
+
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+
+        $funcionarios = Funcionario::model()->findAll($criteria);
+        $servicos = Servico::model()->findAll($criteria);
+        $materiais = Material::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'folhaObra' => $folhaObra,
+            'funcionarios' => $funcionarios,
+            'servicos' => $servicos,
+            'materiais' => $materiais
+        ));
     }
 
 }

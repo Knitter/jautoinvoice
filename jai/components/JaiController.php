@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class JAIController extends CController {
+class JaiController extends CController {
 
     public $layout;
     protected $title;

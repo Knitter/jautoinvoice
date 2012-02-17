@@ -54,7 +54,7 @@ class IvaController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new IVA();
+        $filtro = new IVA('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Iva'])) {

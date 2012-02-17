@@ -60,7 +60,7 @@ class ClientesController extends SistemaController {
     }
 
     public function actionIndex() {
-        $filtro = new Cliente();
+        $filtro = new Cliente('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Cliente'])) {

@@ -57,7 +57,7 @@ class Credenciais extends CBaseUserIdentity {
                     }
                 }
             } else {
-                if ($funcionario->password !== Funcionario::hash($this->password)) {
+                if ($funcionario->passwordHash !== Funcionario::hash($this->password)) {
                     $this->errorCode = self::ERROR_PASSWORD_INVALID;
                 } else {
                     $this->id = $funcionario->idFuncionario;

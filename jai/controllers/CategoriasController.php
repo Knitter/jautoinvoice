@@ -54,7 +54,7 @@ class CategoriasController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Categoria();
+        $filtro = new Categoria('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Categoria'])) {

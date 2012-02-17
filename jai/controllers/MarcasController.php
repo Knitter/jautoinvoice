@@ -54,7 +54,7 @@ class MarcasController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Marca();
+        $filtro = new Marca('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Marca'])) {

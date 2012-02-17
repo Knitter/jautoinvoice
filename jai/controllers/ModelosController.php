@@ -54,7 +54,7 @@ class ModelosController extends AdministracaoController {
     }
 
     public function actionIndex() {
-        $filtro = new Modelo();
+        $filtro = new Modelo('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Modelo'])) {
