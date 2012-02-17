@@ -36,7 +36,7 @@ class ObrasController extends SistemaController {
                         'allow',
                         'actions' => array(
                             'index', 'criar', 'editar', 'apagar',
-                            'folhaDeMarcacao'
+                            'folhaDeMarcacao', 'modelo', 'imprimir'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -177,6 +177,15 @@ class ObrasController extends SistemaController {
             'servicos' => $servicos,
             'materiais' => $materiais
         ));
+    }
+    
+    public function actionImprimir($id) {
+        
+    }
+
+    public function actionModelo() {
+        //'ext.fpdf.*'
+        //$pdf = new tFPDF();
     }
 
 }

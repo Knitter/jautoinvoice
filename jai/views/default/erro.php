@@ -2,4 +2,4 @@
 
 $this->title = 'Erro!';
 
-echo $erro['message'];
+echo $message;

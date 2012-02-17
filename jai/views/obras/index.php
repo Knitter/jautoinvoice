@@ -3,6 +3,7 @@
 <div id="titulo">
     <h2>Folhas de Obra</h2>
     <div id="opcoes">
+        <a href="<?php echo $this->createUrl('obras/modelo'); ?>"><img src="imagens/icones/impressora.png" /></a>
         <a href="<?php echo $this->createUrl('obras/criar'); ?>"><img src="imagens/icones/folhaobra.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
@@ -34,19 +35,24 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'buttons-3'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
+                'imprimir' => array(
+                    'imageUrl' => 'imagens/icones/impressora.png',
+                    'url' => 'Yii::app()->createUrl("obras/imprimir", array("id" => $data->idFolhaObra))',
+                ),
                 'update' => array(
                     'imageUrl' => 'imagens/icones/folhaobra.editar.png',
-                    'url' => 'Yii::app()->createUrl("folhasobra/editar", array("id" => $data->idFolhaObra))',
+                    'url' => 'Yii::app()->createUrl("obras/editar", array("id" => $data->idFolhaObra))',
                 ),
                 'delete' => array(
                     'imageUrl' => 'imagens/icones/folhaobra.remover.png',
-                    'url' => 'Yii::app()->createUrl("folhasobra/apagar", array("id" => $data->idFolhaObra))',
+                    'url' => 'Yii::app()->createUrl("obras/apagar", array("id" => $data->idFolhaObra))',
                 )
             ),
+            'template' => '{imprimir} {update} {delete}'
         ),
     ),
 ));
