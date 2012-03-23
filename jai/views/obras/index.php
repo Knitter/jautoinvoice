@@ -3,7 +3,7 @@
 <div id="titulo">
     <h2>Folhas de Obra</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('obras/modelo'); ?>"><img src="imagens/icones/impressora.png" /></a>
+        <!-- <a href="<?php echo $this->createUrl('obras/modelo'); ?>"><img src="imagens/icones/impressora.png" /></a> -->
         <a href="<?php echo $this->createUrl('obras/criar'); ?>"><img src="imagens/icones/folhaobra.adicionar.png" /></a>
     </div>
     <div style="clear: both"></div>
@@ -39,10 +39,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
-                'imprimir' => array(
-                    'imageUrl' => 'imagens/icones/impressora.png',
-                    'url' => 'Yii::app()->createUrl("obras/imprimir", array("id" => $data->idFolhaObra))',
-                ),
+                //'imprimir' => array(
+                //    'imageUrl' => 'imagens/icones/impressora.png',
+                //    'url' => 'Yii::app()->createUrl("obras/imprimir", array("id" => $data->idFolhaObra))',
+                //),
                 'update' => array(
                     'imageUrl' => 'imagens/icones/folhaobra.editar.png',
                     'url' => 'Yii::app()->createUrl("obras/editar", array("id" => $data->idFolhaObra))',
@@ -52,7 +52,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     'url' => 'Yii::app()->createUrl("obras/apagar", array("id" => $data->idFolhaObra))',
                 )
             ),
-            'template' => '{imprimir} {update} {delete}'
+            //'template' => '{imprimir} {update} {delete}'
         ),
     ),
 ));

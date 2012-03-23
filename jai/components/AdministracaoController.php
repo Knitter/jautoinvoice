@@ -87,6 +87,11 @@ class AdministracaoController extends JAIController {
                 'url' => $this->createUrl('/iva'),
                 'icon' => 'imagens/icones/iva.png',
             ),
+            array(
+                'label' => 'Logs',
+                'url' => $this->createUrl('/logs'),
+                'icon' => 'imagens/icones/logs.png',
+            ),
         );
     }
 

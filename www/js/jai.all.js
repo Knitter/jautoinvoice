@@ -28,7 +28,8 @@ function initCalendar() {
             left: 'month,basicWeek,basicDay',
             center: 'title',
             right: 'today prev,next'
-        },     
+        },
+        editable: true,
         theme: true,
         firstDay: 1,
         firstHour: g.marcacoes.horario.inicio,
@@ -61,7 +62,45 @@ function initCalendar() {
         dayClick: function(date, allDay, jsEvent, view) {
             $('#dataMarcacao').datepicker('setDate', date);
             $('#janelaMarcacao').dialog('open');
-        }
+        },
+        eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
+        //$.ajax({
+        //   url: '$urlEventDrop',
+        //   data: {
+        //            id: event.id,
+        //            dayDelta: dayDelta,
+        //            minuteDelta: minuteDelta,
+        //            allDay: (allDay ? 1 : 0)
+        //         },
+        //   error: function (jqXHR, textStatus, errorThrown) { revertFunc() },
+        //   success: function (data, textStatus, jqXHR)
+        //               {
+        //                  eval(data);
+        //                  if (event.className.indexOf('eventloading') != -1) event.className.splice(event.className.indexOf('eventloading'), 1);
+        //                  event.className.push('periodoModificado');
+        //                  $('#{$this->getIdFullCalendar()}').fullCalendar('updateEvent', event);
+        //               }
+        //   });
+        },
+        eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ) {
+        //$.ajax({
+        //    url: '$urlEventResize',
+        //    data: {
+        //        id: event.id,
+        //        minuteDelta: minuteDelta
+        //    },
+        //    error: function (jqXHR, textStatus, errorThrown) {
+        //        revertFunc()
+        //    },
+        //    success: function (data, textStatus, jqXHR)
+        //    {
+        //        eval(data);
+        //        if (event.className.indexOf('eventloading') != -1) event.className.splice(event.className.indexOf('eventloading'), 1);
+        //        event.className.push('periodoModificado');
+        //        $('#{$this->getIdFullCalendar()}').fullCalendar('updateEvent', event);
+        //    }
+        //});
+        }        
     });
 }
 

@@ -140,7 +140,23 @@ class ObrasController extends SistemaController {
     }
 
     public function actionEditar($id) {
-        
+        $folhaObra = $this->carregarModeloFolhaObra($id);
+
+        $criteria = new CDbCriteria();
+
+        $criteria->order = 'nome';
+        $criteria->compare('activo', 1);
+
+        $funcionarios = Funcionario::model()->findAll($criteria);
+        $servicos = Servico::model()->findAll($criteria);
+        $materiais = Material::model()->findAll($criteria);
+
+        $this->render('editar', array(
+            'folhaObra' => $folha,
+            'funcionarios' => $funcionarios,
+            'servicos' => $servicos,
+            'materiais' => $materiais
+        ));
     }
 
     public function actionApagar($id) {
@@ -178,14 +194,14 @@ class ObrasController extends SistemaController {
             'materiais' => $materiais
         ));
     }
-    
+
     public function actionImprimir($id) {
-        
+        Yii::import('ext.fpdf.tFPDF');
     }
 
     public function actionModelo() {
-        //'ext.fpdf.*'
-        //$pdf = new tFPDF();
+        Yii::import('ext.fpdf.tFPDF');
+        $pdf = new tFPDF();
     }
 
 }
