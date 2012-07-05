@@ -1,2 +1,5 @@
 private/
 .DS_Store
+/jai/config/main-dev.php
+/jai/config/params-dev.php
+/jai/config/test.php
