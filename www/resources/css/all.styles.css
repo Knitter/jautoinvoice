@@ -1,12 +1,4 @@
-/* -----------------------------------------------------------------------
- Blueprint CSS Framework 1.0
- http://blueprintcss.org
-
-   * Copyright (c) 2007-Present. See LICENSE for more info.
-   * See README for instructions on how to use Blueprint.
-   * For credits and origins, see AUTHORS.
-   * This is a compressed file. See the sources in the 'src' directory.
------------------------------------------------------------------------ */
+/* Blueprint CSS */
 /* reset.css */
 html {margin:0;padding:0;border:0;}
 body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
@@ -231,14 +223,9 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+/* END: Blueprint CSS */
 
-/*
---------------------------------------------------------------------------------
-Estilos para JAI
---------------------------------------------------------------------------------
-*/
-
-/*GERAL*/
+/* GENERAL */
 body {
     margin: 0;
     padding: 0;
@@ -264,7 +251,9 @@ h2 {
     text-transform: uppercase;
     color: #555;
 }
+/* END: GENERAL */
 
+/* LAYOUT */
 #content {
     padding: 10px;
     min-height: 400px;
@@ -293,22 +282,24 @@ h2 {
     margin-right: .5em;
     height: 55px;
 }
+/* END: LAYOUT */
 
-#titulo {
+/* MISC */
+#title {
 }
 
-#titulo h2 {
+#title h2 {
     float: left;
     width: 70%;
 }
 
-#opcoes {
+#tools {
     float: left;
     width: 28%;
     text-align: right;
 }
 
-#opcoes img {
+#tools img {
     vertical-align: middle;
 }
 
@@ -320,11 +311,11 @@ h2 {
     width: 30%;
 }
 
-.configuracoes {
+.settings {
     padding: 0 0 1.5em 1.5em;
 }
 
-#creditosSMS {
+#sms-credit {
     padding: 0 1em 0 1em;
     font-weight: bold;
 }
@@ -334,8 +325,9 @@ h2 {
     color: #777;
     font-style: italic;
 }
+/* END: MISC */
 
-/*FORMULÁRIOS*/
+/* FORMS */
 fieldset {
     border: 1px solid #777;
     padding-left: 1em; 
@@ -359,7 +351,7 @@ span.required {
     color: #F00;
 }
 
-.errorMessage {
+.error-message {
     display: inline;
     margin-left: .5em;
     color: red;
@@ -385,13 +377,11 @@ span.required {
     width: 50em;
 }
 
-/*FOLHAS DE OBRA*/
-.coluna-gastos {
+/* SERVICE DETAILS */
+/*.coluna-gastos {
     padding-left: 2em;
-}
+}*/
 
-
-/**/
 input[type="image"] {
     border: none;
 }
@@ -405,7 +395,7 @@ input[type="image"] {
 }
 
 /*DASHBOARD*/
-#coluna-1, #coluna-2 {
+/*#coluna-1, #coluna-2 {
     min-height: 30px;
     text-align:center;
 }
@@ -420,7 +410,7 @@ input[type="image"] {
     height: 25px;    
     cursor: move; 
     text-align: left;
-    /*TODO:*/
+    /*TODO:
     background: lightgoldenrodyellow;
 }        
 
@@ -436,9 +426,10 @@ input[type="image"] {
 }
 
 .ui-sortable-placeholder * { visibility: hidden; }
+*/
 
-/*CONFIGURAÇÕES*/
-#tixa h3 {
+/* SETTINGS */
+/*#tixa h3 {
     padding-left: 24px;
     background-image: url(../imagens/icones/item.mais.png);
     background-repeat: no-repeat;
@@ -447,4 +438,76 @@ input[type="image"] {
 
 #tixa h3.active {
     background-image: url(../imagens/icones/item.menos.png);
-}
+}*/
+
+/*SPRITE INFO*/
+.sprite { background-image: url(../images/button-sprite.png); }
+.sprite-add{ background-position: 0 0; width: 32px; height: 32px; } 
+.sprite-administration{ background-position: 0 -82px; width: 32px; height: 32px; } 
+.sprite-brand-add{ background-position: 0 -164px; width: 32px; height: 32px; } 
+.sprite-brand-edit{ background-position: 0 -246px; width: 32px; height: 32px; } 
+.sprite-brand-remove{ background-position: 0 -328px; width: 32px; height: 32px; } 
+.sprite-brand{ background-position: 0 -410px; width: 32px; height: 32px; } 
+.sprite-calendar{ background-position: 0 -492px; width: 32px; height: 32px; } 
+.sprite-car-add{ background-position: 0 -574px; width: 32px; height: 32px; } 
+.sprite-car-edit{ background-position: 0 -656px; width: 32px; height: 32px; } 
+.sprite-car-remove{ background-position: 0 -738px; width: 32px; height: 32px; } 
+.sprite-car{ background-position: 0 -820px; width: 32px; height: 32px; } 
+.sprite-category-add{ background-position: 0 -902px; width: 32px; height: 32px; } 
+.sprite-category-edit{ background-position: 0 -984px; width: 32px; height: 32px; } 
+.sprite-category-remove{ background-position: 0 -1066px; width: 32px; height: 32px; } 
+.sprite-category{ background-position: 0 -1148px; width: 32px; height: 32px; } 
+.sprite-client-add{ background-position: 0 -1230px; width: 32px; height: 32px; } 
+.sprite-client-edit{ background-position: 0 -1312px; width: 32px; height: 32px; } 
+.sprite-client-remove{ background-position: 0 -1394px; width: 32px; height: 32px; } 
+.sprite-client{ background-position: 0 -1476px; width: 32px; height: 32px; } 
+.sprite-contacts{ background-position: 0 -1558px; width: 32px; height: 32px; } 
+.sprite-dashboard{ background-position: 0 -1640px; width: 32px; height: 32px; } 
+.sprite-edit{ background-position: 0 -1722px; width: 32px; height: 32px; } 
+.sprite-email-read{ background-position: 0 -1804px; width: 32px; height: 32px; } 
+.sprite-email-remove{ background-position: 0 -1886px; width: 32px; height: 32px; } 
+.sprite-email{ background-position: -82px 0; width: 32px; height: 32px; } 
+.sprite-employee-add{ background-position: -82px -82px; width: 32px; height: 32px; } 
+.sprite-employee-edit{ background-position: -82px -164px; width: 32px; height: 32px; } 
+.sprite-employee-remove{ background-position: -82px -246px; width: 32px; height: 32px; } 
+.sprite-employee{ background-position: -82px -328px; width: 32px; height: 32px; } 
+.sprite-exit{ background-position: -82px -410px; width: 32px; height: 32px; } 
+.sprite-fueladd{ background-position: -82px -492px; width: 32px; height: 32px; } 
+.sprite-fueledit{ background-position: -82px -574px; width: 32px; height: 32px; } 
+.sprite-fuel{ background-position: -82px -656px; width: 32px; height: 32px; } 
+.sprite-fuelremove{ background-position: -82px -738px; width: 32px; height: 32px; } 
+.sprite-home{ background-position: -82px -820px; width: 32px; height: 32px; } 
+.sprite-key{ background-position: -82px -902px; width: 32px; height: 32px; } 
+.sprite-login{ background-position: -82px -984px; width: 32px; height: 32px; } 
+.sprite-logs{ background-position: -82px -1066px; width: 32px; height: 32px; } 
+.sprite-model-add{ background-position: -82px -1148px; width: 32px; height: 32px; } 
+.sprite-model-edit{ background-position: -82px -1230px; width: 32px; height: 32px; } 
+.sprite-model-remove{ background-position: -82px -1312px; width: 32px; height: 32px; } 
+.sprite-model{ background-position: -82px -1394px; width: 32px; height: 32px; } 
+.sprite-parts-add{ background-position: -82px -1476px; width: 32px; height: 32px; } 
+.sprite-parts-edit{ background-position: -82px -1558px; width: 32px; height: 32px; } 
+.sprite-parts-remove{ background-position: -82px -1640px; width: 32px; height: 32px; } 
+.sprite-parts{ background-position: -82px -1722px; width: 32px; height: 32px; } 
+.sprite-printer{ background-position: -82px -1804px; width: 32px; height: 32px; } 
+.sprite-refresh{ background-position: -82px -1886px; width: 32px; height: 32px; } 
+.sprite-remove{ background-position: -164px 0; width: 32px; height: 32px; } 
+.sprite-return{ background-position: -164px -82px; width: 32px; height: 32px; } 
+.sprite-service-add{ background-position: -164px -164px; width: 32px; height: 32px; } 
+.sprite-service-edit{ background-position: -164px -246px; width: 32px; height: 32px; } 
+.sprite-service-remove{ background-position: -164px -328px; width: 32px; height: 32px; } 
+.sprite-service{ background-position: -164px -410px; width: 32px; height: 32px; } 
+.sprite-servicedetails-add{ background-position: -164px -492px; width: 32px; height: 32px; } 
+.sprite-servicedetails-remove{ background-position: -164px -574px; width: 32px; height: 32px; } 
+.sprite-servicedetailsedit{ background-position: -164px -656px; width: 32px; height: 32px; } 
+.sprite-servicedetails{ background-position: -164px -738px; width: 32px; height: 32px; } 
+.sprite-settings{ background-position: -164px -820px; width: 32px; height: 32px; } 
+.sprite-sms{ background-position: -164px -902px; width: 32px; height: 32px; } 
+.sprite-smsremove{ background-position: -164px -984px; width: 32px; height: 32px; } 
+.sprite-supplier-add{ background-position: -164px -1066px; width: 32px; height: 32px; } 
+.sprite-supplier-edit{ background-position: -164px -1148px; width: 32px; height: 32px; } 
+.sprite-supplier-remove{ background-position: -164px -1230px; width: 32px; height: 32px; } 
+.sprite-supplier{ background-position: -164px -1312px; width: 32px; height: 32px; } 
+.sprite-vat-add{ background-position: -164px -1394px; width: 32px; height: 32px; } 
+.sprite-vat-edit{ background-position: -164px -1476px; width: 32px; height: 32px; } 
+.sprite-vat-remove{ background-position: -164px -1558px; width: 32px; height: 32px; } 
+.sprite-vat{ background-position: -164px -1640px; width: 32px; height: 32px; } 

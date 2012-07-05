@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    '' => '',
-    '' => '',
-    'hash' => '',
+    'smsuser' => '',
+    'smspass' => '',
+    'hash' => 'DEVELOPMENT HASH; PLEASE REMOVE!',
     
 );

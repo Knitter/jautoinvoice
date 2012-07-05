@@ -26,7 +26,7 @@
  * Controlador pai de todos os controladores que fornencem serviços de 
  * administração/configuração do sistema.
  */
-class AdministracaoController extends JAIController {
+class SettingsController extends JAIController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

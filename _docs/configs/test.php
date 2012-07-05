@@ -1,16 +1,16 @@
 <?php
 
 return CMap::mergeArray(
-                require(dirname(__FILE__) . '/main-dev.php'), array(
+                require(dirname(__FILE__) . '/main.php'), array(
             'components' => array(
                 'fixture' => array(
                     'class' => 'system.test.CDbFixtureManager',
                 ),
                 'db' => array(
-                    'connectionString' => 'mysql:host=127.0.0.1;dbname=jaitesting',
+                    'connectionString' => 'mysql:host=<SERVER>;dbname=<DBNAME>',
                     'emulatePrepare' => true,
-                    'username' => 'root',
-                    'password' => 'toor',
+                    'username' => '<USER>',
+                    'password' => '<PASSWORD>',
                     'charset' => 'utf8'
                 ),
             )

@@ -24,7 +24,7 @@
  * Controlador pai para todos os controladores que fornecem as funcionalidades 
  * base da aplicação, acessível a todos os funcionários.
  */
-class SistemaController extends JAIController {
+class SystemController extends JAIController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);

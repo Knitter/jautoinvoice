@@ -4,8 +4,7 @@ return array(
     'basePath' => dirname(__FILE__) . '/..',
     'name' => 'jAutoInvoice',
     'defaultController' => 'default',
-    'sourceLanguage' => 'pt',
-    'preload' => array('log'),
+    //'preload' => array('log'),
     'import' => array(
         'application.models.*',
         'application.components.*',
@@ -25,16 +24,16 @@ return array(
         ),
         //MySQL database
         'db' => array(
-            'connectionString' => 'mysql:host=127.0.0.1;dbname=jai',
+            'connectionString' => 'mysql:host=<SERVER>;dbname=<DBNAME>',
             'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => 'toor',
+            'username' => '<USER>',
+            'password' => '<PASSWORD>',
             'charset' => 'utf8'
         ),
         'errorHandler' => array(
-            'errorAction' => 'default/erro'
+            'errorAction' => 'public/erro'
         ),
-        'log' => array(
+        /*'log' => array(
             'class' => 'CLogRouter',
             'routes' => array(
                 array(
@@ -42,7 +41,7 @@ return array(
                     'levels' => 'error, warning'
                 )
             )
-        )
+        )*/
     ),
     'params' => require(dirname(__FILE__) . '/params-dev.php'),
 );
