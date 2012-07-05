@@ -1,7 +1,7 @@
 <?php
 
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../yii-1.1.8/yii.php';
+$yii=dirname(__FILE__).'/../framework/yii.php';
 
 //switch these two lines
 //$config=dirname(__FILE__).'/../jai/config/main.php';

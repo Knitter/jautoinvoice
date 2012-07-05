@@ -3,10 +3,10 @@
 <div id="titulo">
     <h2><?php echo $modelo->isNewRecord ? 'Criar' : 'Editar'; ?> Modelo</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/modelos'); ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('modelos/criar'); ?>"><img src="imagens/icones/modelo.adicionar.png" /></a>
+        <a href="<?php echo $this->createUrl('/modelos'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/voltar.png" /></a>
+        <a href="<?php echo $this->createUrl('modelos/criar'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/modelo.adicionar.png" /></a>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php

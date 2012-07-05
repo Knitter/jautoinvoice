@@ -3,10 +3,10 @@
 <div id="titulo">
     <h2>Folhas de Obra</h2>
     <div id="opcoes">
-        <!-- <a href="<?php echo $this->createUrl('obras/modelo'); ?>"><img src="imagens/icones/impressora.png" /></a> -->
-        <a href="<?php echo $this->createUrl('obras/criar'); ?>"><img src="imagens/icones/folhaobra.adicionar.png" /></a>
+        <!-- <a href="<?php echo $this->createUrl('obras/modelo'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/impressora.png" /></a> -->
+        <a href="<?php echo $this->createUrl('obras/criar'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/folhaobra.adicionar.png" /></a>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php
