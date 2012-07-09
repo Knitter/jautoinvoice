@@ -1,8 +1,6 @@
 <?php
 
-/* Categoria.php
- * 
- * This file is part of jAutoInvoice, a car workshop management software.
+/* This file is part of jAutoInvoice, a car workshop management software.
  * 
  * Copyright (c) 2012, Sérgio Lopes.
  * 
@@ -39,7 +37,7 @@ class Categoria extends CActiveRecord {
     }
 
     public function tableName() {
-        return 'Categoria';
+        return '{{Categoria}}';
     }
 
     public function rules() {

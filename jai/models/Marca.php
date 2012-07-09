@@ -1,8 +1,6 @@
 <?php
 
-/* Marca.php
- * 
- * This file is part of jAutoInvoice, a car workshop management software.
+/* This file is part of jAutoInvoice, a car workshop management software.
  * 
  * Copyright (c) 2012, Sérgio Lopes.
  * 
@@ -40,7 +38,7 @@ class Marca extends CActiveRecord {
     }
 
     public function tableName() {
-        return 'Marca';
+        return '{{Marca}}';
     }
 
     public function rules() {

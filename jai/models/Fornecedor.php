@@ -1,8 +1,6 @@
 <?php
 
-/* Fornecedor.php
- * 
- * This file is part of jAutoInvoice, a car workshop management software.
+/* This file is part of jAutoInvoice, a car workshop management software.
  * 
  * Copyright (c) 2012, Sérgio Lopes.
  * 
@@ -19,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- *  http://sourceforge.net/projects/jautoinvoice
+ * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
@@ -47,7 +45,7 @@ class Fornecedor extends CActiveRecord {
     }
 
     public function tableName() {
-        return 'Fornecedor';
+        return '{{Fornecedor}}';
     }
 
     public function rules() {

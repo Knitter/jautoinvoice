@@ -1,10 +1,8 @@
 <?php
 
-/* .php
+/* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * This file is part of jAutoInvoice, a car workshop management software.
- * 
- * Copyright (c) 2012, Sérgio Lopes <knitter.is@gmail.com>s.
+ * Copyright (c) 2012, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -13,15 +11,18 @@
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Affero General Public License for more details.
  * 
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
  * http://sourceforge.net/projects/jautoinvoice
  */
 
+/**
+ * 
+ */
 class Credenciais extends CBaseUserIdentity {
 
     private $identificacao;
@@ -84,7 +85,7 @@ class Credenciais extends CBaseUserIdentity {
             }
         }
 
-        return!$this->errorCode;
+        return !$this->errorCode;
     }
 
     public function getId() {

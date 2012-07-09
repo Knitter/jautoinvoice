@@ -1,8 +1,6 @@
 <?php
 
-/* Cliente.php
- * 
- * This file is part of jAutoInvoice, a car workshop management software.
+/* This file is part of jAutoInvoice, a car workshop management software.
  * 
  * Copyright (c) 2012, Sérgio Lopes.
  * 
@@ -48,7 +46,7 @@ class Cliente extends CActiveRecord {
     }
 
     public function tableName() {
-        return 'Cliente';
+        return '{{Cliente}}';
     }
 
     public function rules() {

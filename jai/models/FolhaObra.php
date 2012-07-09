@@ -1,8 +1,6 @@
 <?php
 
-/* FolhaObra.php
- * 
- * This file is part of jAutoInvoice, a car workshop management software.
+/* This file is part of jAutoInvoice, a car workshop management software.
  * 
  * Copyright (c) 2012, Sérgio Lopes.
  * 
@@ -46,7 +44,7 @@ class FolhaObra extends CActiveRecord {
     }
 
     public function tableName() {
-        return 'FolhaObra';
+        return '{{FolhaObra}}';
     }
 
     public function rules() {

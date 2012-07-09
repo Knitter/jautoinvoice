@@ -1,0 +1,6 @@
++ 
+    Desconto por material
+    Desconto por factura
+
+?
+    IVA no serviço
