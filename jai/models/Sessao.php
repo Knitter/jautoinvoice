@@ -29,7 +29,7 @@
  * @property int $idCliente
  * @property int $idFuncionario
  */
-class DadosSessao extends CActiveRecord {
+class Sessao extends CActiveRecord {
 
     /**
      * @return DadosSessao

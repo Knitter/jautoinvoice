@@ -30,11 +30,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/marca.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/marca-editar.png',
                     'url' => 'Yii::app()->createUrl("marcas/editar", array("id" => $data->idMarca))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/marca.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/marca-remover.png',
                     'url' => 'Yii::app()->createUrl("marcas/apagar", array("id" => $data->idMarca))'
                 )
             ),

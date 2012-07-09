@@ -45,7 +45,7 @@ CREATE TABLE `Funcionario` (
 `password` VARCHAR( 40 ) NOT NULL ,
 `valorHora` DECIMAL (10,4) NULL ,
 `nome` VARCHAR( 255 ) NOT NULL ,
-`contribuinte` VARCHAR( 9 ) NOT NULL ,
+`contribuinte` VARCHAR( 9 ) NULL ,
 `telefone` VARCHAR ( 13 ) NULL ,
 `telemovel` VARCHAR ( 13 ) NULL ,
 `admin` TINYINT NOT NULL DEFAULT 0,

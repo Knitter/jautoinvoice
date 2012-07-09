@@ -36,11 +36,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/iva.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/iva-editar.png',
                     'url' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIVA))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/iva.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/iva-remover.png',
                     'url' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIVA))',
                 )
             ),

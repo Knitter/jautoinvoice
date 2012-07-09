@@ -29,11 +29,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/combustivel.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/combustivel-editar.png',
                     'url' => 'Yii::app()->createUrl("combustiveis/editar", array("id" => $data->idCombustivel))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/combustivel.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/combustivel-remover.png',
                     'url' => 'Yii::app()->createUrl("combustiveis/apagar", array("id" => $data->idCombustivel))',
                 )
             ),

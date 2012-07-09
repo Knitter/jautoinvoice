@@ -47,11 +47,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/fornecedor.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/fornecedor-editar.png',
                     'url' => 'Yii::app()->createUrl("fornecedores/editar", array("id" => $data->idFornecedor))'
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/fornecedor.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/fornecedor-remover.png',
                     'url' => 'Yii::app()->createUrl("fornecedores/apagar", array("id" => $data->idFornecedor))',
                 )
             ),

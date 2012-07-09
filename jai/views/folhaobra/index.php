@@ -44,11 +44,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 //    'url' => 'Yii::app()->createUrl("obras/imprimir", array("id" => $data->idFolhaObra))',
                 //),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/folhaobra.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/folhaobra-editar.png',
                     'url' => 'Yii::app()->createUrl("obras/editar", array("id" => $data->idFolhaObra))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/folhaobra.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/folhaobra-remover.png',
                     'url' => 'Yii::app()->createUrl("obras/apagar", array("id" => $data->idFolhaObra))',
                 )
             ),

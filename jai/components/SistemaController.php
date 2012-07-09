@@ -43,7 +43,7 @@ class SistemaController extends JController {
             array(
                 'label' => 'Marcações',
                 'url' => $this->createUrl('/marcacao'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/marcacoes.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/calendario.png',
             ),
             array(
                 'label' => 'Clientes',
@@ -51,7 +51,7 @@ class SistemaController extends JController {
                 'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente.png',
             ),
             array(
-                'label' => 'Administração',
+                'label' => 'Configuração',
                 'url' => $this->createUrl('/configuracao'),
                 'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/administracao.png',
             ),

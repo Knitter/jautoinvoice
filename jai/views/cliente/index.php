@@ -59,16 +59,16 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/cliente.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/cliente-editar.png',
                     'url' => 'Yii::app()->createUrl("clientes/editar", array("id" => $data->idCliente))'
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/cliente.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/cliente-remover.png',
                     'url' => 'Yii::app()->createUrl("clientes/apagar", array("id" => $data->idCliente))'
                 ),
                 'carros' => array(
                     'label' => 'Veículos',
-                    'imageUrl' => 'imagens/icones/veiculo.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/veiculo.png',
                     'url' => 'Yii::app()->createUrl("veiculos/lista", array("id" => $data->idCliente, "op" => "lista"))'
                 ),
             ),

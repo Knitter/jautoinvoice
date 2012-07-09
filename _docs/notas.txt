@@ -1,6 +1,35 @@
 + 
     Desconto por material
     Desconto por factura
+    Fotos do material
 
 ?
     IVA no serviço
+    Notas de serviços/folhas precisam de mais caracteres?
+
+
+Done:
+
+    Registos
+    Taxas de Iva
+    Modelos
+    Marcas
+    Combustiveis
+    Categorias
+    Serviços
+    Material
+    Fornecedores
+    Funcionários
+    Configurações
+    Clientes
+    Marcações
+    Folhas de Obra
+    Quadro
+    Contactos
+    Início
+    Sobre
+
+Visual:
+    Logótipo
+    Css das tabelas
+    Títulos de listas e formulários

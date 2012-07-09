@@ -70,7 +70,7 @@ class PublicoController extends JController {
             $formulario->attributes = $_POST['FormularioEntrada'];
 
             if ($formulario->validate() && $formulario->login()) {
-                $this->redirect(Yii::app()->user->returnUrl);
+                $this->redirect(array('quadro/index'));
             }
         }
         $this->render('entrar', array('formulario' => $formulario));

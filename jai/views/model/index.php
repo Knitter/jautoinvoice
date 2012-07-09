@@ -35,11 +35,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/modelo.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/modelo-editar.png',
                     'url' => 'Yii::app()->createUrl("modelos/editar", array("id" => $data->idMarca))',
                 ),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/modelo.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/modelo-remover.png',
                     'url' => 'Yii::app()->createUrl("modelos/apagar", array("id" => $data->idMarca))'
                 )
             ),

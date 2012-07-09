@@ -33,11 +33,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'delete' => array(
-                    'imageUrl' => 'imagens/icones/funcionario.remover.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/funcionario-remover.png',
                     'url' => 'Yii::app()->createUrl("funcionarios/apagar", array("id" => $data->idFuncionario))'
                 ),
                 'update' => array(
-                    'imageUrl' => 'imagens/icones/funcionario.editar.png',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/funcionario-editar.png',
                     'url' => 'Yii::app()->createUrl("funcionarios/editar", array("id" => $data->idFuncionario))',
                 ),
             ),
