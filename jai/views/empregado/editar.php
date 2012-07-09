@@ -1,4 +1,4 @@
-<?php $this->title = $funcionario->isNewRecord ? 'Criar Funcionário' : 'Editar ' . $funcionario->nome; ?>
+<?php $this->titulo = $funcionario->isNewRecord ? 'Criar Funcionário' : 'Editar ' . $funcionario->nome; ?>
 
 <div id="titulo">
     <h2><?php echo $funcionario->isNewRecord ? 'Criar' : 'Editar'; ?> Funcionário</h2>

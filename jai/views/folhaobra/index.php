@@ -1,4 +1,4 @@
-<?php $this->title = 'Folhas de Obra'; ?>
+<?php $this->titulo = 'Folhas de Obra'; ?>
 
 <div id="titulo">
     <h2>Folhas de Obra</h2>

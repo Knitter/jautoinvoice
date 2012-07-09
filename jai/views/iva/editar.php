@@ -1,4 +1,4 @@
-<?php $this->title = $iva->isNewRecord ? 'Criar Taxa de IVA' : 'Editar Taxa de ' . $iva->percentagem . '%'; ?>
+<?php $this->titulo = $iva->isNewRecord ? 'Criar Taxa de IVA' : 'Editar Taxa de ' . $iva->percentagem . '%'; ?>
 
 <div id="titulo">
     <h2><?php echo $iva->isNewRecord ? 'Criar' : 'Editar'; ?> Taxa de IVA</h2>

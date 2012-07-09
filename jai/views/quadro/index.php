@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Dashboard';
+$this->titulo = 'Dashboard';
 
 $js = <<<JS
 $("#coluna-1, #coluna-2").sortable({

@@ -28,24 +28,24 @@ class PublicoController extends JController {
         $this->menu = array(
             array(
                 'label' => 'Início',
-                'url' => $this->createUrl('/default'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/casa.png',
+                'url' => $this->createUrl('/publico'),
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/casa.png',
             ),
             array(
                 'label' => 'Contactos',
-                'url' => $this->createUrl('default/contactos'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/contactos.png',
+                'url' => $this->createUrl('publico/contactos'),
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/contactos.png',
             ),
             array(
                 'label' => 'Entrar',
-                'url' => $this->createUrl('default/login'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/entrar.png',
+                'url' => $this->createUrl('publico/entrar'),
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/entrar.png',
                 'visible' => Yii::app()->user->isGuest
             ),
             array(
                 'label' => 'Dashboard',
-                'url' => $this->createUrl('/dashboard'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/quadro.png',
+                'url' => $this->createUrl('/quadro'),
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/quadro.png',
                 'visible' => !Yii::app()->user->isGuest
             ),
         );

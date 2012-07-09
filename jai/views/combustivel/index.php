@@ -1,4 +1,4 @@
-<?php $this->title = 'Combustíveis/Fontes de Energia'; ?>
+<?php $this->titulo = 'Combustíveis/Fontes de Energia'; ?>
 <div id="titulo">
     <h2>Combustíveis/Fontes de Energia</h2>
     <div id="opcoes">

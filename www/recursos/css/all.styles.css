@@ -441,7 +441,7 @@ input[type="image"] {
 }*/
 
 /*SPRITE INFO*/
-.sprite { background-image: url(../images/button-sprite.png); }
+.sprite { background-image: url(../imagens/sprite.png); }
 .sprite-add{ background-position: 0 0; width: 32px; height: 32px; } 
 .sprite-administration{ background-position: 0 -82px; width: 32px; height: 32px; } 
 .sprite-brand-add{ background-position: 0 -164px; width: 32px; height: 32px; } 

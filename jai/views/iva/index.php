@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Taxas de IVA'
+$this->titulo = 'Taxas de IVA'
 ?>
 <div id="titulo">
     <h2>Taxas de IVA</h2>

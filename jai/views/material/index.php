@@ -1,4 +1,4 @@
-<?php $this->title = 'Gestão de Stock'; ?>
+<?php $this->titulo = 'Gestão de Stock'; ?>
 <div id="titulo">
     <h2>Stock</h2>
     <div id="opcoes">

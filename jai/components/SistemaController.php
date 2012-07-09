@@ -33,32 +33,32 @@ class SistemaController extends JController {
             array(
                 'label' => 'Quadro',
                 'url' => $this->createUrl('/quadro'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/quadro.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/quadro.png',
             ),
             array(
                 'label' => 'Folhas de Obra',
                 'url' => $this->createUrl('/folhaobra'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/folhaobra.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/folhaobra.png',
             ),
             array(
                 'label' => 'Marcações',
                 'url' => $this->createUrl('/marcacao'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/marcacoes.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/marcacoes.png',
             ),
             array(
                 'label' => 'Clientes',
                 'url' => $this->createUrl('/cliente'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/cliente.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente.png',
             ),
             array(
                 'label' => 'Administração',
                 'url' => $this->createUrl('/configuracao'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/administracao.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/administracao.png',
             ),
             array(
                 'label' => 'Sair',
                 'url' => $this->createUrl('publico/sair'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/sair.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/sair.png',
             )
         );
     }

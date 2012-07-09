@@ -1,4 +1,4 @@
-<?php $this->title = $material->isNewRecord ? 'Criar Material' : 'Editar ' . $material->referencia; ?> 
+<?php $this->titulo = $material->isNewRecord ? 'Criar Material' : 'Editar ' . $material->referencia; ?> 
 <div id="titulo">
     <h2><?php echo $material->isNewRecord ? 'Criar' : 'Editar'; ?> Material</h2>
     <div id="opcoes">

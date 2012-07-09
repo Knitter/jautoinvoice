@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Login';
+$this->titulo = 'Login';
 ?>
 
 <div class="span-12 prepend-6 append-6">

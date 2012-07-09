@@ -1,2 +1,2 @@
-<?php $this->title = 'Contactos'; ?>
+<?php $this->titulo = 'Contactos'; ?>
 //TODO: por implementar

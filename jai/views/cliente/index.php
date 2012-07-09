@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Clientes';
+$this->titulo = 'Clientes';
 ?>
 
 <div id="titulo">

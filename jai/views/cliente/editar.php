@@ -1,4 +1,4 @@
-<?php $this->title = $cliente->isNewRecord ? 'Criar Cliente' : 'Editar ' . $cliente->nome; ?>
+<?php $this->titulo = $cliente->isNewRecord ? 'Criar Cliente' : 'Editar ' . $cliente->nome; ?>
 <div id="titulo">
     <h2><?php echo $cliente->isNewRecord ? 'Criar' : 'Editar'; ?> Cliente</h2>
     <div id="opcoes">

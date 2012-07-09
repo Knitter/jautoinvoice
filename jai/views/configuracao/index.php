@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Configurações de Sistema';
+$this->titulo = 'Configurações de Sistema';
 
 $cs = Yii::app()->clientScript;
 

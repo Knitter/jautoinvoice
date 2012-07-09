@@ -1,4 +1,4 @@
-<?php $this->title = $categoria->isNewRecord ? 'Criar Categoria de Veículo' : 'Editar' . $categoria->nome; ?>
+<?php $this->titulo = $categoria->isNewRecord ? 'Criar Categoria de Veículo' : 'Editar' . $categoria->nome; ?>
 <div id="titulo">
     <h2><?php echo $categoria->isNewRecord ? 'Criar' : 'Editar'; ?> Categoria</h2>
     <div id="opcoes">

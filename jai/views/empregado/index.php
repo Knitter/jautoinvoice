@@ -1,4 +1,4 @@
-<?php $this->title = 'Funcionários'; ?>
+<?php $this->titulo = 'Funcionários'; ?>
 <div id="titulo">
     <h2>Funcionários</h2>
     <div id="opcoes">

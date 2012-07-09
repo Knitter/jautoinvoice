@@ -1,4 +1,4 @@
-<?php $this->title = 'Categorias de Veículos'; ?>
+<?php $this->titulo = 'Categorias de Veículos'; ?>
 <div id="titulo">
     <h2>Categorias</h2>
     <div id="opcoes">

@@ -39,7 +39,7 @@ return array(
         ),
         'user' => array(
             'allowAutoLogin' => true,
-            'class' => 'JWebUser',
+            'class' => 'JUtilizadorWeb',
             'loginUrl' => array('public/entrar'),
         ),
         //MySQL database

@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Marcações';
+$this->titulo = 'Marcações';
 
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile('css/fullcalendar.min.css');

@@ -1,4 +1,4 @@
-<?php $this->title = $combustivel->isNewRecord ? 'Criar Combustível' : 'Editar ' . $combustivel->nome; ?>
+<?php $this->titulo = $combustivel->isNewRecord ? 'Criar Combustível' : 'Editar ' . $combustivel->nome; ?>
 
 <div id="titulo">
     <h2><?php echo $combustivel->isNewRecord ? 'Criar' : 'Editar'; ?> Combustível</h2>

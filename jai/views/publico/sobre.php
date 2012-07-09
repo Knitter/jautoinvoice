@@ -1,3 +1,3 @@
-<?php $this->title = 'Sobre'; ?>
+<?php $this->titulo = 'Sobre'; ?>
 
 //TODO: por implementar

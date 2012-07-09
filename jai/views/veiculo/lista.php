@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Lista de Veículos';
+$this->titulo = 'Lista de Veículos';
 
 if ($op == 'editar') {
     $voltar = $this->createUrl('/clientes/editar', array('id' => $cliente->idCliente));

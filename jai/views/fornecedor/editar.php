@@ -1,5 +1,5 @@
 <?php
-$this->title = $fornecedor->isNewRecord ? 'Criar Fornecedor' : 'Editar ' . $fornecedor->nome;
+$this->titulo = $fornecedor->isNewRecord ? 'Criar Fornecedor' : 'Editar ' . $fornecedor->nome;
 ?>
 
 <div id="titulo">

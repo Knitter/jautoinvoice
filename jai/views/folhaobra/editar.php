@@ -1,4 +1,4 @@
-<?php $this->title = $folhaObra->isNewRecord ? 'Criar Folha de Obra' : 'Editar Folha ' . $folhaObra->data; ?>
+<?php $this->titulo = $folhaObra->isNewRecord ? 'Criar Folha de Obra' : 'Editar Folha ' . $folhaObra->data; ?>
 <div id="titulo">
     <h2><?php echo $folhaObra->isNewRecord ? 'Criar' : 'Editar'; ?> Folha de Obra</h2>
     <div id="opcoes">

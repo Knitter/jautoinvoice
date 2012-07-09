@@ -1,5 +1,5 @@
 <?php
 
-$this->title = 'Erro!';
+$this->titulo = 'Erro!';
 
 echo $message;
