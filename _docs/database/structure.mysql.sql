@@ -175,7 +175,7 @@ CONSTRAINT `fkLinhaServicoServico` FOREIGN KEY (`idServico`) REFERENCES `Servico
 
 CREATE TABLE `Configuracao` (
 `chave` VARCHAR( 150 ) NOT NULL PRIMARY KEY ,
-`valor` VARCHAR( 255 ) NULL ,
+`valor` VARCHAR( 255 ) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE utf8_unicode_ci ;
 
 CREATE TABLE `Material` (
