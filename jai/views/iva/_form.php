@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($iva, 'descricao'),
     $form->textField($iva, 'descricao', array('class' => 'medium-field', 'maxlength' => 255)),
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($iva, 'percentagem'),
     $form->textField($iva, 'percentagem', array('class' => 'small-field')),
@@ -22,13 +22,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($iva->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/iva'));
+    CHtml::link('Cancelar', $this->createUrl('iva/index'), array('class' => 'cancelar'));
     ?>
 </div>
 

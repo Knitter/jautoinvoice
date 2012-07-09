@@ -2,10 +2,11 @@
 
 <div id="titulo">
     <h2>Marcas</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('marcas/criar'); ?>"><img src="imagens/icones/marca.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/marca-adicionar.png'), $this->createUrl('marca/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php
@@ -30,11 +31,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/marca-editar.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/marca-editar.png',
                     'url' => 'Yii::app()->createUrl("marcas/editar", array("id" => $data->idMarca))',
                 ),
                 'delete' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/marca-remover.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/marca-remover.png',
                     'url' => 'Yii::app()->createUrl("marcas/apagar", array("id" => $data->idMarca))'
                 )
             ),

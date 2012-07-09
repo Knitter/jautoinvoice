@@ -1,10 +1,12 @@
 <?php $this->titulo = 'Gestão de Stock'; ?>
+
 <div id="titulo">
     <h2>Stock</h2>
+    
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('stock/criar'); ?>"><img src="imagens/icones/material.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/material-adicionar.png'), $this->createUrl('material/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php

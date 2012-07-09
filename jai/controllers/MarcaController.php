@@ -26,6 +26,9 @@ class MarcaController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
+    /**
+     * 
+     */
     public function actionIndex() {
         $filtro = new Marca('search');
         $filtro->unsetAttributes();
@@ -37,6 +40,9 @@ class MarcaController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
+    /**
+     * 
+     */
     public function actionAdicionar() {
         $marca = new Marca();
 
@@ -44,13 +50,18 @@ class MarcaController extends AdministracaoController {
 
         if (isset($_POST['Marca'])) {
             $marca->attributes = $_POST['Marca'];
-            if ($marca->save())
+            if ($marca->save()) {
                 $this->redirect(array('editar', 'id' => $marca->idMarca));
+            }
         }
 
         $this->render('editar', array('marca' => $marca));
     }
 
+    /**
+     *
+     * @param integer $id 
+     */
     public function actionEditar($id) {
         $marca = $this->carregarModeloMarca($id);
 
@@ -58,13 +69,20 @@ class MarcaController extends AdministracaoController {
 
         if (isset($_POST['Marca'])) {
             $marca->attributes = $_POST['Marca'];
-            if ($marca->save())
+            if ($marca->save()) {
                 $this->redirect(array('editar', 'id' => $marca->idMarca));
+            }
         }
 
         $this->render('editar', array('marca' => $marca));
     }
 
+    /**
+     *
+     * @param integer $id
+     * 
+     * @throws CHttpException 
+     */
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest && ($marca = $this->carregarModeloMarca($id))) {
 
@@ -75,6 +93,7 @@ class MarcaController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
+            //TODO: 
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
@@ -87,20 +106,21 @@ class MarcaController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
-     * @return type
+     * @param integer $id
+     * @return Marca
+     * 
      * @throws CHttpException 
      */
-    private function carregarModelo($id) {
+    private function carregarModeloMarca($id) {
         if (($marca = Marca::model()->findByPk((int) $id)) === null) {
-            //TODO: melhor mensagem
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $marca;

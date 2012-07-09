@@ -2,11 +2,14 @@
 
 <div id="titulo">
     <h2><?php echo $iva->isNewRecord ? 'Criar' : 'Editar'; ?> Taxa de IVA</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/iva'); ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/iva.adicionar.png" /></a>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('iva/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/iva-adicionar.png'), $this->createUrl('iva/adicionar', array('class' => 'adicionar')));
+        ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php

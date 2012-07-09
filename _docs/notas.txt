@@ -2,6 +2,7 @@
     Desconto por material
     Desconto por factura
     Fotos do material
+    Ícone de aviso quando não é possível criar elementos por falta de dependentes
 
 ?
     IVA no serviço

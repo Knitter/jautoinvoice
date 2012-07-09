@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($modelo, 'nome'),
     $form->textField($modelo, 'nome', array('class' => 'medium-field', 'maxlength' => 100)),
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($modelo, 'idMarca'),
     $form->dropDownList($modelo, 'idMarca', CHtml::listData($marcas, 'idMarca', 'nome')
@@ -23,13 +23,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($modelo->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/modelos'));
+    CHtml::link('Cancelar', $this->createUrl('modelo/index'), array('class' => 'cancelar'));
     ?>
 </div>
 

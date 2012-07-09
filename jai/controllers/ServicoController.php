@@ -26,6 +26,9 @@ class ServicoController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
+    /**
+     * 
+     */
     public function actionIndex() {
         $filtro = new Servico('search');
         $filtro->unsetAttributes();
@@ -37,6 +40,9 @@ class ServicoController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
+    /**
+     * 
+     */
     public function actionAdicionar() {
         $servico = new Servico();
 
@@ -44,8 +50,9 @@ class ServicoController extends AdministracaoController {
 
         if (isset($_POST['Servico'])) {
             $servico->attributes = $_POST['Servico'];
-            if ($servico->save())
+            if ($servico->save()) {
                 $this->redirect(array('editar', 'id' => $servico->idServico));
+            }
         }
 
         $this->render('editar', array(
@@ -53,6 +60,10 @@ class ServicoController extends AdministracaoController {
         ));
     }
 
+    /**
+     *
+     * @param integer $id 
+     */
     public function actionEditar($id) {
         $servico = $this->carregarModeloServico($id);
 
@@ -60,8 +71,9 @@ class ServicoController extends AdministracaoController {
 
         if (isset($_POST['Servico'])) {
             $servico->attributes = $_POST['Servico'];
-            if ($servico->save())
+            if ($servico->save()) {
                 $this->redirect(array('editar', 'id' => $servico->idServico));
+            }
         }
 
         $this->render('editar', array(
@@ -69,6 +81,12 @@ class ServicoController extends AdministracaoController {
         ));
     }
 
+    /**
+     *
+     * @param integer $id
+     * 
+     * @throws CHttpException 
+     */
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($servico = $this->carregarModeloServico($id)) !== null) {
 
@@ -79,10 +97,14 @@ class ServicoController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
+            //TODO:
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
 
+    /**
+     * 
+     */
     public function actionDadosJSON() {
         $resultado = (object) array('sucesso' => 0);
         if (isset($_POST['id']) && ($servico = $this->carregarModeloServico($_POST['id'])) !== null) {
@@ -107,7 +129,7 @@ class ServicoController extends AdministracaoController {
                     array(
                         'allow',
                         'actions' => array(
-                            'index', 'criar', 'editar', 'apagar', 'dadosJSON'
+                            'index', 'adicionar', 'editar', 'apagar', 'dadosJSON'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());

@@ -2,9 +2,12 @@
 
 <div id="titulo">
     <h2><?php echo $marca->isNewRecord ? 'Criar' : 'Editar'; ?> Marca</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/marcas'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/voltar.png" /></a>
-        <a href="<?php echo $this->createUrl('marcas/criar'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/marca.adicionar.png" /></a>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('marca/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/marca-adicionar.png'), $this->createUrl('marca/adicionar'), array('class' => 'adicionar'));
+        ?>
     </div>
     <div class="clear"></div>
 </div>

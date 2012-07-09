@@ -26,6 +26,9 @@ class ModeloController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
+    /**
+     * 
+     */
     public function actionIndex() {
         $filtro = new Modelo('search');
         $filtro->unsetAttributes();
@@ -45,6 +48,9 @@ class ModeloController extends AdministracaoController {
         ));
     }
 
+    /**
+     * 
+     */
     public function actionAdicionar() {
         $modelo = new Modelo();
 
@@ -68,6 +74,10 @@ class ModeloController extends AdministracaoController {
         ));
     }
 
+    /**
+     *
+     * @param integer $id 
+     */
     public function actionEditar($id) {
         $modelo = $this->carregarModeloModelo($id);
 
@@ -91,6 +101,12 @@ class ModeloController extends AdministracaoController {
         ));
     }
 
+    /**
+     *
+     * @param integer $id
+     * 
+     * @throws CHttpException 
+     */
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($modelo = $this->carregarModeloModelo($id)) !== null) {
 
@@ -101,10 +117,15 @@ class ModeloController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
+            //TODO:
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
 
+    /**
+     *
+     * @return array
+     */
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -113,20 +134,21 @@ class ModeloController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
-     * @return Modelo
+     * @param integer $id
      * 
+     * @return Modelo
      * @throws CHttpException 
      */
     private function carregarModeloModelo($id) {
         if (($modelo = Modelo::model()->findByPk((int) $id)) === null) {
+            //TODO: 
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $modelo;

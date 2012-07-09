@@ -285,21 +285,21 @@ h2 {
 /* END: LAYOUT */
 
 /* MISC */
-#title {
+#titulo {
 }
 
-#title h2 {
+#titulo h2 {
     float: left;
     width: 70%;
 }
 
-#tools {
+#opcoes {
     float: left;
     width: 28%;
     text-align: right;
 }
 
-#tools img {
+#opcoes img {
     vertical-align: middle;
 }
 
@@ -357,11 +357,11 @@ span.required {
     color: red;
 }
 
-.row {
+.linha {
     margin: 1em 0;
 }
 
-.row img {
+.linha img {
     vertical-align: middle;
 }
 

@@ -1,10 +1,12 @@
 <?php $this->titulo = 'Serviços Prestados'; ?>
+
 <div id="titulo">
     <h2>Serviços</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('servicos/criar'); ?>"><img src="imagens/icones/servico.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/servico-adicionar.png'), $this->createUrl('servico/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php
@@ -29,11 +31,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/servico-editar.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/servico-editar.png',
                     'url' => 'Yii::app()->createUrl("servicos/editar", array("id" => $data->idServico))',
                 ),
                 'delete' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/servico-remover.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/servico-remover.png',
                     'url' => 'Yii::app()->createUrl("servicos/apagar", array("id" => $data->idServico))',
                 )
             ),

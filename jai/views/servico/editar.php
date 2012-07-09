@@ -1,9 +1,13 @@
 <?php $this->titulo = $servico->isNewRecord ? 'Criar Serviço' : 'Editar ' . $servico->nome; ?>
+
 <div id="titulo">
     <h2><?php echo $servico->isNewRecord ? 'Criar' : 'Editar'; ?> Serviço</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/servicos'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/voltar.png" /></a>
-        <a href="<?php echo $this->createUrl('servicos/criar'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/servico.adicionar.png" /></a>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('servico/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/servico-adicionar.png'), $this->createUrl('servico/adicionar'), array('class' => 'adicionar'));
+        ?>
     </div>
     <div class="clear"></div>
 </div>

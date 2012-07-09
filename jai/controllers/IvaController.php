@@ -26,8 +26,11 @@ class IvaController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
+    /**
+     * 
+     */
     public function actionIndex() {
-        $filtro = new IVA('search');
+        $filtro = new Iva('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Iva'])) {
@@ -37,34 +40,49 @@ class IvaController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
+    /**
+     * 
+     */
     public function actionAdicionar() {
-        $iva = new IVA();
+        $iva = new Iva();
 
         $this->validacaoAJAX('iva-form', $iva);
 
         if (isset($_POST['Iva'])) {
             $iva->attributes = $_POST['Iva'];
             if ($iva->save())
-                $this->redirect(array('editar', 'id' => $iva->idIVA));
+                $this->redirect(array('editar', 'id' => $iva->idIva));
         }
 
         $this->render('editar', array('iva' => $iva));
     }
 
+    /**
+     *
+     * @param integer $id 
+     */
     public function actionEditar($id) {
-        $iva = $this->carregarModeloIVA($id);
+        $iva = $this->carregarModeloIva($id);
 
         $this->validacaoAJAX('iva-form', $iva);
 
         if (isset($_POST['Iva'])) {
             $iva->attributes = $_POST['Iva'];
-            if ($iva->save())
-                $this->redirect(array('editar', 'id' => $iva->idIVA));
+
+            if ($iva->save()) {
+                $this->redirect(array('editar', 'id' => $iva->idIva));
+            }
         }
 
         $this->render('editar', array('iva' => $iva));
     }
 
+    /**
+     *
+     * @param integer $id
+     * 
+     * @throws CHttpException 
+     */
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($iva = $this->carregarModeloIVA($id)) !== null) {
 
@@ -75,10 +93,15 @@ class IvaController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
+            //TODO:
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
 
+    /**
+     *
+     * @return array 
+     */
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -87,19 +110,21 @@ class IvaController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
-     * @return type
+     * @param integer $id
+     * 
+     * @return Iva
      * @throws CHttpException 
      */
-    private function carregarModeloIVA($id) {
-        if (($iva = IVA::model()->findByPk((int) $id)) === null) {
+    private function carregarModeloIva($id) {
+        if (($iva = Iva::model()->findByPk((int) $id)) === null) {
+            //TODO: 
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 

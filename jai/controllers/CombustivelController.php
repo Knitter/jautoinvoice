@@ -26,6 +26,9 @@ class CombustivelController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
+    /**
+     * 
+     */
     public function actionIndex() {
         $filtro = new Combustivel('search');
         $filtro->unsetAttributes();
@@ -37,6 +40,9 @@ class CombustivelController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
+    /**
+     * 
+     */
     public function actionAdicionar() {
         $combustivel = new Combustivel();
 
@@ -44,13 +50,18 @@ class CombustivelController extends AdministracaoController {
 
         if (isset($_POST['Combustivel'])) {
             $combustivel->attributes = $_POST['Combustivel'];
-            if ($combustivel->save())
+            if ($combustivel->save()) {
                 $this->redirect(array('editar', 'id' => $combustivel->idCombustivel));
+            }
         }
 
         $this->render('editar', array('combustivel' => $combustivel));
     }
 
+    /**
+     *
+     * @param integer $id 
+     */
     public function actionEditar($id) {
         $combustivel = $this->carregarModeloCombustivel($id);
 
@@ -58,13 +69,20 @@ class CombustivelController extends AdministracaoController {
 
         if (isset($_POST['Combustivel'])) {
             $combustivel->attributes = $_POST['Combustivel'];
-            if ($combustivel->save())
+            if ($combustivel->save()) {
                 $this->redirect(array('editar', 'id' => $combustivel->idCombustivel));
+            }
         }
 
         $this->render('editar', array('combustivel' => $combustivel));
     }
 
+    /**
+     *
+     * @param integer $id
+     * 
+     * @throws CHttpException 
+     */
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($combustivel = $this->carregarModeloCombustivel($id))) {
 
@@ -75,6 +93,7 @@ class CombustivelController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
+            //TODO:
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
@@ -87,20 +106,21 @@ class CombustivelController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar'),
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
+     * @param integer $id
      * 
      * @return Combustivel
      * @throws CHttpException 
      */
     private function carregarModeloCombustivel($id) {
         if (($combustivel = Combustivel::model()->findByPk((int) $id)) === null) {
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $combustivel;

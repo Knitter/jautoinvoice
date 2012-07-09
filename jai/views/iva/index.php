@@ -1,12 +1,13 @@
-<?php
-$this->titulo = 'Taxas de IVA'
-?>
+<?php $this->titulo = 'Taxas de IVA'; ?>
+
 <div id="titulo">
     <h2>Taxas de IVA</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('iva/criar'); ?>"><img src="imagens/icones/iva.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/iva-adicionar.png'), $this->createUrl('iva/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    
+    <div class="clear"></div>
 </div>
 
 <?php
@@ -36,12 +37,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/iva-editar.png',
-                    'url' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIVA))',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/iva-editar.png',
+                    'url' => 'Yii::app()->createUrl("iva/editar", array("id" => $data->idIva))',
                 ),
                 'delete' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/iva-remover.png',
-                    'url' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIVA))',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/iva-remover.png',
+                    'url' => 'Yii::app()->createUrl("iva/apagar", array("id" => $data->idIva))',
                 )
             ),
         ),

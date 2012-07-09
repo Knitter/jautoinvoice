@@ -26,8 +26,9 @@ class MaterialController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
-    
-
+    /**
+     * 
+     */
     public function actionIndex() {
         $filtro = new Material('search');
         $filtro->unsetAttributes();
@@ -39,6 +40,9 @@ class MaterialController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
+    /**
+     * 
+     */
     public function actionAdicionar() {
         $material = new Material();
 
@@ -74,6 +78,10 @@ class MaterialController extends AdministracaoController {
         ));
     }
 
+    /**
+     *
+     * @param integer $id 
+     */
     public function actionEditar($id) {
         $material = $this->carregarModeloMaterial($id);
 
@@ -112,6 +120,12 @@ class MaterialController extends AdministracaoController {
         ));
     }
 
+    /**
+     *
+     * @param integer $id
+     * 
+     * @throws CHttpException 
+     */
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($material = $this->carregarModeloMaterial($id)) !== null) {
 
@@ -126,6 +140,9 @@ class MaterialController extends AdministracaoController {
         }
     }
 
+    /**
+     * 
+     */
     public function actionDadosJSON() {
         $resultado = (object) array('sucesso' => 0);
         if (isset($_POST['id']) && ($material = $this->carregarModeloMaterial($_POST['id'])) !== null) {
@@ -145,7 +162,11 @@ class MaterialController extends AdministracaoController {
         echo json_encode($resultado);
         Yii::app()->end();
     }
-    
+
+    /**
+     *
+     * @return array
+     */
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -155,20 +176,22 @@ class MaterialController extends AdministracaoController {
                     array(
                         'allow',
                         'actions' => array(
-                            'index', 'criar', 'editar', 'apagar', 'dadosJSON'
+                            'index', 'adicionar', 'editar', 'apagar', 'dadosJSON'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
 
-/**
- *
- * @param type $id
- * @return type
- * @throws CHttpException 
- */
+    /**
+     *
+     * @param integer $id
+     * 
+     * @return Material
+     * @throws CHttpException 
+     */
     private function carregarModeloMaterial($id) {
         if (($material = Material::model()->findByPk((int) $id)) === null) {
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 

@@ -1,10 +1,12 @@
 <?php $this->titulo = 'Modelos de Veículos'; ?>
+
 <div id="titulo">
     <h2>Modelos</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('modelos/criar'); ?>"><img src="imagens/icones/modelo.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/modelo-adicionar.png'), $this->createUrl('modelo/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php

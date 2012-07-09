@@ -2,11 +2,14 @@
 
 <div id="titulo">
     <h2><?php echo $combustivel->isNewRecord ? 'Criar' : 'Editar'; ?> Combustível</h2>
+    
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/combustiveis'); ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('combustiveis/criar'); ?>"><img src="imagens/icones/combustivel.adicionar.png" /></a>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('combustivel/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/modelo-adicionar.png'), $this->createUrl('combustivel/adicionar'), array('class' => 'adicionar'));
+        ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 <?php
 $this->renderPartial('_form', array('combustivel' => $combustivel));
