@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class MarcacoesController extends SistemaController {
+class MarcacaoController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $inicio = 8;
@@ -196,6 +194,12 @@ class MarcacoesController extends SistemaController {
                         )), parent::accessRules());
     }
 
+    /**
+     *
+     * @param type $id
+     * @return type
+     * @throws CHttpException 
+     */
     private function carregarModeloMarcacao($id) {
         if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -203,4 +207,5 @@ class MarcacoesController extends SistemaController {
 
         return $marcacao;
     }
+
 }

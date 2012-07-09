@@ -29,7 +29,7 @@ class JController extends CController {
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
 
-        $this->layout = '//layouts/default';
+        $this->layout = '//layouts/principal';
         $this->menu = array();
     }
 

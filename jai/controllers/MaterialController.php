@@ -20,7 +20,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class StockController extends AdministracaoController {
+class MaterialController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -39,10 +39,10 @@ class StockController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $material = new Material();
 
-        $this->performAjaxValidation('material-form', $material);
+        $this->validacaoAJAX('material-form', $material);
 
         if (isset($_POST['Material'])) {
             $material->attributes = $_POST['Material'];
@@ -77,7 +77,7 @@ class StockController extends AdministracaoController {
     public function actionEditar($id) {
         $material = $this->carregarModeloMaterial($id);
 
-        $this->performAjaxValidation('material-form', $material);
+        $this->validacaoAJAX('material-form', $material);
 
         if (isset($_POST['Material'])) {
             $material->attributes = $_POST['Material'];
@@ -161,10 +161,12 @@ class StockController extends AdministracaoController {
                         )), parent::accessRules());
     }
 
-    /**
-     * @param int $id
-     * @return Material
-     */
+/**
+ *
+ * @param type $id
+ * @return type
+ * @throws CHttpException 
+ */
     private function carregarModeloMaterial($id) {
         if (($material = Material::model()->findByPk((int) $id)) === null) {
             throw new CHttpException(404, 'The requested page does not exist.');

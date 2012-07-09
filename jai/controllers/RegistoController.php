@@ -23,14 +23,14 @@
 /**
  * 
  */
-class LogsController extends AdministracaoController {
+class RegistoController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
 
     public function actionIndex() {
-        $filtroSms = new SMS('search');
+        $filtroSms = new Sms('search');
         $filtroEmail = new Email('search');
 
         $this->render('index', array(
@@ -40,7 +40,7 @@ class LogsController extends AdministracaoController {
     }
 
     public function actionSms() {
-        $filtro = new SMS('search');
+        $filtro = new Sms('search');
         $this->render('sms', array('filtro' => $filtro));
     }
 
@@ -66,7 +66,7 @@ class LogsController extends AdministracaoController {
     public function actionRemoverEmail($id) {
         
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -83,12 +83,15 @@ class LogsController extends AdministracaoController {
     }
 
     /**
-     * @param int $id
+     *
+     * @param integer $id
      * 
      * @return Email
+     * @throws CHttpException 
      */
     private function carregarModeloEmail($id) {
         if (($email = Email::model()->findByPk((int) $id)) === null) {
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 
@@ -96,12 +99,15 @@ class LogsController extends AdministracaoController {
     }
 
     /**
-     * @param int $id
+     *
+     * @param integer $id
      * 
-     * @return SMS 
+     * @return Sms
+     * @throws CHttpException 
      */
     private function carregarModeloSms($id) {
-        if (($sms = SMS::model()->findByPk((int) $id)) === null) {
+        if (($sms = Sms::model()->findByPk((int) $id)) === null) {
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 

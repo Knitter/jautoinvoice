@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class FuncionariosController extends AdministracaoController {
+class FuncionarioController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $filtro = new Funcionario('search');
@@ -39,14 +37,14 @@ class FuncionariosController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $funcionario = new Funcionario();
 
-        $this->performAjaxValidation('funcionario-form', $funcionario);
+        $this->validacaoAJAX('funcionario-form', $funcionario);
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
-            
+
             $funcionario->password = Funcionario::hash($funcionario->password);
             $funcionario->password2 = Funcionario::hash($funcionario->password2);
 
@@ -61,7 +59,7 @@ class FuncionariosController extends AdministracaoController {
     public function actionEditar($id) {
         $funcionario = $this->carregarModeloFuncionario($id);
 
-        $this->performAjaxValidation('funcionario-form', $funcionario);
+        $this->validacaoAJAX('funcionario-form', $funcionario);
 
         if (isset($_POST['Funcionario'])) {
             $funcionario->attributes = $_POST['Funcionario'];
@@ -120,8 +118,10 @@ class FuncionariosController extends AdministracaoController {
     }
 
     /**
-     * @param int $id
+     *
+     * @param type $id
      * @return Funcionario
+     * @throws CHttpException 
      */
     public function carregarModeloFuncionario($id) {
         if (($funcionario = Funcionario::model()->findByPk((int) $id)) === null) {
@@ -129,4 +129,5 @@ class FuncionariosController extends AdministracaoController {
         }
         return $funcionario;
     }
+
 }

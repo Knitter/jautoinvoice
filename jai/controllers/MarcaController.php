@@ -51,10 +51,10 @@ class MarcaController extends AdministracaoController {
         $this->render('editar', array('marca' => $marca));
     }
 
-    public function actionUpdate($id) {
+    public function actionEditar($id) {
         $marca = $this->carregarModeloMarca($id);
 
-        $this->performAjaxValidation('marca-form', $marca);
+        $this->validacaoAJAX('marca-form', $marca);
 
         if (isset($_POST['Marca'])) {
             $marca->attributes = $_POST['Marca'];
@@ -78,7 +78,8 @@ class MarcaController extends AdministracaoController {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
-public function accessRules() {
+
+    public function accessRules() {
         return array_merge(array(
                     array(
                         'deny',
@@ -93,8 +94,9 @@ public function accessRules() {
 
     /**
      *
-     * @param int $id
-     * @return Marca 
+     * @param type $id
+     * @return type
+     * @throws CHttpException 
      */
     private function carregarModelo($id) {
         if (($marca = Marca::model()->findByPk((int) $id)) === null) {
@@ -103,4 +105,5 @@ public function accessRules() {
         }
         return $marca;
     }
+
 }

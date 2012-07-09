@@ -1,4 +1,5 @@
 <?php
+
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
  * Copyright (c) 2012, Sérgio Lopes.
@@ -19,7 +20,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class CombustiveisController extends AdministracaoController {
+class CombustivelController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -36,10 +37,10 @@ class CombustiveisController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $combustivel = new Combustivel();
 
-        $this->performAjaxValidation('combustivel-form', $combustivel);
+        $this->validacaoAJAX('combustivel-form', $combustivel);
 
         if (isset($_POST['Combustivel'])) {
             $combustivel->attributes = $_POST['Combustivel'];
@@ -53,7 +54,7 @@ class CombustiveisController extends AdministracaoController {
     public function actionEditar($id) {
         $combustivel = $this->carregarModeloCombustivel($id);
 
-        $this->performAjaxValidation('combustivel-form', $combustivel);
+        $this->validacaoAJAX('combustivel-form', $combustivel);
 
         if (isset($_POST['Combustivel'])) {
             $combustivel->attributes = $_POST['Combustivel'];
@@ -78,7 +79,6 @@ class CombustiveisController extends AdministracaoController {
         }
     }
 
-    
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -94,8 +94,10 @@ class CombustiveisController extends AdministracaoController {
 
     /**
      *
-     * @param int $id
+     * @param type $id
+     * 
      * @return Combustivel
+     * @throws CHttpException 
      */
     private function carregarModeloCombustivel($id) {
         if (($combustivel = Combustivel::model()->findByPk((int) $id)) === null) {

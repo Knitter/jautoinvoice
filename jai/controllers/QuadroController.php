@@ -29,6 +29,11 @@ class QuadroController extends SistemaController {
         parent::__construct($id, $module);
     }
 
+    public function actionIndex() {
+        //TODO: not implemented yet, gráficos e informações úteis
+        $this->render('index');
+    }
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -45,16 +50,6 @@ class QuadroController extends SistemaController {
                         'actions' => array('index'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
-    }
-
-    public function actionIndex() {
-        //TODO: not implemented yet, gráficos e informações úteis
-        $this->render('index');
-    }
-
-    public function actionSair() {
-        //TODO: not implemented yet, logout.
-        $this->redirect(array('publico/index'));
     }
 
 }

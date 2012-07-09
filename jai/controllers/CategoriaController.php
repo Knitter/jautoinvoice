@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class CategoriasController extends AdministracaoController {
+class CategoriaController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $filtro = new Categoria('search');
@@ -39,10 +37,10 @@ class CategoriasController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $categoria = new Categoria();
 
-        $this->performAjaxValidation('categoria-form', $categoria);
+        $this->validacaoAJAX('categoria-form', $categoria);
 
         if (isset($_POST['Categoria'])) {
             $categoria->attributes = $_POST['Categoria'];
@@ -56,7 +54,7 @@ class CategoriasController extends AdministracaoController {
     public function actionEditar($id) {
         $categoria = $this->carregarModeloCategoria($id);
 
-        $this->performAjaxValidation('categoria-form', $categoria);
+        $this->validacaoAJAX('categoria-form', $categoria);
 
         if (isset($_POST['Categoria'])) {
             $categoria->attributes = $_POST['Categoria'];
@@ -80,7 +78,7 @@ class CategoriasController extends AdministracaoController {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -96,11 +94,14 @@ class CategoriasController extends AdministracaoController {
 
     /**
      *
-     * @param int $id
-     * @return Categoria 
+     * @param type $id
+     * 
+     * @return Categoria
+     * @throws CHttpException 
      */
-    private function carregarModelo($id) {
+    private function carregarModeloCategoria($id) {
         if (($categoria = Categoria::model()->findByPk((int) $id)) === null) {
+            //TODO: 
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $categoria;

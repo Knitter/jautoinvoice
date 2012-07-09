@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class FornecedoresController extends AdministracaoController {
+class FornecedorController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $filtro = new Fornecedor('search');
@@ -39,10 +37,10 @@ class FornecedoresController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $fornecedor = new Fornecedor();
 
-        $this->performAjaxValidation('fornecedor-form', $fornecedor);
+        $this->validacaoAJAX('fornecedor-form', $fornecedor);
 
         if (isset($_POST['Fornecedor'])) {
             $fornecedor->attributes = $_POST['Fornecedor'];
@@ -56,7 +54,7 @@ class FornecedoresController extends AdministracaoController {
     public function actionEditar($id) {
         $fornecedor = $this->carregarModeloFornecedor($id);
 
-        $this->performAjaxValidation('fornecedor-form', $fornecedor);
+        $this->validacaoAJAX('fornecedor-form', $fornecedor);
 
         if (isset($_POST['Fornecedor'])) {
             $fornecedor->attributes = $_POST['Fornecedor'];
@@ -116,7 +114,7 @@ class FornecedoresController extends AdministracaoController {
         echo json_encode($resultado);
         Yii::app()->end();
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -132,8 +130,9 @@ class FornecedoresController extends AdministracaoController {
 
     /**
      *
-     * @param int $id
-     * @return Fornecedor 
+     * @param type $id
+     * @return type
+     * @throws CHttpException 
      */
     private function carregarModeloFornecedor($id) {
         if (($fornecedor = Fornecedor::model()->findByPk((int) $id)) === null) {

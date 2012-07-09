@@ -24,7 +24,7 @@
  * Controlador pai para todos os controladores que fornecem as funcionalidades 
  * base da aplicação, acessível a todos os funcionários.
  */
-class SistemaController extends JAIController {
+class SistemaController extends JController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -32,32 +32,32 @@ class SistemaController extends JAIController {
         $this->menu = array(
             array(
                 'label' => 'Quadro',
-                'url' => $this->createUrl('/dashboard'),
+                'url' => $this->createUrl('/quadro'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/quadro.png',
             ),
             array(
                 'label' => 'Folhas de Obra',
-                'url' => $this->createUrl('/obras'),
+                'url' => $this->createUrl('/folhaobra'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/folhaobra.png',
             ),
             array(
                 'label' => 'Marcações',
-                'url' => $this->createUrl('/marcacoes'),
+                'url' => $this->createUrl('/marcacao'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/marcacoes.png',
             ),
             array(
                 'label' => 'Clientes',
-                'url' => $this->createUrl('/clientes'),
+                'url' => $this->createUrl('/cliente'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/cliente.png',
             ),
             array(
                 'label' => 'Administração',
-                'url' => $this->createUrl('/configuracoes'),
+                'url' => $this->createUrl('/configuracao'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/administracao.png',
             ),
             array(
                 'label' => 'Sair',
-                'url' => $this->createUrl('dashboard/sair'),
+                'url' => $this->createUrl('publico/sair'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/sair.png',
             )
         );

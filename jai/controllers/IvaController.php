@@ -26,8 +26,6 @@ class IvaController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
-    
-
     public function actionIndex() {
         $filtro = new IVA('search');
         $filtro->unsetAttributes();
@@ -39,10 +37,10 @@ class IvaController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $iva = new IVA();
 
-        $this->performAjaxValidation('iva-form', $iva);
+        $this->validacaoAJAX('iva-form', $iva);
 
         if (isset($_POST['Iva'])) {
             $iva->attributes = $_POST['Iva'];
@@ -56,7 +54,7 @@ class IvaController extends AdministracaoController {
     public function actionEditar($id) {
         $iva = $this->carregarModeloIVA($id);
 
-        $this->performAjaxValidation('iva-form', $iva);
+        $this->validacaoAJAX('iva-form', $iva);
 
         if (isset($_POST['Iva'])) {
             $iva->attributes = $_POST['Iva'];
@@ -80,7 +78,8 @@ class IvaController extends AdministracaoController {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
     }
-public function accessRules() {
+
+    public function accessRules() {
         return array_merge(array(
                     array(
                         'deny',
@@ -94,8 +93,10 @@ public function accessRules() {
     }
 
     /**
-     * @param int $id
-     * @return IVA
+     *
+     * @param type $id
+     * @return type
+     * @throws CHttpException 
      */
     private function carregarModeloIVA($id) {
         if (($iva = IVA::model()->findByPk((int) $id)) === null) {
@@ -104,4 +105,5 @@ public function accessRules() {
 
         return $iva;
     }
+
 }

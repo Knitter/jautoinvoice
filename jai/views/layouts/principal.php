@@ -14,13 +14,13 @@
         <script type="text/javascript" src="js/jquery.ui.1.8.17.min.js"></script>
         <script type="text/javascript" src="js/jai.all<?php echo (YII_DEBUG ? '' : '.min'); ?>.js"></script>
 
-        <title><?php echo $this->title; ?></title>
+        <title><?php echo $this->titulo; ?></title>
     </head>
     <body>
         <div class="container">
             <!-- THE MAIN MENU -->
             <?php
-            $this->widget('ext.JaiMenu', array(
+            $this->widget('ext.JMenu', array(
                 'items' => $this->menu,
                 'id' => 'menu'
             ));

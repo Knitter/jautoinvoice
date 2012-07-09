@@ -20,13 +20,12 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class ModelosController extends AdministracaoController {
+class ModeloController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
 
-    
     public function actionIndex() {
         $filtro = new Modelo('search');
         $filtro->unsetAttributes();
@@ -34,7 +33,7 @@ class ModelosController extends AdministracaoController {
         if (isset($_REQUEST['Modelo'])) {
             $filtro->attributes = $_REQUEST['Modelo'];
         }
-        
+
         $criteria = new CDbCriteria();
         $criteria->order = 'nome';
         $criteria->compare('activo', 1);
@@ -43,13 +42,13 @@ class ModelosController extends AdministracaoController {
         $this->render('index', array(
             'filtro' => $filtro,
             'marcas' => $marcas
-            ));
+        ));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $modelo = new Modelo();
 
-        $this->performAjaxValidation('modelo-form', $modelo);
+        $this->validacaoAJAX('modelo-form', $modelo);
 
         if (isset($_POST['Modelo'])) {
             $modelo->attributes = $_POST['Modelo'];
@@ -72,7 +71,7 @@ class ModelosController extends AdministracaoController {
     public function actionEditar($id) {
         $modelo = $this->carregarModeloModelo($id);
 
-        $this->performAjaxValidation('modelo-form', $modelo);
+        $this->validacaoAJAX('modelo-form', $modelo);
 
         if (isset($_POST['Modelo'])) {
             $modelo->attributes = $_POST['Modelo'];
@@ -121,8 +120,10 @@ class ModelosController extends AdministracaoController {
 
     /**
      *
-     * @param int $id
-     * @return Modelo 
+     * @param type $id
+     * @return Modelo
+     * 
+     * @throws CHttpException 
      */
     private function carregarModeloModelo($id) {
         if (($modelo = Modelo::model()->findByPk((int) $id)) === null) {

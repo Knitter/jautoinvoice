@@ -24,6 +24,7 @@ return array(
     'basePath' => dirname(__FILE__) . '/..',
     'name' => 'jAutoInvoice',
     'defaultController' => 'publico',
+    'sourceLanguage' => 'pt',
     'import' => array(
         'application.models.*',
         'application.components.*',

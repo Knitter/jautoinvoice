@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class ObrasController extends SistemaController {
+class FolhaObraController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $filtro = new FolhaObra('search');
@@ -48,10 +46,10 @@ class ObrasController extends SistemaController {
         ));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $folha = new FolhaObra();
 
-        $this->performAjaxValidation($folha, 'folhaobra-form');
+        $this->validacaoAJAX($folha, 'folhaobra-form');
 
         if (isset($_POST['FolhaObra'])) {
             $folha->attributes = $_POST['FolhaObra'];
@@ -127,7 +125,7 @@ class ObrasController extends SistemaController {
         $materiais = Material::model()->findAll($criteria);
 
         $this->render('editar', array(
-            'folhaObra' => $folha,
+            'folhaObra' => $folhaObra,
             'funcionarios' => $funcionarios,
             'servicos' => $servicos,
             'materiais' => $materiais
@@ -178,7 +176,7 @@ class ObrasController extends SistemaController {
         Yii::import('ext.fpdf.tFPDF');
         $pdf = new tFPDF();
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -196,8 +194,10 @@ class ObrasController extends SistemaController {
     }
 
     /**
-     * @param int $id
+     *
+     * @param type $id
      * @return FolhaObra
+     * @throws CHttpException 
      */
     private function carregarModeloFolhaObra($id) {
         if (($folha = FolhaObra::model()->findByPk((int) $id)) === null) {

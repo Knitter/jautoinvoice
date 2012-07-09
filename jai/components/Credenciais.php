@@ -52,8 +52,8 @@ class Credenciais extends CBaseUserIdentity {
                     $this->name = $cliente->nome;
                     $this->setState('tipo', 1);
 
-                    if (($sessao = DadosSessao::model()->find('idCliente = :id', array(':id' => $cliente->idCliente))) === null) {
-                        $sessao = new DadosSessao();
+                    if (($sessao = Sessao::model()->find('idCliente = :id', array(':id' => $cliente->idCliente))) === null) {
+                        $sessao = new Sessao();
                         $sessao->idCliente = $cliente->idCliente;
                     }
                 }
@@ -65,8 +65,8 @@ class Credenciais extends CBaseUserIdentity {
                     $this->name = $funcionario->nome;
                     $this->setState('tipo', ($funcionario->admin ? 3 : 2));
 
-                    if (($sessao = DadosSessao::model()->find('idFuncionario = :id', array(':id' => $funcionario->idFuncionario))) === null) {
-                        $sessao = new DadosSessao();
+                    if (($sessao = Sessao::model()->find('idFuncionario = :id', array(':id' => $funcionario->idFuncionario))) === null) {
+                        $sessao = new Sessao();
                         $sessao->idFuncionario = $funcionario->idFuncionario;
                     }
                 }

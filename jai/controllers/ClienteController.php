@@ -23,13 +23,11 @@
 /**
  * 
  */
-class ClientesController extends SistemaController {
+class ClienteController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $filtro = new Cliente('search');
@@ -42,10 +40,10 @@ class ClientesController extends SistemaController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $cliente = new Cliente();
 
-        $this->performAjaxValidation('cliente-form', $cliente);
+        $this->validacaoAJAX('cliente-form', $cliente);
 
         if (isset($_POST['Cliente'])) {
             $cliente->attributes = $_POST['Cliente'];
@@ -59,7 +57,7 @@ class ClientesController extends SistemaController {
     public function actionEditar($id) {
         $cliente = $this->carregarModeloCliente($id);
 
-        $this->performAjaxValidation('cliente-form', $cliente);
+        $this->validacaoAJAX('cliente-form', $cliente);
 
         if (isset($_POST['Cliente'])) {
             $cliente->attributes = $_POST['Cliente'];
@@ -161,7 +159,7 @@ class ClientesController extends SistemaController {
         echo json_encode($resultado);
         Yii::app()->end();
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -178,16 +176,19 @@ class ClientesController extends SistemaController {
     }
 
     /**
-     * @param int $id
+     *
+     * @param type $id
      * 
      * @return Cliente
+     * @throws CHttpException 
      */
-    private function carregarModelo($id) {
+    private function carregarModeloCliente($id) {
         if (($cliente = Cliente::model()->findByPk((int) $id)) === null) {
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 
         return $cliente;
-}
+    }
 
 }

@@ -23,30 +23,14 @@
 /**
  * 
  */
-class VeiculosController extends SistemaController {
+class VeiculoController extends SistemaController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
 
-    
-
-    /**
-     *
-     * @param type $id
-     * @return type
-     * 
-     * @throws CHttpException 
-     */
-    private function carregarModeloVeiculo($id) {
-        if (($veiculo = Veiculo::model()->findByPk((int) $id)) === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
-        }
-        return $veiculo;
-    }
-
     public function actionIndex() {
-        $this->redirect(array('/clientes'));
+        $this->redirect(array('/cliente'));
     }
 
     public function actionLista($id, $op = 'lista') {
@@ -63,11 +47,11 @@ class VeiculosController extends SistemaController {
         ));
     }
 
-    public function actionCriar($id, $op = 'lista') {
+    public function actionAdicionar($id, $op = 'lista') {
         $cliente = $this->carregarModeloCliente($id);
-        $veiculo = new Veiculo();
 
-        $this->performAjaxValidation('veiculo-form', $veiculo);
+        $veiculo = new Veiculo();
+        $this->validacaoAJAX('veiculo-form', $veiculo);
 
         if (isset($_POST['Veiculo'])) {
             $veiculo->attributes = $_POST['Veiculo'];
@@ -103,10 +87,9 @@ class VeiculosController extends SistemaController {
 
     public function actionEditar($idc, $idv, $op = 'lista') {
         $cliente = $this->carregarModeloCliente($idc);
-
         $veiculo = $this->carregarModeloVeiculo($idv);
 
-        $this->performAjaxValidation('veiculo-form', $veiculo);
+        $this->validacaoAJAX('veiculo-form', $veiculo);
 
         if (isset($_POST['Veiculo'])) {
             $veiculo->attributes = $_POST['Veiculo'];
@@ -192,8 +175,25 @@ class VeiculosController extends SistemaController {
      */
     private function carregarModeloCliente($id) {
         if (($cliente = Cliente::model()->findByPk((int) $id)) === null) {
+            //TODO:
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $cliente;
     }
+
+    /**
+     *
+     * @param integer $id
+     * 
+     * @return Veiculo
+     * @throws CHttpException 
+     */
+    private function carregarModeloVeiculo($id) {
+        if (($veiculo = Veiculo::model()->findByPk((int) $id)) === null) {
+            //TODO: 
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $veiculo;
+    }
+
 }

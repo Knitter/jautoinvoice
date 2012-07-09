@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class ConfiguracoesController extends AdministracaoController {
+class ConfiguracacoController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $configuracoes = array(
@@ -116,7 +114,7 @@ class ConfiguracoesController extends AdministracaoController {
 
         $this->redirect(array('/configuracoes'));
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(

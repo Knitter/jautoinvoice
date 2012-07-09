@@ -37,47 +37,47 @@ class AdministracaoController extends JController {
             ),
             array(
                 'label' => 'Configurações',
-                'url' => $this->createUrl('/configuracoes'),
+                'url' => $this->createUrl('/configuracao'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/configuracoes.png',
             ),
             array(
                 'label' => 'Funcionários',
-                'url' => $this->createUrl('/funcionarios'),
-                'icon' => Yii::app()->baseUrl . 'imagens/icones/funcionario.png',
+                'url' => $this->createUrl('/funcionario'),
+                'icon' => Yii::app()->baseUrl . 'imagens/icones/empregado.png',
             ),
             array(
                 'label' => 'Fornecedores',
-                'url' => $this->createUrl('/fornecedores'),
+                'url' => $this->createUrl('/fornecedor'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/fornecedor.png',
             ),
             array(
                 'label' => 'Material',
-                'url' => $this->createUrl('/stock'),
+                'url' => $this->createUrl('/material'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/material.png',
             ),
             array(
                 'label' => 'Serviços',
-                'url' => $this->createUrl('/servicos'),
+                'url' => $this->createUrl('/servico'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/servico.png',
             ),
             array(
                 'label' => 'Categorias',
-                'url' => $this->createUrl('/categorias'),
+                'url' => $this->createUrl('/categoria'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/categoria.png',
             ),
             array(
                 'label' => 'Combustíveis',
-                'url' => $this->createUrl('/combustiveis'),
+                'url' => $this->createUrl('/combustiveç'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/combustivel.png',
             ),
             array(
                 'label' => 'Marcas',
-                'url' => $this->createUrl('/marcas'),
+                'url' => $this->createUrl('/marca'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/marca.png',
             ),
             array(
                 'label' => 'Modelos',
-                'url' => $this->createUrl('/modelos'),
+                'url' => $this->createUrl('/modelo'),
                 'icon' => Yii::app()->baseUrl . 'imagens/icones/modelo.png',
             ),
             array(

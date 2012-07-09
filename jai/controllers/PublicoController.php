@@ -20,7 +20,7 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class PublicoController extends JaiController {
+class PublicoController extends JController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
@@ -74,6 +74,11 @@ class PublicoController extends JaiController {
             }
         }
         $this->render('entrar', array('formulario' => $formulario));
+    }
+
+    public function actionSair() {
+        //TODO: not implemented yet, logout.
+        $this->redirect(array('publico/index'));
     }
 
     public function actionErro() {

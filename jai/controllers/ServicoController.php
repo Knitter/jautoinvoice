@@ -20,13 +20,11 @@
  * http://sourceforge.net/projects/jautoinvoice
  */
 
-class ServicosController extends AdministracaoController {
+class ServicoController extends AdministracaoController {
 
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
     }
-
-    
 
     public function actionIndex() {
         $filtro = new Servico('search');
@@ -39,10 +37,10 @@ class ServicosController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
-    public function actionCriar() {
+    public function actionAdicionar() {
         $servico = new Servico();
 
-        $this->performAjaxValidation('servico-form', $servico);
+        $this->validacaoAJAX('servico-form', $servico);
 
         if (isset($_POST['Servico'])) {
             $servico->attributes = $_POST['Servico'];
@@ -58,7 +56,7 @@ class ServicosController extends AdministracaoController {
     public function actionEditar($id) {
         $servico = $this->carregarModeloServico($id);
 
-        $this->performAjaxValidation('servico-form', $servico);
+        $this->validacaoAJAX('servico-form', $servico);
 
         if (isset($_POST['Servico'])) {
             $servico->attributes = $_POST['Servico'];
@@ -99,7 +97,7 @@ class ServicosController extends AdministracaoController {
         echo json_encode($resultado);
         Yii::app()->end();
     }
-    
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -117,11 +115,14 @@ class ServicosController extends AdministracaoController {
 
     /**
      *
-     * @param int $id
-     * @return Servico 
+     * @param integer $id
+     * 
+     * @return Servico
+     * @throws CHttpException 
      */
     private function carregarModeloServico($id) {
         if (($servico = Servico::model()->findByPk((int) $id)) === null) {
+            //TODO: 
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $servico;
