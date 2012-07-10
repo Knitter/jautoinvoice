@@ -2,16 +2,17 @@
 <div id="titulo">
     <h2><?php echo $cliente->isNewRecord ? 'Criar' : 'Editar'; ?> Cliente</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/clientes'); ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('clientes/criar'); ?>"><img src="imagens/icones/cliente.adicionar.png" /></a>
-        <?php if (!$cliente->isNewRecord) { ?>
-            &nbsp;&nbsp;
-            <a href="<?php echo $this->createUrl('veiculos/lista', array('id' => $cliente->idCliente, 'op' => 'editar')); ?>"><img src="imagens/icones/veiculo.png" /></a>
-            &nbsp;&nbsp;
-            <a href="<?php echo $this->createUrl('clientes/rstpwd', array('id' => $cliente->idCliente, 'op' => 'editar')); ?>"><img src="imagens/icones/chave.png" /></a>
-        <?php } ?>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('cliente/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/cliente-adicionar.png'), $this->createUrl('cliente/adicionar'), array('class' => 'adicionar'));
+
+        if (!$cliente->isNewRecord) {
+            echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/veiculo.png'), $this->createUrl('veiculo/lista')),
+            CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/chave.png'), $this->createUrl('cliente/password'));
+        }
+        ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php

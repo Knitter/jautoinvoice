@@ -70,7 +70,7 @@ $form = $this->beginWidget('CActiveForm', array(
             <th class="small-column">Preço ( &euro; )</th>
             <th class="buttons-2">
                 <?php
-                echo CHtml::link(CHtml::image('imagens/icones/adicionar.png'), 'javascript:;', array(
+                echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/adicionar.png'), 'javascript:;', array(
                     'onclick' => 'adicionarLinhaServico();',
                     'value' => 'javascript:;'
                 ));
@@ -86,7 +86,7 @@ $form = $this->beginWidget('CActiveForm', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
     '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/obras'));
+    CHtml::link('Cancelar', $this->createUrl('/folhaobra'));
     ?>
 </div>
 

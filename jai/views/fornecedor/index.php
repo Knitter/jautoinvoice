@@ -4,10 +4,11 @@ $this->titulo = 'Fornecedores';
 
 <div id="titulo">
     <h2>Fornecedores</h2>
+    
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/fornecedor.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/fornecedor-adicionar.png'), $this->createUrl('fornecedor/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php
@@ -21,7 +22,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'nome',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->nome, array("fornecedores/editar", "id" => $data->idFornecedor))'
+            'value' => 'CHtml::link($data->nome, array("fornecedor/editar", "id" => $data->idFornecedor))'
         ),
         array(
             'class' => 'CButtonColumn',
@@ -48,11 +49,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/fornecedor-editar.png',
-                    'url' => 'Yii::app()->createUrl("fornecedores/editar", array("id" => $data->idFornecedor))'
+                    'url' => 'Yii::app()->createUrl("fornecedor/editar", array("id" => $data->idFornecedor))'
                 ),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/fornecedor-remover.png',
-                    'url' => 'Yii::app()->createUrl("fornecedores/apagar", array("id" => $data->idFornecedor))',
+                    'url' => 'Yii::app()->createUrl("fornecedor/apagar", array("id" => $data->idFornecedor))',
                 )
             ),
         ),
@@ -61,4 +62,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ?>
 
 <?php
-$this->renderPartial('//_common/_email', array('url' => $this->createUrl('fornecededores/email')));
+$this->renderPartial('//_comum/_email', array('url' => $this->createUrl('fornecededor/email')));

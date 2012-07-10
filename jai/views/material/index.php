@@ -20,12 +20,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'nome',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->nome, array("stock/editar", "id" => $data->idMaterial))'
+            'value' => 'CHtml::link($data->nome, array("material/editar", "id" => $data->idMaterial))'
         ),
         array(
             'name' => 'referencia',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->referencia, array("stock/editar", "id" => $data->idMaterial))',
+            'value' => 'CHtml::link($data->referencia, array("material/editar", "id" => $data->idMaterial))',
             'headerHtmlOptions' => array('class' => 'small-column')
         ),
         array(
@@ -38,11 +38,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/material-editar.png',
-                    'url' => 'Yii::app()->createUrl("stock/editar", array("id" => $data->idMaterial))',
+                    'url' => 'Yii::app()->createUrl("material/editar", array("id" => $data->idMaterial))',
                 ),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/material-remover.png',
-                    'url' => 'Yii::app()->createUrl("stock/apagar", array("id" => $data->idMaterial))',
+                    'url' => 'Yii::app()->createUrl("material/apagar", array("id" => $data->idMaterial))',
                 )
             ),
         ),

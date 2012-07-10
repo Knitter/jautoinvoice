@@ -2,9 +2,9 @@
 
 <div id="titulo">
     <h2>Folhas de Obra</h2>
+    
     <div id="opcoes">
-        <!-- <a href="<?php echo $this->createUrl('obras/modelo'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/impressora.png" /></a> -->
-        <a href="<?php echo $this->createUrl('obras/criar'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/resources/imagens/icones/folhaobra.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/folhaobra-adicionar.png'), $this->createUrl('folhaobra/adicionar')); ?>
     </div>
     <div class="clear"></div>
 </div>
@@ -39,10 +39,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
-                //'imprimir' => array(
-                //    'imageUrl' => 'imagens/icones/impressora.png',
-                //    'url' => 'Yii::app()->createUrl("obras/imprimir", array("id" => $data->idFolhaObra))',
-                //),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/folhaobra-editar.png',
                     'url' => 'Yii::app()->createUrl("obras/editar", array("id" => $data->idFolhaObra))',
@@ -52,7 +48,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     'url' => 'Yii::app()->createUrl("obras/apagar", array("id" => $data->idFolhaObra))',
                 )
             ),
-            //'template' => '{imprimir} {update} {delete}'
         ),
     ),
 ));

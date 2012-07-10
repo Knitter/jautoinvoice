@@ -160,6 +160,10 @@ class ClienteController extends SistemaController {
         Yii::app()->end();
     }
 
+    public function actionPassword() {
+        
+    }
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -168,9 +172,7 @@ class ClienteController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar',
-                            'email', 'sms'
-                        ),
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar', 'email', 'sms', 'password'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }

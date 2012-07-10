@@ -160,7 +160,7 @@ class VeiculoController extends SistemaController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'criar', 'editar', 'apagar',
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar',
                             'lista', 'acMatricula'
                         ),
                         'expression' => '$user->tipo > 1'

@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($marca, 'nome'),
     $form->textField($marca, 'nome', array('class' => 'medium-field', 'maxlength' => 100)),
@@ -14,13 +14,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($marca->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/marcas'));
+    CHtml::link('Cancelar', $this->createUrl('/marcas'), array('class' => 'cancelar'));
     ?>
 </p>
 

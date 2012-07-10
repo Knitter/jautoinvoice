@@ -75,7 +75,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
             <td></td>
             <td>
                 <?php
-                echo CHtml::link(CHtml::image('imagens/icones/adicionar.png'), 'javascript:;', array(
+                echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/adicionar.png'), 'javascript:;', array(
                     'onclick' => 'criarLinhaGasto();',
                     'id' => 'btnAdicionarLG'
                 ));

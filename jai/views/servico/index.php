@@ -32,11 +32,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/servico-editar.png',
-                    'url' => 'Yii::app()->createUrl("servicos/editar", array("id" => $data->idServico))',
+                    'url' => 'Yii::app()->createUrl("servico/editar", array("id" => $data->idServico))',
                 ),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/servico-remover.png',
-                    'url' => 'Yii::app()->createUrl("servicos/apagar", array("id" => $data->idServico))',
+                    'url' => 'Yii::app()->createUrl("servico/apagar", array("id" => $data->idServico))',
                 )
             ),
         ),

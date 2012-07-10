@@ -186,7 +186,7 @@ class FolhaObraController extends SistemaController {
                     array(
                         'allow',
                         'actions' => array(
-                            'index', 'criar', 'editar', 'apagar',
+                            'index', 'adicionar', 'editar', 'apagar',
                             'folhaDeMarcacao', 'modelo', 'imprimir'
                         ),
                         'expression' => '$user->tipo > 1'

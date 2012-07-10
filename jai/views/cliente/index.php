@@ -1,13 +1,12 @@
-<?php
-$this->titulo = 'Clientes';
-?>
+<?php $this->titulo = 'Clientes'; ?>
 
 <div id="titulo">
     <h2>Clientes</h2>
+
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('clientes/criar'); ?>"><img src="imagens/icones/cliente.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/cliente-adicionar.png'), $this->createUrl('cliente/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php
@@ -21,7 +20,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'nome',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->nome, array("clientes/editar", "id" => $data->idCliente))'
+            'value' => 'CHtml::link($data->nome, array("cliente/editar", "id" => $data->idCliente))'
         ),
         array(
             'name' => 'contribuinte',
@@ -39,12 +38,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'delete' => array('visible' => 'false'),
                 'email' => array(
                     'label' => 'Enviar e-mail',
-                    'imageUrl' => 'imagens/icones/email.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/email.png',
                     'url' => '"javascript:caixaEmail({$data->idCliente})";'
                 ),
                 'sms' => array(
                     'label' => 'Enviar SMS',
-                    'imageUrl' => 'imagens/icones/sms.png',
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/sms.png',
                     'url' => '"javascript:caixaSms({$data->idCliente})";'
                 )
             ),
@@ -59,17 +58,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/cliente-editar.png',
-                    'url' => 'Yii::app()->createUrl("clientes/editar", array("id" => $data->idCliente))'
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente-editar.png',
+                    'url' => 'Yii::app()->createUrl("cliente/editar", array("id" => $data->idCliente))'
                 ),
                 'delete' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/cliente-remover.png',
-                    'url' => 'Yii::app()->createUrl("clientes/apagar", array("id" => $data->idCliente))'
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente-remover.png',
+                    'url' => 'Yii::app()->createUrl("cliente/apagar", array("id" => $data->idCliente))'
                 ),
                 'carros' => array(
                     'label' => 'Veículos',
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/veiculo.png',
-                    'url' => 'Yii::app()->createUrl("veiculos/lista", array("id" => $data->idCliente, "op" => "lista"))'
+                    'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/veiculo.png',
+                    'url' => 'Yii::app()->createUrl("veiculo/lista", array("id" => $data->idCliente, "op" => "lista"))'
                 ),
             ),
             'template' => '{update} {delete} {carros}'
@@ -77,6 +76,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
 ));
 
-$this->renderPartial('//_common/_sms');
+$this->renderPartial('//_comum/_sms');
 
-$this->renderPartial('//_common/_email', array('url' => $this->createUrl('clientes/email')));
+$this->renderPartial('//_comum/_email', array('url' => $this->createUrl('cliente/email')));

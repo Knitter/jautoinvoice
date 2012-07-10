@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($servico, 'nome'),
     $form->textField($servico, 'nome', array('class' => 'long-field', 'maxlength' => 255)),
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($servico, 'preco'),
     $form->textField($servico, 'preco', array('class' => 'small-field')), '&nbsp;&euro;',
@@ -22,7 +22,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($servico, 'descricao'),
     $form->textArea($servico, 'descricao', array('rows' => 5, 'cols' => 76)),
@@ -30,12 +30,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
-    echo CHtml::submitButton($servico->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    CHtml::link('Cancelar', $this->createUrl('/servicos'));
+    CHtml::link('Cancelar', $this->createUrl('/servico'), array('class' => 'cancelar'));
     ?>
 </div>
 

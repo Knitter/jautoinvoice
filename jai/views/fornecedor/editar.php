@@ -4,18 +4,20 @@ $this->titulo = $fornecedor->isNewRecord ? 'Criar Fornecedor' : 'Editar ' . $for
 
 <div id="titulo">
     <h2><?php echo $fornecedor->isNewRecord ? 'Criar' : 'Editar'; ?> Fornecedor</h2>
+    
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/fornecedores'); ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('fornecedores/criar'); ?>"><img src="imagens/icones/fornecedor.adicionar.png" /></a>
-        <?php if (!$fornecedor->isNewRecord) { ?>
-            &nbsp;&nbsp;
-            <a href="javascript:caixaEmail(<?php echo $fornecedor->idFornecedor; ?>);"><img src="imagens/icones/email.png" /></a>
-        <?php } ?>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('fornecedor/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/fornecedor-adicionar.png'), $this->createUrl('fornecedor/adicionar'), array('class' => 'adicionar'));
+        if (!$fornecedor->isNewRecord) {
+            echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/email.png'), 'javascript:caixaEmail(' . $fornecedor->idFornecedor . ')');
+        }
+        ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear"></div>
 </div>
 
 <?php
 $this->renderPartial('_form', array('fornecedor' => $fornecedor));
 
-$this->renderPartial('//_common/_email', array('url' => $this->createUrl('fornecededores/email')));
+$this->renderPartial('//_comum/_email', array('url' => $this->createUrl('fornecedor/email')));

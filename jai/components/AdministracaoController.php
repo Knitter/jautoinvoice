@@ -67,7 +67,7 @@ class AdministracaoController extends JController {
             ),
             array(
                 'label' => 'Combustíveis',
-                'url' => $this->createUrl('/combustiveç'),
+                'url' => $this->createUrl('/combustivel'),
                 'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/combustivel.png',
             ),
             array(

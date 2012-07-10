@@ -4,7 +4,7 @@
     <h2>Categorias</h2>
 
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('categoria/adicionar'); ?>"><img src="imagens/icones/categoria-adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/categoria-adicionar.png'), $this->createUrl('categoria/adicionar')); ?>
     </div>
     <div class="clear"></div>
 </div>

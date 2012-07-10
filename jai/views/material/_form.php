@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($material, 'nome'),
     $form->textField($material, 'nome', array('class' => 'medium-field', 'maxlength' => 150)),
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($material, 'referencia'),
     $form->textField($material, 'referencia', array('class' => 'medium-field', 'maxlength' => 25)),
@@ -22,7 +22,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($material, 'precoUnitario'),
     $form->textField($material, 'precoUnitario', array('class' => 'small-field', 'maxlength' => 15)), '&nbsp;&euro;',
@@ -30,7 +30,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($material, 'quantidadeStock'),
     $form->textField($material, 'quantidadeStock', array('class' => 'small-field', 'maxlength' => 10)),
@@ -38,15 +38,15 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
-    echo $form->labelEx($material, 'idIVA'),
-    $form->dropDownList($material, 'idIVA', CHtml::listData($ivas, 'idIVA', 'descricao')),
-    $form->error($material, 'idIVA');
+    echo $form->labelEx($material, 'idIva'),
+    $form->dropDownList($material, 'idIva', CHtml::listData($ivas, 'idIva', 'descricao')),
+    $form->error($material, 'idIva');
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($material, 'descricao'),
     $form->textArea($material, 'descricao', array('rows' => 5, 'cols' => 76)),
@@ -54,7 +54,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($material, 'fornecedores'),
     $form->listBox($material, 'fornecedores', CHtml::listData($fornecedores, 'idFornecedor', 'nome')
@@ -63,13 +63,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
-    echo CHtml::submitButton($material->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/stock'));
+    CHtml::link('Cancelar', $this->createUrl('/material'), array('class' => 'cancelar'));
     ?>
 </div>
 

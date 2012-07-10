@@ -110,9 +110,7 @@ class FuncionarioController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array(
-                            'index', 'criar', 'editar', 'apagar', 'dadosJSON'
-                        ),
+                        'actions' => array('index', 'adicionar', 'editar', 'apagar', 'dadosJSON'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }

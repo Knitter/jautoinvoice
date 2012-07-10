@@ -1,7 +1,7 @@
 <?php
 $cs = Yii::app()->clientScript;
-$cs->registerCssFile('css/jquery.timepicker.min.css');
-$cs->registerScriptFile('js/jquery.timepicker.min.js');
+$cs->registerCssFile(Yii::app()->baseUrl . '/recursos/css/jquery.timepicker.min.css');
+$cs->registerScriptFile(Yii::app()->baseUrl . '/recursos/js/jquery.timepicker.min.js');
 
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id' => 'janelaMarcacao',

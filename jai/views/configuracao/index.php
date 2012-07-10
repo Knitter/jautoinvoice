@@ -3,7 +3,7 @@ $this->titulo = 'Configurações de Sistema';
 
 $cs = Yii::app()->clientScript;
 
-$cs->registerScriptFile('js/jquery.collapse.min.js');
+$cs->registerScriptFile(Yii::app()->baseUrl . '/recursos/js/jquery.collapse.min.js');
 $cs->registerScript('initTixa', '$("#tixa").collapse();');
 ?>
 <h2>Configurações de Sistema</h2>

@@ -2,15 +2,15 @@
 $this->titulo = 'Marcações';
 
 $cs = Yii::app()->clientScript;
-$cs->registerCssFile('css/fullcalendar.min.css');
-$cs->registerScriptFile('js/fullcalendar.min.js');
+$cs->registerCssFile(Yii::app()->baseUrl . '/recursos/css/fullcalendar.min.css');
+$cs->registerScriptFile(Yii::app()->baseUrl . '/recursos/js/fullcalendar.min.js');
 
 $js = <<<JS
-g.marcacoes.urls.calendario = '{$this->createUrl('marcacoes/eventos')}';
-g.marcacoes.urls.marcar = '{$this->createUrl('marcacoes/marcar')}';
-g.marcacoes.urls.actualizar = '{$this->createUrl('marcacoes/actualizar')}';
-g.marcacoes.urls.folha = '{$this->createUrl('obras/folhademarcacao')}';
-g.marcacoes.urls.cancelar = '{$this->createUrl('marcacoes/cancelar')}';
+g.marcacoes.urls.calendario = '{$this->createUrl('marcacao/eventos')}';
+g.marcacoes.urls.marcar = '{$this->createUrl('marcacao/marcar')}';
+g.marcacoes.urls.actualizar = '{$this->createUrl('marcacao/actualizar')}';
+g.marcacoes.urls.folha = '{$this->createUrl('folhaobra/folhademarcacao')}';
+g.marcacoes.urls.cancelar = '{$this->createUrl('marcacao/cancelar')}';
     
 g.marcacoes.urls.inicio = {$inicio};
 g.marcacoes.urls.fim = {$fim};

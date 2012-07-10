@@ -2,8 +2,10 @@
 <div id="titulo">
     <h2><?php echo $categoria->isNewRecord ? 'Criar' : 'Editar'; ?> Categoria</h2>
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('/categorias'); ?>"><img src="imagens/icones/voltar.png" /></a>&nbsp;&nbsp;
-        <a href="<?php echo $this->createUrl('categorias/criar'); ?>"><img src="imagens/icones/categoria.adicionar.png" /></a>
+        <?php
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('categoria/index'), array('class' => 'voltar')),
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/categoria-adicionar.png'), $this->createUrl('categoria/adicionar'), array('class' => 'adicionar'));
+        ?>
     </div>
     <div style="clear: both"></div>
 </div>

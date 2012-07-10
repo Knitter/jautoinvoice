@@ -1,10 +1,12 @@
 <?php $this->titulo = 'Funcionários'; ?>
+
 <div id="titulo">
     <h2>Funcionários</h2>
+    
     <div id="opcoes">
-        <a href="<?php echo $this->createUrl('funcionarios/criar'); ?>"><img src="imagens/icones/funcionario.adicionar.png" /></a>
+        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/empregado-adicionar.png'), $this->createUrl('funcionario/adicionar')); ?>
     </div>
-    <div style="clear: both"></div>
+    <div cçass="clear"></div>
 </div>
 
 <?php
@@ -18,7 +20,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'nome',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->nome, array("funcionarios/editar", "id" => $data->idFuncionario))'
+            'value' => 'CHtml::link($data->nome, array("funcionario/editar", "id" => $data->idFuncionario))'
         ),
         array(
             'name' => 'contribuinte',
@@ -33,12 +35,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'delete' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/funcionario-remover.png',
-                    'url' => 'Yii::app()->createUrl("funcionarios/apagar", array("id" => $data->idFuncionario))'
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/empregado-remover.png',
+                    'url' => 'Yii::app()->createUrl("funcionario/apagar", array("id" => $data->idFuncionario))'
                 ),
                 'update' => array(
-                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/funcionario-editar.png',
-                    'url' => 'Yii::app()->createUrl("funcionarios/editar", array("id" => $data->idFuncionario))',
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/empregado-editar.png',
+                    'url' => 'Yii::app()->createUrl("funcionario/editar", array("id" => $data->idFuncionario))',
                 ),
             ),
         ),

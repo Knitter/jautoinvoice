@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($combustivel, 'nome'),
     $form->textField($combustivel, 'nome', array('class' => 'medium-field', 'maxlength' => 100)),
@@ -14,12 +14,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($combustivel->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    CHtml::link('Cancelar', $this->createUrl('/combustiveis'), array('class' => 'cancel'));
+    CHtml::link('Cancelar', $this->createUrl('/combustiveis'), array('class' => 'cancelar'));
     ?>
 </div>
 

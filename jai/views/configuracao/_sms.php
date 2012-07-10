@@ -28,7 +28,11 @@
         </div>
     </fieldset>
     <div class="row">
-        <a href="javascript:;" onclick="actualizarCreditos('<?php echo $this->createUrl('configuracoes/vercreditossms'); ?>');"><img src="imagens/icones/actualizar.png" /></a>
-        Nr. Créditos Disponíveis <span id="creditosSMS"><?php echo $config->creditosLSMS; ?></span> 
+        <?php
+        $url = $this->createUrl('configuracoes/vercreditossms');
+
+        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/actualizar.png'), 'javascript:;', array('onclick' => "actualizarCreditos('{$url}');"));
+        ?>
+        Nr. Créditos Disponíveis <span id = "creditosSMS"><?php echo $config->creditosLSMS; ?></span> 
     </div>
 </div>

@@ -6,7 +6,7 @@
     <div id="opcoes">
         <?php
         echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('combustivel/index'), array('class' => 'voltar')),
-        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/modelo-adicionar.png'), $this->createUrl('combustivel/adicionar'), array('class' => 'adicionar'));
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/combustivel-adicionar.png'), $this->createUrl('combustivel/adicionar'), array('class' => 'adicionar'));
         ?>
     </div>
     <div class="clear"></div>
