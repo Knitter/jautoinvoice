@@ -19,7 +19,7 @@ $form = $this->beginWidget('CActiveForm', array(
     echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    CHtml::link('Cancelar', $this->createUrl('/combustiveis'), array('class' => 'cancelar'));
+    CHtml::link('Cancelar', $this->createUrl('combustivel/index'), array('class' => 'cancelar'));
     ?>
 </div>
 

@@ -15,6 +15,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'iva-grid',
     'dataProvider' => $filtro->search(),
     'filter' => $filtro,
+    'cssFile' => false,
     'summaryText' => 'A mostrar {start} - {end} de {count} registo(s).',
     'template' => '{items} {pager} {summary}',
     'columns' => array(

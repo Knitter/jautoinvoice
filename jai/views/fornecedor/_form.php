@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'nome'),
     $form->textField($fornecedor, 'nome', array('class' => 'medium-field', 'maxlength' => 255)),
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'email'),
     $form->textField($fornecedor, 'email', array('class' => 'medium-field', 'maxlength' => 255)),
@@ -22,7 +22,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'telefone'),
     $form->textField($fornecedor, 'telefone', array('maxlength' => 9)),
@@ -30,7 +30,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'telemovel'),
     $form->textField($fornecedor, 'telemovel', array('maxlength' => 9)),
@@ -38,7 +38,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'website'),
     $form->textField($fornecedor, 'website', array('class' => 'medium-field', 'maxlength' => 255)),
@@ -46,7 +46,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'morada'),
     $form->textField($fornecedor, 'morada', array('class' => 'long-field', 'maxlength' => 255)),
@@ -54,7 +54,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($fornecedor, 'notas'),
     $form->textArea($fornecedor, 'notas', array('cols' => 76, 'rows' => 5)),
@@ -62,13 +62,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($fornecedor->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/fornecedores'));
+    CHtml::link('Cancelar', $this->createUrl('fornecedor/index'), array('class' => 'cancelar'));
     ?>
 </div>
 

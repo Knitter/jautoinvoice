@@ -1,32 +1,54 @@
-<?php
-$this->titulo = 'Configurações de Sistema';
+<?php $this->titulo = 'Configurações de Sistema'; ?>
 
-$cs = Yii::app()->clientScript;
-
-$cs->registerScriptFile(Yii::app()->baseUrl . '/recursos/js/jquery.collapse.min.js');
-$cs->registerScript('initTixa', '$("#tixa").collapse();');
-?>
 <h2>Configurações de Sistema</h2>
 
-<div id="tixa">
+<?php
+$nim = array('nao' => 'Não', 'sim' => 'Sim');
+
+echo CHtml::form($this->createUrl('configuracao/gravar'));
+
+$this->widget('CTabView', array(
+    'tabs' => array(
+        'tab1' => array(
+            'title' => 'Introdução',
+            'view' => '_intro'
+        ),
+        'tab2' => array(
+            'title' => 'Geral',
+            'view' => '_geral',
+            'data' => array('config' => $config, 'nim' => $nim),
+        ),
+        'tab3' => array(
+            'title' => 'E-mail',
+            'view' => '_email',
+            'data' => array('config' => $config, 'nim' => $nim)
+        ),
+        'tab4' => array(
+            'title' => 'SMS',
+            'view' => '_sms',
+            'data' => array('config' => $config, 'nim' => $nim)
+        ),
+        'tab5' => array(
+            'title' => 'CMS',
+            'view' => '_cms',
+            'data' => array('config' => $config, 'nim' => $nim)
+        ),
+        'tab6' => array(
+            'title' => 'Suporte',
+            'view' => '_suporte',
+            'data' => array('config' => $config, 'nim' => $nim)
+        )
+        ))
+);
+?>
+
+<div class="linha accoes">
     <?php
-    $nim = array('nao' => 'Não', 'sim' => 'Sim');
-
-    echo CHtml::form($this->createUrl('configuracao/gravar'));
-
-    $this->renderPartial('_intro');
-    $this->renderPartial('_geral', array('config' => $config, 'nim' => $nim));
-    $this->renderPartial('_email', array('config' => $config, 'nim' => $nim));
-    $this->renderPartial('_sms', array('config' => $config, 'nim' => $nim));
-    $this->renderPartial('_suporte', array('config' => $config, 'nim' => $nim));
+    echo CHtml::submitButton('Gravar', array(
+        'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only',
+        'name' => 'save'
+    ));
     ?>
-    <div class="linha">
-        <?php
-        echo CHtml::submitButton('Gravar', array(
-            'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only',
-            'name' => 'save'
-        ));
-        ?>
-    </div>
-    <?php echo CHtml::endForm(); ?>
 </div>
+
+<?php echo CHtml::endForm(); ?>

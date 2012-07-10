@@ -25,6 +25,11 @@ class PublicoController extends JController {
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
 
+        $contactos = false;
+        if (($conf = Configuracao::model()->findByPk('mostrarPContacto')) !== null) {
+            $contactos = intval($conf->valor);
+        }
+
         $this->menu = array(
             array(
                 'label' => 'Início',
@@ -35,6 +40,7 @@ class PublicoController extends JController {
                 'label' => 'Contactos',
                 'url' => $this->createUrl('publico/contactos'),
                 'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/contactos.png',
+                'visible' => $contactos
             ),
             array(
                 'label' => 'Entrar',
@@ -43,7 +49,7 @@ class PublicoController extends JController {
                 'visible' => Yii::app()->user->isGuest
             ),
             array(
-                'label' => 'Dashboard',
+                'label' => 'Quadro',
                 'url' => $this->createUrl('/quadro'),
                 'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/quadro.png',
                 'visible' => !Yii::app()->user->isGuest
@@ -77,7 +83,8 @@ class PublicoController extends JController {
     }
 
     public function actionSair() {
-        //TODO: not implemented yet, logout.
+        Yii::app()->user->logout();
+
         $this->redirect(array('publico/index'));
     }
 

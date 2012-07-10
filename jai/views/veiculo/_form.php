@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'matricula'),
     $form->textField($veiculo, 'matricula'),
@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'dataRegisto');
 
@@ -27,7 +27,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'idCategoria'),
     $form->dropDownList($veiculo, 'idCategoria'
@@ -37,7 +37,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'idCombustivel'),
     $form->dropDownList($veiculo, 'idCombustivel'
@@ -47,7 +47,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'idModelo'),
     $form->dropDownList($veiculo, 'idModelo'
@@ -57,7 +57,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'nrChassis'),
     $form->textField($veiculo, 'nrChassis', array('size' => 25, 'maxlength' => 25)),
@@ -65,7 +65,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'cilindrada'),
     $form->textField($veiculo, 'cilindrada', array('size' => 25, 'maxlength' => 25)),
@@ -73,7 +73,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'nrMotor'),
     $form->textField($veiculo, 'nrMotor', array('size' => 25, 'maxlength' => 25)),
@@ -81,7 +81,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($veiculo, 'notas'),
     $form->textArea($veiculo, 'notas', array('rows' => 5, 'cols' => 76)),
@@ -89,13 +89,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($veiculo->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('veiculos/lista', array('id' => $cliente->idCliente, 'op' => $op)));
+    CHtml::link('Cancelar', $this->createUrl('veiculo/lista', array('id' => $cliente->idCliente, 'op' => $op)), array('class' => 'cancelar'));
     ?>
 </div>
 

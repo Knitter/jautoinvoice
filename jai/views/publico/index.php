@@ -1,2 +1,3 @@
-<?php $this->titulo = 'jAutoInvoice'; ?>
-//TODO: por implementar
+<?php 
+
+$this->titulo = 'jAutoInvoice';

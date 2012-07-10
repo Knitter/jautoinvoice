@@ -63,12 +63,12 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="linha">
+<div class="linha accoes">
     <?php
     echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    CHtml::link('Cancelar', $this->createUrl('/material'), array('class' => 'cancelar'));
+    CHtml::link('Cancelar', $this->createUrl('material/index'), array('class' => 'cancelar'));
     ?>
 </div>
 

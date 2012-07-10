@@ -261,6 +261,7 @@ h2 {
     margin-bottom: 5px;
     background: #FFFFFF;
     border: 1px solid #C9E0ED;
+    position: relative;
 }
 
 #footer {
@@ -301,6 +302,14 @@ h2 {
 
 #opcoes img {
     vertical-align: middle;
+}
+
+#opcoes a {
+    margin-right: 1em;
+}
+
+#opcoes a:last-child {
+    margin-right: 0;
 }
 
 .small-column {
@@ -377,25 +386,24 @@ span.required {
     width: 50em;
 }
 
-/* SERVICE DETAILS */
-/*.coluna-gastos {
-    padding-left: 2em;
-}*/
-
-input[type="image"] {
-    border: none;
+.cancelar {
+    margin-left: 15px;
+    color: #900;
 }
 
-.buttons-2 {
-    width: 8em;
+a.cancelar:hover {
+    color: #F00;
 }
 
-.buttons-3 {
-    width: 12em;
+.accoes {
+    position: absolute;
+    bottom: 0;
+    margin-left: 15px;
 }
+
 
 /*DASHBOARD*/
-/*#coluna-1, #coluna-2 {
+#coluna-1, #coluna-2 {
     min-height: 30px;
     text-align:center;
 }
@@ -410,8 +418,6 @@ input[type="image"] {
     height: 25px;    
     cursor: move; 
     text-align: left;
-    /*TODO:
-    background: lightgoldenrodyellow;
 }        
 
 .widget-body {
@@ -426,19 +432,6 @@ input[type="image"] {
 }
 
 .ui-sortable-placeholder * { visibility: hidden; }
-*/
-
-/* SETTINGS */
-/*#tixa h3 {
-    padding-left: 24px;
-    background-image: url(../imagens/icones/item.mais.png);
-    background-repeat: no-repeat;
-    background-position: -5px;
-}
-
-#tixa h3.active {
-    background-image: url(../imagens/icones/item.menos.png);
-}*/
 
 /*SPRITE INFO*/
 .sprite { background-image: url(../imagens/sprite.png); }
@@ -511,3 +504,103 @@ input[type="image"] {
 .sprite-vat-edit{ background-position: -164px -1476px; width: 32px; height: 32px; } 
 .sprite-vat-remove{ background-position: -164px -1558px; width: 32px; height: 32px; } 
 .sprite-vat{ background-position: -164px -1640px; width: 32px; height: 32px; } 
+
+/**/
+.grid-view-loading {
+    /*background:url(loading.gif) no-repeat;*/
+}
+
+.grid-view {
+    padding: 15px 0;
+}
+
+.grid-view table.items {
+    background: white;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px #D0E3EF solid;
+}
+
+.grid-view table.items th, .grid-view table.items td {
+    font-size: 0.9em;
+    border: 1px white solid;
+    padding: 0.3em;
+}
+
+.grid-view table.items th {
+    color: white;
+    /*background: url("bg.gif") repeat-x scroll left top white;*/
+    text-align: center;
+}
+
+.grid-view table.items th a {
+    color: #EEE;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.grid-view table.items th a:hover {
+    color: #FFF;
+}
+
+.grid-view table.items th a.asc {
+    /*background:url(up.gif) right center no-repeat;*/
+    padding-right: 10px;
+}
+
+.grid-view table.items th a.desc {
+    /*background:url(down.gif) right center no-repeat;*/
+    padding-right: 10px;
+}
+
+.grid-view table.items tr.even {
+    background: #F8F8F8;
+}
+
+.grid-view table.items tr.odd {
+    background: #E5F1F4;
+}
+
+.grid-view table.items tr.selected {
+    background: #BCE774;
+}
+
+.grid-view table.items tr:hover {
+    background: #ECFBD4;
+}
+
+.grid-view .link-column img {
+    border: 0;
+}
+
+.grid-view .button-column {
+    text-align: center;
+    width: 60px;
+}
+
+.grid-view .button-column img {
+    border: 0;
+}
+
+.grid-view .checkbox-column {
+    width: 15px;
+}
+
+.grid-view .summary {
+    margin: 0 0 5px 0;
+    text-align: right;
+}
+
+.grid-view .pager {
+    margin: 5px 0 0 0;
+    text-align: right;
+}
+
+.grid-view .empty {
+    font-style: italic;
+}
+
+.grid-view .filters input, .grid-view .filters select {
+    width: 100%;
+    border: 1px solid #ccc;
+}

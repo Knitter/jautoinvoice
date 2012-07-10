@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($folhaObra, 'matricula');
     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
@@ -22,7 +22,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($folhaObra, 'data');
 
@@ -35,7 +35,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($folhaObra, 'kms'),
     $form->textField($folhaObra, 'kms', array('class' => 'small-field')),
@@ -43,7 +43,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($folhaObra, 'idFuncionario'),
     $form->dropDownList($folhaObra, 'idFuncionario', CHtml::listData($funcionarios, 'idFuncionario', 'nome')),
@@ -51,10 +51,10 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($folhaObra, 'descricaoAvaria'),
-    $form->textArea($folhaObra, 'descricaoAvaria', array('rows' => 5, 'cols' => 76)),
+    $form->textArea($folhaObra, 'descricaoAvaria', array('linhas' => 5, 'cols' => 76)),
     $form->error($folhaObra, 'descricaoAvaria');
     ?>
 </div>
@@ -80,13 +80,12 @@ $form = $this->beginWidget('CActiveForm', array(
     </table>
 </fieldset>
 
-<div class="row">
+<div class="linha">
     <?php
-    echo CHtml::submitButton($folhaObra->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('/folhaobra'));
+    CHtml::link('Cancelar', $this->createUrl('folhaobra/index'), array('class' => 'cancelar'));
     ?>
 </div>
 
