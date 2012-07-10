@@ -1,6 +1,6 @@
 <?php
 
-define('TEST_BASE_URL', 'http://localhost/jai/index-test.php/');
+define('TEST_BASE_URL', 'http://localhost/www/jai/index-test.php/');
 
 class WebTestCase extends CWebTestCase {
 
