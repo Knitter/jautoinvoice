@@ -1,36 +1,93 @@
-+ 
-    Desconto por material
-    Desconto por factura
-    Fotos do material
-    Ícone de aviso quando não é possível criar elementos por falta de dependentes
+Notas de Desenvolvimento
+========================
 
-?
-    IVA no serviço
-    Notas de serviços/folhas precisam de mais caracteres?
+Ideias
+------
 
+Registos
+    - Exportação de registos para arquivo
 
-Done:
+Geral
+    - Desconto por material
+    - Desconto total por factura
+    - Fotos/Imagens da peça/material
+    - Ícone de aviso quando não é possível criar elementos por falta de dependentes
+    - Importar modelos e marcas de automóveis automaticamente ou através de ficheiros com updates
 
-    Registos
-    Taxas de Iva
-    Modelos
-    Marcas
-    Combustiveis
-    Categorias
-    Serviços
-    Material
-    Fornecedores
-    Funcionários
-    Configurações
-    Clientes
-    Marcações
-    Folhas de Obra
-    Quadro
-    Contactos
-    Início
-    Sobre
+Confirmar
+---------
 
-Visual:
-    Logótipo
-    Css das tabelas
-    Títulos de listas e formulários
+Necessidade de IVA no serviço
+Notas de serviços/folhas precisam de mais caracteres?
+
+Revisão de Funcionalidades
+--------------------------
+
+Registos
+    - Criação automática de registos de envio de e-mails e de sms
+    - Listagem de registos
+    - Vizualização de detalhes de registo
+    - Remoção de registos específicos
+    
+Taxas de Iva
+    - CRUD de taxas de IVA
+
+Modelos
+    - CRUD de modelos de automóveis
+
+Marcas
+    - CRUD de marcas de automóveis
+
+Combustíveis
+    - CRUD de combustíveis
+
+Categorias
+    - CRUD de categorias de veículos
+
+Serviços
+    - CRUD de serviços
+
+Material
+    - CRUD de material
+
+Fornecedores
+    - CRUD de fornecedores
+    - Contactar fornecedores através de e-mail
+
+Funcionários
+    - CRUD de funcionários
+    - Reset à password do funcionário
+
+Clientes
+    - CRUD de clientes
+    - Acesso a veículos do cliente
+    - CRUD de veívulos
+    - Reset à password do cliente
+    - Contactar cliente por e-mail e por SMS
+
+Marcações
+    - ?
+Folhas de Obra
+    - ?
+Quadro
+    - ?
+
+Páginas
+    - Contactos
+    - Início
+    - Sobre
+    - Créditos no footer para ícones
+
+Outros
+    - Logótipo
+    - CSS para tabelas
+    - CSS para formulários
+    - CSS geral para listagens, texto longo, links, etc.
+
+Configurações
+    - Configurações gerais
+    - Dados da empresa
+    - Dados da página de contactos
+    - Configurações de e-mails
+    - Configurações de SMSs
+    - Opções de suporte

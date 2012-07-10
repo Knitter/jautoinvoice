@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo $form->labelEx($cliente, 'nome'),
     $form->textField($cliente, 'nome', array('class' => 'medium-field', 'maxlength' => 255)),
@@ -14,43 +14,42 @@ $form = $this->beginWidget('CActiveForm', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo $form->labelEx($cliente, 'email'); ?>
     <?php echo $form->textField($cliente, 'email', array('class' => 'medium-field', 'maxlength' => 255)); ?>
     <?php echo $form->error($cliente, 'email'); ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo $form->labelEx($cliente, 'contribuinte'); ?>
     <?php echo $form->textField($cliente, 'contribuinte', array('maxlength' => 9)); ?>
     <?php echo $form->error($cliente, 'contribuinte'); ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo $form->labelEx($cliente, 'telefone'); ?>
     <?php echo $form->textField($cliente, 'telefone', array('maxlength' => 9)); ?>
     <?php echo $form->error($cliente, 'telefone'); ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo $form->labelEx($cliente, 'telemovel'); ?>
     <?php echo $form->textField($cliente, 'telemovel', array('maxlength' => 9)); ?>
     <?php echo $form->error($cliente, 'telemovel'); ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo $form->labelEx($cliente, 'morada'); ?>
     <?php echo $form->textField($cliente, 'morada', array('class' => 'long-field', 'maxlength' => 255)); ?>
     <?php echo $form->error($cliente, 'morada'); ?>
 </div>
 
-<div class="row">
+<div class="linha accoes">
     <?php
-    echo CHtml::submitButton($cliente->isNewRecord ? 'Criar' : 'Gravar', array(
+    echo CHtml::submitButton('Gravar', array(
         'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'
     )),
-    '&nbsp;&nbsp;&nbsp;',
-    CHtml::link('Cancelar', $this->createUrl('clientes/index'));
+    CHtml::link('Cancelar', $this->createUrl('cliente/index'), array('class' => 'cancelar'));
     ?>
 </div>
 
