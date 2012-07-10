@@ -12,7 +12,7 @@ $cs->registerScript('initTixa', '$("#tixa").collapse();');
     <?php
     $nim = array('nao' => 'Não', 'sim' => 'Sim');
 
-    echo CHtml::form($this->createUrl('configuracoes/gravar'));
+    echo CHtml::form($this->createUrl('configuracao/gravar'));
 
     $this->renderPartial('_intro');
     $this->renderPartial('_geral', array('config' => $config, 'nim' => $nim));
@@ -20,7 +20,7 @@ $cs->registerScript('initTixa', '$("#tixa").collapse();');
     $this->renderPartial('_sms', array('config' => $config, 'nim' => $nim));
     $this->renderPartial('_suporte', array('config' => $config, 'nim' => $nim));
     ?>
-    <div class="row">
+    <div class="linha">
         <?php
         echo CHtml::submitButton('Gravar', array(
             'class' => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only',

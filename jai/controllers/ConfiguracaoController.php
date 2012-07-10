@@ -112,7 +112,7 @@ class ConfiguracaoController extends AdministracaoController {
             }
         }
 
-        $this->redirect(array('/configuracoes'));
+        $this->redirect(array('/configuracao'));
     }
 
     public function accessRules() {
