@@ -9,7 +9,7 @@ $this->titulo = $fornecedor->isNewRecord ? 'Criar Fornecedor' : 'Editar ' . $for
         <?php
         echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $this->createUrl('fornecedor/index'), array('class' => 'voltar')),
         CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/fornecedor-adicionar.png'), $this->createUrl('fornecedor/adicionar'), array('class' => 'adicionar'));
-        if (!$fornecedor->isNewRecord) {
+        if (!$fornecedor->isNewRecord && $fornecedor->email != null) {
             echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/email.png'), 'javascript:caixaEmail(' . $fornecedor->idFornecedor . ')');
         }
         ?>

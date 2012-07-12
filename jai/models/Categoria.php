@@ -71,7 +71,7 @@ class Categoria extends CActiveRecord {
         $criteria->compare('nome', $this->nome, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Categoria', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',

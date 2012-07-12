@@ -22,7 +22,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'descricao',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->descricao, array("iva/editar", "id" => $data->idIVA))'
+            'value' => 'CHtml::link($data->descricao, array("iva/editar", "id" => $data->idIva))'
         ),
         array(
             'name' => 'percentagem',
@@ -33,7 +33,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),

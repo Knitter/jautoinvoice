@@ -138,7 +138,7 @@ class FolhaObraController extends SistemaController {
 
     public function actionFolhaDeMarcacao($id) {
         if (($marcacao = Marcacao::model()->findByPk((int) $id)) === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
 
         $folhaObra = new FolhaObra();
@@ -201,7 +201,7 @@ class FolhaObraController extends SistemaController {
      */
     private function carregarModeloFolhaObra($id) {
         if (($folha = FolhaObra::model()->findByPk((int) $id)) === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $folha;
     }

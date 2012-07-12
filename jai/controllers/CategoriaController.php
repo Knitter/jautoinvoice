@@ -75,7 +75,7 @@ class CategoriaController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
@@ -101,8 +101,7 @@ class CategoriaController extends AdministracaoController {
      */
     private function carregarModeloCategoria($id) {
         if (($categoria = Categoria::model()->findByPk((int) $id)) === null) {
-            //TODO: 
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $categoria;
     }

@@ -21,23 +21,23 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'nome',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->nome, array("marcas/editar", "id" => $data->idMarca))'
+            'value' => 'CHtml::link($data->nome, array("marca/editar", "id" => $data->idMarca))'
         ),
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/marca-editar.png',
-                    'url' => 'Yii::app()->createUrl("marcas/editar", array("id" => $data->idMarca))',
+                    'url' => 'Yii::app()->createUrl("marca/editar", array("id" => $data->idMarca))',
                 ),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/marca-remover.png',
-                    'url' => 'Yii::app()->createUrl("marcas/apagar", array("id" => $data->idMarca))'
+                    'url' => 'Yii::app()->createUrl("marca/apagar", array("id" => $data->idMarca))'
                 )
             ),
         ),

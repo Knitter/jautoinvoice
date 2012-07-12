@@ -30,7 +30,7 @@ class VeiculoController extends SistemaController {
     }
 
     public function actionIndex() {
-        $this->redirect(array('/cliente'));
+        $this->redirect(array('cliente/index'));
     }
 
     public function actionLista($id, $op = 'lista') {
@@ -38,6 +38,7 @@ class VeiculoController extends SistemaController {
 
         $filtro = new Veiculo('search');
         $filtro->unsetAttributes();
+        
         $filtro->idCliente = $cliente->idCliente;
 
         $this->render('lista', array(
@@ -131,12 +132,12 @@ class VeiculoController extends SistemaController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
     //TODO: limitar a pedidos AJAX
-    public function actionAcMatricula() {
+    public function actionMatricula() {
         $criteria = new CDbCriteria();
         $criteria->order = 'matricula';
         $criteria->compare('matricula', $_GET['term'], true);
@@ -148,7 +149,6 @@ class VeiculoController extends SistemaController {
         }
 
         echo json_encode($veiculos);
-
         Yii::app()->end();
     }
 
@@ -161,7 +161,7 @@ class VeiculoController extends SistemaController {
                     array(
                         'allow',
                         'actions' => array('index', 'adicionar', 'editar', 'apagar',
-                            'lista', 'acMatricula'
+                            'lista', 'matricula'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
@@ -175,8 +175,7 @@ class VeiculoController extends SistemaController {
      */
     private function carregarModeloCliente($id) {
         if (($cliente = Cliente::model()->findByPk((int) $id)) === null) {
-            //TODO:
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $cliente;
     }
@@ -190,8 +189,7 @@ class VeiculoController extends SistemaController {
      */
     private function carregarModeloVeiculo($id) {
         if (($veiculo = Veiculo::model()->findByPk((int) $id)) === null) {
-            //TODO: 
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $veiculo;
     }

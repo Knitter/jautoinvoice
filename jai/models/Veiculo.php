@@ -115,7 +115,7 @@ class Veiculo extends CActiveRecord {
 
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Veiculo', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'matricula ASC',

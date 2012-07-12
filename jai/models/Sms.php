@@ -83,7 +83,7 @@ class Sms extends CActiveRecord {
         $criteria->compare('idFuncionario', $this->idFuncionario);
         $criteria->compare('data', $this->data);
 
-        return new CActiveDataProvider('SMS', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'data DESC',

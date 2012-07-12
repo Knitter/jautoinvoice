@@ -78,7 +78,7 @@ class ClienteController extends SistemaController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
@@ -160,8 +160,38 @@ class ClienteController extends SistemaController {
         Yii::app()->end();
     }
 
-    public function actionPassword() {
-        
+    public function actionPassword($id) {
+        $cliente = $this->carregarModeloCliente($id);
+
+        if ($utilizador->email) {
+            if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null
+                    && $enderecoEmail->valor != '') {
+
+                Yii::import('ext.email.*');
+
+                $nome = 'jAutoInvoice';
+                $config = Configuracao::model()->findByPk('nome');
+                if ($config && $config->valor != '') {
+                    $nome = $config->valor;
+                }
+
+                try {
+                    //TODO: validate
+                    $pass = Cliente::hash($this->random());
+                    $email = new Email($cliente->nome, $cliente->email, $nome, $enderecoEmail->valor, 'Nova password',
+                                    sprintf('A sua password de acesso ao sistema %s foi alterada para %s', $nome, $pass));
+
+                    $email->enviar();
+
+                    $utilizador->password = $pass;
+                    $utilizador->save();
+                } catch (Exception $ex) {
+                    //TODO: mostrar mensagem de erro
+                }
+            }
+        }
+
+        $this->redirect(array('cliente/editar', 'id' => $id));
     }
 
     public function accessRules() {
@@ -186,11 +216,22 @@ class ClienteController extends SistemaController {
      */
     private function carregarModeloCliente($id) {
         if (($cliente = Cliente::model()->findByPk((int) $id)) === null) {
-            //TODO:
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
 
         return $cliente;
+    }
+
+    private function random($size = 9) {
+        $password = '';
+        $data = array('aeioubcdfghjklmnpqrstvwxyz', '1234567890', '+#&@');
+        for ($i = 0; $i < $size; $i++) {
+            $password .= $data[$index = rand(0, 2)][($index % 2 == 0) ?
+                            strtoupper(rand(0, strlen($data[$index]))) :
+                            rand(0, strlen($data[$index]))];
+        }
+
+        return $password;
     }
 
 }

@@ -27,7 +27,7 @@ class MaterialController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Lista de todas as peças activas, com pesquisa.
      */
     public function actionIndex() {
         $filtro = new Material('search');
@@ -41,7 +41,7 @@ class MaterialController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Permite adicionar uma nova peça.
      */
     public function actionAdicionar() {
         $material = new Material();
@@ -51,12 +51,14 @@ class MaterialController extends AdministracaoController {
         if (isset($_POST['Material'])) {
             $material->attributes = $_POST['Material'];
             if ($material->save()) {
-                foreach ($_POST['Material']['fornecedores'] as $fornecedor) {
-                    $mf = new MaterialFornecedor();
-                    $mf->idMaterial = $material->idMaterial;
-                    $mf->idFornecedor = (int) $fornecedor;
+                if (isset($_POST['Material']['fornecedores']) && count($_POST['Material']['fornecedores'])) {
+                    foreach ($_POST['Material']['fornecedores'] as $fornecedor) {
+                        $mf = new MaterialFornecedor();
+                        $mf->idMaterial = $material->idMaterial;
+                        $mf->idFornecedor = (int) $fornecedor;
 
-                    $mf->save();
+                        $mf->save();
+                    }
                 }
 
                 $this->redirect(array('editar', 'id' => $material->idMaterial));
@@ -79,8 +81,9 @@ class MaterialController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id 
+     * Permite a edição de peças existentes.
+     * 
+     * @param integer $id ID do registo a editar.
      */
     public function actionEditar($id) {
         $material = $this->carregarModeloMaterial($id);
@@ -92,13 +95,15 @@ class MaterialController extends AdministracaoController {
             if ($material->save()) {
                 MaterialFornecedor::model()->deleteAll('idMaterial = :id', array(':id' => $material->idMaterial));
 
-                foreach ($_POST['Material']['fornecedores'] as $fornecedor) {
-                    if ($fornecedor) {
-                        $mf = new MaterialFornecedor();
-                        $mf->idMaterial = $material->idMaterial;
-                        $mf->idFornecedor = (int) $fornecedor;
+                if (isset($_POST['Material']['fornecedores']) && count($_POST['Material']['fornecedores'])) {
+                    foreach ($_POST['Material']['fornecedores'] as $fornecedor) {
+                        if ($fornecedor) {
+                            $mf = new MaterialFornecedor();
+                            $mf->idMaterial = $material->idMaterial;
+                            $mf->idFornecedor = (int) $fornecedor;
 
-                        $mf->save();
+                            $mf->save();
+                        }
                     }
                 }
                 $this->redirect(array('editar', 'id' => $material->idMaterial));
@@ -121,9 +126,9 @@ class MaterialController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id
+     * Remove um registo.
      * 
+     * @param integer $id ID do registo a remover
      * @throws CHttpException 
      */
     public function actionApagar($id) {
@@ -136,12 +141,12 @@ class MaterialController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
     /**
-     * 
+     * Devolve os dados de um registo em formato JSON.
      */
     public function actionDadosJSON() {
         $resultado = (object) array('sucesso' => 0);
@@ -164,8 +169,9 @@ class MaterialController extends AdministracaoController {
     }
 
     /**
-     *
-     * @return array
+     * Regras de acesso às acções do controlador.
+     * 
+     * @return array Lista de regras de acesso.
      */
     public function accessRules() {
         return array_merge(array(
@@ -183,16 +189,16 @@ class MaterialController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id
+     * Carrega um registo de material a partir da base de dados.
      * 
-     * @return Material
+     * @param integer $id ID do registo a carregar.
+     * 
+     * @return Material Registo de material encontrado.
      * @throws CHttpException 
      */
     private function carregarModeloMaterial($id) {
         if (($material = Material::model()->findByPk((int) $id)) === null) {
-            //TODO:
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
 
         return $material;

@@ -241,14 +241,12 @@ function caixaSms(idCliente) {
     $("#idClienteSms").val(idCliente);
     
     $("#smsForm").dialog("open");
-    return false;
 }
 
 function caixaEmail(idDestinatario) {
     $("#idDestinatario").val(idDestinatario);
     
     $("#emailForm").dialog("open");
-    return false;
 }
 
 function enviarEmail(url) {
@@ -259,13 +257,13 @@ function enviarEmail(url) {
         data: {
             assunto: $('#assunto').val(),
             mensagem: $('#mensagem').val(),
-            cliente: $('#idDestinatario').val()
+            destinatario: $('#idDestinatario').val()
         },
         success: function(json){
             if(json.sucesso) {
                 alert('Mensagem enviada.');
             } else {
-                alert(json.motivo ? json.motivo : 'Não foi possível enviar o e-mail.');
+                alert(json.motivo ? json.motivo : 'Não foi possível enviar o e-mail. Por favor tente mais tarde.');
             }
         },
         complete: function() {
@@ -287,7 +285,7 @@ function enviarSMS(url) {
             if(json.sucesso) {
                 alert('Mensagem enviada.');
             } else {
-                alert(json.motivo ? json.motivo : 'Não foi possível enviar a mensagem.');
+                alert(json.motivo ? json.motivo : 'Não foi possível enviar a mensagem. Por favor tente mais tarde.');
             }
         },
         complete: function() {

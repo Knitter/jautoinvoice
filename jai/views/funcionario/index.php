@@ -31,7 +31,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),

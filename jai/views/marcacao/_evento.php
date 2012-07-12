@@ -28,19 +28,19 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Descricao', 'descricaoEvento'),
     CHtml::textField('descricaoEvento', null, array('class' => 'medium-field', 'maxlength' => 150));
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Matrícula', 'matriculaEvento');
     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
         'name' => 'matriculaEvento',
-        'sourceUrl' => $this->createUrl('marcacoes/acmatricula'),
+        'sourceUrl' => $this->createUrl('marcacao/matricula'),
         'options' => array(
             'minLength' => '3'
         )
@@ -48,7 +48,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ?>
 </div>
 
-<div class = "row">
+<div class = "linha">
     <?php
     echo CHtml::label('Data', 'dataEvento');
 
@@ -61,14 +61,14 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Hora', 'horaEvento'),
     CHtml::textField('horaEvento', '', array('class' => 'horas small-field'));
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Notas', 'notasEvento'),
     CHtml::textArea('notasEvento', null, array('rows' => 5, 'cols' => 39));

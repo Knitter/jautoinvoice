@@ -28,44 +28,74 @@ class ConfiguracaoController extends AdministracaoController {
 
     public function actionIndex() {
         $configuracoes = array(
-            'nome' => '',
-            'email' => '',
-            'url' => '',
-            'enderecoEnvio' => '',
-            'enviarEmails' => 'nao',
-            'sistemaActivo' => 'sim',
-            'enviarNotificacoes' => 'nao',
-            'permitirClientes' => 'nao',
-            'htmlEmails' => 1,
-            'usarSMTP' => 'nao',
-            'utilizadorSMTP' => '',
-            'passwordSMTP' => '',
-            'servidorSMTP' => '',
-            'portoSMTP' => 25,
-            'prefixoSMTP' => '',
-            'chaveSuporte' => '',
-            'enviarSMS' => 'sim',
-            'telemovelLSMS' => '',
-            'utilizadorLSMS' => '',
-            'passwordLSMS' => '',
-            'creditosLSMS' => 0,
-            'endereco' => '',
-            'telefone' => '',
-            'telemovel' => '',
-            'fax' => '',
-            'inicioActividade' => '',
-            'fimActividade' => '',
-            'mostrarPContacto' => 0,
-            'longitude' => '',
-            'latitude' => '',
-            'gmapskey' => '',
+            'geral_empresa_nome' => '',
+            'geral_empresa_email' => '',
+            'geral_empresa_url' => '',
+            'geral_sistema_activo' => 'sim',
+            'geral_sistema_notificacoes' => 'nao',
+            'geral_sistema_clientes' => 'nao',
+            'geral_empresa_endereco' => '',
+            'geral_empresa_telefone' => '',
+            'geral_empresa_telemovel' => '',
+            'geral_empresa_fax' => '',
+            'geral_empresa_horario_inicio' => '',
+            'geral_empresa_horario_fim' => '',
+            'geral_contactos_mostrar' => 0,
+            'geral_contactos_longitude' => '',
+            'geral_contactos_latitude' => '',
+            'geral_contactos_gmapskey' => '',
+            'email_enviar' => 'nao',
+            'email_html' => 1,
+            'email_endereco' => '',
+            'email_smtp_usar' => 'nao',
+            'email_smtp_utilizador' => '',
+            'email_smtp_password' => '',
+            'email_smtp_servidor' => '',
+            'email_smtp_porto' => 25,
+            'email_smtp_prefixo' => '',
+            'sms_enviar' => 'sim',
+            'sms_telemovel' => '',
+            'sms_utilizador' => '',
+            'sms_passwordL' => '',
+            'sms_creditos' => 0,
+            'suporte_chave' => ''
         );
+
+        $notificacoes = array(
+            'nao' => 'Não',
+            'email' => 'Apenas E-mail',
+            'sms' => 'Apenas SMS',
+            'emailsms' => 'E-mail ou SMS',
+            'smsemail' => 'SMS ou E-mail'
+        );
+
+        if (isset($_POST['save'])) {
+            unset($_POST['save']);
+
+            foreach ($_POST as $chave => $valor) {
+                if (($config = Configuracao::model()->findByPk($chave)) === null) {
+                    $config = new Configuracao();
+                    $config->chave = $chave;
+                }
+                $config->valor = $valor;
+
+                if ($config->save()) {
+                    
+                }
+            }
+        }
+
+        $nim = array('nao' => 'Não', 'sim' => 'Sim');
 
         foreach (Configuracao::model()->findAll() as $configuracao) {
             $configuracoes[$configuracao->chave] = $configuracao->valor;
         }
 
-        $this->render('index', array('config' => (object) $configuracoes));
+        $this->render('index', array(
+            'config' => (object) $configuracoes,
+            'nim' => $nim,
+            'notificacoes' => $notificacoes
+        ));
     }
 
     public function actionVerCreditosSMS() {
@@ -86,33 +116,16 @@ class ConfiguracaoController extends AdministracaoController {
                 $cCreditos->save();
                 $resultado->sucesso = 1;
             } catch (AutenticacaoInvalidaException $aie) {
-                $resultado->motivo = 'Erro de autenticação no sistema Luso SMS.';
+                $resultado->motivo = 'Erro de autenticação no Gateway de SMSs. ' . $aie->getMessage();
             } catch (SintaxeInvalidaException $sie) {
-                $resultado->motivo = 'Erro interno.';
+                $resultado->motivo = 'Erro interno. ' . $sie->getMessage();
             } catch (Exception $e) {
-                $resultado->motivo = 'Erro desconhecido.';
+                $resultado->motivo = 'Erro desconhecido. ' . $e->getMessage();
             }
         }
 
         echo json_encode($resultado);
         Yii::app()->end();
-    }
-
-    public function actionGravar() {
-        foreach ($_POST as $chave => $valor) {
-            if ($chave != 'save') {
-                if (($config = Configuracao::model()->findByPk($chave)) === null) {
-                    $config = new Configuracao();
-                    $config->chave = $chave;
-                }
-                $config->valor = $valor;
-
-                //NOTE: ignoring save errors
-                $config->save();
-            }
-        }
-
-        $this->redirect(array('/configuracao'));
     }
 
     public function accessRules() {

@@ -21,23 +21,23 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'nome',
             'type' => 'raw',
-            'value' => 'CHtml::link($data->nome, array("combustiveis/editar", "id" => $data->idCombustivel))'
+            'value' => 'CHtml::link($data->nome, array("combustivel/editar", "id" => $data->idCombustivel))'
         ),
         array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/combustivel-editar.png',
-                    'url' => 'Yii::app()->createUrl("combustiveis/editar", array("id" => $data->idCombustivel))',
+                    'url' => 'Yii::app()->createUrl("combustivel/editar", array("id" => $data->idCombustivel))',
                 ),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/combustivel-remover.png',
-                    'url' => 'Yii::app()->createUrl("combustiveis/apagar", array("id" => $data->idCombustivel))',
+                    'url' => 'Yii::app()->createUrl("combustivel/apagar", array("id" => $data->idCombustivel))',
                 )
             ),
         ),

@@ -2,9 +2,9 @@
 $this->titulo = 'Lista de Veículos';
 
 if ($op == 'editar') {
-    $voltar = $this->createUrl('/clientes/editar', array('id' => $cliente->idCliente));
+    $voltar = $this->createUrl('cliente/editar', array('id' => $cliente->idCliente));
 } else {
-    $voltar = $this->createUrl('/clientes');
+    $voltar = $this->createUrl('cliente/index');
 }
 ?>
 <div id="titulo">
@@ -13,7 +13,7 @@ if ($op == 'editar') {
     <div id="opcoes">
         <?php
         echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'), $voltar, array('class' => '')),
-        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/veiculo-adicionar.png'), $this->createUrl('veiculo/adicionar'), array('class' => 'adicionar'));
+        CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/veiculo-adicionar.png'), $this->createUrl('veiculo/adicionar', array('id' => $cliente->idCliente, 'op' => $op)), array('class' => 'adicionar'));
         ?>
     </div>
     <div style="clear: both"></div>
@@ -45,17 +45,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/veiculo-remover.png',
-                    'url' => 'Yii::app()->createUrl("veiculos/apagar", array("id" => $data->idVeiculo))'
+                    'url' => 'Yii::app()->createUrl("veiculo/apagar", array("id" => $data->idVeiculo))'
                 ),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl . '/recursos/imagens/icones/veiculo-editar.png',
-                    'url' => 'Yii::app()->createUrl("veiculos/editar", array("id" => $data->idVeiculo, "op" => "' . $op . '"))'
+                    'url' => 'Yii::app()->createUrl("veiculo/editar", array("id" => $data->idVeiculo, "op" => "' . $op . '"))'
                 )
             ),
         ),

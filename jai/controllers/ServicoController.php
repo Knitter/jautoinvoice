@@ -27,14 +27,14 @@ class ServicoController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Lista de todos os serviços activos e pesquisa.
      */
     public function actionIndex() {
         $filtro = new Servico('search');
         $filtro->unsetAttributes();
 
         if (isset($_REQUEST['Servico'])) {
-            $filtro->attributes = $_REQUEST['servico'];
+            $filtro->attributes = $_REQUEST['Servico'];
         }
 
         $this->render('index', array('filtro' => $filtro));
@@ -97,8 +97,7 @@ class ServicoController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            //TODO:
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
@@ -144,8 +143,7 @@ class ServicoController extends AdministracaoController {
      */
     private function carregarModeloServico($id) {
         if (($servico = Servico::model()->findByPk((int) $id)) === null) {
-            //TODO: 
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $servico;
     }

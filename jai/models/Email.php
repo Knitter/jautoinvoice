@@ -89,7 +89,7 @@ class Email extends CActiveRecord {
         $criteria->compare('idCliente', $this->idCliente);
         $criteria->compare('estado', $this->estado);
 
-        return new CActiveDataProvider('Email', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'data DESC',

@@ -36,17 +36,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-3'
+                'class' => 'coluna-botoes3'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/folhaobra-editar.png',
-                    'url' => 'Yii::app()->createUrl("obras/editar", array("id" => $data->idFolhaObra))',
+                    'url' => 'Yii::app()->createUrl("folhaobra/editar", array("id" => $data->idFolhaObra))',
                 ),
                 'delete' => array(
                     'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/folhaobra-remover.png',
-                    'url' => 'Yii::app()->createUrl("obras/apagar", array("id" => $data->idFolhaObra))',
+                    'url' => 'Yii::app()->createUrl("folhaobra/apagar", array("id" => $data->idFolhaObra))',
                 )
             ),
         ),

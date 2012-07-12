@@ -91,7 +91,7 @@ class FolhaObra extends CActiveRecord {
         $criteria->compare('idFuncionario', $this->idFuncionario);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('FolhaObra', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'data DESC',

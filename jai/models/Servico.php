@@ -78,7 +78,7 @@ class Servico extends CActiveRecord {
         $criteria->compare('descricao', $this->descricao, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Servico', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',

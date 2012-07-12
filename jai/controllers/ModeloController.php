@@ -27,7 +27,7 @@ class ModeloController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Lista dos modelos existentes.
      */
     public function actionIndex() {
         $filtro = new Modelo('search');
@@ -49,7 +49,7 @@ class ModeloController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Permite a adição de novos modelos.
      */
     public function actionAdicionar() {
         $modelo = new Modelo();
@@ -75,8 +75,9 @@ class ModeloController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id 
+     * Permite a edição de modelos de veículos.
+     * 
+     * @param integer $id ID do registo do modelo.
      */
     public function actionEditar($id) {
         $modelo = $this->carregarModeloModelo($id);
@@ -102,9 +103,9 @@ class ModeloController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id
+     * Remove um registo de modelo de veículo.
      * 
+     * @param integer $id ID do registo a remover.
      * @throws CHttpException 
      */
     public function actionApagar($id) {
@@ -117,14 +118,14 @@ class ModeloController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            //TODO:
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
     /**
-     *
-     * @return array
+     * Regras de acesso às acções do controlador.
+     * 
+     * @return array Lista de regras de acesso.
      */
     public function accessRules() {
         return array_merge(array(
@@ -140,16 +141,16 @@ class ModeloController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id
+     * Carrega um registo de modelo de veículo.
      * 
-     * @return Modelo
+     * @param integer $id ID do registo a carregar.
+     * 
+     * @return Modelo Registo encontrado.
      * @throws CHttpException 
      */
     private function carregarModeloModelo($id) {
         if (($modelo = Modelo::model()->findByPk((int) $id)) === null) {
-            //TODO: 
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $modelo;
     }

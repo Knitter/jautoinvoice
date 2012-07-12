@@ -13,6 +13,11 @@ Geral
     - Fotos/Imagens da peça/material
     - Ícone de aviso quando não é possível criar elementos por falta de dependentes
     - Importar modelos e marcas de automóveis automaticamente ou através de ficheiros com updates
+    - Adicionar jGrowl a verdinho para registos criados/actualizados, melhor feedback
+    - Mensagens de remoção de elementos nas listas adequadas ao conteúdo.
+
+Valores monetários
+    - Trocar pontos por vírgulas, remover casas decimais a mais, ex: preço do serviço registado a 35 é apresentado a 35.0000
 
 Confirmar
 ---------
@@ -26,51 +31,18 @@ Revisão de Funcionalidades
 Registos
     - Criação automática de registos de envio de e-mails e de sms
     - Listagem de registos
-    - Vizualização de detalhes de registo
+    - Visualização de detalhes de registo
     - Remoção de registos específicos
-    
-Taxas de Iva
-    - CRUD de taxas de IVA
 
-Modelos
-    - CRUD de modelos de automóveis
+Folhas de Obra  
+    - Criar, remover, editar, fechar(?)
+    - Imprimir
 
-Marcas
-    - CRUD de marcas de automóveis
-
-Combustíveis
-    - CRUD de combustíveis
-
-Categorias
-    - CRUD de categorias de veículos
-
-Serviços
-    - CRUD de serviços
-
-Material
-    - CRUD de material
-
-Fornecedores
-    - CRUD de fornecedores
-    - Contactar fornecedores através de e-mail
-
-Funcionários
-    - CRUD de funcionários
-    - Reset à password do funcionário
-
-Clientes
-    - CRUD de clientes
-    - Acesso a veículos do cliente
-    - CRUD de veívulos
-    - Reset à password do cliente
-    - Contactar cliente por e-mail e por SMS
-
-Marcações
-    - ?
-Folhas de Obra
-    - ?
 Quadro
-    - ?
+    - Marcações: próximas (3 dias), passadas não fechadas
+    - Últimos clientes a entrar no sistema, admin
+    - Avisos de configuração
+    - Estatísticas: número de reparações por mês
 
 Páginas
     - Contactos
@@ -79,15 +51,7 @@ Páginas
     - Créditos no footer para ícones
 
 Outros
-    - Logótipo
-    - CSS para tabelas
-    - CSS para formulários
     - CSS geral para listagens, texto longo, links, etc.
 
 Configurações
-    - Configurações gerais
-    - Dados da empresa
-    - Dados da página de contactos
-    - Configurações de e-mails
-    - Configurações de SMSs
-    - Opções de suporte
+    - CMS

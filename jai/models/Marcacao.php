@@ -89,7 +89,7 @@ class Marcacao extends CActiveRecord {
         $criteria->compare('notas', $this->notas, true);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Marcacao', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'dataMarcacao DESC',

@@ -28,14 +28,18 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'header' => 'Contactar',
+            'headerHtmlOptions' => array(
+                'class' => 'coluna-botoes1'
+            ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
                 'update' => array('visible' => 'false'),
                 'delete' => array('visible' => 'false'),
                 'email' => array(
                     'label' => 'Enviar e-mail',
-                    'imageUrl' => 'imagens/icones/email.png',
-                    'url' => '"javascript:caixaEmail({$data->idFornecedor})";'
+                    'imageUrl' => Yii::app()->baseUrl. '/recursos/imagens/icones/email.png',
+                    'url' => '"javascript:caixaEmail({$data->idFornecedor})";',
+                    'visible' => '$data->email != null'
                 ),
             ),
             'template' => '{email}',
@@ -44,7 +48,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
@@ -63,4 +67,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ?>
 
 <?php
-$this->renderPartial('//_comum/_email', array('url' => $this->createUrl('fornecededor/email')));
+$this->renderPartial('//_comum/_email', array('url' => $this->createUrl('fornecedor/email')));

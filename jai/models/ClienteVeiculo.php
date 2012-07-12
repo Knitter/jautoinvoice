@@ -63,7 +63,7 @@ class ClienteVeiculo extends CActiveRecord {
         $criteria->compare('idVeiculo', $this->idVeiculo);
         $criteria->compare('idCliente', $this->idCliente);
 
-        return new CActiveDataProvider('ClienteVeiculo', array('criteria' => $criteria));
+        return new CActiveDataProvider($this, array('criteria' => $criteria));
     }
 
 }

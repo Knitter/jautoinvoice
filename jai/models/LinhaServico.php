@@ -97,7 +97,7 @@ class LinhaServico extends CActiveRecord {
 
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('LinhaServico', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'idLinhaServico'

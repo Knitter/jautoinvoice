@@ -27,7 +27,7 @@ class IvaController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Listagem de todos os registos existentes e possibilidade de pesquisa simples.
      */
     public function actionIndex() {
         $filtro = new Iva('search');
@@ -41,7 +41,7 @@ class IvaController extends AdministracaoController {
     }
 
     /**
-     * 
+     * Adiciona um novo registo de IVA.
      */
     public function actionAdicionar() {
         $iva = new Iva();
@@ -58,7 +58,8 @@ class IvaController extends AdministracaoController {
     }
 
     /**
-     *
+     * Permite a edição de um registo de IVA existente.
+     * 
      * @param integer $id 
      */
     public function actionEditar($id) {
@@ -78,9 +79,9 @@ class IvaController extends AdministracaoController {
     }
 
     /**
-     *
-     * @param integer $id
+     * Permite a remoção de um registo de IVA.
      * 
+     * @param integer $id ID do registo a remover.
      * @throws CHttpException 
      */
     public function actionApagar($id) {
@@ -93,14 +94,14 @@ class IvaController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            //TODO:
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
     /**
-     *
-     * @return array 
+     * Regras de acesso às acções do controlador.
+     * 
+     * @return array Lista de regras de acesso
      */
     public function accessRules() {
         return array_merge(array(
@@ -117,15 +118,14 @@ class IvaController extends AdministracaoController {
 
     /**
      *
-     * @param integer $id
+     * @param integer $id 
      * 
      * @return Iva
      * @throws CHttpException 
      */
     private function carregarModeloIva($id) {
         if (($iva = Iva::model()->findByPk((int) $id)) === null) {
-            //TODO: 
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
 
         return $iva;

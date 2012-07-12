@@ -77,7 +77,7 @@ class Modelo extends CActiveRecord {
         $criteria->compare('idMarca', $this->idMarca);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Modelo', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',

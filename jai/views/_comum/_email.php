@@ -19,13 +19,13 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ),
 ));
 ?>
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Assunto', 'assunto'), CHtml::textField('assunto', null, array('class' => 'medium-field', 'maxlength' => 200));
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Mensagem', 'mensagem'), CHtml::textArea('mensagem', null, array('rows' => 5, 'cols' => 39));
     ?>

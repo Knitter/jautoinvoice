@@ -232,6 +232,11 @@ body {
     background: #EFEFEF;
 }
 
+img {
+    border: none;
+    padding: 0;
+}
+
 table {
     width: 100%;
 }
@@ -337,6 +342,10 @@ h2 {
 /* END: MISC */
 
 /* FORMS */
+div.form {
+    margin-bottom: 64px;
+}
+
 fieldset {
     border: 1px solid #777;
     padding-left: 1em; 
@@ -360,7 +369,7 @@ span.required {
     color: #F00;
 }
 
-.error-message {
+.errorMessage, .error-message {
     display: inline;
     margin-left: .5em;
     color: red;
@@ -433,78 +442,6 @@ a.cancelar:hover {
 
 .ui-sortable-placeholder * { visibility: hidden; }
 
-/*SPRITE INFO*/
-.sprite { background-image: url(../imagens/sprite.png); }
-.sprite-add{ background-position: 0 0; width: 32px; height: 32px; } 
-.sprite-administration{ background-position: 0 -82px; width: 32px; height: 32px; } 
-.sprite-brand-add{ background-position: 0 -164px; width: 32px; height: 32px; } 
-.sprite-brand-edit{ background-position: 0 -246px; width: 32px; height: 32px; } 
-.sprite-brand-remove{ background-position: 0 -328px; width: 32px; height: 32px; } 
-.sprite-brand{ background-position: 0 -410px; width: 32px; height: 32px; } 
-.sprite-calendar{ background-position: 0 -492px; width: 32px; height: 32px; } 
-.sprite-car-add{ background-position: 0 -574px; width: 32px; height: 32px; } 
-.sprite-car-edit{ background-position: 0 -656px; width: 32px; height: 32px; } 
-.sprite-car-remove{ background-position: 0 -738px; width: 32px; height: 32px; } 
-.sprite-car{ background-position: 0 -820px; width: 32px; height: 32px; } 
-.sprite-category-add{ background-position: 0 -902px; width: 32px; height: 32px; } 
-.sprite-category-edit{ background-position: 0 -984px; width: 32px; height: 32px; } 
-.sprite-category-remove{ background-position: 0 -1066px; width: 32px; height: 32px; } 
-.sprite-category{ background-position: 0 -1148px; width: 32px; height: 32px; } 
-.sprite-client-add{ background-position: 0 -1230px; width: 32px; height: 32px; } 
-.sprite-client-edit{ background-position: 0 -1312px; width: 32px; height: 32px; } 
-.sprite-client-remove{ background-position: 0 -1394px; width: 32px; height: 32px; } 
-.sprite-client{ background-position: 0 -1476px; width: 32px; height: 32px; } 
-.sprite-contacts{ background-position: 0 -1558px; width: 32px; height: 32px; } 
-.sprite-dashboard{ background-position: 0 -1640px; width: 32px; height: 32px; } 
-.sprite-edit{ background-position: 0 -1722px; width: 32px; height: 32px; } 
-.sprite-email-read{ background-position: 0 -1804px; width: 32px; height: 32px; } 
-.sprite-email-remove{ background-position: 0 -1886px; width: 32px; height: 32px; } 
-.sprite-email{ background-position: -82px 0; width: 32px; height: 32px; } 
-.sprite-employee-add{ background-position: -82px -82px; width: 32px; height: 32px; } 
-.sprite-employee-edit{ background-position: -82px -164px; width: 32px; height: 32px; } 
-.sprite-employee-remove{ background-position: -82px -246px; width: 32px; height: 32px; } 
-.sprite-employee{ background-position: -82px -328px; width: 32px; height: 32px; } 
-.sprite-exit{ background-position: -82px -410px; width: 32px; height: 32px; } 
-.sprite-fueladd{ background-position: -82px -492px; width: 32px; height: 32px; } 
-.sprite-fueledit{ background-position: -82px -574px; width: 32px; height: 32px; } 
-.sprite-fuel{ background-position: -82px -656px; width: 32px; height: 32px; } 
-.sprite-fuelremove{ background-position: -82px -738px; width: 32px; height: 32px; } 
-.sprite-home{ background-position: -82px -820px; width: 32px; height: 32px; } 
-.sprite-key{ background-position: -82px -902px; width: 32px; height: 32px; } 
-.sprite-login{ background-position: -82px -984px; width: 32px; height: 32px; } 
-.sprite-logs{ background-position: -82px -1066px; width: 32px; height: 32px; } 
-.sprite-model-add{ background-position: -82px -1148px; width: 32px; height: 32px; } 
-.sprite-model-edit{ background-position: -82px -1230px; width: 32px; height: 32px; } 
-.sprite-model-remove{ background-position: -82px -1312px; width: 32px; height: 32px; } 
-.sprite-model{ background-position: -82px -1394px; width: 32px; height: 32px; } 
-.sprite-parts-add{ background-position: -82px -1476px; width: 32px; height: 32px; } 
-.sprite-parts-edit{ background-position: -82px -1558px; width: 32px; height: 32px; } 
-.sprite-parts-remove{ background-position: -82px -1640px; width: 32px; height: 32px; } 
-.sprite-parts{ background-position: -82px -1722px; width: 32px; height: 32px; } 
-.sprite-printer{ background-position: -82px -1804px; width: 32px; height: 32px; } 
-.sprite-refresh{ background-position: -82px -1886px; width: 32px; height: 32px; } 
-.sprite-remove{ background-position: -164px 0; width: 32px; height: 32px; } 
-.sprite-return{ background-position: -164px -82px; width: 32px; height: 32px; } 
-.sprite-service-add{ background-position: -164px -164px; width: 32px; height: 32px; } 
-.sprite-service-edit{ background-position: -164px -246px; width: 32px; height: 32px; } 
-.sprite-service-remove{ background-position: -164px -328px; width: 32px; height: 32px; } 
-.sprite-service{ background-position: -164px -410px; width: 32px; height: 32px; } 
-.sprite-servicedetails-add{ background-position: -164px -492px; width: 32px; height: 32px; } 
-.sprite-servicedetails-remove{ background-position: -164px -574px; width: 32px; height: 32px; } 
-.sprite-servicedetailsedit{ background-position: -164px -656px; width: 32px; height: 32px; } 
-.sprite-servicedetails{ background-position: -164px -738px; width: 32px; height: 32px; } 
-.sprite-settings{ background-position: -164px -820px; width: 32px; height: 32px; } 
-.sprite-sms{ background-position: -164px -902px; width: 32px; height: 32px; } 
-.sprite-smsremove{ background-position: -164px -984px; width: 32px; height: 32px; } 
-.sprite-supplier-add{ background-position: -164px -1066px; width: 32px; height: 32px; } 
-.sprite-supplier-edit{ background-position: -164px -1148px; width: 32px; height: 32px; } 
-.sprite-supplier-remove{ background-position: -164px -1230px; width: 32px; height: 32px; } 
-.sprite-supplier{ background-position: -164px -1312px; width: 32px; height: 32px; } 
-.sprite-vat-add{ background-position: -164px -1394px; width: 32px; height: 32px; } 
-.sprite-vat-edit{ background-position: -164px -1476px; width: 32px; height: 32px; } 
-.sprite-vat-remove{ background-position: -164px -1558px; width: 32px; height: 32px; } 
-.sprite-vat{ background-position: -164px -1640px; width: 32px; height: 32px; } 
-
 /**/
 .grid-view-loading {
     /*background:url(loading.gif) no-repeat;*/
@@ -522,20 +459,21 @@ a.cancelar:hover {
 }
 
 .grid-view table.items th, .grid-view table.items td {
-    font-size: 0.9em;
+    font-size: 1em;
     border: 1px white solid;
     padding: 0.3em;
 }
 
 .grid-view table.items th {
     color: white;
-    /*background: url("bg.gif") repeat-x scroll left top white;*/
+    background: #222;
     text-align: center;
+    font-weight: normal;
 }
 
 .grid-view table.items th a {
     color: #EEE;
-    font-weight: bold;
+    font-weight: normal;
     text-decoration: none;
 }
 
@@ -569,17 +507,8 @@ a.cancelar:hover {
     background: #ECFBD4;
 }
 
-.grid-view .link-column img {
-    border: 0;
-}
-
-.grid-view .button-column {
+.grid-view .button-column, .link-column {
     text-align: center;
-    width: 60px;
-}
-
-.grid-view .button-column img {
-    border: 0;
 }
 
 .grid-view .checkbox-column {
@@ -603,4 +532,20 @@ a.cancelar:hover {
 .grid-view .filters input, .grid-view .filters select {
     width: 100%;
     border: 1px solid #ccc;
+}
+
+.grid-view .coluna-botoes1 {
+    width: 38px;
+}
+
+.grid-view .coluna-botoes2 {
+    width: 72px;
+}
+
+.grid-view .coluna-botoes3 {
+    width: 116px;
+}
+
+.grid-view .coluna-botoes4 {
+    width: 137px;
 }

@@ -145,6 +145,7 @@ CREATE TABLE `Marcacao` (
 `criado` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 `descricao` VARCHAR( 150 ) NULL ,
 `notas` TEXT NULL ,
+`fechada` TINYINT NOT NULL DEFAULT 0 ,
 `activo` TINYINT NOT NULL DEFAULT 1 ,
 CONSTRAINT `fkMFolhaObra` FOREIGN KEY (`idFolhaObra`) REFERENCES `FolhaObra`(`idFolhaObra`) ,
 CONSTRAINT `fkMVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `Veiculo`(`idVeiculo`) 
@@ -175,7 +176,7 @@ CONSTRAINT `fkLinhaServicoServico` FOREIGN KEY (`idServico`) REFERENCES `Servico
 
 CREATE TABLE `Configuracao` (
 `chave` VARCHAR( 150 ) NOT NULL PRIMARY KEY ,
-`valor` VARCHAR( 255 ) NULL
+`valor` TEXT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE utf8_unicode_ci ;
 
 CREATE TABLE `Material` (

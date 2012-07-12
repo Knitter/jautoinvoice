@@ -28,10 +28,10 @@
  *
  * @property Material[] $materials
  */
-class IVA extends CActiveRecord {
+class Iva extends CActiveRecord {
 
     /**
-     * @return IVA
+     * @return Iva
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -59,7 +59,7 @@ class IVA extends CActiveRecord {
 
     public function attributeLabels() {
         return array(
-            'idIVA' => 'ID',
+            'idIva' => 'ID',
             'descricao' => 'Descrição',
             'percentagem' => 'Percentagem'
         );
@@ -75,7 +75,7 @@ class IVA extends CActiveRecord {
         $criteria->compare('percentagem', $this->percentagem);
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('IVA', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'descricao ASC',

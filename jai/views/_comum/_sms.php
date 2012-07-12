@@ -19,7 +19,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ),
 ));
 ?>
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Mensagem', 'sms'), CHtml::textField('sms', null, array('class' => 'medium-field', 'maxlength' => '160'));
     ?>

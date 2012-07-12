@@ -28,7 +28,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 ));
 ?>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Funcionário', 'funcionario'),
     CHtml::dropDownList('funcionario', null, CHtml::listData($funcionarios, 'idFuncionario', 'nome'), array(
@@ -37,7 +37,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php
     echo CHtml::label('Serviço', 'servico'),
     CHtml::dropDownList('servico', null, CHtml::listData($servicos, 'idServico', 'nome'), array(
@@ -46,11 +46,11 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ?>
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo CHtml::label('Duração', 'duracao'), CHtml::textField('duracao', null, array('class' => 'small-field')); ?> (horas)
 </div>
 
-<div class="row">
+<div class="linha">
     <?php echo CHtml::label('Notas', 'notas'), CHtml::textField('notas', null, array('class' => 'medium-field')); ?>
 </div>
 

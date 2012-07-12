@@ -1,38 +1,33 @@
-<h3>Sistema de SMSs</h3>
-<div class="configuracoes">
-    <fieldset>
-        <legend>Luso SMS</legend>
-        <div class="row">
-            <?php
-            echo CHtml::label('Permitir SMSs', 'enviarSMS'),
-            CHtml::dropDownList('enviarSMS', $config->enviarSMS, $nim);
-            ?>
-        </div>
-        <div class="row">
-            <?php
-            echo CHtml::label('Nr. Telemóvel', 'telemovelLSMS'),
-            CHtml::textField('telemovelLSMS', $config->telemovelLSMS);
-            ?>
-        </div>
-        <div class="row">
-            <?php
-            echo CHtml::label('Username', 'utilizadorLSMS'),
-            CHtml::textField('utilizadorLSMS', $config->utilizadorLSMS);
-            ?>
-        </div>
-        <div class="row">
-            <?php
-            echo CHtml::label('Password', 'passwordLSMS'),
-            CHtml::textField('passwordLSMS', $config->passwordLSMS);
-            ?>
-        </div>
-    </fieldset>
-    <div class="row">
-        <?php
-        $url = $this->createUrl('configuracoes/vercreditossms');
+<div class="linha">
+    <?php
+    echo CHtml::label('Permitir SMSs', 'sms_enviar'),
+    CHtml::dropDownList('sms_enviar', $config->sms_enviar, $nim);
+    ?>
+</div>
+<div class="linha">
+    <?php
+    echo CHtml::label('Nr. Telemóvel', 'sms_telemovel'),
+    CHtml::textField('sms_telemovel', $config->sms_telemovel);
+    ?>
+</div>
+<div class="linha">
+    <?php
+    echo CHtml::label('Username', 'sms_utilizador'),
+    CHtml::textField('sms_utilizador', $config->sms_utilizador);
+    ?>
+</div>
+<div class="linha">
+    <?php
+    echo CHtml::label('Password', 'sms_password'),
+    CHtml::textField('sms_password', $config->sms_password);
+    ?>
+</div>
 
-        echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/actualizar.png'), 'javascript:;', array('onclick' => "actualizarCreditos('{$url}');"));
-        ?>
-        Nr. Créditos Disponíveis <span id = "creditosSMS"><?php echo $config->creditosLSMS; ?></span> 
-    </div>
+<div class="linha">
+    <?php
+    $url = $this->createUrl('configuracoes/vercreditossms');
+
+    echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/actualizar.png'), 'javascript:;', array('onclick' => "actualizarCreditos('{$url}');"));
+    ?>
+    Créditos Disponíveis <span id = "creditosSMS"><?php echo $config->sms_creditos; ?></span> 
 </div>

@@ -48,7 +48,7 @@ class Material extends CActiveRecord {
 
     public function rules() {
         return array(
-            array('nome, precoUnitario, referencia, idIVA, quantidadeStock', 'required'),
+            array('nome, precoUnitario, referencia, idIva, quantidadeStock', 'required'),
             array('nome', 'length', 'max' => 150),
             array('referencia', 'length', 'max' => 25),
             array('precoUnitario', 'numerical'),
@@ -63,7 +63,7 @@ class Material extends CActiveRecord {
         return array(
             'linhaGastos' => array(self::HAS_MANY, 'LinhaGasto', 'idMaterial'),
             'fornecedores' => array(self::MANY_MANY, 'Fornecedor', 'MaterialFornecedor(idMaterial, idFornecedor)'),
-            'iva' => array(self::BELONGS_TO, 'IVA', 'idIVA'),
+            'iva' => array(self::BELONGS_TO, 'Iva', 'idIva'),
         );
     }
 
@@ -76,7 +76,7 @@ class Material extends CActiveRecord {
             'descricao' => 'Descrição',
             'quantidadeStock' => 'Em Stock',
             'desconto' => 'Desconto Possível',
-            'idIVA' => 'IVA',
+            'idIva' => 'IVA',
         );
     }
 
@@ -92,7 +92,7 @@ class Material extends CActiveRecord {
 
         $criteria->compare('activo', 1);
 
-        return new CActiveDataProvider('Material', array(
+        return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                     'sort' => array(
                         'defaultOrder' => 'nome ASC',

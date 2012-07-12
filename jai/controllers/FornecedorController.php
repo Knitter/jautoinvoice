@@ -26,6 +26,9 @@ class FornecedorController extends AdministracaoController {
         parent::__construct($id, $module);
     }
 
+    /**
+     * Lista de todos os fornecedores registados e activos. 
+     */
     public function actionIndex() {
         $filtro = new Fornecedor('search');
         $filtro->unsetAttributes();
@@ -37,6 +40,9 @@ class FornecedorController extends AdministracaoController {
         $this->render('index', array('filtro' => $filtro));
     }
 
+    /**
+     * Permite adicionar um novo fornecedor. 
+     */
     public function actionAdicionar() {
         $fornecedor = new Fornecedor();
 
@@ -44,13 +50,19 @@ class FornecedorController extends AdministracaoController {
 
         if (isset($_POST['Fornecedor'])) {
             $fornecedor->attributes = $_POST['Fornecedor'];
-            if ($fornecedor->save())
+            if ($fornecedor->save()) {
                 $this->redirect(array('editar', 'id' => $fornecedor->idFornecedor));
+            }
         }
 
         $this->render('editar', array('fornecedor' => $fornecedor));
     }
 
+    /**
+     * Permite editar um fornecedor existente.
+     * 
+     * @param integer $id ID do registo a editar.
+     */
     public function actionEditar($id) {
         $fornecedor = $this->carregarModeloFornecedor($id);
 
@@ -58,13 +70,20 @@ class FornecedorController extends AdministracaoController {
 
         if (isset($_POST['Fornecedor'])) {
             $fornecedor->attributes = $_POST['Fornecedor'];
-            if ($fornecedor->save())
+            if ($fornecedor->save()) {
                 $this->redirect(array('editar', 'id' => $fornecedor->idFornecedor));
+            }
         }
 
         $this->render('editar', array('fornecedor' => $fornecedor));
     }
 
+    /**
+     * Remove um registo de fornecedor.
+     * 
+     * @param integer $id ID do registo a remover.
+     * @throws CHttpException 
+     */
     public function actionApagar($id) {
         if (Yii::app()->request->isPostRequest && ($fornecedor = $this->carregarModeloFornecedor($id))) {
 
@@ -75,10 +94,13 @@ class FornecedorController extends AdministracaoController {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
             }
         } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            throw new CHttpException(400, 'Pedido inválido. Se tem a certeza que o pedido está correcto contacte o suporte ou confirme o registo de erros.');
         }
     }
 
+    /**
+     * Permite o envio de mensagens de e-mail. 
+     */
     public function actionEmail() {
         $resultado = (object) array('sucesso' => 0);
         if (!empty($_POST['destinatario']) && !empty($_POST['mensagem'])
@@ -100,21 +122,30 @@ class FornecedorController extends AdministracaoController {
                     try {
                         $email->enviar();
                         $resultado->sucesso = 1;
+                        
+                        //TODO: registo de e-mails enviados
                     } catch (Exception $e) {
                         $resultado->motivo = $e->getMessage();
                     }
                 } else {
-                    $resultado->motivo = 'Não está definido um endereço de origem.';
+                    $resultado->motivo = 'Não está definido um endereço de origem nas configurações do sistema.';
                 }
             } else {
-                $resultado->motivo = 'Não existe endereço de destino.';
+                $resultado->motivo = 'Este fornecedor não tem endereço de e-mail registado.';
             }
+        } else {
+            $resultado->motivo = 'Pedido inválido.';
         }
 
         echo json_encode($resultado);
         Yii::app()->end();
     }
 
+    /**
+     * Regras de acesso às acções do controlador.
+     * 
+     * @return array Lista de regras de acesso.
+     */
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -136,7 +167,7 @@ class FornecedorController extends AdministracaoController {
      */
     private function carregarModeloFornecedor($id) {
         if (($fornecedor = Fornecedor::model()->findByPk((int) $id)) === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
         return $fornecedor;
     }

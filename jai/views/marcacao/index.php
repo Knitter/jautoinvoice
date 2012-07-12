@@ -10,7 +10,7 @@ g.marcacoes.urls.calendario = '{$this->createUrl('marcacao/eventos')}';
 g.marcacoes.urls.marcar = '{$this->createUrl('marcacao/marcar')}';
 g.marcacoes.urls.actualizar = '{$this->createUrl('marcacao/actualizar')}';
 g.marcacoes.urls.folha = '{$this->createUrl('folhaobra/folhademarcacao')}';
-g.marcacoes.urls.cancelar = '{$this->createUrl('marcacao/cancelar')}';
+g.marcacoes.urls.apagar = '{$this->createUrl('marcacao/apagar')}';
     
 g.marcacoes.urls.inicio = {$inicio};
 g.marcacoes.urls.fim = {$fim};

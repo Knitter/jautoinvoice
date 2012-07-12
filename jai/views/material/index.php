@@ -1,7 +1,7 @@
-<?php $this->titulo = 'Gestão de Stock'; ?>
+<?php $this->titulo = 'Gestão de Material'; ?>
 
 <div id="titulo">
-    <h2>Stock</h2>
+    <h2>Material</h2>
     
     <div id="opcoes">
         <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/recursos/imagens/icones/material-adicionar.png'), $this->createUrl('material/adicionar')); ?>
@@ -33,7 +33,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'class' => 'CButtonColumn',
             'header' => 'Operações',
             'headerHtmlOptions' => array(
-                'class' => 'buttons-2'
+                'class' => 'coluna-botoes2'
             ),
             'buttons' => array(
                 'view' => array('visible' => 'false'),
