@@ -1,2 +1,60 @@
 Instalação Rápida
 =================
+
+Introdução
+----------
+
+As próximas versões deverão conter um documento de ajuda à instalação mais completo 
+mas este documento poderá ser usado como referência rápida para o processo de 
+instalação do jAutoInvoice.
+
+Requisitos Mínimos
+------------------
+
+Para que o sistema funcione deverá ter acesso a:
+- Servidor web Apache, não foi testado com outros.
+- PHP 5.3, não é garantido que funcione com versões anteriores.
+- MySQL 5 com suporte para InnoDB, não irá funcionar em versões anteriores ou sem InnoDB.
+- Browser actual e que cumpra os standards, Firefox, Chrome ou Opera. IE não é suportado embora possa funcionar.
+
+Instalação
+----------
+
+Para instalar e usar o jAutoInvoice deve garantir que cumpre com os requisitos mínimos 
+apresentados acima.
+
+Copie o conteúdo da pasta *www* para a pasta pública do seu servidor web e copie 
+as pastas *jai* e *framework* para um nível acima da pasta pública. Mantenha a relação 
+de caminhos que existem.
+
+Caso pretenda uma estrutura diferente deverá alterar o ficheiro *index.php* que se 
+encontra na pasta *www*.
+
+Após copiar os ficheiros para as localizações correctas no servidor, altere os dois 
+ficheiros de configuração que se encontram na pasta *jai/config*. No ficheiro *main.php* 
+deve indicar o nome que deseja dar à instalação (é usado em alguns títulos e páginas de 
+texto estático) e os dados de acesso à base de dados.
+
+Assim, altere o valor da propriedade _name_ para o nome que pretende dar à sua instalação 
+e descomente (retirando as //) as propriedades referentes à ligação do servidor MySQL. Altere 
+os valores que estão indicados em maiúsculas.
+
+Caso necessite de colocar um prefixo nas tabelas pode usar a propriedade _tablePrefix_.
+
+O ficheiro *params.php* contém parâmetros extra que deve alterar, principalmente o valor da 
+propriedate _hash_ que deverá ser alterado para um valor aleatório.
+
+Uma vez que ainda não existe assistente de instalação é necessário criar o primeiro 
+utilizador na base de dados. A forma de criar o utilizador dependerá da ferramenta que 
+usa para aceder ao servidor MySQL, a ferramenta mais comum é o phpMyAdmin.
+
+Crie um novo utilizador com o nome e username que pretende usar, bem como com a password. Marque 
+este utilizador como sendo um administrador colocando o valor 1 na coluna adequada.
+
+ATENÇÃO: A password a registar na base de dados não é a sua password de acesso. Deve juntar 
+o valor da proprieade _hash_ que alterou no ficheiro *params.php* com o valor da sua password e 
+criar uma hash SHA1. É depois este valor que deve ser introduzido na tabela.
+
+Ex.: Se a password for 'demo' e o valor da propriedade _hash_ for 'HASH DE TESTE', deve ser 
+criada uma hash SHA1 com o valor 'HASH DE TESTEdemo' que depois é colocada no campo password que 
+se encontra na tabela de utilizadores.

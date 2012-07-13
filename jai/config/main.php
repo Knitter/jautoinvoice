@@ -44,10 +44,10 @@ return array(
         ),
         //MySQL database
         //'db' => array(
-        //'connectionString' => 'mysql:host=127.0.0.1;dbname=jai',
+        //'connectionString' => 'mysql:host=<ENDERECO DA BASE DE DADOS>;dbname=<NOME DA BASE DE DADOS>',
         //'emulatePrepare' => true,
-        //'username' => 'root',
-        //'password' => 'toor',
+        //'username' => '<UTILIZADOR DA BASE DE DADOS>',
+        //'password' => '<PASSWORD DE ACESSO>',
         //'charset' => 'utf8',
         //'tablePrefix => ''
         //),
