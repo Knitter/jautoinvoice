@@ -33,6 +33,8 @@
  * 
  * @property Veiculo[] $veiculosActuais
  * @property Veiculo[] $veiculosAntigos
+ * @property Sms[] $smss
+ * @property Email[] emails
  */
 class Cliente extends CActiveRecord {
 
@@ -87,6 +89,8 @@ class Cliente extends CActiveRecord {
         return array(
             'veiculosActuais' => array(self::HAS_MANY, 'Veiculo', 'idCliente'),
             'veiculosAntigos' => array(self::MANY_MANY, 'Veiculo', 'ClienteVeiculo(idCliente, idVeiculo)'),
+            'emails' => array(self::HAS_MANY, 'Email', 'idCliente'),
+            'smss' => array(self::HAS_MANY, 'Sms', 'idCliente')
         );
     }
 

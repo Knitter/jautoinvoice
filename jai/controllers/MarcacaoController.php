@@ -192,7 +192,7 @@ class MarcacaoController extends SistemaController {
             $marcacao = $this->carregarModeloMarcacao($_POST['id']);
 
             if (!$marcacao->dataFecho) {
-                $marcacao->dataFecho = date('Y-m-d H:m:i');
+                $marcacao->dataFecho = date('Y-m-d H:i:s');
                 if ($marcacao->save()) {
                     $resultado['sucesso'] = 1;
                 }

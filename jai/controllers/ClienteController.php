@@ -98,14 +98,30 @@ class ClienteController extends SistemaController {
                         $nome = $config->valor;
                     }
 
-                    $email = new Email($cliente->nome, $cliente->email, $nome, $enderecoEmail->valor
+                    $registo = new Email();
+                    $email = new ExtEmail($cliente->nome, $cliente->email, $nome, $enderecoEmail->valor
                                     , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
+
                     try {
                         $email->enviar();
                         $resultado->sucesso = 1;
+
+                        //Registar e-mail enviado
+                        $registo->idFuncionario = Yii::app()->user->id;
+                        $registo->idCliente = $cliente->idCliente;
+                        $registo->endereco = $cliente->email;
+                        $registo->assunto = (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.');
+                        $registo->mensagem = $_POST['mensagem'];
+                        $registo->data = date('Y-m-d H:i:s');
+
+                        $registo->save();
                     } catch (Exception $e) {
                         $resultado->motivo = $e->getMessage();
+                        $registo->debug = $e->getMessage();
                     }
+
+                    $registo->estado = $resultado->sucesso;
+                    $registo->save();
                 } else {
                     $resultado->motivo = 'Não está definido um endereço de origem.';
                 }
@@ -130,23 +146,44 @@ class ClienteController extends SistemaController {
                         && ($cPassword = Configuracao::model()->findByPk('passwordLSMS')) !== null
                         && ($cOrigem = Configuracao::model()->findByPk('passwordLSMS')) !== null) {
 
+                    $registo = new Sms();
                     try {
                         $sms = new LusoSMS($cUsername->valor, $cPassword->valor, $_POST['sms'], $cOrigem->valor, $cliente->telemovel);
                         $sms->enviar();
 
                         $resultado->sucesso = 1;
+
+                        $registo->idFuncionario = Yii::app()->user->id;
+                        $registo->idCliente = $cliente->idCliente;
+                        $registo->numero = $cliente->telemovel;
+                        $registo->mensagem = $_POST['sms'];
+                        $registo->data = date('Y-m-d H:i:s');
+
+                        $registo->save();
                     } catch (CaracteresExcedidosException $cee) {
                         $resultado->motivo = 'Número de caracteres excedidos.';
+                        $registo->codigoErro = 'caracteres_excedidos';
+                        $registo->save();
                     } catch (ErroComunicacaoException $ece) {
                         $resultado->motivo = 'Ocorreu um erro de comunicação com o sistema Luso SMS.';
+                        $registo->codigoErro = 'erro_comunicacao';
+                        $registo->save();
                     } catch (CreditoInsuficienteException $cie) {
                         $resultado->motivo = 'Não possui créditos suficientes para enviar novas SMSs.';
+                        $registo->codigoErro = 'credito_insuficiente';
+                        $registo->save();
                     } catch (AutenticacaoInvalidaException $aie) {
                         $resultado->motivo = 'Falha na autenticação do sistema Luso SMS.';
+                        $registo->codigoErro = 'autenticacao_invalida';
+                        $registo->save();
                     } catch (SintaxeInvalidaException $sie) {
                         $resultado->motivo = 'Erro interno.';
+                        $registo->codigoErro = 'sintaxe_invalida';
+                        $registo->save();
                     } catch (Exception $e) {
                         $resultado->motivo = 'Erro desconhecido.';
+                        $registo->codigoErro = 'desconhecido';
+                        $registo->save();
                     }
                 } else {
                     $resultado->motivo = 'Configurações Luso SMS inválidas.';
@@ -178,7 +215,7 @@ class ClienteController extends SistemaController {
                 try {
                     //TODO: validate
                     $pass = Cliente::hash($this->random());
-                    $email = new Email($cliente->nome, $cliente->email, $nome, $enderecoEmail->valor, 'Nova password',
+                    $email = new ExtEmail($cliente->nome, $cliente->email, $nome, $enderecoEmail->valor, 'Nova password',
                                     sprintf('A sua password de acesso ao sistema %s foi alterada para %s', $nome, $pass));
 
                     $email->enviar();

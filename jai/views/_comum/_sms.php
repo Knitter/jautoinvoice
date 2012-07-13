@@ -25,7 +25,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     ?>
 </div>
 
-<span class="info">Nota: Limite de 160 caracteres.</p>
+<span class="info">Nota: Limite de 150 caracteres.</p>
 <?php
 echo CHtml::hiddenField('idClienteSms');
 

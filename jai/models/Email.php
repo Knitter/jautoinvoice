@@ -21,18 +21,19 @@
  */
 
 /**
- * @property int $idEmail
- * @property int $idFuncionario
- * @property int $idCliente
+ * @property integer $idEmail
+ * @property integer $idFuncionario
+ * @property integer $idCliente
  * @property string $endereco
  * @property string $mensagem
  * @property string $data
- * @property int $estado
+ * @property integer $estado
  * @property string $debug
  * @property string $assunto
  * 
  * @property Funcionario $funcionario
- * @property Cliente[] $cliente
+ * @property Cliente $cliente
+ * @property Fornecedor $fornecedor
  */
 class Email extends CActiveRecord {
 
@@ -58,6 +59,7 @@ class Email extends CActiveRecord {
         return array(
             'funcionario' => array(self::BELONGS_TO, 'Funcionario', 'idFuncionario'),
             'cliente' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+            'fornecedor' => array(self::BELONGS_TO, 'Fornecedor', 'idFornecedor'),
         );
     }
 
@@ -66,6 +68,7 @@ class Email extends CActiveRecord {
             'idEmail' => 'ID',
             'idFuncionario' => 'Funcionário',
             'idCliente' => 'Cliente',
+            'idFornecedor' => 'Fornecedor',
             'endereco' => 'Endereço',
             'mensagem' => 'Mensagem',
             'data' => 'Data de Envio',
@@ -85,8 +88,6 @@ class Email extends CActiveRecord {
         $criteria->compare('mensagem', $this->mensagem, true);
         $criteria->compare('assunto', $this->assunto, true);
         $criteria->compare('data', $this->data);
-        $criteria->compare('idFuncionario', $this->idFuncionario);
-        $criteria->compare('idCliente', $this->idCliente);
         $criteria->compare('estado', $this->estado);
 
         return new CActiveDataProvider($this, array(

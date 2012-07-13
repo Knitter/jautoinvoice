@@ -32,8 +32,8 @@
  * @property integer $activo
  *
  * The followings are the available model relations:
- * @property Contacto[] $contactos
- * @property Material[] $materials
+ * @property Email[] $emails
+ * @property Material[] $materiais
  */
 class Fornecedor extends CActiveRecord {
 
@@ -59,14 +59,12 @@ class Fornecedor extends CActiveRecord {
         );
     }
 
-//    public function relations() {
-//        // NOTE: you may need to adjust the relation name and the related
-//        // class name for the relations automatically generated below.
-//        return array(
-//            'contactos' => array(self::MANY_MANY, 'Contacto', 'ContactoFornecedor(idFornecedor, idContacto)'),
-//            'materials' => array(self::HAS_MANY, 'Material', 'idFornecedor'),
-//        );
-//    }
+    public function relations() {
+        return array(
+            'emails' => array(self::MANY_MANY, 'Email', 'idFornecedor'),
+            'materiais' => array(self::HAS_MANY, 'Material', 'MaterialFornecedor(idFornecedor,idMaterial)'),
+        );
+    }
 
     public function attributeLabels() {
         return array(

@@ -79,8 +79,6 @@ class Sms extends CActiveRecord {
 
         $criteria->compare('codigErro', $this->codigoErro, true);
         $criteria->compare('numero', $this->numero, true);
-        $criteria->compare('idCliente', $this->idCliente);
-        $criteria->compare('idFuncionario', $this->idFuncionario);
         $criteria->compare('data', $this->data);
 
         return new CActiveDataProvider($this, array(

@@ -4,9 +4,6 @@ Notas de Desenvolvimento
 Ideias
 ------
 
-Registos
-    - Exportação de registos para arquivo
-
 Geral
     - Desconto por material
     - Desconto total por factura
@@ -25,14 +22,6 @@ Confirmar
 Necessidade de IVA no serviço
 Notas de serviços/folhas precisam de mais caracteres?
 
-Revisão de Funcionalidades
---------------------------
-
-Registos
-    - Criação automática de registos de envio de e-mails e de sms
-    - Listagem de registos
-    - Visualização de detalhes de registo
-    - Remoção de registos específicos
 
 Folhas de Obra  
     - Criar, remover, editar, fechar(?)

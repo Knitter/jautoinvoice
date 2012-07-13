@@ -30,8 +30,6 @@ class PublicoController extends JController {
             $contactos = intval($conf->valor);
         }
 
-        $contactos = 1;
-
         $this->menu = array(
             array(
                 'label' => 'Início',

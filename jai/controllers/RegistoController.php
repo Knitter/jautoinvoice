@@ -31,40 +31,23 @@ class RegistoController extends AdministracaoController {
 
     public function actionIndex() {
         $filtroSms = new Sms('search');
+        $filtroSms->unsetAttributes();
+
         $filtroEmail = new Email('search');
+        $filtroEmail->unsetAttributes();
+
+        if (isset($_POST['Sms'])) {
+            $filtroSms->attributes = $_POST['Sms'];
+        }
+
+        if (isset($_POST['Email'])) {
+            $filtroEmail->attributes = $_POST['Email'];
+        }
 
         $this->render('index', array(
             'filtroSms' => $filtroSms,
             'filtroEmail' => $filtroEmail
         ));
-    }
-
-    public function actionSms() {
-        $filtro = new Sms('search');
-        $this->render('sms', array('filtro' => $filtro));
-    }
-
-    public function actionEmail() {
-        $filtro = new Email('search');
-        $this->render('email', array('filtro' => $filtro));
-    }
-
-    public function actionDetalhesSms($id) {
-        $sms = $this->carregarModeloSms($id);
-        $this->render('lerSms', array('sms' => $sms));
-    }
-
-    public function actionDetalhes($id) {
-        $email = $this->carregarModeloEmail($id);
-        $this->render('lerEmail', array('email' => $email));
-    }
-
-    public function actionRemoverSms($id) {
-        
-    }
-
-    public function actionRemoverEmail($id) {
-        
     }
 
     public function accessRules() {
@@ -75,9 +58,7 @@ class RegistoController extends AdministracaoController {
                     ),
                     array(
                         'allow',
-                        'actions' => array('index', 'sms', 'email', 'detalhesSms',
-                            'detalhesEmail', 'removerSms', 'removerEmail'
-                        ),
+                        'actions' => array('index'),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());
     }
@@ -91,8 +72,7 @@ class RegistoController extends AdministracaoController {
      */
     private function carregarModeloEmail($id) {
         if (($email = Email::model()->findByPk((int) $id)) === null) {
-            //TODO:
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
 
         return $email;
@@ -107,8 +87,7 @@ class RegistoController extends AdministracaoController {
      */
     private function carregarModeloSms($id) {
         if (($sms = Sms::model()->findByPk((int) $id)) === null) {
-            //TODO:
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página pedida não existe.');
         }
 
         return $sms;

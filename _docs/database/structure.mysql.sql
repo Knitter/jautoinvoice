@@ -227,7 +227,8 @@ CONSTRAINT `fkSmsCliente` FOREIGN KEY (`idCliente`) REFERENCES `Cliente`(`idClie
 CREATE TABLE `Email` (
 `idEmail` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
 `idFuncionario` INT UNSIGNED NOT NULL ,
-`idCliente` INT UNSIGNED NOT NULL ,
+`idCliente` INT UNSIGNED NULL ,
+`idFornecedor` INT UNSIGNED NULL ,
 `endereco` VARCHAR( 255 ) NOT NULL ,
 `mensagem` TEXT NOT NULL ,
 `data` DATETIME NOT NULL ,
@@ -235,7 +236,8 @@ CREATE TABLE `Email` (
 `debug` TEXT NULL ,
 `assunto` VARCHAR( 255 ) NOT NULL ,
 CONSTRAINT `fkEmailFuncionario` FOREIGN KEY (`idFuncionario`) REFERENCES `Funcionario`(`idFuncionario`) ,
-CONSTRAINT `fkEmailCliente` FOREIGN KEY (`idCliente`) REFERENCES `Cliente`(`idCliente`)
+CONSTRAINT `fkEmailCliente` FOREIGN KEY (`idCliente`) REFERENCES `Cliente`(`idCliente`) ,
+CONSTRAINT `fkEmailFornecedor` FOREIGN KEY (`idFornecedor`) REFERENCES `Fornecedor`(`idFornecedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE utf8_unicode_ci ;
 
 

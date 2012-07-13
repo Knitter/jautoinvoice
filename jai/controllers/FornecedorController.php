@@ -117,25 +117,41 @@ class FornecedorController extends AdministracaoController {
                         $nome = $config->valor;
                     }
 
-                    $email = new Email($fornecedor->nome, $fornecedor->email, $nome, $enderecoEmail->valor
+                    $registo = new Email();
+                    $email = new ExtEmail($fornecedor->nome, $fornecedor->email, $nome, $enderecoEmail->valor
                                     , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
                     try {
                         $email->enviar();
                         $resultado->sucesso = 1;
-                        
-                        //TODO: registo de e-mails enviados
+
+                        //Registar e-mail enviado
+                        $registo->idFuncionario = Yii::app()->user->id;
+                        $registo->idFornecedor = $fornecedor->idFornecedor;
+                        $registo->endereco = $fornecedor->email;
+                        $registo->assunto = (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.');
+                        $registo->mensagem = $_POST['mensagem'];
+                        $registo->data = date('Y-m-d H:i:s');
+
+                        $registo->save();
                     } catch (Exception $e) {
                         $resultado->motivo = $e->getMessage();
+                        $registo->debug = $e->getMessage();
                     }
                 } else {
                     $resultado->motivo = 'Não está definido um endereço de origem nas configurações do sistema.';
+                    $registo->debug = $e->getMessage();
                 }
             } else {
                 $resultado->motivo = 'Este fornecedor não tem endereço de e-mail registado.';
+                $registo->debug = $e->getMessage();
             }
         } else {
             $resultado->motivo = 'Pedido inválido.';
+            $registo->debug = $e->getMessage();
         }
+
+        $registo->estado = $resultado;
+        $registo->save();
 
         echo json_encode($resultado);
         Yii::app()->end();
