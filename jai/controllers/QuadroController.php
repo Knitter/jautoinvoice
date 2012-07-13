@@ -30,8 +30,24 @@ class QuadroController extends SistemaController {
     }
 
     public function actionIndex() {
-        //TODO: not implemented yet, gráficos e informações úteis
-        $this->render('index');
+        //- Últimos clientes a entrar no sistema, admin
+        //- Avisos de configuração
+        //- Estatísticas: número de reparações por mês
+
+        $now = date('Y-m-d');
+        $end = date('Y-m-d', time() + (3 * 24 * 3600));
+
+        $criteria = new CDbCriteria();
+        $criteria->addBetweenCondition('dataMarcacao', $now, $end);
+        $criteria->addCondition('dataFecho IS NULL');
+        $marcacoes = Marcacao::model()->findAll($criteria);
+
+        $avisos = array();
+
+        $this->render('index', array(
+            'marcacoes' => $marcacoes,
+            'avisos' => $avisos
+        ));
     }
 
     public function accessRules() {
@@ -39,11 +55,6 @@ class QuadroController extends SistemaController {
                     array(
                         'deny',
                         'users' => array('?')
-                    ),
-                    array(
-                        'allow',
-                        'actions' => array('sair'),
-                        'users' => array('@')
                     ),
                     array(
                         'allow',

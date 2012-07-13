@@ -251,6 +251,11 @@ ul {
     list-style: none;
 }
 
+ul.normal {
+    margin: 15px;
+    list-style: square;
+}
+
 h2 {
     font-weight: bold;
     text-transform: uppercase;
@@ -342,79 +347,77 @@ h2 {
 /* END: MISC */
 
 /* FORMS */
-div.form {
+.form {
     margin-bottom: 64px;
 }
 
-fieldset {
+.form fieldset {
     border: 1px solid #777;
     padding-left: 1em; 
 }
 
-legend {
+.form legend {
     padding: 0 .5em 0 .5em;
 }
 
-label {
+.form label {
     display: block;
     float: left;
     width: 150px;
 }
 
-input, select, textarea {
+.form input, .form select, .form textarea {
     border: solid 1px #CCC;
 }
 
-span.required {
+.form span.required {
     color: #F00;
 }
 
-.errorMessage, .error-message {
+.form .errorMessage, .form .error-message {
     display: inline;
     margin-left: .5em;
     color: red;
 }
 
-.linha {
+.form .linha {
     margin: 1em 0;
 }
 
-.linha img {
+.form .linha img {
     vertical-align: middle;
 }
 
-.small-field {
+.form .small-field {
     width: 5em;
 }
 
-.medium-field {
+.form .medium-field {
     width: 25em;
 }
 
-.long-field {
+.form .long-field {
     width: 50em;
 }
 
-.cancelar {
+.form .cancelar {
     margin-left: 15px;
     color: #900;
 }
 
-a.cancelar:hover {
+.form a.cancelar:hover {
     color: #F00;
 }
 
-.accoes {
+.form .accoes {
     position: absolute;
     bottom: 0;
     margin-left: 15px;
 }
 
-
 /*DASHBOARD*/
 #coluna-1, #coluna-2 {
     min-height: 30px;
-    text-align:center;
 }
 
 .widget {
@@ -424,14 +427,32 @@ a.cancelar:hover {
 }
 
 .widget-header {
-    height: 25px;    
+    height: 25px;
     cursor: move; 
+    padding-left: 10px;
     text-align: left;
 }        
 
+.avisos {
+    background: #FFD324;
+}
+
+.marcacoes {
+    background: #09F;
+}
+
 .widget-body {
     min-height: 175px;
-    height:auto;
+    height: auto;
+}
+
+.widget-body ul {
+    margin-left: 10px;
+}
+
+.widget-body div.vazio {
+    text-align: center;
+    font-style: italic;
 }
 
 .ui-sortable-placeholder { 
@@ -548,4 +569,10 @@ a.cancelar:hover {
 
 .grid-view .coluna-botoes4 {
     width: 137px;
+}
+
+/*PÁGINA DE CONTACTOS*/
+div#contactos .linha {
+    clear:both;
+    margin-top: 15px;
 }

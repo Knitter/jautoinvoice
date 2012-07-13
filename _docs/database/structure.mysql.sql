@@ -145,7 +145,7 @@ CREATE TABLE `Marcacao` (
 `criado` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 `descricao` VARCHAR( 150 ) NULL ,
 `notas` TEXT NULL ,
-`fechada` TINYINT NOT NULL DEFAULT 0 ,
+`dataFecho` DATETIME NULL ,
 `activo` TINYINT NOT NULL DEFAULT 1 ,
 CONSTRAINT `fkMFolhaObra` FOREIGN KEY (`idFolhaObra`) REFERENCES `FolhaObra`(`idFolhaObra`) ,
 CONSTRAINT `fkMVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `Veiculo`(`idVeiculo`) 

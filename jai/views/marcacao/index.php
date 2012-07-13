@@ -11,6 +11,7 @@ g.marcacoes.urls.marcar = '{$this->createUrl('marcacao/marcar')}';
 g.marcacoes.urls.actualizar = '{$this->createUrl('marcacao/actualizar')}';
 g.marcacoes.urls.folha = '{$this->createUrl('folhaobra/folhademarcacao')}';
 g.marcacoes.urls.apagar = '{$this->createUrl('marcacao/apagar')}';
+g.marcacoes.urls.fechar = '{$this->createUrl('marcacao/fechar')}';
     
 g.marcacoes.urls.inicio = {$inicio};
 g.marcacoes.urls.fim = {$fim};

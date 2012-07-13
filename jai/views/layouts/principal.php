@@ -35,7 +35,7 @@
         </div>
         <div id="footer">
             <!-- FOOTER TEXT -->
-            &copy; <?php echo date('Y'); ?> <a href="http://sourceforge.net/projects/jautoinvoice">jAutoInvoice</a> | <a href="<?php echo $this->createUrl('default/sobre'); ?>">Sobre</a>
+            &copy; <?php echo date('Y'); ?> <a target="_blank" href="http://sourceforge.net/projects/jautoinvoice">jAutoInvoice</a> | <a href="<?php echo $this->createUrl('publico/sobre'); ?>">Sobre</a>
         </div>
     </body>
 </html>

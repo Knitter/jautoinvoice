@@ -112,14 +112,20 @@ class MarcacaoController extends SistemaController {
             $criteria->compare('activo', 1);
 
             foreach (Marcacao::model()->findAll($criteria) as $evt) {
-                $eventos[] = (object) array(
-                            'id' => $evt->idMarcacao,
-                            'title' => $evt->descricao,
-                            'start' => strtotime($evt->dataMarcacao),
-                            'allDay' => false,
-                            'notas' => $evt->notas,
-                            'matricula' => ($evt->idVeiculo ? $evt->veiculo->matricula : '')
+                $evento = array(
+                    'id' => $evt->idMarcacao,
+                    'title' => $evt->descricao,
+                    'start' => strtotime($evt->dataMarcacao),
+                    'allDay' => false,
+                    'notas' => $evt->notas,
+                    'matricula' => ($evt->idVeiculo ? $evt->veiculo->matricula : '')
                 );
+
+                if ($evt->dataFecho) {
+                    $evento['color'] = '#FF8133';
+                }
+
+                $eventos[] = (object) $evento;
             }
         }
 
@@ -179,6 +185,24 @@ class MarcacaoController extends SistemaController {
         Yii::app()->end();
     }
 
+    public function actionFechar() {
+        $resultado = array('sucesso' => 0);
+
+        if (isset($_POST['id'])) {
+            $marcacao = $this->carregarModeloMarcacao($_POST['id']);
+
+            if (!$marcacao->dataFecho) {
+                $marcacao->dataFecho = date('Y-m-d H:m:i');
+                if ($marcacao->save()) {
+                    $resultado['sucesso'] = 1;
+                }
+            }
+        }
+
+        echo json_encode($resultado);
+        Yii::app()->end();
+    }
+
     public function accessRules() {
         return array_merge(array(
                     array(
@@ -188,7 +212,7 @@ class MarcacaoController extends SistemaController {
                     array(
                         'allow',
                         'actions' => array('index', 'marcar', 'actualizar',
-                            'apagar', 'eventos'
+                            'apagar', 'eventos', 'fechar'
                         ),
                         'expression' => '$user->tipo > 1'
                         )), parent::accessRules());

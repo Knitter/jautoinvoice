@@ -30,6 +30,8 @@ class PublicoController extends JController {
             $contactos = intval($conf->valor);
         }
 
+        $contactos = 1;
+
         $this->menu = array(
             array(
                 'label' => 'Início',
@@ -66,7 +68,58 @@ class PublicoController extends JController {
     }
 
     public function actionContactos() {
-        $this->render('contactos');
+        $dados = (object) array(
+                    'nome' => '',
+                    'email' => '',
+                    'endereco' => '',
+                    'fax' => '',
+                    'telefone' => '',
+                    'telemovel' => '',
+                    'inicio' => '',
+                    'fim' => '',
+                    'url' => '',
+                    'gmapskey' => '',
+                    'latitude' => '',
+                    'longitude' => '',
+        );
+        if (($config = Configuracao::model()->findByPk('geral_contactos_gmapskey')) != null) {
+            $dados->gmapskey = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_contactos_latitude')) != null) {
+            $dados->latitude = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_contactos_longitude')) != null) {
+            $dados->longitude = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_email')) != null) {
+            $dados->email = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_endereco')) != null) {
+            $dados->endereco = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_fax')) != null) {
+            $dados->fax = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_horario_fim')) != null) {
+            $dados->fim = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_horario_inicio')) != null) {
+            $dados->inicio = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_nome')) != null) {
+            $dados->nome = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_telefone')) != null) {
+            $dados->telefone = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_telemovel')) != null) {
+            $dados->telemovel = $config->valor;
+        }
+        if (($config = Configuracao::model()->findByPk('geral_empresa_url')) != null) {
+            $dados->url = $config->valor;
+        }
+
+        $this->render('contactos', array('dados' => $dados));
     }
 
     public function actionEntrar() {

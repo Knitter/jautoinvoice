@@ -15,6 +15,10 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
                 'click' => 'js:folhaObra'
             ),
             array(
+                'text' => 'Fechar',
+                'click' => 'js:fechar'
+            ),
+            array(
                 'text' => 'Apagar',
                 'click' => 'js:apagar'
             ),

@@ -28,11 +28,6 @@
                 'data' => array('config' => $config, 'nim' => $nim)
             ),
             'tab5' => array(
-                'title' => 'Gestão de Conteúdos',
-                'view' => '_cms',
-                'data' => array('config' => $config, 'nim' => $nim)
-            ),
-            'tab6' => array(
                 'title' => 'Opções de Suporte',
                 'view' => '_suporte',
                 'data' => array('config' => $config, 'nim' => $nim)

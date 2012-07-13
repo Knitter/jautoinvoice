@@ -225,6 +225,33 @@ function apagar() {
     }
 }
 
+function fechar() {
+    var calendario = $('#calendar'), id = $('#idEvento').val(), 
+    eventos = calendario.fullCalendar('clientEvents',id), evento = eventos[0];
+    
+    if(confirm('Tem a certeza que deseja fechar esta marcação?')) {
+        $.ajax({
+            url: g.marcacoes.urls.fechar,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: id
+            },
+            success: function(json){
+                if(json.sucesso) {                   
+                    evento.color = '#FF8133';
+                    calendario.fullCalendar('updateEvent', evento);
+                } else {
+                    alert('Não foi possível remover a marcação seleccionada.');
+                }
+            },
+            complete: function() {
+                $("#janelaEvento").dialog("close");
+            }
+        });
+    }
+}
+
 /*Contactos*/
 function fecharCaixaSMS() {
     $('#sms').val(''),

@@ -27,6 +27,7 @@
  * @property int $activo
  * @property string $descricao
  * @property string $notas
+ * @property string $dataFecho
  * 
  * @property int $idFolhaObra
  * @property int $idVeiculo
@@ -54,7 +55,7 @@ class Marcacao extends CActiveRecord {
             array('descricao', 'length', 'max' => 150),
             array('notas', 'safe'),
             // search
-            array('dataMarcacao, descricao, criado, notas', 'safe', 'on' => 'search'),
+            array('dataMarcacao, descricao, criado, notas, dataFecho', 'safe', 'on' => 'search'),
         );
     }
 
@@ -73,7 +74,8 @@ class Marcacao extends CActiveRecord {
             'idVeiculo' => 'Veículo',
             'idFolhaObra' => 'Folha de Obra',
             'descricacao' => 'Descrição',
-            'notas' => 'Notas'
+            'notas' => 'Notas',
+            'dataFecho' => 'Data de Fecho'
         );
     }
 
@@ -87,6 +89,7 @@ class Marcacao extends CActiveRecord {
         $criteria->compare('criado', $this->criado, true);
         $criteria->compare('descricao', $this->descricao, true);
         $criteria->compare('notas', $this->notas, true);
+        $criteria->compare('dataFecho', $this->dataFecho, true);
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider($this, array(

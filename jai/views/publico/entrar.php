@@ -1,8 +1,8 @@
-<?php
-$this->titulo = 'Login';
-?>
+<?php $this->titulo = 'Login'; ?>
 
-<div class="span-12 prepend-6 append-6">
+<div class="span-12 prepend-6 append-6 form">
+    <h2>Entrar no Sistema</h2>
+
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'login-form',
@@ -10,30 +10,31 @@ $this->titulo = 'Login';
             ));
     ?>
 
-    <p>
+    <div class="linha">
         <?php
         echo $form->labelEx($formulario, 'identificacao'),
         $form->textField($formulario, 'identificacao'),
         $form->error($formulario, 'identificacao');
         ?>
-    </p>
+    </div>
 
-    <p>
+    <div class="linha">
         <?php
         echo $form->labelEx($formulario, 'password'),
         $form->passwordField($formulario, 'password'),
         $form->error($formulario, 'password');
         ?>
-    </p>
-    <p>
+    </div>
+
+    <div class="linha">
         <?php
         echo $form->checkBox($formulario, 'lembrarMe'),
         $form->label($formulario, 'lembrarMe'),
         $form->error($formulario, 'lembrarMe');
         ?>
-    </p>
-    <p>
+    </div>
+    <div class="linha">
         <?php echo CHtml::submitButton('Entrar'); ?>
-    </p>
+    </div>
     <?php $this->endWidget(); ?>
 </div>
