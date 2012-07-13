@@ -44,9 +44,16 @@ Caso necessite de colocar um prefixo nas tabelas pode usar a propriedade _tableP
 O ficheiro *params.php* contém parâmetros extra que deve alterar, principalmente o valor da 
 propriedate _hash_ que deverá ser alterado para um valor aleatório.
 
-Uma vez que ainda não existe assistente de instalação é necessário criar o primeiro 
-utilizador na base de dados. A forma de criar o utilizador dependerá da ferramenta que 
-usa para aceder ao servidor MySQL, a ferramenta mais comum é o phpMyAdmin.
+Uma vez que ainda não existe assistente de instalação é necessário criar a base de dados 
+e o primeiro utilizador.
+
+
+A forma de criar a base de dados e o utilizador dependerá da ferramenta que usa para aceder ao servidor MySQL, 
+a ferramenta mais comum é o phpMyAdmin.
+
+Crie uma base de dados no servidor com o nome que quiser. Abra o ficheiro *structure.mysql.sql* 
+com um editor de texto e copie o código SQL que este contém. Execute o código na base de dados 
+que criou anteriormente.
 
 Crie um novo utilizador com o nome e username que pretende usar, bem como com a password. Marque 
 este utilizador como sendo um administrador colocando o valor 1 na coluna adequada.
@@ -58,3 +65,8 @@ criar uma hash SHA1. É depois este valor que deve ser introduzido na tabela.
 Ex.: Se a password for 'demo' e o valor da propriedade _hash_ for 'HASH DE TESTE', deve ser 
 criada uma hash SHA1 com o valor 'HASH DE TESTEdemo' que depois é colocada no campo password que 
 se encontra na tabela de utilizadores.
+
+Permissões de Escrita
+~~~~~~~~~~~~~~~~~~~~~
+
+É necessário que o servidor web consiga escrever na pasta *www/assets*.
