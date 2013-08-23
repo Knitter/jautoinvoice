@@ -1,48 +1,44 @@
-jAutoInvoice
-============
+# jAutoInvoice
 
-Sobre
------
-jAutoInvoice é um sistema de gestão de oficinas de automóveis desenhado especialmente 
-para o mercado português. Oferece funcionalidades simples mas bem desenhadas com o 
-objectivo de facilitar a gestão da oficina sem obrigar a demasiados conhecimentos 
-técnicos ou tempo perdido frente ao sistema.
+jAutoInvoice is a car workshop management system targeting the Portuguese 
+market. It offers the simplest feature set needed by small companies without 
+requiring the user to have much experience with computers.
 
-Ao contrário de outros sistemas de gestão, o jAutoInvoice não é um sistema genérico e 
-não permite a gestão de outros negócios. Em vez disso foca-se em oficinas de automóveis de 
-pequena ou média dimensão.
+## Features
 
-Características
-~~~~~~~~~~~~~~~
+* Client management;
+* Repair/vehicle  history;
+* Cost control, part/stock management;
+* Invoices (planned);
+* Supporting data like employee details, suppliers VAT, etc.;
+* Client public/private sections;
+* Reports and statistics;
 
-- Gestão de clientes e de veículos relacionados;
-- Histórico de reparação e inspecção (planeado);
-- Controlo de custos, gestão de peças e tempo gasto nas reparações (incompleto);
-- Facturas (planeado);
-- Gestão de dados de apoio como funcionários, utilizadores, fornecedores, regimes de IVA, categorias de veículos, etc.;
-- Acesso ao sistema por parte dos clientes (planeado);
-- Estatíticas e relatórios (planeado).
+## Tech
 
-Tecnologias
-~~~~~~~~~~~~
+The software is developer using PHP 5.3, Apache Webserver, HTML5, CSS and 
+JavaScript and the Yii framework.
 
-O jAutoInvoice é desenvolvido usando PHP 5.3, servidor Web Apache, e standards como HTML5, CSS e JavaScript.
-Embora desenvolvido para um ambiente Web, é simples de configurar e instalar como uma 
-aplicação tradicional, podendo ser usado com uma instalação local.
+## License
 
-Licença
--------
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-O jAutoInvoice é desenvolvido e disponibilizado sob a licença livre GNU Affero GPL.
-Veja o ficheiro LICENCA para mais informações.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-Estado do Projecto
-------------------
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+jAutoInvoice is developed and made available under the free software license 
+GNU Affero GPL.
 
-Embora lançada a versão 1.0, o projecto encontra-se num estado bastante embrionário e com inúmeras funcionalidades 
-em processo de criação. Existe a necessidade de testes por parte dos utilizadores e a falta de 
-relatórios com experiência na instalação e na utilização tem limitado bastante o evoluir do projecto.
+See the [license file](LICENSE.md) for the full text.
 
-Esta primeira versão destinada a utilizadores finais não é considerada uma versão estável e deve ser usada 
-com a noção de que existirão possíveis erros e que as actualizações serão bastantes durante as próximas 
-versões.
+## Current Status
+
+The project is in very early stage of development and has been dormant for most 
+of the last nine months.
