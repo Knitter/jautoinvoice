@@ -27,36 +27,37 @@ class SistemaController extends JController {
     public function __construct($id, $module = null) {
         parent::__construct($id, $module);
 
+        $urlBase = Yii::app()->baseUrl;
         $this->menu = array(
             array(
                 'label' => 'Quadro',
-                'url' => $this->createUrl('/quadro'),
+                'url' => array('quadro/index'),
                 'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/quadro.png'
             ),
             array(
                 'label' => 'Folhas de Obra',
-                'url' => $this->createUrl('/folhaobra'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/folhaobra.png'
+                'url' => array('folhaobra/index'),
+                'icon' => $urlBase . '/imagens/icones/folhaobra.png'
             ),
             array(
                 'label' => 'Marcações',
-                'url' => $this->createUrl('/marcacao'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/calendario.png'
+                'url' => array('marcacao/index'),
+                'icon' => $urlBase . '/imagens/icones/calendario.png'
             ),
             array(
                 'label' => 'Clientes',
-                'url' => $this->createUrl('/cliente'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente.png'
+                'url' => array('cliente/index'),
+                'icon' => $urlBase . '/imagens/icones/cliente.png'
             ),
             array(
                 'label' => 'Configuração',
-                'url' => $this->createUrl('/configuracao'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/administracao.png'
+                'url' => array('configuracao/index'),
+                'icon' => $urlBase . '/imagens/icones/administracao.png'
             ),
             array(
                 'label' => 'Sair',
-                'url' => $this->createUrl('publico/sair'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/sair.png'
+                'url' => array('publico/sair'),
+                'icon' => $urlBase . '/imagens/icones/sair.png'
             )
         );
     }

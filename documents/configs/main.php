@@ -3,7 +3,7 @@
 return array(
     'basePath' => dirname(__FILE__) . '/..',
     'name' => 'jAutoInvoice',
-    'defaultController' => 'default',
+    'defaultController' => 'publico',
     //'preload' => array('log'),
     'import' => array(
         'application.models.*',
@@ -20,7 +20,7 @@ return array(
         'user' => array(
             'allowAutoLogin' => true,
             'class' => 'JAIWebUser',
-            'loginUrl' => array('default/login'),
+            'loginUrl' => array('publico/entrar'),
         ),
         //MySQL database
         'db' => array(
@@ -32,7 +32,7 @@ return array(
             'tablePrefix' => ''
         ),
         'errorHandler' => array(
-            'errorAction' => 'public/erro'
+            'errorAction' => 'publico/erro'
         ),
     /* 'log' => array(
       'class' => 'CLogRouter',
