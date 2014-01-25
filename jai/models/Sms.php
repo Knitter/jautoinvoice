@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,14 +16,12 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
- * @property int $idSMS
- * @property int $idFuncionario
- * @property int $idCliente
+ * @property integer $idSMS
+ * @property integer $idFuncionario
+ * @property integer $idCliente
  * @property string $numero
  * @property string $mensagem
  * @property string $codigoErro
@@ -47,15 +45,14 @@ class Sms extends CActiveRecord {
 
     public function rules() {
         return array(
-            // search
-            array('codigoErro, numero, idCliente, idFuncionario, data', 'safe', 'on' => 'search'),
+            array('codigoErro, numero, idCliente, idFuncionario, data', 'safe', 'on' => 'search')
         );
     }
 
     public function relations() {
         return array(
             'funcionario' => array(self::BELONGS_TO, 'Funcionario', 'idFuncionario'),
-            'cliente' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+            'cliente' => array(self::BELONGS_TO, 'Cliente', 'idCliente')
         );
     }
 
@@ -82,10 +79,10 @@ class Sms extends CActiveRecord {
         $criteria->compare('data', $this->data);
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                    'sort' => array(
-                        'defaultOrder' => 'data DESC',
-                        )));
+            'criteria' => $criteria,
+            'sort' => array(
+                'defaultOrder' => 'data DESC'
+        )));
     }
 
 }

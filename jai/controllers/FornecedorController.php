@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 class FornecedorController extends AdministracaoController {
@@ -103,11 +101,9 @@ class FornecedorController extends AdministracaoController {
      */
     public function actionEmail() {
         $resultado = (object) array('sucesso' => 0);
-        if (!empty($_POST['destinatario']) && !empty($_POST['mensagem'])
-                && ($fornecedor = Fornecedor::model()->findByPk((int) $_POST['destinatario'])) !== null) {
+        if (!empty($_POST['destinatario']) && !empty($_POST['mensagem']) && ($fornecedor = Fornecedor::model()->findByPk((int) $_POST['destinatario'])) !== null) {
             if ($fornecedor->email) {
-                if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null
-                        && $enderecoEmail->valor != '') {
+                if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null && $enderecoEmail->valor != '') {
 
                     Yii::import('ext.email.*');
 
@@ -119,7 +115,7 @@ class FornecedorController extends AdministracaoController {
 
                     $registo = new Email();
                     $email = new ExtEmail($fornecedor->nome, $fornecedor->email, $nome, $enderecoEmail->valor
-                                    , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
+                            , (!empty($_POST['assunto']) ? $_POST['assunto'] : 'Sem assunto.'), $_POST['mensagem']);
                     try {
                         $email->enviar();
                         $resultado->sucesso = 1;
@@ -164,21 +160,21 @@ class FornecedorController extends AdministracaoController {
      */
     public function accessRules() {
         return array_merge(array(
-                    array(
-                        'deny',
-                        'users' => array('?')
-                    ),
-                    array(
-                        'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar', 'email'),
-                        'expression' => '$user->tipo > 1'
-                        )), parent::accessRules());
+            array(
+                'deny',
+                'users' => array('?')
+            ),
+            array(
+                'allow',
+                'actions' => array('index', 'adicionar', 'editar', 'apagar', 'email'),
+                'expression' => '$user->tipo > 1'
+            )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
-     * @return type
+     * @param integer $id
+     * @return Fornecedor
      * @throws CHttpException 
      */
     private function carregarModeloFornecedor($id) {

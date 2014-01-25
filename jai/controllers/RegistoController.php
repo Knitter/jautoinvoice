@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -52,15 +52,15 @@ class RegistoController extends AdministracaoController {
 
     public function accessRules() {
         return array_merge(array(
-                    array(
-                        'deny',
-                        'users' => array('?')
-                    ),
-                    array(
-                        'allow',
-                        'actions' => array('index'),
-                        'expression' => '$user->tipo > 1'
-                        )), parent::accessRules());
+            array(
+                'deny',
+                'users' => array('?')
+            ),
+            array(
+                'allow',
+                'actions' => array('index'),
+                'expression' => '$user->tipo > 1'
+            )), parent::accessRules());
     }
 
     /**

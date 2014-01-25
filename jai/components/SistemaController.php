@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
@@ -33,32 +31,32 @@ class SistemaController extends JController {
             array(
                 'label' => 'Quadro',
                 'url' => $this->createUrl('/quadro'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/quadro.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/quadro.png'
             ),
             array(
                 'label' => 'Folhas de Obra',
                 'url' => $this->createUrl('/folhaobra'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/folhaobra.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/folhaobra.png'
             ),
             array(
                 'label' => 'Marcações',
                 'url' => $this->createUrl('/marcacao'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/calendario.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/calendario.png'
             ),
             array(
                 'label' => 'Clientes',
                 'url' => $this->createUrl('/cliente'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/cliente.png'
             ),
             array(
                 'label' => 'Configuração',
                 'url' => $this->createUrl('/configuracao'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/administracao.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/administracao.png'
             ),
             array(
                 'label' => 'Sair',
                 'url' => $this->createUrl('publico/sair'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/sair.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/sair.png'
             )
         );
     }

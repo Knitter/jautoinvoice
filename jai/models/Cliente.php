@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,12 +16,10 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
- * @property int $idCliente
+ * @property integer $idCliente
  * @property string $email
  * @property string $password
  * @property string $nome
@@ -29,7 +27,7 @@
  * @property string $telefone
  * @property string $telemovel
  * @property string $morada
- * @property int $activo
+ * @property integer $activo
  * 
  * @property Veiculo[] $veiculosActuais
  * @property Veiculo[] $veiculosAntigos
@@ -56,11 +54,9 @@ class Cliente extends CActiveRecord {
             array('contribuinte, nome', 'required'),
             array('email, nome, morada', 'length', 'max' => 255),
             array('telefone, telemovel', 'length', 'max' => 13),
-            //
             array('contribuinte', 'length', 'max' => 9),
             array('contribuinte', 'validarContribuinte'),
-            // search
-            array('nome, contribuinte, telefone, telemovel', 'safe', 'on' => 'search'),
+            array('nome, contribuinte, telefone, telemovel', 'safe', 'on' => 'search')
         );
     }
 
@@ -121,10 +117,10 @@ class Cliente extends CActiveRecord {
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                    'sort' => array(
-                        'defaultOrder' => 'nome ASC',
-                        )));
+            'criteria' => $criteria,
+            'sort' => array(
+                'defaultOrder' => 'nome ASC'
+        )));
     }
 
     public static function hash($password) {

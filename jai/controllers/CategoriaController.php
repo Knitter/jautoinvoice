@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 class CategoriaController extends AdministracaoController {
@@ -44,8 +42,9 @@ class CategoriaController extends AdministracaoController {
 
         if (isset($_POST['Categoria'])) {
             $categoria->attributes = $_POST['Categoria'];
-            if ($categoria->save())
+            if ($categoria->save()) {
                 $this->redirect(array('editar', 'id' => $categoria->idCategoria));
+            }
         }
 
         $this->render('editar', array('categoria' => $categoria));
@@ -58,8 +57,9 @@ class CategoriaController extends AdministracaoController {
 
         if (isset($_POST['Categoria'])) {
             $categoria->attributes = $_POST['Categoria'];
-            if ($categoria->save())
+            if ($categoria->save()) {
                 $this->redirect(array('editar', 'id' => $categoria->idCategoria));
+            }
         }
 
         $this->render('editar', array('categoria' => $categoria));
@@ -81,20 +81,20 @@ class CategoriaController extends AdministracaoController {
 
     public function accessRules() {
         return array_merge(array(
-                    array(
-                        'deny',
-                        'users' => array('?')
-                    ),
-                    array(
-                        'allow',
-                        'actions' => array('index', 'adicionar', 'editar', 'apagar'),
-                        'expression' => '$user->tipo > 1'
-                        )), parent::accessRules());
+            array(
+                'deny',
+                'users' => array('?')
+            ),
+            array(
+                'allow',
+                'actions' => array('index', 'adicionar', 'editar', 'apagar'),
+                'expression' => '$user->tipo > 1'
+            )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
+     * @param integer $id
      * 
      * @return Categoria
      * @throws CHttpException 

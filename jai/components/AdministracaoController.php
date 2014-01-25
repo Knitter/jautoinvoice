@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
@@ -33,62 +31,62 @@ class AdministracaoController extends JController {
             array(
                 'label' => 'Voltar',
                 'url' => $this->createUrl('/quadro'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/voltar.png'
             ),
             array(
                 'label' => 'Configurações',
                 'url' => $this->createUrl('/configuracao'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/configuracoes.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/configuracoes.png'
             ),
             array(
                 'label' => 'Funcionários',
                 'url' => $this->createUrl('/funcionario'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/empregado.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/empregado.png'
             ),
             array(
                 'label' => 'Fornecedores',
                 'url' => $this->createUrl('/fornecedor'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/fornecedor.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/fornecedor.png'
             ),
             array(
                 'label' => 'Material',
                 'url' => $this->createUrl('/material'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/material.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/material.png'
             ),
             array(
                 'label' => 'Serviços',
                 'url' => $this->createUrl('/servico'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/servico.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/servico.png'
             ),
             array(
                 'label' => 'Categorias',
                 'url' => $this->createUrl('/categoria'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/categoria.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/categoria.png'
             ),
             array(
                 'label' => 'Combustíveis',
                 'url' => $this->createUrl('/combustivel'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/combustivel.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/combustivel.png'
             ),
             array(
                 'label' => 'Marcas',
                 'url' => $this->createUrl('/marca'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/marca.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/marca.png'
             ),
             array(
                 'label' => 'Modelos',
                 'url' => $this->createUrl('/modelo'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/modelo.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/modelo.png'
             ),
             array(
                 'label' => 'Taxas de IVA',
                 'url' => $this->createUrl('/iva'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/iva.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/iva.png'
             ),
             array(
                 'label' => 'Registos',
                 'url' => $this->createUrl('/registo'),
-                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/registos.png',
+                'icon' => Yii::app()->baseUrl . '/recursos/imagens/icones/registos.png'
             ),
         );
     }

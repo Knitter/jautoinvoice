@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
@@ -47,8 +45,9 @@ class ClienteController extends SistemaController {
 
         if (isset($_POST['Cliente'])) {
             $cliente->attributes = $_POST['Cliente'];
-            if ($cliente->save())
+            if ($cliente->save()) {
                 $this->redirect(array('editar', 'id' => $cliente->idCliente));
+            }
         }
 
         $this->render('editar', array('cliente' => $cliente));
@@ -61,8 +60,9 @@ class ClienteController extends SistemaController {
 
         if (isset($_POST['Cliente'])) {
             $cliente->attributes = $_POST['Cliente'];
-            if ($cliente->save())
+            if ($cliente->save()) {
                 $this->redirect(array('editar', 'id' => $cliente->idCliente));
+            }
         }
 
         $this->render('editar', array('cliente' => $cliente));
@@ -200,7 +200,7 @@ class ClienteController extends SistemaController {
     public function actionPassword($id) {
         $cliente = $this->carregarModeloCliente($id);
 
-        if ($utilizador->email) {
+        if ($cliente->email) {
             if (($enderecoEmail = Configuracao::model()->findByPk('enderecoEmail')) !== null
                     && $enderecoEmail->valor != '') {
 
@@ -220,8 +220,8 @@ class ClienteController extends SistemaController {
 
                     $email->enviar();
 
-                    $utilizador->password = $pass;
-                    $utilizador->save();
+                    $cliente->password = $pass;
+                    $cliente->save();
                 } catch (Exception $ex) {
                     //TODO: mostrar mensagem de erro
                 }
@@ -246,7 +246,7 @@ class ClienteController extends SistemaController {
 
     /**
      *
-     * @param type $id
+     * @param integer $id
      * 
      * @return Cliente
      * @throws CHttpException 

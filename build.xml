@@ -1,0 +1,85 @@
+<project name="jAutoInvoice" default="dist">
+    <property name="version" value="development" override="true" />
+    
+    <!-- =================================================================== -->
+    <!-- 
+        Target: prepare, creates the work directory used by all targets that 
+        produce some sort of output or need some place to store temporary files.
+    -->
+    <!-- =================================================================== -->
+    <target name="prepare">
+        <echo msg="Preparing build directories" />
+        <mkdir dir="./bin" />
+        <mkdir dir="./bin/build" />
+        <mkdir dir="./bin/dist" />
+        <mkdir dir="./bin/manual" />
+        <mkdir dir="./bin/documentation" />
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Target: docs, generates code documentation.                         -->
+    <!-- =================================================================== -->
+    <target name="docs" depends="prepare"></target>
+
+    <!-- =================================================================== -->
+    <!-- Target: sql, processes SQL changes into a single file.              -->
+    <!-- =================================================================== -->
+    <target name="sql" depends="prepare"></target>
+    
+    <!-- =================================================================== -->
+    <!-- Target: manual, generates the manual files, PDF and HTML.           -->
+    <!-- =================================================================== -->
+    <target name="manual" depends="prepare"></target>
+    
+    <!-- =================================================================== -->
+    <!-- 
+         Target: build, copies all files into their correct places for 
+         achiving and distribution.
+    -->
+    <!-- =================================================================== -->
+    <target name="build" depends="prepare">
+        <echo msg="Starting build." />
+        
+        <echo msg="Copying framework folder..." />
+        
+        <echo msg="Copying application folder..." />
+        
+        <echo msg="Copying public and resources folders..." />
+        
+        <echo msg="Copying default configuration files..." />
+        
+        <echo msg="Crushing SQL files..." />
+        
+        <echo msg="Generating manual..." />
+
+        <!-- <echo msg="Copying ./about.php to ./build directory..." />
+        <copy file="./about.php" tofile="./build/about.php" />
+
+        <echo msg="Copying ./browsers.php to ./build directory..." />
+        <copy file="./browsers.php" tofile="./build/browsers.php" />
+
+        <echo msg="Copying ./contact.php to ./build directory..." />
+        <copy file="./contact.php" tofile="./build/contact.php" /> -->
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- (DEFAULT)  Target: dist, creates distribution archives.             --> 
+    <!-- =================================================================== -->
+    <target name="dist" depends="build, docs, manual, sql">
+        <echo msg="Creating archive distribution archives..." />
+
+        <!-- <tar destfile="./bin/dist/citrus-${version}.tar.gz" compression="gzip">
+            <fileset dir="./bin/build">
+                <include name="*" />
+            </fileset>
+        </tar> -->
+        
+        <!-- <tar destfile="./bin/dist/citrus-${version}.tar.gz" compression="gzip">
+            <fileset dir="./bin/build">
+                <include name="*" />
+            </fileset>
+        </tar> -->
+
+        <echo msg="Finished. Distribution files ready." />
+    </target>
+</project>

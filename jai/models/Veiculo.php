@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,24 +16,22 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
- * @property int $idVeiculo
+ * @property integer $idVeiculo
  * @property string $dataRegisto
  * @property string $matricula
  * @property string $nrChassis
  * @property string $cilindrada
  * @property string $nrMotor
  * @property string $notas
- * @property int $activo
+ * @property integer $activo
  * 
- * @property int $idCliente
- * @property int $idCategoria
- * @property int $idCombustivel
- * @property int $idModelo
+ * @property integer $idCliente
+ * @property integer $idCategoria
+ * @property integer $idCombustivel
+ * @property integer $idModelo
  *
  * @property Cliente $dono
  * @property Categoria $categoria
@@ -62,8 +60,7 @@ class Veiculo extends CActiveRecord {
             array('matricula', 'length', 'max' => 12),
             array('nrChassis, cilindrada, nrMotor', 'length', 'max' => 25),
             array('dataRegisto, notas', 'safe'),
-            // search
-            array('dataRegisto, matricula, nrChassis, cilindrada, nrMotor, idCliente, idCategoria, idCombustivel, idModelo', 'safe', 'on' => 'search'),
+            array('dataRegisto, matricula, nrChassis, cilindrada, nrMotor, idCliente, idCategoria, idCombustivel, idModelo', 'safe', 'on' => 'search')
         );
     }
 
@@ -75,7 +72,7 @@ class Veiculo extends CActiveRecord {
             'dono' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
             'categoria' => array(self::BELONGS_TO, 'Categoria', 'idCategoria'),
             'combustivel' => array(self::BELONGS_TO, 'Combustivel', 'idCombustivel'),
-            'modelo' => array(self::BELONGS_TO, 'Modelo', 'idModelo'),
+            'modelo' => array(self::BELONGS_TO, 'Modelo', 'idModelo')
         );
     }
 
@@ -116,10 +113,10 @@ class Veiculo extends CActiveRecord {
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                    'sort' => array(
-                        'defaultOrder' => 'matricula ASC',
-                        )));
+            'criteria' => $criteria,
+            'sort' => array(
+                'defaultOrder' => 'matricula ASC'
+        )));
     }
 
 }

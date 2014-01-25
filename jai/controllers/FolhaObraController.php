@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 class FolhaObraController extends SistemaController {
@@ -133,7 +131,7 @@ class FolhaObraController extends SistemaController {
     }
 
     public function actionApagar($id) {
-        
+        //TODO: not implemented yet.
     }
 
     public function actionFolhaDeMarcacao($id) {

@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,14 +16,12 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 /**
- * @property int $idCategoria
+ * @property integer $idCategoria
  * @property string $nome
- * @property int $activo
+ * @property integer $activo
  *
  * @property Veiculo[] $veiculos
  */
@@ -44,14 +42,13 @@ class Categoria extends CActiveRecord {
         return array(
             array('nome', 'required'),
             array('nome', 'length', 'max' => 100),
-            // search
-            array('nome', 'safe', 'on' => 'search'),
+            array('nome', 'safe', 'on' => 'search')
         );
     }
 
     public function relations() {
         return array(
-            'veiculos' => array(self::HAS_MANY, 'Veiculo', 'idCategoria'),
+            'veiculos' => array(self::HAS_MANY, 'Veiculo', 'idCategoria')
         );
     }
 
@@ -72,10 +69,10 @@ class Categoria extends CActiveRecord {
         $criteria->compare('activo', 1);
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                    'sort' => array(
-                        'defaultOrder' => 'nome ASC',
-                        )));
+            'criteria' => $criteria,
+            'sort' => array(
+                'defaultOrder' => 'nome ASC'
+        )));
     }
 
 }

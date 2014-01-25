@@ -2,7 +2,7 @@
 
 /* This file is part of jAutoInvoice, a car workshop management software.
  * 
- * Copyright (c) 2012, Sérgio Lopes.
+ * Copyright (c) 2012 - 2014, Sérgio Lopes.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,6 @@
  * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
- * http://sourceforge.net/projects/jautoinvoice
  */
 
 class MarcacaoController extends SistemaController {
@@ -205,23 +203,23 @@ class MarcacaoController extends SistemaController {
 
     public function accessRules() {
         return array_merge(array(
-                    array(
-                        'deny',
-                        'users' => array('?')
-                    ),
-                    array(
-                        'allow',
-                        'actions' => array('index', 'marcar', 'actualizar',
-                            'apagar', 'eventos', 'fechar'
-                        ),
-                        'expression' => '$user->tipo > 1'
-                        )), parent::accessRules());
+            array(
+                'deny',
+                'users' => array('?')
+            ),
+            array(
+                'allow',
+                'actions' => array('index', 'marcar', 'actualizar',
+                    'apagar', 'eventos', 'fechar'
+                ),
+                'expression' => '$user->tipo > 1'
+            )), parent::accessRules());
     }
 
     /**
      *
-     * @param type $id
-     * @return type
+     * @param integer $id
+     * @return Marcacao
      * @throws CHttpException 
      */
     private function carregarModeloMarcacao($id) {
